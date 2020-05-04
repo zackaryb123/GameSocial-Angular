@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../core/auth.service'
+import {Component, EventEmitter, Output} from '@angular/core';
+import { AuthService } from '../../core/auth.service';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {formAnimation} from '../../animations';
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.scss']
+  styleUrls: ['login.scss'],
+  animations: [
+    formAnimation
+  ]
 })
 export class LoginComponent {
-
+  stateForm = 'normal';
   loginForm: FormGroup;
   errorMessage = '';
+  public errorLogin: string;
+  @Output() public displayPanel: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     public authService: AuthService,
@@ -55,7 +61,17 @@ export class LoginComponent {
       this.router.navigate(['/user']);
     }, err => {
       console.log(err);
+      this.stateForm = 'invalid';
+      setTimeout(() => {
+        this.stateForm = 'normal';
+      }, 700);
+      this.loginForm.get('email').markAsTouched();
+      this.loginForm.get('password').markAsTouched();
       this.errorMessage = err.message;
     });
+  }
+
+  public displayPanelLogin(): void {
+    this.displayPanel.emit('register');
   }
 }

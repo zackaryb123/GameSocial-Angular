@@ -1,0 +1,32 @@
+//.header{
+//  text-align: center;
+//  font-size: 30px;
+//  margin-bottom: 40px;
+//}
+//
+//.row{
+//  margin-top: 10px;
+//}
+//
+//.error{
+//  color: red;
+//}
+
+.card-title {
+  //background-image: url("/assets/logo-instagram.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60px;
+  width: 100%;
+}
+
+input.ng-touched.ng-invalid {
+  border: 2px solid red;
+  border-radius: 2px;
+}
+
+input.ng-touched.ng-valid {
+  border: 2px solid green;
+  border-radius: 2px;
+}
+
