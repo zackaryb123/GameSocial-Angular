@@ -6,11 +6,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBmNkRGMwyD_Z6sPYY3FtKI4H9w7kUzYi4",
-    authDomain: "cohesive-apogee-95023.firebaseapp.com",
-    databaseURL: "https://cohesive-apogee-95023.firebaseio.com",
-    projectId: "cohesive-apogee-95023",
-    storageBucket: "cohesive-apogee-95023.appspot.com",
-    messagingSenderId: "546552200902"
+    apiKey: 'AIzaSyALcEJyPvQDEb1bZZVGKbveu5woOpxw4hs',
+    authDomain: 'gamesocial-zb.firebaseapp.com',
+    databaseURL: 'https://gamesocial-zb.firebaseio.com',
+    projectId: 'gamesocial-zb',
+    storageBucket: 'gamesocial-zb.appspot.com',
+    messagingSenderId: '659801044712',
+    appId: '1:659801044712:web:e30d41edbeeb46e8aabb5d'
   }
 };
