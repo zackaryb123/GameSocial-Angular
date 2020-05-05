@@ -8,6 +8,9 @@ button {
   background-color: transparent !important;
   border-color: transparent;
   box-shadow: none;
+  icon {
+    color: #03a9f4;
+  }
 }
 
 @media (min-width: 320px) {

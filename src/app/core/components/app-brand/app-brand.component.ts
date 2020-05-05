@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AppDispatcher} from '../../store/app/dispatcher';
 
 
 @Component({
@@ -7,17 +8,17 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   templateUrl: './app-brand.component.html',
 })
 export class AppBrandComponent implements OnInit {
-  toggleSidebar = true;
-  @Output() sidebarCollapsed$: EventEmitter<any> = new EventEmitter();
+  // @Output() sidebarCollapsed$: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
+  constructor(
+    private appDispatch: AppDispatcher
+  ) {
   }
 
   ngOnInit() {
   }
 
   handleToggleSidebar() {
-    this.sidebarCollapsed$.emit(!this.toggleSidebar);
-    this.toggleSidebar = !this.toggleSidebar;
+    return this.appDispatch.toggleSidebar();
   }
 }

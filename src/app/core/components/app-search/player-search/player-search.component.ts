@@ -27,33 +27,33 @@ const defaultSearchParams = {
     <form class="navbar-form form-search is-flex-row"
       [formGroup]="searchForm"
       >
-      <input placeholder="Find My Echoes..."
+      <input placeholder="Search..."
         ngxTypeahead
-        [taUrl]="'//suggestqueries.google.com/complete/search'"
+        [taUrl]=""
         [taParams]="params"
         [taAllowEmpty]="true"
         (taSelected)="handleSelectSuggestion($event)"
         type="search" class="form-control" autocomplete="off"
         formControlName="query"
         >
-      <button class="btn btn-transparent btn-submit is-flex-row is-flex-valign" title="search with echoes">
+      <button class="search btn btn-transparent btn-submit is-flex-row is-flex-valign" title="search with echoes">
         <icon name="search"></icon>
       </button>
     </form>
-      <button class="btn btn-filter btn-transparent is-flex-row is-flex-valign">
-        <icon name="filter" [ngClass]="{'text-primary': filtersForm.value.duration || filtersForm.value.hd }"></icon>
-        <form class="filters is-rounded" [formGroup]="filtersForm">
-          <div class="filter">
-            <input id="long" type="checkbox" class="form-control" formControlName="duration">
-            <label for="long" class="filter-label">long</label>
-          </div>
-          <div class="filter">
-            <input id="hd" type="checkbox" class="form-control" formControlName="hd">
-            <label for="hd" class="filter-label">HD</label>
-          </div>
-          <icon name="trash" *ngIf="filtersForm.value.duration || filtersForm.value.hd" (click)="clearFilters()"></icon>
-        </form>
-      </button>
+<!--      <button class="btn btn-filter btn-transparent is-flex-row is-flex-valign">-->
+<!--        <icon name="filter" [ngClass]="{'text-primary': filtersForm.value.duration || filtersForm.value.hd }"></icon>-->
+<!--        <form class="filters is-rounded" [formGroup]="filtersForm">-->
+<!--          <div class="filter">-->
+<!--            <input id="long" type="checkbox" class="form-control" formControlName="duration">-->
+<!--            <label for="long" class="filter-label">long</label>-->
+<!--          </div>-->
+<!--          <div class="filter">-->
+<!--            <input id="hd" type="checkbox" class="form-control" formControlName="hd">-->
+<!--            <label for="hd" class="filter-label">HD</label>-->
+<!--          </div>-->
+<!--          <icon name="trash" *ngIf="filtersForm.value.duration || filtersForm.value.hd" (click)="clearFilters()"></icon>-->
+<!--        </form>-->
+<!--      </button>-->
       `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -139,7 +139,9 @@ export class PlayerSearchComponent implements OnChanges, OnDestroy {
   }
 
   selectSuggestion(suggestion: string) {
-    if (!suggestion.hasOwnProperty('isTrusted')) this.search.emit(suggestion);
+    if (!suggestion.hasOwnProperty('isTrusted')) {
+      this.search.emit(suggestion);
+    }
   }
 
   clearFilters() {

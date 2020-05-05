@@ -42,7 +42,7 @@ import { select, Store } from '@ngrx/store';
 })
 export class AppSearchComponent implements OnInit {
   query$ = '';
-  searchType$ = '';
+  searchType$ = 'video';
   currentPlaylist$ = '';
   queryParams$ = '';
   presets$ = '';

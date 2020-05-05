@@ -1,4 +1,6 @@
 @import '../../../../../css/core/global.scss';
+@import '../../../../../css/echoes-variables.scss';
+
 
 @media (min-width: 320px) {
   $input-search-box-height: $input-height-base;
@@ -8,6 +10,15 @@
 
   player-search {
     display: flex;
+
+    .navbar-form {
+      display: inline-flex;
+      padding: 10px -1rem;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+      margin: 4px 1rem;
+    }
 
     .form-search {
       position: relative;
@@ -37,6 +48,12 @@
         font-size: var(--font-large);
         color: $navbar-default-link-active-color;
         z-index: 10;
+      }
+
+      .btn.search {
+        background-color: transparent !important;
+        border-color: transparent;
+        box-shadow: none;
       }
 
       .btn-submit {
@@ -82,9 +99,11 @@
 
     .btn-filter {
       position: relative;
-      padding: calc(var(--spacing-medium) + var(--spacing-standard))
-        var(--spacing-medium);
+      padding: 10px;
+      //padding: calc(var(--spacing-medium) + var(--spacing-standard))
+      //  var(--spacing-medium);
       z-index: 1000;
+      background-color: rgba(243,243,243,0.8);
 
       &:hover .filters {
         opacity: 1;

@@ -1,4 +1,9 @@
 @import '../../../../../css/core/global.scss';
+@import '../../../../../css/echoes-variables.scss';
+
+li {
+  color: #03a9f4;
+}
 
 @media (min-width: 320px) {
   :host {

@@ -47,7 +47,7 @@ export class SearchNavigatorComponent implements OnInit {
     {
       label: 'Albums',
       link: `/search/videos`,
-      params: { filter: 'full_albumns' },
+      params: { filter: 'full albumns' },
       type: 'video'
     },
     {
@@ -73,8 +73,8 @@ export class SearchNavigatorComponent implements OnInit {
 
   isActive({ type, params }: TSearchType) {
     const { queryParams , searchType } = this;
-    // const currentPreset = preset === undefined ? '' : preset;
-    // return type === searchType && params.filter === currentPreset
+    const currentPreset = '';
+    return type === searchType && params.filter === currentPreset;
   }
 
 }

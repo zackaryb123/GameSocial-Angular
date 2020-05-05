@@ -70,6 +70,7 @@ const posts: PostModel[] = [
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
+  sidebarCollapsed$ = '';
   user: FirebaseUserModel = new FirebaseUserModel();
   ngUnsubscribe: Subject<any> = new Subject();
   posts: PostModel[] = posts;
