@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-
-import { LoginComponent } from './access/login/login.component';
-import { UserComponent } from './user/user.component';
-import { RegisterComponent } from './access/register/register.component';
-import { UserResolver } from './user/user.resolver';
-import { AuthGuard } from './core/auth.guard';
-import {AccessComponent} from './access/access.component';
+import { AuthGuard } from './core/services/auth/auth.guard';
+import { AccessPage } from './pages/access/access.page';
+import { HomePage } from './pages/home/home.page';
+import { ProfilePage} from './pages/profile/profile.page';
+import { DiscoverPage } from './pages/discover/discover.page';
+import { AuthResolver } from './core/services/auth/auth.resolver';
+import { RefreshPage } from './pages/refresh/refresh.page';
 
 export const rootRouterConfig: Routes = [
-  {path: '', component: AccessComponent},
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  // { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  // { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent,  resolve: { data: UserResolver}}
+  { path: '', component: AccessPage, resolve: [AuthResolver], runGuardsAndResolvers: 'always' },
+  { path: 'home', component: HomePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always' },
+  { path: 'profile', component: ProfilePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always' },
+  { path: 'discover', component: DiscoverPage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always' },
+  { path: 'refresh', component: RefreshPage}
 ];
