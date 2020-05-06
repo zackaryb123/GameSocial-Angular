@@ -1,16 +1,16 @@
 import { ActionReducerMap } from '@ngrx/store';
 
 // reducers
-import {IAppStore, appReducer, AppActionTypes} from './app';
+import {IAppStore, appStore, AppActionTypes} from './app';
 
 // The top level Echoes Player application interface
 // each reducer is reponsible for manipulating a certain state
 export interface GameSocialState {
-  appReducer: IAppStore;
+  appStore: IAppStore;
 }
 
 export let GameSocialReducers: ActionReducerMap<GameSocialState> = {
-  appReducer
+  appStore
 };
 
 export let GameSocialActions = [

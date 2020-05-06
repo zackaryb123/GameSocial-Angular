@@ -4,7 +4,18 @@
     "outDir": "../out-tsc/app",
     "types": [],
     "paths": {
-      "@env/*": ["environments/*"]
+//      "@env/*": ["./environments/*"],
+//      "@store/*": ["./src/app/core/store/*"],
+//      "@service/*": ["./src/app/core/service/*"],
+//      "@models/*": ["./src/app/core/models/*"],
+//      "@interfaces/*": ["./src/app/core/interfaces/*"],
+//      "@core-components/*": ["./src/app/core/components/*"],
+//      "@pages/*": ["./src/app/pages/*"],
+//      "@animations/*": ["./src/app/shared/animations/*"],
+//      "@directives/*": ["./src/app/shared/directives/*"],
+//      "@pipes/*": ["./src/app/shared/pipes/*"],
+//      "@utils/*": ["./src/app/shared/utils/*"],
+//      "@shared-components/*": ["./src/app/shared/components/*"]
     }
   },
   "exclude": [

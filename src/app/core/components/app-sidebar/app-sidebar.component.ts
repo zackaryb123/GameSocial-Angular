@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Injectable, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {getSidebarCollapsed} from "../../store/app";
-import {Store} from "@ngrx/store";
-import {GameSocialState} from "../../store/reducers";
-import {AppDispatcher} from "../../store/app/dispatcher";
+import {getSidebarCollapsed} from '../../store/app';
+import {Store} from '@ngrx/store';
+import {GameSocialState} from '../../store/reducers';
+import {AppDispatcher} from '../../dispatcher/app.dispatcher';
 
 
 @Component({
@@ -42,7 +41,7 @@ import {AppDispatcher} from "../../store/app/dispatcher";
 })
 
 export class AppSidebarComponent implements OnInit {
-  sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+  // sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
   searchType$ = '';
   // public routes = [
   //   {link: 'search', icon: 'sign-out', label: 'Explore'}
@@ -50,6 +49,7 @@ export class AppSidebarComponent implements OnInit {
   // ];
 
   constructor(
+    // private appSidebarProxy: AppSidebarProxy,
     private store: Store<GameSocialState>,
     private appDispatch: AppDispatcher,
     private authService: AuthService,
@@ -58,12 +58,23 @@ export class AppSidebarComponent implements OnInit {
   }
 
   toggleSidebar() {
+    // this.appSidebarProxy.toggleSidebar();
     this.appDispatch.toggleSidebar();
-    // this.sidebarCollapsed$ = value;
   }
 
   ngOnInit() {
 
   }
 }
+
+// @Injectable()
+// export class AppSidebarProxy {
+//   // sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+//
+//   constructor(private store: Store<GameSocialState>, private appDispatcher: AppDispatcher) {}
+//
+//   toggleSidebar() {
+//     this.appDispatcher.toggleSidebar();
+//   }
+// }
 

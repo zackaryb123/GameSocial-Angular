@@ -3,7 +3,7 @@ import { distinctUntilChanged, pluck } from 'rxjs/operators';
 import {StateInterface} from '../interfaces/state.interface';
 
 const state: StateInterface = {
-  user: null,
+  user: {},
 };
 
 export class StoreService {

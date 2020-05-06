@@ -10,7 +10,7 @@ import {
 
 // import { Authorization } from '@core/services';
 // import { EchoesState } from '@core/store';
-// import { AppApi } from '@api/app.api';
+// import { AppApi } from '@dispatcher/app.dispatcher';
 
 @Component({
   selector: 'app-navbar',
@@ -31,15 +31,13 @@ import {
         </div>
         <section class="navbar-text navbar-actions">
           <app-navbar-user
-            [signedIn]="isSignIn()"
-            [userImageUrl]="(user$ | async)"
+            [userImageUrl]="(user$)"
             (signIn)="signInUser()"
             ></app-navbar-user>
           <app-navbar-menu
-            [appVersion]="appVersion$ | async"
-            [theme]="themes$ | async"
+            [appVersion]="appVersion$"
+            [theme]="themes$"
             (themeChange)="changeTheme($event)"
-            [signedIn]="isSignIn()"
             (signOut)="signOutUser()"
             (versionUpdate)="updateVersion()"
             (versionCheck)="checkVersion()"
@@ -51,9 +49,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavbarComponent implements OnInit {
-  user$ = null;
-  appVersion$ = null;
-  themes$ = null;
+  user$ = '';
+  appVersion$ =  {
+    isNewAvailable: false,
+    semver: '',
+    checkingForVersion: false
+  };
+  themes$ = {
+    themes: [''],
+    selected: ''
+  };
 
   @Input() header: string;
   @Input() headerIcon = '';

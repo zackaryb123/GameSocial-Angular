@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class AppActionTypes {
   static SIDEBAR_EXPAND = '[APP] SIDEBAR_EXPAND';
-  static SIDEBAR_COLLAPSE = '[APP CORE] SIDEBAR_COLLAPSE';
-  static SIDEBAR_TOGGLE = '[APP CORE] SIDEBAR_TOGGLE';
+  static SIDEBAR_COLLAPSE = '[APP] SIDEBAR_COLLAPSE';
+  static SIDEBAR_TOGGLE = '[APP] SIDEBAR_TOGGLE';
 }
 
 export class ExpandSidebar implements Action {
@@ -20,6 +20,7 @@ export class CollapseSidebar implements Action {
 
 export class ToggleSidebar implements Action {
   public type = AppActionTypes.SIDEBAR_TOGGLE;
+  // constructor(public payload: boolean) {}
   public payload = '';
 }
 

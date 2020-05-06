@@ -36,15 +36,15 @@ import { select, Store } from '@ngrx/store';
           ></search-navigator>
         </section>
       </app-navbar>
-      <router-outlet></router-outlet>
+<!--      <router-outlet></router-outlet>-->
     </article>
   `
 })
 export class AppSearchComponent implements OnInit {
   query$ = '';
   searchType$ = 'video';
-  currentPlaylist$ = '';
-  queryParams$ = '';
+  currentPlaylist$ = false;
+  queryParams$ = {duration: false, hd: false };
   presets$ = '';
 
   constructor(

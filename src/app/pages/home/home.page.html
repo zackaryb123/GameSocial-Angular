@@ -1,10 +1,10 @@
 <!--<app-player class="navbar navbar-default navbar-fixed-bottom"></app-player>-->
 
-<app-sidebar></app-sidebar>
+<app-sidebar [class.closed]="sidebarCollapsed$ | async"></app-sidebar>
 
 
 <div class="container-main">
-  <app-search [class.closed]="sidebarCollapsed$"></app-search>
+  <app-search [class.closed]="sidebarCollapsed$ | async"></app-search>
 </div>
 
 <!--<app-error-handler></app-error-handler>-->

@@ -1,7 +1,7 @@
 import { Store, select } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import * as AppStore from './index';
-import {GameSocialState} from '../reducers';
+import * as AppStore from '../store/app/index';
+import {GameSocialState} from '../store/reducers';
 
 // Actions
 

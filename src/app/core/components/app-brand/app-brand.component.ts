@@ -1,5 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AppDispatcher} from '../../store/app/dispatcher';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {GameSocialState} from '../../store/reducers';
+import {AppDispatcher} from '../../dispatcher/app.dispatcher';
 
 
 @Component({
@@ -8,10 +10,9 @@ import {AppDispatcher} from '../../store/app/dispatcher';
   templateUrl: './app-brand.component.html',
 })
 export class AppBrandComponent implements OnInit {
-  // @Output() sidebarCollapsed$: EventEmitter<any> = new EventEmitter();
-
   constructor(
-    private appDispatch: AppDispatcher
+    private appDispatch: AppDispatcher,
+    // private store: Store<GameSocialState>,
   ) {
   }
 

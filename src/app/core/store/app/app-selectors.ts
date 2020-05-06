@@ -3,7 +3,7 @@ import {IAppStore} from './app-reducer';
 import {GameSocialState} from '../reducers';
 
 
-export const getAppStore = (state: GameSocialState) => state.appReducer;
+export const getAppStore = (state: GameSocialState) => state.appStore;
 
 export const getSidebarCollapsed = createSelector(
   getAppStore,

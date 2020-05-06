@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import {env} from '../../../environments/environment';
 import {GameSocialActions, GameSocialReducers} from './reducers';
+import {env} from '../../../environments/environment';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>

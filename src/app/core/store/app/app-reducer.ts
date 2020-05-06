@@ -1,5 +1,6 @@
 import {migrateReducerState} from '../store.utils';
 import {AppAction, AppActionTypes} from './app-actions';
+import {Store} from '@ngrx/store';
 
 
 export interface IAppStore {
@@ -15,10 +16,11 @@ const initialState: IAppStore = migrateReducerState(
   localStorage
 );
 
-export function appReducer(
+export function appStore(
   state: IAppStore = initialState,
   action: AppAction
 ): IAppStore {
+  console.log('initialState: ', initialState);
   switch (action.type) {
     case AppActionTypes.SIDEBAR_EXPAND:
       return { ...state, sidebarExpanded: true };
@@ -29,5 +31,9 @@ export function appReducer(
     case AppActionTypes.SIDEBAR_TOGGLE:
       return { ...state, sidebarExpanded: !state.sidebarExpanded };
   }
+}
+
+export function getSidebarExpanded($state: Store<IAppStore>) {
+  return $state.select(state => state.sidebarExpanded);
 }
 
