@@ -24,7 +24,6 @@ import { DiscoverPage } from './pages/discover/discover.page';
 import { HomePage } from './pages/home/home.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { AuthResolver } from './core/services/auth/auth.resolver';
-import { RefreshPage } from './pages/refresh/refresh.page';
 import { ScrollComponent } from './core/components/scroll/scroll.component';
 import { MultiScrollComponent } from './core/components/multi-scroll/multi-scroll.component';
 import {AppSidebarComponent} from './core/components/app-sidebar/app-sidebar.component';
@@ -64,7 +63,6 @@ const prod = false;
     DiscoverPage,
     HomePage,
     ProfilePage,
-    RefreshPage,
     ScrollComponent,
     MultiScrollComponent,
     AppSidebarComponent,
