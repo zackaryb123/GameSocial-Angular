@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {GameSocialState} from '../../store/reducers';
 import {AppDispatcher} from '../../dispatcher/app.dispatcher';
 
 
@@ -12,9 +10,7 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
 export class AppBrandComponent implements OnInit {
   constructor(
     private appDispatch: AppDispatcher,
-    // private store: Store<GameSocialState>,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
   }

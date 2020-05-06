@@ -1,5 +1,5 @@
 import {AppDispatcher} from './app.dispatcher';
 
-export const APP_APIS = [
+export const APP_DISPATCHER = [
   AppDispatcher
 ];

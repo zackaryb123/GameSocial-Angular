@@ -39,6 +39,12 @@ button {
         }
       }
 
+      button {
+        icon {
+          color: #03a9f4;
+        }
+      }
+
       .brand-icon {
         font-size: $brand-icon-font-size;
         margin: $brand-icon-margin;
@@ -78,6 +84,12 @@ button {
       .sidebar-toggle {
         transform: translateX(0);
         color: var(--brand-inverse-text);
+      }
+
+      button {
+        icon {
+          color: white;
+        }
       }
 
       .brand-icon {

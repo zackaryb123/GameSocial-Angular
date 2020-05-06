@@ -17,7 +17,7 @@ const ICON_LIB_PREFIX = 'fa';
   selector: 'icon',
   template: `<ng-content></ng-content>`
 })
-export class IconComponent implements OnInit, OnChanges {
+export class IconDirective implements OnInit, OnChanges {
   @Input() name = '';
   @Input() prefix = ICON_PREFIX_STANDARD;
 

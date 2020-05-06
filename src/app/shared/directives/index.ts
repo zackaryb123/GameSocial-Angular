@@ -1,6 +1,6 @@
-import { IconComponent } from './icon';
+import { IconDirective } from './icon';
 
-export const CORE_DIRECTIVES = [
-  IconComponent,
+export const SHARED_DIRECTIVES = [
+  IconDirective,
   // TooltipDirective
 ];

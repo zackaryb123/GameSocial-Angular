@@ -12,7 +12,7 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
   styleUrls: ['./app-sidebar.scss'],
   template: `
   <div id="sidebar" class="sidebar ux-maker"
-    [class.closed]="sidebarCollapsed$">
+    [class.closed]="sidebarCollapsed$ | async">
     <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
     <nav class="navbar navbar-transparent">
       <app-brand></app-brand>
@@ -31,8 +31,7 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
       <app-navigator
         iconLabel="Logout"
         iconName="sign-out"
-        [closed]="sidebarCollapsed$ | async"
-        [searchType]="searchType$">
+        [closed]="sidebarCollapsed$ | async">
       </app-navigator>
     </nav>
   </div>
@@ -41,19 +40,13 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
 })
 
 export class AppSidebarComponent implements OnInit {
-  // sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+  sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
   searchType$ = '';
-  // public routes = [
-  //   {link: 'search', icon: 'sign-out', label: 'Explore'}
-  //   // { link: '/user', icon: 'heart', label: 'My Profile' }
-  // ];
 
   constructor(
-    // private appSidebarProxy: AppSidebarProxy,
+    private appSidebarProxy: AppSidebarProxy,
     private store: Store<GameSocialState>,
     private appDispatch: AppDispatcher,
-    private authService: AuthService,
-    private router: Router,
   ) {
   }
 
@@ -63,18 +56,17 @@ export class AppSidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }
 
-// @Injectable()
-// export class AppSidebarProxy {
-//   // sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
-//
-//   constructor(private store: Store<GameSocialState>, private appDispatcher: AppDispatcher) {}
-//
-//   toggleSidebar() {
-//     this.appDispatcher.toggleSidebar();
-//   }
-// }
+@Injectable()
+export class AppSidebarProxy {
+  sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+
+  constructor(private store: Store<GameSocialState>, private appDispatcher: AppDispatcher) {}
+
+  toggleSidebar() {
+    this.appDispatcher.toggleSidebar();
+  }
+}
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { UserService } from './user.service';
-import { FirebaseUserModel } from '../models/user.model';
+import { FirebaseUserModel } from '../../models/user.model';
 
 @Injectable()
 export class UserGuard implements Resolve<FirebaseUserModel> {

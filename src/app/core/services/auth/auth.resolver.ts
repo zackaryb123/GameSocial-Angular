@@ -8,7 +8,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { UserService } from '../user.service';
+import { UserService } from '../user/user.service';
 import {User} from 'firebase';
 import {Observable, Subject} from 'rxjs';
 

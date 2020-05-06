@@ -20,7 +20,9 @@ export function appStore(
   state: IAppStore = initialState,
   action: AppAction
 ): IAppStore {
-  console.log('initialState: ', initialState);
+  console.log('initialState: ', initialState, 'action.type: ', action.type);
+  console.log(AppActionTypes.SIDEBAR_TOGGLE);
+  console.log(action.type === AppActionTypes.SIDEBAR_TOGGLE);
   switch (action.type) {
     case AppActionTypes.SIDEBAR_EXPAND:
       return { ...state, sidebarExpanded: true };
@@ -29,6 +31,7 @@ export function appStore(
       return { ...state, sidebarExpanded: false };
 
     case AppActionTypes.SIDEBAR_TOGGLE:
+      console.log('Reducer: state', state);
       return { ...state, sidebarExpanded: !state.sidebarExpanded };
   }
 }
