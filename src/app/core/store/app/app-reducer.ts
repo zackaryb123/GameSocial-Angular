@@ -1,9 +1,5 @@
 import {migrateReducerState} from '../store.utils';
 import {AppAction, AppActionTypes} from './app-actions';
-import {createSelector, Store} from '@ngrx/store';
-import {GameSocialState} from '../reducers';
-import {createFeatureSelector} from '@ngrx/store';
-
 
 export interface IAppStore {
   sidebarExpanded: boolean;
@@ -36,22 +32,10 @@ export function appStore(
       console.log('Reducer: state', state);
       return { ...state, sidebarExpanded: !state.sidebarExpanded };
     default: {
-      return state;
+      return {
+        ...initialState,
+        ...state
+      };
     }
   }
 }
-
-export const getAppReducer = (state: GameSocialState) => state.appStore;
-console.log('getAppStore: ', getAppReducer);
-
-export const appStoreState = createFeatureSelector<GameSocialState, IAppStore>(
-  'appStore' // feature root
-);
-
-export const getSidebarCollapsed = createSelector(
-  appStoreState,
-  (state: IAppStore) => {
-    console.log('getSidebarCollapsed: state: ', state);
-    return !state.sidebarExpanded;
-  }
-);

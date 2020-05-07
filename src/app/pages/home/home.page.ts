@@ -5,9 +5,9 @@ import {FirebaseUserModel} from '../../core/models/user.model';
 import {Subject} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {PostModel} from '../../core/models/post.model';
-import {select, Store} from '@ngrx/store';
-import {getSidebarCollapsed} from '../../core/store/app';
+import {Store} from '@ngrx/store';
 import {GameSocialState} from '../../core/store/reducers';
+import {getSidebarCollapsed} from '../../core/store/app/app-selectors';
 
 const posts: PostModel[] = [
   {
@@ -73,9 +73,6 @@ const posts: PostModel[] = [
 })
 export class HomePage implements OnInit {
   sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
-  // sidebarCollapsed$ = this.store.select(appStore => appStore.appStore.sidebarExpanded);
-
-
   user: FirebaseUserModel = new FirebaseUserModel();
   ngUnsubscribe: Subject<any> = new Subject();
   posts: PostModel[] = posts;
@@ -89,9 +86,6 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.sidebarCollapsed$.subscribe(data => {
-    //   console.log('this.sidebarCollapsed$: data: ', data);
-    // });
   }
 
 }

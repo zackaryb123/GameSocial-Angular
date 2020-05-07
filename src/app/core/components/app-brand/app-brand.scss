@@ -74,6 +74,7 @@ button {
         .closed & {
           position: absolute;
           transform: translateY(-4rem);
+          outline: 0;
         }
       }
     }
