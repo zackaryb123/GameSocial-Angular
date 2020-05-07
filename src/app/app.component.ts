@@ -1,4 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {GameSocialState} from './core/store/reducers';
+import {select, Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 export class AppComponent implements OnInit {
 
   constructor(
+    private store: Store<GameSocialState>,
   ) {
   }
 

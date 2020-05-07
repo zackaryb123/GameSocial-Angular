@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
-  OnDestroy
+  OnDestroy, OnInit
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -27,15 +27,18 @@ const defaultSearchParams = {
     <form class="navbar-form form-search is-flex-row"
       [formGroup]="searchForm"
       >
-      <input placeholder="Search..."
-        ngxTypeahead
-        [taUrl]=""
-        [taParams]="params"
-        [taAllowEmpty]="true"
-        (taSelected)="handleSelectSuggestion($event)"
-        type="search" class="form-control" autocomplete="off"
-        formControlName="query"
-        >
+      <input
+        [value]="query"
+        placeholder="Search..."
+        type="search"
+        class="form-control"
+        autocomplete="off"
+        formControlName="query">
+<!--        ngxTypeahead-->
+<!--        [taUrl]=""-->
+<!--        [taParams]="params"-->
+<!--        [taAllowEmpty]="true"-->
+<!--        (taSelected)="handleSelectSuggestion($event)"-->
       <button class="search btn btn-transparent btn-submit is-flex-row is-flex-valign" title="search with echoes">
         <icon name="search"></icon>
       </button>
@@ -57,7 +60,7 @@ const defaultSearchParams = {
       `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlayerSearchComponent implements OnChanges, OnDestroy {
+export class PlayerSearchComponent implements OnInit, OnChanges, OnDestroy {
   @Input() query;
   @Input() searchParams = { ...defaultSearchParams };
   @Output() queryChange = new EventEmitter<string>();
@@ -73,7 +76,8 @@ export class PlayerSearchComponent implements OnChanges, OnDestroy {
     hl: 'en',
     ds: 'yt',
     xhr: 't',
-    client: 'youtube'
+    client: 'youtube',
+    q: this.query
   };
 
   constructor(private fb: FormBuilder) {
@@ -96,6 +100,9 @@ export class PlayerSearchComponent implements OnChanges, OnDestroy {
     this.filtersChanged = this.filtersForm.valueChanges.subscribe(state => {
       this.paramsChange.emit(state);
     });
+  }
+
+  ngOnInit(): void {
   }
 
   ngOnChanges({ query, searchParams }: SimpleChanges) {
@@ -139,9 +146,10 @@ export class PlayerSearchComponent implements OnChanges, OnDestroy {
   }
 
   selectSuggestion(suggestion: string) {
-    if (!suggestion.hasOwnProperty('isTrusted')) {
-      this.search.emit(suggestion);
-    }
+    this.query = suggestion;
+    // if (!suggestion.hasOwnProperty('isTrusted')) {
+    //   this.search.emit(suggestion);
+    // }
   }
 
   clearFilters() {

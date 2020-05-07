@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../core/services/auth/auth.service';
+import {AuthService} from '../../core/services/auth';
 import { Router} from '@angular/router';
 import {FirebaseUserModel} from '../../core/models/user.model';
 import {Subject} from 'rxjs';
@@ -72,7 +72,9 @@ const posts: PostModel[] = [
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
-  sidebarCollapsed$ = this.store.pipe(select(getSidebarCollapsed));
+  sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+  // sidebarCollapsed$ = this.store.select(appStore => appStore.appStore.sidebarExpanded);
+
 
   user: FirebaseUserModel = new FirebaseUserModel();
   ngUnsubscribe: Subject<any> = new Subject();
@@ -87,6 +89,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.sidebarCollapsed$.subscribe(data => {
+    //   console.log('this.sidebarCollapsed$: data: ', data);
+    // });
   }
 
 }

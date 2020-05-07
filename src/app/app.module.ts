@@ -20,7 +20,8 @@ import {CORE_COMPONENTS} from './core/components';
 import {SHARED_PIPES} from './shared/pipes';
 import {SERVICES} from './core/services';
 import {PAGES} from './pages';
-import {AppSidebarProxy} from "./core/components/app-sidebar/app-sidebar.component";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AppErrorHandler, AppHttpInterceptor} from "./core/services/app-http-interceptor";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {AppSidebarProxy} from "./core/components/app-sidebar/app-sidebar.compone
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, {
       useHash: true,
-      onSameUrlNavigation: 'reload'
+      // onSameUrlNavigation: 'reload'
     }),
     AngularFireModule.initializeApp(env.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
@@ -55,7 +56,11 @@ import {AppSidebarProxy} from "./core/components/app-sidebar/app-sidebar.compone
     ErrorHandler,
     ...SERVICES,
     ...APP_DISPATCHER,
-    AppSidebarProxy,
+    // {
+      // provide: HTTP_INTERCEPTORS,
+      // useClass: [AppHttpInterceptor, AppErrorHandler],
+      // multi: true,
+    // }
   ],
   bootstrap: [AppComponent]
 })
