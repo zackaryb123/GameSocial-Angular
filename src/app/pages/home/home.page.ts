@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../core/services/auth';
 import { Router} from '@angular/router';
 import {FirebaseUserModel} from '../../core/models/user.model';
-import {Subject} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {PostModel} from '../../core/models/post.model';
-import {Store} from '@ngrx/store';
-import {GameSocialState} from '../../core/store/reducers';
-import {getSidebarCollapsed} from '../../core/store/app/app-selectors';
+import {AppDispatcher} from '../../core/dispatcher/app.dispatcher';
 
 const posts: PostModel[] = [
   {
@@ -72,13 +69,11 @@ const posts: PostModel[] = [
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
-  sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+  sidebarToggle$ = this.appDispatch.sidebarToggle$;
   user: FirebaseUserModel = new FirebaseUserModel();
-  ngUnsubscribe: Subject<any> = new Subject();
-  posts: PostModel[] = posts;
 
   constructor(
-    private store: Store<GameSocialState>,
+    private appDispatch: AppDispatcher,
     private authService: AuthService,
     private router: Router,
     public afAuth: AngularFireAuth,

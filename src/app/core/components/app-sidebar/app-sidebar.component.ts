@@ -9,7 +9,7 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
   styleUrls: ['./app-sidebar.scss'],
   template: `
   <div id="sidebar" class="sidebar ux-maker"
-    [class.closed]="sidebarCollapsed$ | async">
+    [class.closed]="sidebarToggle$ | async">
     <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
     <nav class="navbar navbar-transparent">
       <app-brand></app-brand>
@@ -17,7 +17,7 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
         iconLink="explore"
         iconLabel="Explore"
         iconName="globe"
-        [closed]="sidebarCollapsed$ | async"
+        [closed]="sidebarToggle$ | async"
         [searchType]="searchType$">
       </app-navigator>
     </nav>
@@ -28,7 +28,7 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
       <app-navigator
         iconLabel="Logout"
         iconName="sign-out"
-        [closed]="sidebarCollapsed$ | async">
+        [closed]="sidebarToggle$ | async">
       </app-navigator>
     </nav>
   </div>
@@ -37,12 +37,10 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
 })
 
 export class AppSidebarComponent implements OnInit {
-  sidebarCollapsed$ = this.appDispatch.sidebarCollapsed$;
+  sidebarToggle$ = this.appDispatch.sidebarToggle$;
   searchType$ = '';
 
   constructor(
-    // private appSidebarProxy: AppSidebarProxy,
-    private store: Store<GameSocialState>,
     private appDispatch: AppDispatcher,
   ) {
   }
@@ -53,18 +51,7 @@ export class AppSidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('sidebarCollapsed$: ', this.sidebarCollapsed$);
   }
 }
 
-// @Injectable()
-// // export class AppSidebarProxy {
-// //   sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
-// //
-// //   constructor(private store: Store<GameSocialState>, private appDispatcher: AppDispatcher) {}
-// //
-// //   toggleSidebar() {
-// //     this.appDispatcher.toggleSidebar();
-// //   }
-// }
 

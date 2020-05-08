@@ -26,6 +26,7 @@
     "bootstrap-sass": "^3.4.1",
     "core-js": "^2.6.11",
     "firebase": "^7.14.2",
+    "memo-decorator": "^2.0.1",
     "ngrx-store-localstorage": "^9.0.0",
     "ngx-infinite-scroll": "^8.0.2",
     "ngx-typeahead": "^6.2.1",

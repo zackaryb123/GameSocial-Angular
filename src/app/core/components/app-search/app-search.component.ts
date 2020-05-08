@@ -36,7 +36,7 @@ import { select, Store } from '@ngrx/store';
           ></search-navigator>
         </section>
       </app-navbar>
-<!--      <router-outlet></router-outlet>-->
+      <router-outlet name="home"></router-outlet>
     </article>
   `
 })

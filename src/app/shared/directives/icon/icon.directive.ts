@@ -1,5 +1,4 @@
 import {
-  Directive,
   ElementRef,
   Input,
   OnChanges,

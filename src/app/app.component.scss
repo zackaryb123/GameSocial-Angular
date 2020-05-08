@@ -3,7 +3,8 @@ $icon-font-path: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/fonts/" !defau
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap";
 
 .bg-page {
-  background: #FAFAFA;
+  background: #03a9f4;
+  //background: #FAFAFA;
   height: 100vh;
   display: block;
   transition: margin 0.3s ease-out;

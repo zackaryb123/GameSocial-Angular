@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {AppDispatcher} from '../../dispatcher/app.dispatcher';
-import {getSidebarCollapsed} from '../../store/app/app-selectors';
 import {Store} from '@ngrx/store';
 import {GameSocialState} from '../../store/reducers';
 
@@ -9,9 +8,11 @@ import {GameSocialState} from '../../store/reducers';
   selector: 'app-brand',
   styleUrls: ['./app-brand.scss'],
   templateUrl: './app-brand.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppBrandComponent implements OnInit {
-  // sidebarCollapsed$ = this.store.select(getSidebarCollapsed);
+  sidebarToggle$ = this.appDispatch.sidebarToggle$;
+
   constructor(
     private store: Store<GameSocialState>,
     private appDispatch: AppDispatcher,

@@ -20,8 +20,7 @@ import {CORE_COMPONENTS} from './core/components';
 import {SHARED_PIPES} from './shared/pipes';
 import {SERVICES} from './core/services';
 import {PAGES} from './pages';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {AppErrorHandler, AppHttpInterceptor} from "./core/services/app-http-interceptor";
+import {SHARED_COMPONENTS} from './shared/components';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,8 @@ import {AppErrorHandler, AppHttpInterceptor} from "./core/services/app-http-inte
     ...PAGES,
     ...SHARED_PIPES,
     ...SHARED_DIRECTIVES,
-    ...CORE_COMPONENTS
+    ...SHARED_COMPONENTS,
+    ...CORE_COMPONENTS,
   ],
   imports: [
     AppStoreModule,

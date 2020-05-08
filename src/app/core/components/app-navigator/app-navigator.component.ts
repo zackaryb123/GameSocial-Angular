@@ -17,7 +17,7 @@ import {AuthService} from '../../services/auth/auth.service';
     [class.closed]="closed">
     <button class="list-group-item ux-maker"
       *ngFor="let route of routes;"
-      (click)="click()">
+      (click)="click(go(route.link))">
       <icon [name]="route.icon"></icon>
       <span class="text">{{ route.label }}</span>
     </button>
@@ -48,7 +48,7 @@ export class AppNavigatorComponent implements OnInit {
     this.routes[0].label = this.iconLabel;
   }
 
-  click() {
+  click(booleanPromise: Promise<boolean>) {
     if (this.iconLabel === 'Explore') {
       this.go(this.iconLink);
     } else if (this.iconLabel === 'Logout') {
@@ -56,8 +56,9 @@ export class AppNavigatorComponent implements OnInit {
     }
   }
 
-  go(link) {
-    this.router.navigate([`/${link}`], { queryParams: { filter: '' } });
+  go(link: string) {
+    // this.router.navigate([`/${link}`], { queryParams: { filter: '' } });
+    return this.router.navigate([{outlets: {home: `home/${link}`}}]);
   }
 
   logout() {

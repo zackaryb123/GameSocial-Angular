@@ -20,11 +20,10 @@ interface TSearchType {
   template: `
     <ul class="nav nav-tabs search-selector" role="tablist">
       <li *ngFor="let search of searchTypes" [ngClass]="{ 'active': isActive(search)}">
-        <a
-          [routerLink]="search.link"
-          [queryParams]="search.params"
-          class="search-filter"
-          >{{ search.label }}</a>
+        <a class="search-filter"
+           [routerLink]="[{ outlets: { home: search.link } }]"
+           [queryParams]="search.params"
+        >{{ search.label }}</a>
       </li>
     </ul>
   `,
@@ -34,26 +33,20 @@ export class SearchNavigatorComponent implements OnInit {
   searchTypes: TSearchType[] = [
     {
       label: 'Videos',
-      link: `/search/videos`,
+      link: `videos`,
       params: { filter: '' },
       type: 'video'
     },
     {
       label: 'Playlists',
-      link: '/search/playlists',
+      link: 'playlist',
       params: { filter: '' },
       type: 'playlist'
     },
     {
       label: 'Albums',
-      link: `/search/videos`,
-      params: { filter: 'full albumns' },
-      type: 'video'
-    },
-    {
-      label: 'Live',
-      link: `/search/videos`,
-      params: { filter: 'live' },
+      link: `albums`,
+      params: { filter: '' },
       type: 'video'
     }
   ];

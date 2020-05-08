@@ -2,7 +2,7 @@
 @import '../../../../../css/echoes-variables.scss';
 
 li {
-  color: #03a9f4;
+  color: #263238;
 }
 
 @media (min-width: 320px) {
@@ -11,7 +11,7 @@ li {
       clear: both;
 
       &.nav > li > .search-filter {
-        text-transform: uppercase;
+        //text-transform: uppercase;
         border: none;
         border-radius: none;
         background-color: transparent;

@@ -1,6 +1,9 @@
 @import '../../../../../css/core/global.scss';
 @import '../../../../../css/echoes-variables.scss';
 
+icon {
+  color: #263238;
+}
 
 @media (min-width: 320px) {
   $input-search-box-height: $input-height-base;
@@ -22,7 +25,8 @@
 
     .form-search {
       position: relative;
-      border: 0;
+      //border: 0;
+      border: 1px solid #263238!important;
       background-color: $form-bg-color;
       border-radius: 3px;
       padding: var(--spacing-medium);

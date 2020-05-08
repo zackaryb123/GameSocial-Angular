@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6 d-flex justify-content-end" [@animate-banner]="stateBanner">
-      <app-banner></app-banner>
-    </div>
+<!--    <div class="col-sm-6 d-flex justify-content-end" [@animate-banner]="stateBanner">-->
+<!--      <app-banner></app-banner>-->
+<!--    </div>-->
     <div *ngIf="register; else formLogin">
-      <div class="col-sm-6 d-flex justify-content-start" [@animate-panel]="statePanel">
+      <div class="col-sm-12 d-flex justify-content-start" [@animate-panel]="statePanel">
         <app-register (displayPanel)="displayPanel($event)"></app-register>
       </div>
     </div>
     <ng-template #formLogin>
-      <div class="col-sm-6 d-flex justify-content-start" [@animate-panel]="statePanel">
+      <div class="col-sm-12 d-flex justify-content-start" [@animate-panel]="statePanel">
         <page-login (displayPanel)="displayPanel($event)"></page-login>
       </div>
     </ng-template>

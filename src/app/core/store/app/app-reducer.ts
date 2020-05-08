@@ -1,36 +1,31 @@
 import {migrateReducerState} from '../store.utils';
-import {AppAction, AppActionTypes} from './app-actions';
+import {AppActionTypes, IAppAction} from './app-actions';
 
 export interface IAppStore {
-  sidebarExpanded: boolean;
+  sidebarToggle: boolean;
+  searchQuery: string;
 }
 const newInitialState: IAppStore = {
-  sidebarExpanded: true
+  sidebarToggle: true,
+  searchQuery: ''
 };
 
 const initialState: IAppStore = migrateReducerState(
-  'appLayout',
+  'prevAppStore',
   newInitialState,
   localStorage
 );
 
 export function appStore(
   state: IAppStore = initialState,
-  action: AppAction
+  action: IAppAction
 ): IAppStore {
-  console.log('initialState: ', initialState, 'action.type: ', action.type);
-  console.log(AppActionTypes.SIDEBAR_TOGGLE);
-  console.log(action.type === AppActionTypes.SIDEBAR_TOGGLE);
   switch (action.type) {
-    case AppActionTypes.SIDEBAR_EXPAND:
-      return { ...state, sidebarExpanded: true };
-
-    case AppActionTypes.SIDEBAR_COLLAPSE:
-      return { ...state, sidebarExpanded: false };
+    case AppActionTypes.UPDATE_SEARCH_QUERY:
+      return { ...state, searchQuery: action.payload };
 
     case AppActionTypes.SIDEBAR_TOGGLE:
-      console.log('Reducer: state', state);
-      return { ...state, sidebarExpanded: !state.sidebarExpanded };
+      return { ...state, sidebarToggle: !state.sidebarToggle };
     default: {
       return {
         ...initialState,

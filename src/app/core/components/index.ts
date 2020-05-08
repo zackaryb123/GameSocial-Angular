@@ -11,6 +11,7 @@ import {AppSidebarComponent} from './app-sidebar/app-sidebar.component';
 import {UserComponent} from './user/user.component';
 import {MultiScrollComponent} from './multi-scroll/multi-scroll.component';
 import {ScrollComponent} from './scroll/scroll.component';
+import {AppVideosComponent} from './app-search/app-videos/app-videos.component';
 
 export const CORE_COMPONENTS = [
   AppBrandComponent,
@@ -26,4 +27,5 @@ export const CORE_COMPONENTS = [
   MultiScrollComponent,
   ScrollComponent,
   UserComponent,
+  AppVideosComponent
 ];

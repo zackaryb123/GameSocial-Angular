@@ -1,5 +1,9 @@
 import {SearchPipe} from './search.pipe';
+import {IsInQueuePipe} from './isInQueue.pipe';
+import {VideoToThumbPipe} from './videoToThumb.pipe';
 
 export const SHARED_PIPES = [
-  SearchPipe
+  SearchPipe,
+  IsInQueuePipe,
+  VideoToThumbPipe
 ];
