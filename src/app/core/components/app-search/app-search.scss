@@ -1,6 +1,6 @@
 @import '../../../../css/core/global.scss';
 
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
   :host {
     $gap-top: 9.5rem;
 
@@ -8,4 +8,4 @@
       padding-top: $gap-top;
     }
   }
-}
+//}

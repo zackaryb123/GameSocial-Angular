@@ -7,7 +7,7 @@ button {
   }
 }
 
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
   :host {
     .btn-toggle {
       padding: 1rem;
@@ -75,7 +75,7 @@ button {
       width: 100%;
     }
   }
-}
+//}
 
 .list-group-item.theme-selector {
   /deep/ .btn.active {

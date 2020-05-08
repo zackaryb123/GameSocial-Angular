@@ -16,8 +16,9 @@ $navbar-new-height: 5rem;
 		}
 	}
 }
+
 // the code
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
 :host {
   position: fixed;
   bottom: 0;
@@ -99,7 +100,8 @@ $navbar-new-height: 5rem;
     }
 	}
 }
-}
+//}
+
 @media (min-width: 768px) {
 :host { 
 	left: 0;

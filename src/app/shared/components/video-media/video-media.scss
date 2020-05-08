@@ -28,7 +28,7 @@
 }
 
 // playlist also using it
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
   :host {
     --media-primary-color: var(--brand-primary);
     --media-dark-transparent: var(--brand-dark-bg-color-transparent);
@@ -260,7 +260,7 @@
       }
     }
   }
-}
+//}
 @media (min-width: 500px) and (max-width: 767px) {
   :host {
     .video-item {

@@ -5,7 +5,7 @@ icon {
   color: #263238;
 }
 
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
   $input-search-box-height: $input-height-base;
   $input-search-box-width: 35vw;
   $search-box-width-large: 50vw;
@@ -150,7 +150,7 @@ icon {
       }
     }
   }
-}
+//}
 
 // @media (min-width: 460px) {
 // 	player-search {

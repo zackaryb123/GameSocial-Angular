@@ -4,7 +4,7 @@
   margin-right: 0px !important;
 }
 
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
 app-navbar {
   $zindex: 1020;
   $navbar-container-padding: 0.5rem 5rem;
@@ -87,7 +87,7 @@ nav.navbar {
   }
 }
 }
-}
+//}
 @media (min-width: 768px) {
 $navbar-container-left-padding: 2.5rem;
 

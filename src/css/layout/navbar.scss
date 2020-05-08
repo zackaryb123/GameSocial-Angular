@@ -1,6 +1,6 @@
 @import '../core/global.scss';
 
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
   $navbar-new-height: 1rem;
 
   .navbar {
@@ -38,7 +38,7 @@
     background-color: transparent;
     color: $inverse;
   }
-}
+//}
 
 @media (min-width: 768px) {
   .navbar {

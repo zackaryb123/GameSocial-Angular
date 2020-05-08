@@ -14,7 +14,7 @@ button {
   }
 }
 
-@media (min-width: 320px) {
+//@media (min-width: 320px) {
   :host {
     .brand-container {
       $brand-icon-font-size: 30px;
@@ -79,7 +79,8 @@ button {
       }
     }
   }
-}
+//}
+
 @media (min-width: 768px) {
   :host {
     .brand-container {
