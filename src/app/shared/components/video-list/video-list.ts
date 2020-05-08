@@ -21,7 +21,7 @@ function createIdMap(list: any[]) {
   styleUrls: ['./video-list.scss'],
   animations: [fadeInAnimation],
   template: `
-  <ul class="list-unstyled clearfix">
+  <ul class="video-list-container list-unstyled clearfix">
     <li class="video-list-item" [@fadeIn] *ngFor="let media of list">
       <video-media
         [media]="media"
