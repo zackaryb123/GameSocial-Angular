@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {AppDispatcher} from '../../dispatcher/app.dispatcher';
+import {AppService} from '../../services/app/app.service';
 import {Store} from '@ngrx/store';
 import {GameSocialState} from '../../store/reducers';
 
@@ -15,7 +15,7 @@ export class AppBrandComponent implements OnInit {
 
   constructor(
     private store: Store<GameSocialState>,
-    private appDispatch: AppDispatcher,
+    private appDispatch: AppService,
   ) { }
 
   ngOnInit() {

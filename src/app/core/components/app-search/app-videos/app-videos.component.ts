@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {GameSocialState} from '../../../store/reducers';
+import {AppService} from "../../../services/app/app.service";
 
 // actions
-// import * as fromPlayerSearch from '@core/store/player-search';
+// import * as fromPlayerSearch from '@core/store/player-profile';
 // import { AppPlayerApi } from '@core/api/app-player.api';
 // selectors
 // import * as NowPlaylist from '@core/store/now-playlist';
@@ -31,9 +32,7 @@ export class AppVideosComponent implements OnInit {
   loading$ = false; // this.store.select(fromPlayerSearch.getIsSearching);
 
   constructor(
-    // private store: Store<GameSocialState>,
-    // private appPlayerApi: AppPlayerApi,
-    // private appApi: AppApi
+    private appService: AppService
   ) { }
 
   ngOnInit() {
@@ -56,7 +55,7 @@ export class AppVideosComponent implements OnInit {
   }
 
   addMediaToPlaylist(media: any) {
-    // this.appApi.toggleModal(true, media);
+    this.appService.toggleModal(true, media);
   }
 
 }

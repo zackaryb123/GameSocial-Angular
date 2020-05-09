@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Injectable, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {GameSocialState} from '../../store/reducers';
-import {AppDispatcher} from '../../dispatcher/app.dispatcher';
+import {AppService} from '../../services/app/app.service';
 
 
 @Component({
@@ -20,17 +20,22 @@ import {AppDispatcher} from '../../dispatcher/app.dispatcher';
         [closed]="sidebarToggle$ | async"
         [searchType]="searchType$">
       </app-navigator>
-    </nav>
-
-<!--    <now-playing></now-playing>-->
-
-    <nav class="navbar navbar-transparent">
       <app-navigator
         iconLabel="Logout"
         iconName="sign-out"
         [closed]="sidebarToggle$ | async">
       </app-navigator>
     </nav>
+
+<!--    <now-playing></now-playing>-->
+
+<!--    <nav class="navbar navbar-transparent">-->
+<!--      <app-navigator-->
+<!--        iconLabel="Logout"-->
+<!--        iconName="sign-out"-->
+<!--        [closed]="sidebarToggle$ | async">-->
+<!--      </app-navigator>-->
+<!--    </nav>-->
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -41,7 +46,7 @@ export class AppSidebarComponent implements OnInit {
   searchType$ = '';
 
   constructor(
-    private appDispatch: AppDispatcher,
+    private appDispatch: AppService,
   ) {
   }
 

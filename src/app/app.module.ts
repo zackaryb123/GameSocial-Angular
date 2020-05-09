@@ -14,13 +14,13 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {NgxTypeaheadModule} from 'ngx-typeahead';
 import {AppStoreModule} from './core/store';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
-import {APP_DISPATCHER} from './core/dispatcher';
 import {SHARED_DIRECTIVES} from './shared/directives';
 import {CORE_COMPONENTS} from './core/components';
 import {SHARED_PIPES} from './shared/pipes';
 import {SERVICES} from './core/services';
 import {PAGES} from './pages';
 import {SHARED_COMPONENTS} from './shared/components';
+import {AppEffectsModules} from './core/effects';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import {SHARED_COMPONENTS} from './shared/components';
     AppStoreModule,
     BrowserModule,
     ReactiveFormsModule,
+    AppEffectsModules,
     RouterModule.forRoot(rootRouterConfig, {
       useHash: true,
       // onSameUrlNavigation: 'reload'
@@ -55,7 +56,6 @@ import {SHARED_COMPONENTS} from './shared/components';
   providers: [
     ErrorHandler,
     ...SERVICES,
-    ...APP_DISPATCHER,
     // {
       // provide: HTTP_INTERCEPTORS,
       // useClass: [AppHttpInterceptor, AppErrorHandler],

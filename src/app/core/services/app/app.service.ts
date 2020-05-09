@@ -1,20 +1,23 @@
 import {Store} from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import * as AppStore from '../store/app/index';
-import {GameSocialState} from '../store/reducers';
-import {getSearchQuery, getSidebarToggle} from '../store/app/app-selectors';
-
-// Actions
+import * as AppStore from '../../store/app';
+import {GameSocialState} from '../../store/reducers';
+import {getSearchQuery, getShowModal, getSidebarToggle} from '../../store/app';
 
 @Injectable()
-export class AppDispatcher {
+export class AppService {
   sidebarToggle$ = this.store.select(getSidebarToggle);
   searchQuery$ = this.store.select(getSearchQuery);
+  showModal$ = this.store.select(getShowModal);
 
   constructor(private store: Store<GameSocialState>) { }
 
   toggleSidebar() {
     this.store.dispatch(new AppStore.ToggleSidebar());
+  }
+
+  toggleModal(show = true, media = {}) {
+    this.store.dispatch(show ? new AppStore.ShowModal(media) : new AppStore.CloseModal());
   }
 
   updateSearchQuery(query: string) {

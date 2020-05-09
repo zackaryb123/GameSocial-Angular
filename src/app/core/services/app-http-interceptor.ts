@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import {AppDispatcher} from '../dispatcher/app.dispatcher';
+import {AppService} from './app/app.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
@@ -51,7 +51,7 @@ export class AppErrorHandler implements ErrorHandler {
   constructor(private injector: Injector) {}
 
   handleError(error: Error | HttpErrorResponse | any) {
-    const appApi = this.injector.get(AppDispatcher);
+    const appApi = this.injector.get(AppService);
     // if (!DimissedErrors.includes(error.name)) {
     //   const sanitizedError = isYoutubeApiError(error)
     //     ? error.error.error.errors[0]

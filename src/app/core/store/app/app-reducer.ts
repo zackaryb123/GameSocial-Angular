@@ -4,10 +4,20 @@ import {AppActionTypes, IAppAction} from './app-actions';
 export interface IAppStore {
   sidebarToggle: boolean;
   searchQuery: string;
+  showModal: {
+    addToPlaylist: boolean;
+    media: any;
+    status: 'loading' | 'none'
+  };
 }
 const newInitialState: IAppStore = {
   sidebarToggle: true,
-  searchQuery: ''
+  searchQuery: '',
+  showModal: {
+    addToPlaylist: false,
+    media: undefined,
+    status: 'none'
+  }
 };
 
 const initialState: IAppStore = migrateReducerState(
@@ -23,6 +33,21 @@ export function appStore(
   switch (action.type) {
     case AppActionTypes.UPDATE_SEARCH_QUERY:
       return { ...state, searchQuery: action.payload };
+
+    case AppActionTypes.SHOW_MODAL:
+      return;
+
+    case AppActionTypes.CLOSE_MODAL: {
+      const media = action.media || undefined;
+      return {
+        ...state,
+        showModal: {
+          ...state.showModal,
+          addToPlaylist: action.payload,
+          media
+        }
+      };
+    }
 
     case AppActionTypes.SIDEBAR_TOGGLE:
       return { ...state, sidebarToggle: !state.sidebarToggle };

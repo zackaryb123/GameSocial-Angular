@@ -4,7 +4,7 @@ import { Router} from '@angular/router';
 import {FirebaseUserModel} from '../../core/models/user.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {PostModel} from '../../core/models/post.model';
-import {AppDispatcher} from '../../core/dispatcher/app.dispatcher';
+import {AppService} from '../../core/services/app/app.service';
 
 const posts: PostModel[] = [
   {
@@ -73,7 +73,7 @@ export class HomePage implements OnInit {
   user: FirebaseUserModel = new FirebaseUserModel();
 
   constructor(
-    private appDispatch: AppDispatcher,
+    private appDispatch: AppService,
     private authService: AuthService,
     private router: Router,
     public afAuth: AngularFireAuth,

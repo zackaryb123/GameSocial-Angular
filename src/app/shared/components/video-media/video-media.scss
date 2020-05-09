@@ -70,6 +70,14 @@
         display: block;
         position: relative;
         text-decoration: none;
+        &:hover {
+          div {
+            .item-actions.main-actions {
+              background: rgba(10,10,10,.2);
+              box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+            }
+          }
+        }
       }
 
       .media-actions {

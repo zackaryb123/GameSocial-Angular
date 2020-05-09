@@ -148,7 +148,7 @@ export class PlayerSearchComponent implements OnInit, OnChanges, OnDestroy {
   selectSuggestion(suggestion: string) {
     this.query = suggestion;
     // if (!suggestion.hasOwnProperty('isTrusted')) {
-    //   this.search.emit(suggestion);
+    //   this.profile.emit(suggestion);
     // }
   }
 

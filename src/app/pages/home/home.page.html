@@ -1,13 +1,11 @@
-<!--<app-player class="navbar navbar-default navbar-fixed-bottom"></app-player>-->
+<app-player class="navbar navbar-default navbar-fixed-bottom"></app-player>
 
 <app-sidebar [class.closed]="sidebarToggle$ | async"></app-sidebar>
-
 
 <div class="container-main">
   <app-search [class.closed]="sidebarToggle$ | async"></app-search>
 </div>
 
 <!--<app-error-handler></app-error-handler>-->
-<!--<add-to-playlist></add-to-playlist>-->
 
-<!--<app-scroll></app-scroll>-->
+<app-video-modal></app-video-modal>

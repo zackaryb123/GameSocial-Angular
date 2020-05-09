@@ -4,9 +4,9 @@ import { select, Store } from '@ngrx/store';
 
 // selectors
 // import * as fromUserProfile from '@core/store/user-profile';
-// import * as fromPlayerSearch from '@core/store/player-search';
-// import { UpdateQueryFilter } from '@core/store/player-search';
-// import { INavigateEvent } from './search-navigator/search-navigator.component';
+// import * as fromPlayerSearch from '@core/store/player-profile';
+// import { UpdateQueryFilter } from '@core/store/player-profile';
+// import { INavigateEvent } from './profile-navigator/profile-navigator.component';
 
 @Component({
   selector: 'app-search',
