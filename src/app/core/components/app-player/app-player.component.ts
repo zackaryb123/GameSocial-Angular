@@ -24,15 +24,15 @@ import {PlayerService} from '../../services/player/player.service';
   } as player"
     [class.show-youtube-player]="player.isShowPlayer"
     [class.fullscreen]="player.isFullScreen.on">
-    <div class="yt-player ux-maker">
+    <div class="player ux-maker">
       <player-resizer
         (toggle)="togglePlayer()"
         [fullScreen]="player.isShowPlayer"
       ></player-resizer>
-<!--      <youtube-player-->
-<!--        (ready)="setupPlayer($event)"-->
-<!--        (change)="updatePlayerState($event)"-->
-<!--      ></youtube-player>-->
+
+      <iframe id="7sp6dyg" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="367" height="270" src="https://www.youtube.com/embed/?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A4200&amp;widgetid=1"></iframe>
+<!--      <iframe id="7sp6dyg" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="1122" height="1017" src="https://www.youtube.com/embed/?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A4200&amp;widgetid=1"></iframe>-->
+
     </div>
     <div class="container" *ngIf="media$ | async as media">
       <image-blur [media]="media" *ngIf="!player.isFullScreen.on"></image-blur>

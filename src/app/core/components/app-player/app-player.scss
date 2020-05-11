@@ -1,22 +1,24 @@
 @import '../../../../css/core/global.scss';
 $toolbar-position-on-hover: -9rem;
 
-.navbar {
-  //min-height: 40px;
-}
-
 @mixin control-button-active() {
   border-bottom: 4px solid $turquoise;
 }
 
 :host {
   $player-fullscreen-hover-opacity: 0.8;
-
+  background-color: #d6e0f1;
   z-index: 1031 !important;
 
+  section {
+    background-color: #d6e0f1;
+  }
+
   .show-youtube-player {
-    .yt-player {
+    .player {
       transform: translate3d(-10%, -90%, 0) scale(0.8, 0.8);
+      background-color: #6495ed;
+
     }
     .social-shares {
       display: block;
@@ -36,12 +38,13 @@ $toolbar-position-on-hover: -9rem;
       position: fixed;
       transform: translateY($toolbar-position-on-hover);
       opacity: 0;
+      margin: 0px !important;
 
       &:hover {
         opacity: $player-fullscreen-hover-opacity;
       }
     }
-    .yt-player {
+    .player {
       top: 40px;
 
       &:hover + .container {
@@ -54,7 +57,8 @@ $toolbar-position-on-hover: -9rem;
   .container {
     padding: 0;
     z-index: $zindex-navbar-fixed;
-    background: var(--player-controls-bar-bg)
+    //background-color: #263238;
+    background: #d6e0f1
       url('/assets/images/developed-with-youtube-sentence-case-light.png')
       no-repeat right center;
     background-size: contain;
@@ -62,14 +66,15 @@ $toolbar-position-on-hover: -9rem;
     transition: all 0.3s;
     display: flex;
     flex-direction: row;
+    margin: 0px !important;
 
     media-info {
-      width: 41%;
+      width: 50%;
       z-index: 10;
     }
   }
 
-  .yt-player {
+  .player {
     z-index: $zindex-modal-background;
     position: absolute;
     left: 0;
@@ -89,7 +94,7 @@ $toolbar-position-on-hover: -9rem;
   :host {
     border: 0 !important;
 
-    .yt-player {
+    .player {
       iframe {
         display: block;
         clear: both;
@@ -133,10 +138,11 @@ $toolbar-position-on-hover: -9rem;
         width: 70%;
         left: 15%;
         border-radius: 50px;
+        margin: 0px !important;
         // overflow: hidden;
       }
 
-      .yt-player {
+      .player {
         top: 40px;
         transform: translate3d(0, -100%, 0) scale(1, 1);
 

@@ -5,6 +5,7 @@
     .btn.show-player {
       background-color: var(--brand-primary);
       color: var(--brand-inverse-text);
+      margin-right: 10px;
     }
     .full-screen.show-player {
       transform: scale(5);
@@ -20,10 +21,12 @@
     }
     .icon-max {
       display: block;
+      color: #263238;
     }
 
     .icon-minimize {
       display: none;
+      color: #263238;
     }
 
     .show-youtube-player & {

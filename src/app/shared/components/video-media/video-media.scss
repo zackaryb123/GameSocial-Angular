@@ -101,16 +101,13 @@
         overflow: hidden;
         font-size: 12px;
       }
+
       .media-thumb {
         display: block;
         position: relative;
         cursor: pointer;
         font-weight: normal;
         //box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
-
-        .ellipsis {
-          font-size: 12px;
-        }
 
         .stats {
           background: var(--brand-dark-bg-color-transparent);

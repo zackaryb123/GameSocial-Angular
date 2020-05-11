@@ -1,16 +1,5 @@
 @import '../../../../../css/echoes-variables.scss';
 
-media-info {
-  article {
-    aside {
-      section {
-        white-space: nowrap;
-        font-size: 12px;
-      }
-    }
-  }
-}
-
 //@media (min-width: 320px) {
   :host {
     --media-title-text-color: var(--brand-primary);
@@ -54,17 +43,22 @@ media-info {
 
       .title {
         text-shadow: 0px 0px 0.5rem var(--media-title-shadow);
-        font-size: 2rem;
         line-height: 60px;
         vertical-align: middle;
         flex: 2;
         margin: 0 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        //font-size: 12px;
       }
 
       .more-info-btn {
         max-height: 30px;
         border: none;
-
+        background-color: transparent !important;
+        padding-top: 15px;
+        &:focus {outline:0;}
         &:hover {
           box-shadow: none;
           opacity: 0.5;
@@ -78,8 +72,10 @@ media-info {
         width: 300px;
         word-wrap: break-word;
         transition: bottom 0.3s ease-out;
-        background-color: var(--brand-dark-bg-color-transparent);
-        box-shadow: 1px -1px 2px 0px rgba(0, 0, 0, 1);
+        //background-color: var(--brand-dark-bg-color-transparent);
+        //box-shadow: 1px -1px 2px 0px rgba(0, 0, 0, 1);
+        background: rgba(10, 10, 10, 0.2);
+        box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
         right: 0;
         white-space: pre-line;
         overflow: auto;

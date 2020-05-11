@@ -19,6 +19,7 @@ nav.navbar {
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
   transition: transform, margin-left 0.3s ease-out;
   z-index: $zindex;
+  margin-bottom: 0px;
 }
 
 .navbar-container {

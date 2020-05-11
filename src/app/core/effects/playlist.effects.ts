@@ -18,28 +18,28 @@ export class PlaylistEffects {
     // private userProfile: UserProfile
   ) {}
 
-  // @Effect()
-  // queueVideo$ = this.actions$.pipe(
-  //   ofType(playlistStore.PlaylistActionTypes.SELECT),
-  //   map(toPayload),
-  //   map(
-  //     (media: any) =>
-  //       new playlistStore.QueueVideo(media)
-  //   )
-  // );
-  //
-  // @Effect()
-  // playerStateChange$ = this.actions$.pipe(
-  //   ofType(playlistStore.PlaylistActionTypes.PLAYER_STATE_CHANGE),
-  //   map(toPayload),
-  //   filter((data: any) => data === 0),
-  //   map(() => new playlistStore.MediaEnded())
-  // );
-  //
-  // /* if it's the last track
-  //  * AND repeat is on
-  //  * THEN play the first track
-  // **/
+  @Effect()
+  queueVideo$ = this.actions$.pipe(
+    ofType(playlistStore.PlaylistActionTypes.SELECT),
+    map(toPayload),
+    map(
+      (media: any) =>
+        new playlistStore.QueueVideo(media)
+    )
+  );
+
+  @Effect()
+  playerStateChange$ = this.actions$.pipe(
+    ofType(playlistStore.PlaylistActionTypes.PLAYER_STATE_CHANGE),
+    map(toPayload),
+    filter((data: any) => data === 0),
+    map(() => new playlistStore.MediaEnded())
+  );
+
+  /* if it's the last track
+   * AND repeat is on
+   * THEN play the first track
+  **/
   @Effect()
   loadNextTrack$ = this.actions$.pipe(
     ofType(playlistStore.PlaylistActionTypes.MEDIA_ENDED),
@@ -54,48 +54,47 @@ export class PlaylistEffects {
         new playlistStore.SelectVideo(states[1])
     )
   );
-  //
-  // @Effect()
-  // selectBeforeSeekToTime$ = this.actions$.pipe(
-  //   ofType(playlistStore.PlaylistActionTypes.SELECT_AND_SEEK_TO_TIME),
-  //   map(toPayload),
-  //   map(
-  //     trackEvent => new playlistStore.UpdateIndexByMedia(trackEvent.media.id)
-  //   )
-  // );
-  //
+
+  @Effect()
+  selectBeforeSeekToTime$ = this.actions$.pipe(
+    ofType(playlistStore.PlaylistActionTypes.SELECT_AND_SEEK_TO_TIME),
+    map(toPayload),
+    map(
+      trackEvent => new playlistStore.UpdateIndexByMedia(trackEvent.media.id)
+    )
+  );
+
   // @Effect({ dispatch: false })
   // seekToTime$ = this.actions$.pipe(
   //   ofType(playlistStore.PlaylistActionTypes.SELECT_AND_SEEK_TO_TIME),
   //   map(toPayload),
   //   tap(trackEvent => {
-  //       // this.playerService.seekTo(this.mediaParser.toNumber(trackEvent.time))
+  //       this.playerService.seekTo(this.mediaParser.toNumber(trackEvent.time))
   //     })
   // );
-  //
+
   // @Effect()
-  // loadPlaylist$ = null;
-  //   // this.actions$.pipe(
-  //   // ofType(playlistStore.ActionTypes.LOAD_PLAYLIST_START),
-  //   // map(toPayload),
-  //   // switchMap(
-  //   //   (id: string) => this.userProfile.fetchAllPlaylistItems(id))
-  //   // , map(
-  //   //   (playlistItems: any[]) =>
-  //   //     new playlistStore.LoadPlaylistEndAction(playlistItems)
-  //   // )
-  // // );
-  //
-  // @Effect()
-  // addPlaylistItems$ = this.actions$.pipe(
-  //   ofType(playlistStore.PlaylistActionTypes.LOAD_PLAYLIST_END),
+  // loadPlaylist$ = this.actions$.pipe(
+  //   ofType(playlistStore.PlaylistActionTypes.LOAD_PLAYLIST_START),
   //   map(toPayload),
-  //   map(
+  //   switchMap(
+  //     (id: string) => this.userProfile.fetchAllPlaylistItems(id))
+  //   , map(
   //     (playlistItems: any[]) =>
-  //       new playlistStore.QueueVideos(playlistItems)
+  //       new playlistStore.LoadPlaylistEndAction(playlistItems)
   //   )
   // );
-  //
+
+  @Effect()
+  addPlaylistItems$ = this.actions$.pipe(
+    ofType(playlistStore.PlaylistActionTypes.LOAD_PLAYLIST_END),
+    map(toPayload),
+    map(
+      (playlistItems: any[]) =>
+        new playlistStore.QueueVideos(playlistItems)
+    )
+  );
+
   @Effect()
   playPlaylistFirstTrack$ = this.actions$.pipe(
     ofType(playlistStore.PlaylistActionTypes.LOAD_PLAYLIST_END),
