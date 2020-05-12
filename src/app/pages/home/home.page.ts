@@ -69,11 +69,11 @@ const posts: PostModel[] = [
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
-  sidebarToggle$ = this.appDispatch.sidebarToggle$;
+  sidebarToggle$ = this.appService.sidebarToggle$;
   user: FirebaseUserModel = new FirebaseUserModel();
 
   constructor(
-    private appDispatch: AppService,
+    private appService: AppService,
     private authService: AuthService,
     private router: Router,
     public afAuth: AngularFireAuth,

@@ -21,6 +21,7 @@ import {SERVICES} from './core/services';
 import {PAGES} from './pages';
 import {SHARED_COMPONENTS} from './shared/components';
 import {AppEffectsModules} from './core/effects';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {AppEffectsModules} from './core/effects';
     BrowserModule,
     ReactiveFormsModule,
     AppEffectsModules,
+    NgbModule,
     RouterModule.forRoot(rootRouterConfig, {
       useHash: true,
       // onSameUrlNavigation: 'reload'

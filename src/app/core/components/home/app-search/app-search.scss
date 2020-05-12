@@ -1,0 +1,11 @@
+@import '../../../../../assets/home/core/global';
+
+//@media (min-width: 320px) {
+  :host {
+    $gap-top: 9.5rem;
+
+    > article {
+      padding-top: $gap-top;
+    }
+  }
+//}

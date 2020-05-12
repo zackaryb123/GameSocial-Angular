@@ -1,0 +1,36 @@
+@import '../../../../../../assets/home/core/global';
+@import '../../../../../../assets/home/echoes-variables';
+
+li {
+  color: #263238;
+}
+
+//@media (min-width: 320px) {
+  :host {
+    .search-selector {
+      clear: both;
+
+      &.nav > li > .search-filter {
+        //text-transform: uppercase;
+        border: none;
+        border-radius: none;
+        background-color: transparent;
+        color: var(--navbar-text-color);
+
+        &:hover {
+          color: var(--brand-primary);
+        }
+      }
+
+      &.nav-tabs {
+        border-bottom: none;
+
+        > li.active > .search-filter {
+          border-bottom: 0.2rem solid var(--brand-primary);
+          color: var(--navbar-link-color);
+          box-shadow: none;
+        }
+      }
+    }
+  }
+//}
