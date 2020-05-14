@@ -1,0 +1,84 @@
+<!--<div class="container">-->
+
+  <div class="card">
+    <div class="card-body">
+      <div class="brand-container">
+        <section class="brand-text">
+          <h3 class="text brand-text-item">GAME</h3>
+          <icon name="gamepad" class="brand-icon brand-text-item"></icon>
+          <h3 class="text brand-text-item">SOCIAL</h3>
+        </section>
+      </div>
+      <br>
+<!--      <div class="card-title"><h3>Game Social</h3></div>-->
+      <form [formGroup]="registerForm" (ngSubmit)="tryRegister(registerForm.value)" [@animation-form]="stateForm">
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="E-mail"
+            formControlName="email"
+          >
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Full Name"
+            formControlName="name"
+          >
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            formControlName="username"
+          >
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"
+          >
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm btn-block">Sign Up</button>
+        <label class="error">{{errorMessage}}</label>
+        <label class="success">{{successMessage}}</label>
+      </form>
+      <hr />
+      <p class="small text-center">By signing up, you agree to our <b>Terms</b>,
+        <b>Data Policy</b> and <b>Cookies Policy</b>.</p>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-block" (click)="tryFacebookLogin()">Register with Facebook</button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-danger btn-block" (click)="tryGoogleLogin()">Register with Google</button>
+      </div>
+    </div>
+    <br>
+    <div class="row" style="margin-bottom: 1rem !important;">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-info btn-block" (click)="tryTwitterLogin()">Register with Twitter</button>
+      </div>
+    </div>
+
+  </div>
+  <br />
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <p class="card-text">
+        Have an account? <a href="#" (click)="displayPanelLogin()" class="card-link">Log in</a>
+      </p>
+    </div>
+  </div>
+<!--</div>-->

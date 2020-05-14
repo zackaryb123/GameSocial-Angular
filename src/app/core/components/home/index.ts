@@ -1,0 +1,38 @@
+import {HomePage} from './home.page';
+import {AppBrandComponent} from './app-brand/app-brand.component';
+import {AppNavbarMenuComponent} from './app-navbar/app-navbar-menu/app-navbar-menu.component';
+import {AppNavbarComponent} from './app-navbar/app-navbar.component';
+import {AppNavbarUserComponent} from './app-navbar/app-navbar-user/app-navbar-user.component';
+import {AppVideoModalComponent} from './app-video-modal/app-video.modal.component';
+import {AppVideosComponent} from './app-search/app-videos/app-videos.component';
+import {AppSidebarComponent} from './app-sidebar/app-sidebar.component';
+import {ImageBlurComponent} from './app-player/image-blur/image-blur.component';
+import {PlayerResizerComponent} from './app-player/player-resizer/player-resizer.component';
+import {MediaInfoComponent} from './app-player/media-info/media-info.component';
+import {AppPlayerComponent} from './app-player/app-player.component';
+import {SearchNavigatorComponent} from './app-search/search-navigator/search-navigator.component';
+import {AppSearchComponent} from './app-search/app-search.component';
+import {PlayerSearchComponent} from './app-search/player-search/player-search.component';
+import {PlayerControlsComponent} from './app-player/player-controls/player-controls.component';
+import {TrackInfoComponent} from './app-player/track-info/track-info.component';
+
+
+export const HOME_COMPONENTS = [
+  HomePage,
+  AppBrandComponent,
+  AppNavbarComponent,
+  AppNavbarMenuComponent,
+  AppNavbarUserComponent,
+  PlayerSearchComponent,
+  AppSearchComponent,
+  SearchNavigatorComponent,
+  AppSidebarComponent,
+  AppVideosComponent,
+  AppVideoModalComponent,
+  AppPlayerComponent,
+  PlayerResizerComponent,
+  ImageBlurComponent,
+  MediaInfoComponent,
+  PlayerControlsComponent,
+  TrackInfoComponent,
+];

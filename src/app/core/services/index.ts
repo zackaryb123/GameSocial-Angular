@@ -12,5 +12,5 @@ export const SERVICES = [
   UserService,
   AppService,
   PlaylistService,
-  PlayerService
+  PlayerService,
 ];

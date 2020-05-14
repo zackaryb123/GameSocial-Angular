@@ -1,0 +1,114 @@
+@import '../../../../../assets/home/core/global';
+
+//.header{
+//  text-align: center;
+//  font-size: 30px;
+//  margin-bottom: 40px;
+//}
+//
+//.row{
+//  margin-top: 10px;
+//}
+//
+//.error{
+//  color: red;
+//}
+
+.card {
+  margin: 0 auto;
+  width: 25rem;
+  background: cornflowerblue;
+}
+.card-link {
+  color: ghostwhite;
+}
+
+.row {
+  margin: 0 auto !important;
+}
+
+.card-title {
+  //background-image: url("/assets/logo-instagram.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60px;
+  width: 100%;
+}
+
+input.ng-touched.ng-invalid {
+  border: 2px solid red;
+  border-radius: 2px;
+}
+
+input.ng-touched.ng-valid {
+  border: 2px solid green;
+  border-radius: 2px;
+}
+
+.brand-container {
+  $brand-icon-font-size: 30px;
+  $brand-icon-line-height: 2;
+  $brand-icon-margin: 0 0.3rem;
+  $brand-padding: 0.5rem 1.5rem;
+
+  padding: $brand-padding;
+  margin: 0;
+  //text-transform: uppercase;
+  position: relative;
+  display: flex;
+
+  .brand-text {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .text.brand-text-item {
+      color: #263238;
+    }
+
+    .brand-text-item {
+      margin: 0;
+      transition: flex, opacity 0.3s ease-in;
+      line-height: $brand-icon-line-height;
+    }
+  }
+
+  button {
+    icon {
+      color: cornflowerblue;
+    }
+  }
+
+  .brand-icon {
+    font-size: $brand-icon-font-size;
+    margin: $brand-icon-margin;
+    color: $clouds;
+    padding-top: 8px;
+    flex: 0 0 0%;
+
+    &.brand-text-item {
+      line-height: 1 !important;
+    }
+
+    .closed & {
+      flex: 0;
+    }
+  }
+
+  .text {
+    flex: 0 1 0%;
+  }
+
+  .sidebar-toggle {
+    transition: transform;
+    transform: translateX(37.5rem);
+    color: var(--brand-primary);
+
+    .closed & {
+      position: absolute;
+      transform: translateY(-4rem);
+      outline: 0;
+    }
+  }
+}

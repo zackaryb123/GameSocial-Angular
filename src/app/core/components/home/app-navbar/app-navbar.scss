@@ -28,6 +28,7 @@ nav.navbar {
   justify-content: space-between;
   padding: $navbar-container-padding;
   backdrop-filter: blur(.5rem);
+  width: 100%;
 
   .navbar__content {
     flex: 1;
@@ -78,7 +79,7 @@ nav.navbar {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding-right: 1rem;
+  padding: 0;
   position: absolute;
   right: 0;
   top: 0;

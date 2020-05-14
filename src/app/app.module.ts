@@ -18,7 +18,6 @@ import {SHARED_DIRECTIVES} from './shared/directives';
 import {CORE_COMPONENTS} from './core/components';
 import {SHARED_PIPES} from './shared/pipes';
 import {SERVICES} from './core/services';
-import {PAGES} from './pages';
 import {SHARED_COMPONENTS} from './shared/components';
 import {AppEffectsModules} from './core/effects';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,7 +25,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    ...PAGES,
     ...SHARED_PIPES,
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,

@@ -23,6 +23,8 @@
       .media-thumb-container {
         position: relative;
         cursor: pointer;
+        min-width: 8rem;
+        background-color: #263238;
 
         &.floating {
           border-top-left-radius: 50px;

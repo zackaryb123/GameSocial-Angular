@@ -16,7 +16,24 @@ button {
 
 //@media (min-width: 320px) {
   :host {
-    width: 100%;
+    .card {
+      background: rgba(10, 10, 10, 0.2);
+      box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+      img {
+
+      }
+      .card-body {
+        background: rgba(10, 10, 10, 0.2);
+        box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+        .card-title {
+          color: ghostwhite;
+        }
+        .card-text {
+          color: ghostwhite;
+        }
+      }
+    }
+
     .brand-container {
       $brand-icon-font-size: 30px;
       $brand-icon-line-height: 2;
@@ -54,6 +71,7 @@ button {
         color: #263238 !important;
         padding-top: 8px;
         flex: 0 0 0%;
+
         &.brand-text-item {
           line-height: 1 !important;
         }
