@@ -38,14 +38,8 @@ export class SearchNavigatorComponent implements OnInit {
       type: 'video'
     },
     {
-      label: 'Playlists',
-      link: 'playlist',
-      params: { filter: '' },
-      type: 'playlist'
-    },
-    {
-      label: 'Albums',
-      link: `albums`,
+      label: 'Uploads',
+      link: 'uploads',
       params: { filter: '' },
       type: 'video'
     }
@@ -55,14 +49,6 @@ export class SearchNavigatorComponent implements OnInit {
   @Output() navigated = new EventEmitter<INavigateEvent>();
 
   ngOnInit() { }
-
-  handleRouteClick(searchType: {
-    label: string;
-    link: string;
-    type: string;
-  }) {
-    // this.navigated.emit(searchType);
-  }
 
   isActive({ type, params }: TSearchType) {
     const { queryParams , searchType } = this;

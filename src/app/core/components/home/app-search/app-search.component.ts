@@ -17,8 +17,7 @@ import { select, Store } from '@ngrx/store';
       [infiniteScrollDistance]="2"
       [infiniteScrollDisabled]="currentPlaylist$"
       (scrolled)="searchMore()"
-      [immediateCheck]="true"
-    >
+      [immediateCheck]="true">
       <app-navbar>
         <div class="navbar-header">
           <player-search

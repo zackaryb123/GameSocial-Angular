@@ -14,28 +14,20 @@ import {AppService} from '../../../services/app/app.service';
     <nav class="navbar navbar-transparent">
       <profile-brand></profile-brand>
       <app-navigator
-        iconLink="explore"
-        iconLabel="Explore"
-        iconName="globe"
-        [closed]="sidebarToggle$ | async"
-        [searchType]="searchType$">
+        page="profile"
+        iconLink="chat"
+        iconLabel="Chat"
+        iconName="envelope"
+        [closed]="sidebarToggle$ | async">
       </app-navigator>
       <app-navigator
-        iconLabel="Logout"
-        iconName="sign-out"
+        page="profile"
+        iconLink="friends"
+        iconLabel="Friends"
+        iconName="users"
         [closed]="sidebarToggle$ | async">
       </app-navigator>
     </nav>
-
-<!--    <now-playing></now-playing>-->
-
-<!--    <nav class="navbar navbar-transparent">-->
-<!--      <app-navigator-->
-<!--        iconLabel="Logout"-->
-<!--        iconName="sign-out"-->
-<!--        [closed]="sidebarToggle$ | async">-->
-<!--      </app-navigator>-->
-<!--    </nav>-->
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

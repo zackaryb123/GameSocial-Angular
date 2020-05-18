@@ -21,6 +21,9 @@ import {SERVICES} from './core/services';
 import {SHARED_COMPONENTS} from './shared/components';
 import {AppEffectsModules} from './core/effects';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {CdkTableModule} from '@angular/cdk/table';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +51,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     InfiniteScrollModule,
     NgxTypeaheadModule,
     StoreRouterConnectingModule.forRoot({}),
+    CdkTableModule,
+    DragDropModule
     // ServiceWorkerModule.register('/ngsw-worker.js', {
     //   enabled: env.production
     // })

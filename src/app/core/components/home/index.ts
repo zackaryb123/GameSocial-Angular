@@ -15,6 +15,10 @@ import {AppSearchComponent} from './app-search/app-search.component';
 import {PlayerSearchComponent} from './app-search/player-search/player-search.component';
 import {PlayerControlsComponent} from './app-player/player-controls/player-controls.component';
 import {TrackInfoComponent} from './app-player/track-info/track-info.component';
+import {ProfilePlaylist} from './app-sidebar/profile-playlist/profile-playlist';
+import {PlaylistComponent} from './app-sidebar/profile-playlist/playlist/playlist.component';
+import {PlaylistTrackComponent} from './app-sidebar/profile-playlist/playlist/playlist-track.component';
+import {PlaylistFilterComponent} from './app-sidebar/profile-playlist/playlist-filter/playlist-filter.component';
 
 
 export const HOME_COMPONENTS = [
@@ -35,4 +39,8 @@ export const HOME_COMPONENTS = [
   MediaInfoComponent,
   PlayerControlsComponent,
   TrackInfoComponent,
+  ProfilePlaylist,
+  PlaylistComponent,
+  PlaylistTrackComponent,
+  PlaylistFilterComponent
 ];

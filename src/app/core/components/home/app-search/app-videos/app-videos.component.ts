@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {GameSocialState} from '../../../../store/reducers';
-import {AppService} from "../../../../services/app/app.service";
+import {AppService} from '../../../../services/app/app.service';
 
 // actions
 // import * as fromPlayerSearch from '@core/store/player-profile';
 // import { AppPlayerApi } from '@core/api/app-player.api';
 // selectors
-// import * as NowPlaylist from '@core/store/now-playlist';
+// import * as NowPlaylist from '@core/store/playlist';
 // import { AppApi } from '../../../core/api/app.api';
 
 @Component({

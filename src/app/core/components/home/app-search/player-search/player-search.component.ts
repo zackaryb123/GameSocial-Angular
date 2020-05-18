@@ -43,20 +43,6 @@ const defaultSearchParams = {
         <icon name="search"></icon>
       </button>
     </form>
-<!--      <button class="btn btn-filter btn-transparent is-flex-row is-flex-valign">-->
-<!--        <icon name="filter" [ngClass]="{'text-primary': filtersForm.value.duration || filtersForm.value.hd }"></icon>-->
-<!--        <form class="filters is-rounded" [formGroup]="filtersForm">-->
-<!--          <div class="filter">-->
-<!--            <input id="long" type="checkbox" class="form-control" formControlName="duration">-->
-<!--            <label for="long" class="filter-label">long</label>-->
-<!--          </div>-->
-<!--          <div class="filter">-->
-<!--            <input id="hd" type="checkbox" class="form-control" formControlName="hd">-->
-<!--            <label for="hd" class="filter-label">HD</label>-->
-<!--          </div>-->
-<!--          <icon name="trash" *ngIf="filtersForm.value.duration || filtersForm.value.hd" (click)="clearFilters()"></icon>-->
-<!--        </form>-->
-<!--      </button>-->
       `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

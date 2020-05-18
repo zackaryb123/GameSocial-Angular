@@ -9,8 +9,9 @@ import {
 } from '@angular/core';
 import {expandFadeInAnimation} from '../../../../../shared/animations/fade-in.animation';
 import {ICON_PREFIX_BRAND} from '../../../../../shared/directives/icon';
-import {AuthService} from '../../../../services/auth';
-import {Router} from '@angular/router';
+import {AppService} from "../../../../services/app/app.service";
+import {AuthService} from "../../../../services/auth";
+import {Router} from "@angular/router";
 
 enum Key {
   Backspace = 8,
@@ -24,7 +25,7 @@ enum Key {
   ArrowDown = 40
 }
 @Component({
-  selector: 'app-navbar-menu',
+  selector: 'profile-navbar-menu',
   animations: [expandFadeInAnimation],
   template: `
     <button class="btn btn-navbar btn-transparent ux-maker btn-toggle"
@@ -40,20 +41,22 @@ enum Key {
       >
       <div class="list-group">
         <a class="list-group-item navbar-action-link"
-        [routerLink]="['/profile']">
-          <icon name="user"></icon> Profile
+        [routerLink]="['/home']">
+          <icon name="user"></icon> Home
         </a>
+
         <button class="list-group-item"
           (click)="handleSignOut()">
           <icon name="sign-out"></icon> Sign Out
         </button>
+
       </div>
     </div>
   `,
-  styleUrls: ['./app-navbar-menu.component.scss'],
+  styleUrls: ['./profile-navbar-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppNavbarMenuComponent implements OnInit {
+export class ProfileNavbarMenuComponent implements OnInit {
   end = false;
   hide = true;
   get menuState() {

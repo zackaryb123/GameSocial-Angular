@@ -8,12 +8,33 @@ import {AppService} from '../../services/app/app.service';
 })
 export class ProfilePage implements OnInit {
   sidebarToggle$ = this.appService.sidebarToggle$;
-
+  query$ = '';
+  queryParams$ = {duration: false, hd: false };
+  currentPlaylist$ = false;
   constructor(
     private appService: AppService,
   ) {}
   ngOnInit() {
   }
   ngOnDestroy() {
+  }
+
+  search(query: string) {
+    if (!query.hasOwnProperty('isTrusted')) {
+      // this.store.dispatch(this.playerSearchActions.searchNewQuery(query));
+    }
+  }
+
+  resetPageToken(query: string) {
+    // this.store.dispatch(this.playerSearchActions.resetPageToken());
+    // this.store.dispatch(new fromPlayerSearch.UpdateQueryAction(query));
+  }
+
+  searchMore() {
+    // this.store.dispatch(this.playerSearchActions.searchMoreForQuery());
+  }
+
+  updateParams(queryParams: any) {
+    // this.store.dispatch(new UpdateQueryFilter(queryParams));
   }
 }
