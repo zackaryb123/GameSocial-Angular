@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class PlaylistActionTypes {
   static QUEUE_LOAD_VIDEO = '[PLAYLIST] QUEUE_LOAD_VIDEO';
-  static QUEUE = '[PLAYLIST] QUEUE';
+  static ADD = '[PLAYLIST] ADD';
   static QUEUE_LOAD_VIDEO_SUCCESS = '[PLAYLIST] QUEUE_LOAD_VIDEO_SUCCESS';
   static SELECT = '[PLAYLIST] SELECT';
   static REMOVE = '[PLAYLIST] REMOVE';
@@ -14,7 +14,7 @@ export class PlaylistActionTypes {
   static REMOVE_ALL = '[PLAYLIST] REMOVE_ALL';
   static SELECT_NEXT = '[PLAYLIST] SELECT_NEXT';
   static SELECT_PREVIOUS = '[PLAYLIST] SELECT_PREVIOUS';
-  static QUEUE_VIDEOS = '[PLAYLIST] QUEUE_VIDEOS';
+  static ADD_VIDEOS = '[PLAYLIST] ADD_VIDEOS';
   static MEDIA_ENDED = '[PLAYLIST] MEDIA_ENDED';
   static TOGGLE_REPEAT = '[PLAYLIST] TOGGLE_REPEAT';
   static SELECT_AND_SEEK_TO_TIME = '[PLAYLIST] SELECT_AND_SEEK_TO_TIME';
@@ -28,8 +28,11 @@ export class PlaylistActionTypes {
 
 export interface IPlaylistAction {
   type: any;
-  payload?: any;
-  media?: any;
+  video?: any;
+  videos?: any;
+  playlistId?: any;
+  filter?: any;
+  repeat?: any;
 }
 
 export class SeekTo implements Action {
@@ -43,26 +46,32 @@ export class QueueLoadVideo implements Action {
   constructor(public payload: any) {}
 }
 
-export class UpdateIndexByMedia implements Action {
+export class UpdatePlaylistIndex implements Action {
   public type = PlaylistActionTypes.UPDATE_INDEX;
-  constructor(public payload: string) {}
+  constructor(public playlistId: string) {}
 }
 
 export class QueueFailed implements Action {
   public type = PlaylistActionTypes.QUEUE_FAILED;
   constructor(public payload: any) {}
 }
-export class QueueVideo implements Action {
-  public type = PlaylistActionTypes.QUEUE;
-  constructor(public payload: any) {}
+export class AddVideo implements Action {
+  public type = PlaylistActionTypes.ADD;
+  constructor(
+    public video: any,
+    public playlistId: string
+    ) {}
 }
-export class QueueVideos implements Action {
-  public type = PlaylistActionTypes.QUEUE_VIDEOS;
-  constructor(public payload: any[]) {}
+export class AddVideos implements Action {
+  public type = PlaylistActionTypes.ADD_VIDEOS;
+  constructor(public videos: any[]) {}
 }
 export class RemoveVideo implements Action {
   public type = PlaylistActionTypes.REMOVE;
-  constructor(public payload: any) {}
+  constructor(
+    public video: any,
+    public playlistId: any
+  ) {}
 }
 
 export class FilterChange implements Action {
@@ -108,7 +117,7 @@ export class SelectPrevious implements Action {
 }
 export class RemoveAll implements Action {
   public type = PlaylistActionTypes.REMOVE_ALL;
-  constructor(public payload?: any) {}
+  constructor(public playlistId?: any) {}
 }
 export class ToggleRepeat implements Action {
   public type = PlaylistActionTypes.TOGGLE_REPEAT;

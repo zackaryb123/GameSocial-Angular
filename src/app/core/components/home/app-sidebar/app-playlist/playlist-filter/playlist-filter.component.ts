@@ -6,15 +6,16 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
+import {AppService} from '../../../../../services/app/app.service';
 // import * as NowPlaylist from '@store/playlist';
 
 @Component({
   selector: 'playlist-filter',
   styleUrls: ['./playlist-filter.scss'],
   template: `
-  <section class="nav-header user-playlists-filter">
+  <section [class.center]="sidebarToggle$ | async" class="nav-header user-playlists-filter">
   <span class="playlist-header" (click)="onNowPlayingClick()">
-      <icon name="play-circle-o" class="text-primary"></icon>
+      <icon name="play-circle-o"></icon>
 <!--      <span class="text btn-transparent playlist-count"-->
 <!--        title="Reveal now playing track">-->
 <!--        Now Playing <span *ngIf="!isPlaylistEmpty()">({{ playlistLength }})</span>-->
@@ -47,22 +48,18 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistFilterComponent {
-  // @Input() playlist: any = {
-  //   videos: [],
-  //   filter: 'search'
-  // };
+  @Input() playlist: any;
 
-  playlist = {
-    videos: [],
-    filter: 'search'
-  };
+  sidebarToggle$ = this.appService.sidebarToggle$
   // @Output() save = new EventEmitter();
   @Output() clear = new EventEmitter();
   @Output() filter = new EventEmitter();
   @Output() reset = new EventEmitter();
   @Output() headerClick = new EventEmitter();
 
-  constructor() {}
+  constructor(
+    private appService: AppService
+  ) {}
 
   handleFilterChange(searchFilter: string) {
     this.filter.next(searchFilter);

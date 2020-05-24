@@ -1,30 +1,46 @@
-import { Store, createSelector } from '@ngrx/store';
-import { IPlaylistStore } from './playlist.reducer';
+import { createSelector } from '@ngrx/store';
+import {IPlaylistStore} from './playlist.reducer';
 import {GameSocialState} from '../reducers';
 
 export const getPlaylistStore = (state: GameSocialState) => state.playlistStore;
-export const isPlayerInRepeat = createSelector(
+
+// export const isPlayerInRepeat = createSelector(
+//   getPlaylistStore,
+//   (playlist: IPlaylistStore) => playlist.repeat
+// );
+
+export const getPlaylists = createSelector(
   getPlaylistStore,
-  (nowPlaylist: IPlaylistStore) => nowPlaylist.repeat
+  (playlistStore: IPlaylistStore) => playlistStore.playlists
 );
-export const getPlaylistVideos = createSelector(
+
+export const getSelectedPlaylistId = createSelector(
   getPlaylistStore,
-  (nowPlaylist: IPlaylistStore) => nowPlaylist.videos
+  (playlistStore: IPlaylistStore) => playlistStore.selectedPlaylistId
 );
-export const getPlaylistMediaIds = createSelector(
-  getPlaylistVideos,
-  (playlist: any[]) => playlist.map(media => media.id)
-);
-export const getSelectedMediaId = createSelector(
+
+export const getSelectedPlaylistVideos = createSelector(
   getPlaylistStore,
-  (nowPlaylist: IPlaylistStore) => nowPlaylist.selectedId
+  (playlistStore: IPlaylistStore) => playlistStore.playlists[playlistStore.selectedPlaylistId]
 );
-export const getSelectedMedia = createSelector(
+
+// export const getPlaylistMediaIds = createSelector(
+//   getSelectedPlaylistVideos,
+//   (playlist: any[]) => playlist.map(media => media.id)
+// );
+
+export const getSelectedVideoId = createSelector(
   getPlaylistStore,
-  getSelectedMediaId,
-  (nowPlaylist: IPlaylistStore, selectedId: string) => {
-    const mediaIds = nowPlaylist.videos.map(video => video.id);
-    const selectedMediaIndex = mediaIds.indexOf(selectedId);
-    return nowPlaylist.videos[selectedMediaIndex];
+  (playlistStore: IPlaylistStore) => playlistStore.playlists[playlistStore.selectedPlaylistId]
+    .videos[playlistStore[playlistStore.selectedPlaylistId].selectedVideoId].id
+);
+
+export const getSelectedVideo = createSelector(
+  getPlaylistStore,
+  (playlistStore: IPlaylistStore) => {
+    if (playlistStore.playlists) {
+      return playlistStore.playlists[playlistStore.selectedPlaylistId]
+        .videos[playlistStore.playlists[playlistStore.selectedPlaylistId].selectedVideoId];
+    }
   }
 );

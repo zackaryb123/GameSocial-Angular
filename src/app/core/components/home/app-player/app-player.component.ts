@@ -62,7 +62,8 @@ export class AppPlayerComponent implements OnInit, OnDestroy {
   player$ = this.store.select(playerStore.getPlayerStore);
   media$ = this.store.select(playerStore.getCurrentMedia);
   isPlayerPlaying$ = this.store.select(playerStore.getIsPlayerPlaying);
-  isPlayerInRepeat$ = this.store.select(playlistStore.isPlayerInRepeat);
+  isPlayerInRepeat$ = false;
+  // this.store.select(playlistStore.isPlayerInRepeat);
   isPlayerFullscreen$ = this.store.select(playerStore.getPlayerFullscreen);
   isShowPlayer$ = this.store.select(playerStore.getShowPlayer);
 
@@ -77,9 +78,9 @@ export class AppPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.playerService.resetPlayer();
-    this.nowPlaylistEffects.loadNextTrack$.subscribe(action =>
-      this.playVideo(action.payload)
-    );
+    // this.nowPlaylistEffects.loadNextTrack$.subscribe(action =>
+    //   this.playVideo(action.payload)
+    // );
   }
 
   ngOnDestroy() { }

@@ -8,31 +8,31 @@ import {AppService} from '../../../services/app/app.service';
   selector: 'app-sidebar',
   styleUrls: ['./app-sidebar.scss'],
   template: `
-  <div id="sidebar" class="sidebar ux-maker"
-    [class.closed]="sidebarToggle$ | async">
-    <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
-    <nav class="navbar navbar-transparent">
-      <app-brand></app-brand>
-      <app-navigator
-        iconLink="playlist"
-        iconLabel="Playlist"
-        iconName="film"
-        dropDown="true"
-        [closed]="sidebarToggle$ | async"
-        [searchType]="searchType$">
-      </app-navigator>
-    </nav>
+    <div id="sidebar" class="sidebar ux-maker"
+         [class.closed]="sidebarToggle$ | async">
+      <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
+      <nav class="navbar navbar-transparent">
+        <app-brand></app-brand>
+        <app-navigator
+          iconLink="playlist"
+          iconLabel="Playlist"
+          iconName="film"
+          dropDown="true"
+          [closed]="sidebarToggle$ | async"
+          [searchType]="searchType$">
+        </app-navigator>
+      </nav>
 
-    <profile-playlist></profile-playlist>
+      <app-playlist></app-playlist>
 
-<!--    <nav class="navbar navbar-transparent">-->
-<!--      <app-navigator-->
-<!--        iconLabel="Logout"-->
-<!--        iconName="sign-out"-->
-<!--        [closed]="sidebarToggle$ | async">-->
-<!--      </app-navigator>-->
-<!--    </nav>-->
-  </div>
+      <!--    <nav class="navbar navbar-transparent">-->
+      <!--      <app-navigator-->
+      <!--        iconLabel="Logout"-->
+      <!--        iconName="sign-out"-->
+      <!--        [closed]="sidebarToggle$ | async">-->
+      <!--      </app-navigator>-->
+      <!--    </nav>-->
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

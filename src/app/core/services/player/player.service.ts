@@ -27,17 +27,17 @@ export class PlayerService {
     this.store.dispatch(new playlistStore.LoadPlaylistAction(playlist.id));
   }
 
-  playVideo(media: any) {
-    this.store.dispatch(new appPlayerStore.LoadAndPlay(media));
-    this.store.dispatch(new playlistStore.SelectVideo(media));
+  playVideo(video: any) {
+    this.store.dispatch(new appPlayerStore.LoadAndPlay(video));
+    this.store.dispatch(new playlistStore.SelectVideo(video));
   }
 
-  queueVideo(media: any) {
-    this.store.dispatch(new playlistStore.QueueVideo(media));
+  addVideo(video: any, playlistId: any) {
+    this.store.dispatch(new playlistStore.AddVideo(video, playlistId));
   }
 
-  removeVideoFromPlaylist(media: any) {
-    this.store.dispatch(new playlistStore.RemoveVideo(media));
+  removeVideoFromPlaylist(video: any, playlistId: any) {
+    this.store.dispatch(new playlistStore.RemoveVideo(video, playlistId));
   }
 
   pauseVideo() {

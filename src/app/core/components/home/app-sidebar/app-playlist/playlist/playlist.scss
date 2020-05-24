@@ -1,4 +1,13 @@
-@import '../../../../../../../assets/home/echoes-variables.scss';
+@import '../../../../../../../assets/home/echoes-variables';
+
+.empty-list-closed {
+  display: none !important;
+}
+
+.c-cfb {
+  color: cornflowerblue;
+  //background-color: cornflowerblue;
+}
 
 :host {
   $track-badge-index: 10;

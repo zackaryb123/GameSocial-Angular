@@ -30,6 +30,7 @@
     "chart.js": "^2.9.3",
     "core-js": "^2.6.11",
     "firebase": "^7.14.2",
+    "lodash": "^4.17.15",
     "memo-decorator": "^2.0.1",
     "ngrx-store-localstorage": "^9.0.0",
     "ngx-infinite-scroll": "^8.0.2",

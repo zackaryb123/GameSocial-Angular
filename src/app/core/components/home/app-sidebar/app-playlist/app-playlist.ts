@@ -4,21 +4,17 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-
-// import { NowPlaylistService } from '@core/services/playlist.service';
-// import { INowPlaylist } from '@store/playlist';
-// import * as AppPlayer from '@store/app-player/app-player.actions';
-import {GameSocialState} from '../../../../store/reducers';
 import {PlaylistComponent} from './playlist/playlist.component';
+import {PlaylistService} from '../../../../services/playlist/playlist.service';
+import {AppService} from "../../../../services/app/app.service";
 
 @Component({
-  selector: 'profile-playlist',
-  styleUrls: ['./profile-playlist.scss'],
+  selector: 'app-playlist',
+  styleUrls: ['./app-playlist.scss'],
   template: `
   <div class="sidebar-pane">
     <playlist-filter
+      *ngIf="playlist$ | async"
       [playlist]="playlist$ | async"
       (clear)="clearPlaylist()"
       (filter)="updateFilter($event)"
@@ -26,6 +22,7 @@ import {PlaylistComponent} from './playlist/playlist.component';
       (headerClick)="onHeaderClick()"
     ></playlist-filter>
     <playlist
+      *ngIf="playlist$ | async"
       [playlist]="playlist$ | async"
       (select)="selectVideo($event)"
       (selectTrack)="selectTrackInVideo($event)"
@@ -36,16 +33,23 @@ import {PlaylistComponent} from './playlist/playlist.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfilePlaylist implements OnInit {
-  public playlist$: Observable<any>;
+export class AppPlaylist implements OnInit {
+  playlist$ = this.playlistService.slectedPlayist$;
   @ViewChild(PlaylistComponent, { static: true }) nowPlaylistComponent: PlaylistComponent;
 
   constructor(
-    public store: Store<GameSocialState>,
+    private playlistService: PlaylistService,
+    private appService: AppService
     // public nowPlaylistService: NowPlaylistService
   ) {}
 
   ngOnInit() {
+    this.playlistService.selectedPlaylistId$.subscribe(data => {
+      console.log(data);
+    });
+    this.appService.sidebarToggle$.subscribe(data => {
+      console.log(data);
+    });
     // this.playlist$ = this.nowPlaylistService.playlist$;
   }
 

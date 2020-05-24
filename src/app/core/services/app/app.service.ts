@@ -10,7 +10,7 @@ export class AppService {
   searchQuery$ = this.store.select(getSearchQuery);
   showModal$ = this.store.select(getShowModal);
 
-  constructor(private store: Store<GameSocialState>) { }
+  constructor(private store: Store<GameSocialState>) {}
 
   toggleSidebar() {
     this.store.dispatch(new AppStore.ToggleSidebar());

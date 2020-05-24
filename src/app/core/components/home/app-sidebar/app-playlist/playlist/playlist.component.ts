@@ -14,6 +14,7 @@ import {
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {flyOut} from '../../../../../../shared/animations/fade-in.animation';
 import {isNewChange} from '../../../../../../shared/utils/data.utils';
+import {AppService} from '../../../../../services/app/app.service';
 
 @Component({
   selector: 'playlist',
@@ -22,11 +23,11 @@ import {isNewChange} from '../../../../../../shared/utils/data.utils';
   styleUrls: ['./playlist.scss'],
   template: `
   <section class="now-playlist ux-maker">
-    <div *ngIf="isPlaylistEmpty" class="empty-list text-center" [@flyOut]>
-      <icon name="music" class="bg-primary ux-maker"></icon>
+    <div *ngIf="isPlaylistEmpty" [class.empty-list-closed]="sidebarToggle$ | async" class="empty-list text-center" [@flyOut]>
+      <icon name="play-circle-o" class="c-cfb ux-maker"></icon>
       <article>
-        <h3 class="text-primary">Playlist Is Empty</h3>
-        <p class="text-primary">Queue Media From Results</p>
+        <h3 class="c-cfb">Playlist Is Empty</h3>
+        <p class="c-cfb">Queue Media From Results</p>
       </article>
     </div>
     <ul class="nav nav-list ux-maker nicer-ux" cdkDropList
@@ -49,15 +50,8 @@ import {isNewChange} from '../../../../../../shared/utils/data.utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistComponent implements OnChanges, AfterViewChecked {
-  // @Input() playlist: any = {
-  //   videos: []
-  // };
+  @Input() playlist: any;
 
-  playlist = {
-    videos: [],
-    filter: 'search',
-    selectedId: '1'
-  };
   @Output() select = new EventEmitter<any>();
   @Output()
   selectTrack = new EventEmitter<{
@@ -67,10 +61,15 @@ export class PlaylistComponent implements OnChanges, AfterViewChecked {
   @Output() remove = new EventEmitter<any>();
   @Output() sort = new EventEmitter<any[]>();
 
+  sidebarToggle$ = this.appService.sidebarToggle$;
+
   public activeTrackElement: HTMLUListElement;
   public hasActiveChanged = false;
 
-  constructor(public zone: NgZone) {}
+  constructor(
+    public zone: NgZone,
+    private appService: AppService
+  ) {}
 
   ngAfterViewChecked() {
     if (this.hasActiveChanged && this.activeTrackElement) {

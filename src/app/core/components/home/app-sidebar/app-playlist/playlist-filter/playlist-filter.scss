@@ -1,4 +1,8 @@
-@import '../../../../../../../assets/home/core/global.scss';
+@import '../../../../../../../assets/home/core/global';
+
+.center {
+  display: block !important;
+}
 
 //@media (min-width: 320px) {
   :host {
@@ -37,6 +41,9 @@
       }
       .playlist-header {
         cursor: pointer;
+        icon {
+          color: cornflowerblue;
+        }
       }
       .playlist-filter {
         //position: absolute;

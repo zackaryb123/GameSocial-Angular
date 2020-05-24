@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import * as playlistStore from '../../store/playlist';
-import { map, take } from 'rxjs/operators';
 import {GameSocialState} from '../../store/reducers';
-import {MicrosoftService} from '../3rd-party/microsoft/microsoft.service';
+import * as _ from 'lodash';
+import {getPlaylists, getSelectedPlaylistVideos, getSelectedVideo, getSelectedPlaylistId} from '../../store/playlist';
 
 @Injectable()
 export class PlaylistService {
-  public playlist$: Observable<playlistStore.IPlaylistStore>;
+  public playlists$ = this.store.select(getPlaylists);
+  public selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
+  public slectedPlayist$ = this.store.select(getSelectedPlaylistVideos);
+  public selectedVideo$;
 
   constructor(
-    public store: Store<GameSocialState>,
-    // private microsoftService: MicrosoftService
-  ) {
-    this.playlist$ = this.store.pipe(select(playlistStore.getPlaylistStore));
-  }
+    private store: Store<GameSocialState>,
+  ) {}
 
   // queueVideo(mediaId: string) {
     // return this.microsoftService.api
@@ -24,11 +23,11 @@ export class PlaylistService {
   // }
 
   queueVideos(medias: any[]) {
-    this.store.dispatch(new playlistStore.QueueVideos(medias));
+    this.store.dispatch(new playlistStore.AddVideos(medias));
   }
 
-  removeVideo(media) {
-    this.store.dispatch(new playlistStore.RemoveVideo(media));
+  removeVideo(video: any, playlistId: any) {
+    this.store.dispatch(new playlistStore.RemoveVideo(video, playlistId));
   }
 
   selectVideo(media) {
@@ -56,29 +55,25 @@ export class PlaylistService {
   }
 
   getCurrent() {
-    let media;
-    this.playlist$.pipe(take(1)).subscribe(playlist => {
-      media = playlist.videos.find(video => video.id === playlist.selectedId);
-    });
-    return media;
+    return this.selectedVideo$;
   }
 
   updateIndexByMedia(mediaId: string) {
-    this.store.dispatch(new playlistStore.UpdateIndexByMedia(mediaId));
+    this.store.dispatch(new playlistStore.UpdatePlaylistIndex(mediaId));
   }
 
-  isInLastTrack(): boolean {
-    let playlist: playlistStore.IPlaylistStore;
-    this.playlist$
-      .pipe(take(1))
-      .subscribe(p => (playlist = p));
-    const currentVideoId = playlist.selectedId;
-    const indexOfCurrentVideo = playlist.videos.findIndex(
-      video => video.id === currentVideoId
-    );
-    const isCurrentLast = indexOfCurrentVideo + 1 === playlist.videos.length;
-    return isCurrentLast;
-  }
+  // isInLastTrack(): boolean {
+  //   let playlist: playlistStore.IPlaylistStore;
+  //   this.playlist$
+  //     .pipe(take(1))
+  //     .subscribe(p => (playlist = p));
+  //   const currentVideoId = playlist.selectedId;
+  //   const indexOfCurrentVideo = playlist.videos.findIndex(
+  //     video => video.id === currentVideoId
+  //   );
+  //   const isCurrentLast = indexOfCurrentVideo + 1 === playlist.videos.length;
+  //   return isCurrentLast;
+  // }
 
   seekToTrack(trackEvent) {
     this.store.dispatch(new playlistStore.SeekTo(trackEvent));

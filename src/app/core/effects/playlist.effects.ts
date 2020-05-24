@@ -23,8 +23,8 @@ export class PlaylistEffects {
     ofType(playlistStore.PlaylistActionTypes.SELECT),
     map(toPayload),
     map(
-      (media: any) =>
-        new playlistStore.QueueVideo(media)
+      (video: any, playlistId: any) =>
+        new playlistStore.AddVideo(video, playlistId)
     )
   );
 
@@ -40,27 +40,27 @@ export class PlaylistEffects {
    * AND repeat is on
    * THEN play the first track
   **/
-  @Effect()
-  loadNextTrack$ = this.actions$.pipe(
-    ofType(playlistStore.PlaylistActionTypes.MEDIA_ENDED),
-    map(toPayload),
-    withLatestFrom(this.store.select(playlistStore.getSelectedMedia)),
-    filter(
-      (states: [any, any]) =>
-        states[1] && states[1].hasOwnProperty('id')
-    ),
-    map(
-      (states: [any, any]) =>
-        new playlistStore.SelectVideo(states[1])
-    )
-  );
+  // @Effect()
+  // loadNextTrack$ = this.actions$.pipe(
+  //   ofType(playlistStore.PlaylistActionTypes.MEDIA_ENDED),
+  //   map(toPayload),
+  //   withLatestFrom(this.store.select(playlistStore.getSelectedVideo)),
+  //   filter(
+  //     (states: [any, any]) =>
+  //       states[1] && states[1].hasOwnProperty('id')
+  //   ),
+  //   map(
+  //     (states: [any, any]) =>
+  //       new playlistStore.SelectVideo(states[1])
+  //   )
+  // );
 
   @Effect()
   selectBeforeSeekToTime$ = this.actions$.pipe(
     ofType(playlistStore.PlaylistActionTypes.SELECT_AND_SEEK_TO_TIME),
     map(toPayload),
     map(
-      trackEvent => new playlistStore.UpdateIndexByMedia(trackEvent.media.id)
+      trackEvent => new playlistStore.UpdatePlaylistIndex(trackEvent.media.id)
     )
   );
 
@@ -91,7 +91,7 @@ export class PlaylistEffects {
     map(toPayload),
     map(
       (playlistItems: any[]) =>
-        new playlistStore.QueueVideos(playlistItems)
+        new playlistStore.AddVideos(playlistItems)
     )
   );
 
