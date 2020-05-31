@@ -2,7 +2,8 @@ import {IPlaylistAction, PlaylistActionTypes} from './playlist.actions';
 import {migrateReducerState} from '../store.utils';
 
 export interface IPlaylistStore {
-  playlists?: IPlaylist[];
+  playlist?: IPlaylist[];
+  filter?: string;
   selectedPlaylistId?: any;
 }
 
@@ -14,17 +15,46 @@ export interface IPlaylist  {
   repeat?: boolean;
 }
 
+// export class PlaylistModel {
+//
+//
+// }
+
 const newInitialState: IPlaylistStore = {
-  playlists: [
+  playlist: [
     {
-      videos: [],
-      playlistId: 1,
-      selectedVideoId: 1,
+      videos: [
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+            }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        }
+      ],
+      playlistId: 0,
+      selectedVideoId: 0,
       filter: '',
       repeat: false
-    }
+    },
   ],
-  selectedPlaylistId: 1,
+  filter: '',
+  selectedPlaylistId: 0
 };
 
 const initialState: IPlaylistStore = migrateReducerState(
@@ -42,23 +72,23 @@ export function playlistStore(
       return { ...state, selectedPlaylistId: action.video.id };
 
     case PlaylistActionTypes.ADD:
-      return { ...state, playlists: addVideo(state.playlists, action.video, action.playlistId) };
+      return { ...state, playlist: addVideo(state.playlist, action.video, action.playlistId) };
 
     // case PlaylistActionTypes.ADD_VIDEOS:
     //   return { ...state, videos: addMedias(state.videos, action.payload) };
 
     case PlaylistActionTypes.REMOVE:
-      return { ...state, playlists: removeVideo(state.playlists, action.video, action.playlistId) };
+      return { ...state, playlist: removeVideo(state.playlist, action.video, action.playlistId) };
 
     // updates index by media
     case PlaylistActionTypes.UPDATE_INDEX:
       return { ...state, selectedPlaylistId: action.playlistId };
 
-    // case PlaylistActionTypes.FILTER_CHANGE:
-    //   return { ...state, filter: action.filter };
+    case PlaylistActionTypes.FILTER_CHANGE:
+      return { ...state, filter: action.filter };
 
     case PlaylistActionTypes.REMOVE_ALL:
-      return { ...state, playlists: removePlaylist(state.playlists, action.playlistId) };
+      return { ...state, playlist: removePlaylist(state.playlist, action.playlistId) };
 
     // case PlaylistActionTypes.SELECT_NEXT: {
     //   return {

@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import {PlaylistComponent} from './playlist/playlist.component';
 import {PlaylistService} from '../../../../services/playlist/playlist.service';
-import {AppService} from "../../../../services/app/app.service";
 
 @Component({
   selector: 'app-playlist',
@@ -14,16 +13,15 @@ import {AppService} from "../../../../services/app/app.service";
   template: `
   <div class="sidebar-pane">
     <playlist-filter
-      *ngIf="playlist$ | async"
-      [playlist]="playlist$ | async"
+      [playlist]="selectedPlaylist$ | async"
       (clear)="clearPlaylist()"
       (filter)="updateFilter($event)"
       (reset)="resetFilter()"
       (headerClick)="onHeaderClick()"
     ></playlist-filter>
     <playlist
-      *ngIf="playlist$ | async"
-      [playlist]="playlist$ | async"
+      *ngIf="selectedPlaylist$ | async"
+      [playlist]="selectedPlaylist$ | async"
       (select)="selectVideo($event)"
       (selectTrack)="selectTrackInVideo($event)"
       (remove)="removeVideo($event)"
@@ -34,22 +32,16 @@ import {AppService} from "../../../../services/app/app.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppPlaylist implements OnInit {
-  playlist$ = this.playlistService.slectedPlayist$;
-  @ViewChild(PlaylistComponent, { static: true }) nowPlaylistComponent: PlaylistComponent;
+  selectedPlaylist$ = this.playlistService.selectedPlaylist$;
+  @ViewChild(PlaylistComponent, { static: true }) playlistComponent: PlaylistComponent;
 
   constructor(
     private playlistService: PlaylistService,
-    private appService: AppService
     // public nowPlaylistService: NowPlaylistService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
-    this.playlistService.selectedPlaylistId$.subscribe(data => {
-      console.log(data);
-    });
-    this.appService.sidebarToggle$.subscribe(data => {
-      console.log(data);
-    });
     // this.playlist$ = this.nowPlaylistService.playlist$;
   }
 
@@ -63,7 +55,7 @@ export class AppPlaylist implements OnInit {
   }
 
   updateFilter(searchFilter: string) {
-    // this.nowPlaylistService.updateFilter(searchFilter);
+    this.playlistService.updateFilter(searchFilter);
   }
 
   resetFilter() {
@@ -79,7 +71,7 @@ export class AppPlaylist implements OnInit {
   }
 
   onHeaderClick() {
-    this.nowPlaylistComponent.scrollToActiveTrack();
+    this.playlistComponent.scrollToActiveTrack();
   }
 
   selectTrackInVideo(trackEvent: {

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as playlistStore from '../../store/playlist';
 import {GameSocialState} from '../../store/reducers';
-import * as _ from 'lodash';
-import {getPlaylists, getSelectedPlaylistVideos, getSelectedVideo, getSelectedPlaylistId} from '../../store/playlist';
+import {getPlaylist, getSelectedPlaylistVideos, getSelectedVideo, getSelectedPlaylistId} from '../../store/playlist';
 
 @Injectable()
 export class PlaylistService {
-  public playlists$ = this.store.select(getPlaylists);
-  public selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
-  public slectedPlayist$ = this.store.select(getSelectedPlaylistVideos);
-  public selectedVideo$;
+  playlists$ = this.store.select(getPlaylist);
+  selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
+  selectedPlaylist$ = this.store.select(getSelectedPlaylistVideos);
+  selectedVideo$;
 
   constructor(
     private store: Store<GameSocialState>,

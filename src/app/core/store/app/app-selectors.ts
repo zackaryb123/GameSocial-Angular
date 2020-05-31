@@ -11,7 +11,7 @@ export const getSearchQuery = createSelector(
 
 export const getSidebarToggle = createSelector(
   getAppStore,
-  (appStore: IAppStore) => !appStore.sidebarToggle
+  (appStore: IAppStore) => appStore.sidebarToggle
 );
 
 export const getShowModal = createSelector(

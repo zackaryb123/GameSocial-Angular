@@ -1,12 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-// import { EchoesState } from '@core/store';
-
-// selectors
-// import * as fromUserProfile from '@core/store/user-profile';
-// import * as fromPlayerSearch from '@core/store/player-profile';
-// import { UpdateQueryFilter } from '@core/store/player-profile';
-// import { INavigateEvent } from './profile-navigator/profile-navigator.component';
 
 @Component({
   selector: 'app-search',

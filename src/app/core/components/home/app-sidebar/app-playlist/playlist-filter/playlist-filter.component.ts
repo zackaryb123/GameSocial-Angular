@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
+  Input, OnInit,
   Output,
   ViewEncapsulation
 } from '@angular/core';
@@ -47,7 +47,7 @@ import {AppService} from '../../../../../services/app/app.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlaylistFilterComponent {
+export class PlaylistFilterComponent implements OnInit {
   @Input() playlist: any;
 
   sidebarToggle$ = this.appService.sidebarToggle$
@@ -59,7 +59,14 @@ export class PlaylistFilterComponent {
 
   constructor(
     private appService: AppService
-  ) {}
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.sidebarToggle$.subscribe(data => {
+      console.log(data);
+    });
+  }
 
   handleFilterChange(searchFilter: string) {
     this.filter.next(searchFilter);
@@ -86,6 +93,7 @@ export class PlaylistFilterComponent {
   onNowPlayingClick() {
     this.headerClick.next();
   }
+
   get playlistLength() {
     if (this.playlist) {
       return this.playlist.videos.length;

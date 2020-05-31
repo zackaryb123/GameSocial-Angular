@@ -9,9 +9,9 @@ export const getPlaylistStore = (state: GameSocialState) => state.playlistStore;
 //   (playlist: IPlaylistStore) => playlist.repeat
 // );
 
-export const getPlaylists = createSelector(
+export const getPlaylist = createSelector(
   getPlaylistStore,
-  (playlistStore: IPlaylistStore) => playlistStore.playlists
+  (playlistStore: IPlaylistStore) => playlistStore.playlist
 );
 
 export const getSelectedPlaylistId = createSelector(
@@ -21,7 +21,7 @@ export const getSelectedPlaylistId = createSelector(
 
 export const getSelectedPlaylistVideos = createSelector(
   getPlaylistStore,
-  (playlistStore: IPlaylistStore) => playlistStore.playlists[playlistStore.selectedPlaylistId]
+  (playlistStore: IPlaylistStore) => playlistStore.playlist[playlistStore.selectedPlaylistId]
 );
 
 // export const getPlaylistMediaIds = createSelector(
@@ -31,16 +31,16 @@ export const getSelectedPlaylistVideos = createSelector(
 
 export const getSelectedVideoId = createSelector(
   getPlaylistStore,
-  (playlistStore: IPlaylistStore) => playlistStore.playlists[playlistStore.selectedPlaylistId]
+  (playlistStore: IPlaylistStore) => playlistStore.playlist[playlistStore.selectedPlaylistId]
     .videos[playlistStore[playlistStore.selectedPlaylistId].selectedVideoId].id
 );
 
 export const getSelectedVideo = createSelector(
   getPlaylistStore,
   (playlistStore: IPlaylistStore) => {
-    if (playlistStore.playlists) {
-      return playlistStore.playlists[playlistStore.selectedPlaylistId]
-        .videos[playlistStore.playlists[playlistStore.selectedPlaylistId].selectedVideoId];
+    if (playlistStore.playlist) {
+      return playlistStore.playlist[playlistStore.selectedPlaylistId]
+        .videos[playlistStore.playlist[playlistStore.selectedPlaylistId].selectedVideoId];
     }
   }
 );

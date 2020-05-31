@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
   AfterViewChecked,
   NgZone,
-  SimpleChanges
+  SimpleChanges, OnInit
 } from '@angular/core';
 // import * as NowPlaylist from '@store/playlist';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -37,19 +37,19 @@ import {AppService} from '../../../../../services/app/app.service';
         *ngFor="let video of playlist.videos | search:playlist.filter; let index = index"
         [class.active]="isActiveMedia(video.id, playlistTrack)"
         [@flyOut]>
-        <now-playlist-track
+        <playlist-track
           [video]="video" [index]="index"
           (remove)="removeVideo($event)"
           (select)="selectVideo(video)"
           (selectTrack)="selectTrackInVideo($event)"
-        ></now-playlist-track>
+        ></playlist-track>
       </li>
     </ul>
   </section>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlaylistComponent implements OnChanges, AfterViewChecked {
+export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() playlist: any;
 
   @Output() select = new EventEmitter<any>();
@@ -70,6 +70,10 @@ export class PlaylistComponent implements OnChanges, AfterViewChecked {
     public zone: NgZone,
     private appService: AppService
   ) {}
+
+  ngOnInit(): void {
+    console.log('this.playlist: ', this.playlist);
+  }
 
   ngAfterViewChecked() {
     if (this.hasActiveChanged && this.activeTrackElement) {
