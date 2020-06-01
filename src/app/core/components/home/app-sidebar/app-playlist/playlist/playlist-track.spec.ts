@@ -1,14 +1,14 @@
 // import { By } from '@angular/platform-browser';
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
-// import { PlaylistTrackComponent } from './playlist-track.component';
+// import { FriendsTrackComponent } from './playlist-track.component';
 //
-// describe('PlaylistTrackComponent', () => {
-//   let component: PlaylistTrackComponent;
-//   let fixture: ComponentFixture<PlaylistTrackComponent>;
+// describe('FriendsTrackComponent', () => {
+//   let component: FriendsTrackComponent;
+//   let fixture: ComponentFixture<FriendsTrackComponent>;
 //
 //   function createComponent(video = VideoMock) {
-//     fixture = TestBed.createComponent(PlaylistTrackComponent);
+//     fixture = TestBed.createComponent(FriendsTrackComponent);
 //     component = fixture.componentInstance;
 //     component.video = <any>video;
 //     fixture.detectChanges();
@@ -22,7 +22,7 @@
 //       'parseTracks'
 //     ]);
 //     TestBed.configureTestingModule({
-//       declarations: [PlaylistTrackComponent, ...PIPES],
+//       declarations: [FriendsTrackComponent, ...PIPES],
 //       schemas: [NO_ERRORS_SCHEMA],
 //       providers: [{ provide: MediaParserService, useValue: mediaParserSpy }]
 //     }).compileComponents();

@@ -1,6 +1,6 @@
 // FLEX LAYOUT START
 :host {
-  $padding-bottom: 2rem;
+  $padding-bottom: 31rem;
 
   flex-grow: 16;
   flex-shrink: 0;
@@ -25,7 +25,8 @@
   playlist {
     flex: 1 1 0;
     overflow-y: auto;
-    padding-bottom: $padding-bottom;
+    overflow-x: hidden;
+    //padding-bottom: $padding-bottom;
   }
 }
 // FLEX LAYOUT END

@@ -13,13 +13,13 @@ import {AppService} from '../../../services/app/app.service';
     <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
     <nav class="navbar navbar-transparent">
       <profile-brand></profile-brand>
-      <app-navigator
-        page="profile"
-        iconLink="chat"
-        iconLabel="Chat"
-        iconName="envelope"
-        [closed]="sidebarToggle$ | async">
-      </app-navigator>
+<!--      <app-navigator-->
+<!--        page="profile"-->
+<!--        iconLink="chat"-->
+<!--        iconLabel="Chat"-->
+<!--        iconName="envelope"-->
+<!--        [closed]="sidebarToggle$ | async">-->
+<!--      </app-navigator>-->
       <app-navigator
         page="profile"
         iconLink="friends"
@@ -28,6 +28,7 @@ import {AppService} from '../../../services/app/app.service';
         [closed]="sidebarToggle$ | async">
       </app-navigator>
     </nav>
+    <profile-friends-list></profile-friends-list>
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

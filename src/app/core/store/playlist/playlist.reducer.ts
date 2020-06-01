@@ -45,6 +45,83 @@ const newInitialState: IPlaylistStore = {
             thumbnails: {
               "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
           }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
+        },
+        {
+          contentDetails: {
+            duration: 'PT43M23S'
+          },
+          snippet: {
+            title: 'Title',
+            description: 'Description',
+            thumbnails: {
+              "default":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/NkwXpngWfSQ/maxresdefault.jpg","width":1280,"height":720}}
+          }
         }
       ],
       playlistId: 0,
