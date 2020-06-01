@@ -12,21 +12,21 @@ import {FriendsComponent} from './friends/friends.component';
   styleUrls: ['./profile-friends.scss'],
   template: `
   <div class="sidebar-pane">
-    <playlist-filter
+    <friends-filter
       [playlist]="selectedPlaylist$ | async"
       (clear)="clearPlaylist()"
       (filter)="updateFilter($event)"
       (reset)="resetFilter()"
       (headerClick)="onHeaderClick()"
-    ></playlist-filter>
-    <playlist
+    ></friends-filter>
+    <friends
       *ngIf="selectedPlaylist$ | async"
       [playlist]="selectedPlaylist$ | async"
       (select)="selectVideo($event)"
       (selectTrack)="selectTrackInVideo($event)"
       (remove)="removeVideo($event)"
       (sort)="sortPlaylist($event)"
-    ></playlist>
+    ></friends>
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

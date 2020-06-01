@@ -1,4 +1,21 @@
 // FLEX LAYOUT START
+friends::-webkit-scrollbar {
+  width: .5em;
+}
+
+friends::-webkit-scrollbar-track {
+  //box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #263238;
+}
+
+friends::-webkit-scrollbar-thumb {
+  background-color: cornflowerblue;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
+}
+
 :host {
   $padding-bottom: 31rem;
 
@@ -16,13 +33,13 @@
     overflow-y: hidden;
   }
 
-  playlist-filter {
+  friends-filter {
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: 0rem;
   }
 
-  playlist {
+  friends {
     flex: 1 1 0;
     overflow-y: auto;
     overflow-x: hidden;

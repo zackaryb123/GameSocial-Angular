@@ -1,4 +1,21 @@
 // FLEX LAYOUT START
+playlist::-webkit-scrollbar {
+  width: .5em;
+}
+
+playlist::-webkit-scrollbar-track {
+  //box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #263238;
+}
+
+playlist::-webkit-scrollbar-thumb {
+  background-color: cornflowerblue;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
+}
+
 :host {
   $padding-bottom: 2rem;
 
