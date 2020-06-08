@@ -17,17 +17,17 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
     <div class="track-contents">
       <section class="video-thumb playlist-track__thumb"
         (click)="markSelected(video)">
-        <span class="track-number">{{ index + 1 }}</span>
+<!--        <span class="track-number">{{ index + 1 }}</span>-->
         <img draggable="false" class="video-thumb__image"
-        src="{{ video | videoToThumb }}"
+        srcset="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png 1x, https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png 1.778x"
         xtitle="Drag to sort">
         <span class="badge badge-info">
-          {{ video.contentDetails.duration | toFriendlyDuration }}
+          pr0Xt0Xtype18
         </span>
       </section>
 
-      <section class="video-title" (click)="markSelected(video)" [title]="video.snippet.title">{{ video.snippet.title }}</section>
-      </div>
+      <section class="video-title" (click)="markSelected(video)" [title]="video.snippet.title">Zack Blaylock</section>
+    </div>
     <aside class="playlist-track__content">
       <section class="track-actions">
         <button class="btn btn-transparent text-primary playlist-track"
@@ -42,10 +42,10 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
           <icon name="info-circle"></icon>
         </button>
       </section>
-      <button class="btn btn-transparent text-danger ux-maker remove-track" title="Remove From Playlist"
+      <div class="btn btn-transparent text-danger ux-maker remove-track" title="Remove From Playlist"
         (click)="remove.emit(video)">
-        <icon name="trash"></icon>
-      </button>
+        <icon name="circle"></icon>
+      </div>
     </aside>
     <article [@flyInOut] *ngIf="displayTracks" class="track-tracks list-group">
       <aside class="album-tracks-heading">Tracks</aside>

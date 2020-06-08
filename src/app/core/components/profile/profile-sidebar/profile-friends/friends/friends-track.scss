@@ -98,6 +98,7 @@
 
       .video-thumb__image {
         height: 100%;
+        border-radius: 10px;
       }
     }
 
@@ -108,9 +109,12 @@
       // display: block;
       z-index: $track-button;
       font-size: $remove-font-size;
-      transform: translatex(-1rem);
+      //transform: translatex(-1rem);
       icon {
-        color: red;
+        //color: red;
+        color: #00ff00;
+        background-color: #00ff00;
+        border-radius: 1rem;
       }
     }
 
@@ -150,11 +154,11 @@
 @media (min-width: 768px) {
   :host {
     .remove-track {
-      transform: translatex(5rem);
+      //transform: translatex(5rem);
     }
     &:hover {
       .remove-track {
-        transform: translatex(0rem);
+        //transform: translatex(0rem);
       }
     }
 
