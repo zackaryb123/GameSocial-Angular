@@ -8,6 +8,8 @@ import {
   Output
 } from '@angular/core';
 import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
+import {PresenceService} from '../../../../../services/presence/presence.service';
+import {AppService} from "../../../../../services/app/app.service";
 
 @Component({
   selector: 'friends-track',
@@ -16,7 +18,7 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
   <div class="now-playlist-track__trigger">
     <div class="track-contents">
       <section class="video-thumb playlist-track__thumb"
-        (click)="markSelected(video)">
+        (click)="markSelected(friend)">
 <!--        <span class="track-number">{{ index + 1 }}</span>-->
         <img draggable="false" class="video-thumb__image"
         srcset="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png 1x, https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png 1.778x"
@@ -26,13 +28,13 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
         </span>
       </section>
 
-      <section class="video-title" (click)="markSelected(video)" [title]="video.snippet.title">Zack Blaylock</section>
+      <section class="video-title" (click)="markSelected(friend)" [title]="friend.fname + ' ' + friend.lname">Zack Blaylock</section>
     </div>
     <aside class="playlist-track__content">
       <section class="track-actions">
         <button class="btn btn-transparent text-primary playlist-track"
-          *ngIf="isPlaylistMedia(video)"
-          (click)="handleToggleTracks($event, video)"
+          *ngIf="isPlaylistMedia(friend.uid)"
+          (click)="handleToggleTracks($event, friend)"
           title="Album Track - click to select cued tracks">
           <icon name="list-ul"></icon>
         </button>
@@ -43,29 +45,37 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
         </button>
       </section>
       <div class="btn btn-transparent text-danger ux-maker remove-track" title="Remove From Playlist"
-        (click)="remove.emit(video)">
-        <icon name="circle"></icon>
+        (click)="remove.emit(friend)">
+        <icon *ngIf="presence$ | async as presence"
+          [ngClass]="{
+          'is-online':  presence.status  === 'online',
+          'is-away': presence.status  === 'away',
+          'is-offline':  presence.status  === 'offline',
+          'status-sidebar-closed': (sidebarToggle$ | async) === true
+          }"
+          name="circle"></icon>
       </div>
     </aside>
     <article [@flyInOut] *ngIf="displayTracks" class="track-tracks list-group">
       <aside class="album-tracks-heading">Tracks</aside>
       <button type="button" class="list-group-item btn-transparent"
         *ngFor="let track of tracks"
-        (click)="handleSelectTrack($event, track, video)">
+        (click)="handleSelectTrack($event, track, friend)">
         {{ track }}
       </button>
     </article>
     <article [@flyOut] *ngIf="displayInfo" class="track-info">
-      {{ video.snippet.description }}
+      {{ friend.bio }}
     </article>
   </div>
   `,
   animations: [flyOut, flyInOut],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FriendsTrackComponent implements AfterContentInit {
-  @Input() video: any;
-  @Input() index: number;
+export class FriendsTrackComponent implements OnInit, AfterContentInit {
+  @Input() friend;
+
+  sidebarToggle$ = this.appService.sidebarToggle$;
 
   @Output() remove = new EventEmitter<any>();
   @Output() select = new EventEmitter<any>();
@@ -79,14 +89,20 @@ export class FriendsTrackComponent implements AfterContentInit {
   displayInfo = false;
   tracks: string[] = [];
   hasTracks = false;
+  presence$: any;
   private parsedTracks = false;
 
   constructor(
-    // public mediaParser: MediaParserService
-    ) {}
+    private presence: PresenceService,
+    private appService: AppService
+  ) {}
+
+  ngOnInit(): void {
+    this.presence$ = this.presence.getPresence(this.friend.uid);
+  }
 
   ngAfterContentInit() {
-    this.extractTracks(this.video);
+    this.extractTracks(this.friend);
   }
 
   extractTracks(media: any) {
@@ -126,8 +142,8 @@ export class FriendsTrackComponent implements AfterContentInit {
     // }
   }
 
-  markSelected(video: any) {
-    this.select.emit(video);
+  markSelected(user: any) {
+    this.select.emit(user);
   }
 
   toggleInfo() {

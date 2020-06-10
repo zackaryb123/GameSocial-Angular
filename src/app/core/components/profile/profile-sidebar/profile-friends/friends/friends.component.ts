@@ -10,7 +10,6 @@ import {
   NgZone,
   SimpleChanges, OnInit
 } from '@angular/core';
-// import * as NowPlaylist from '@store/playlist';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {flyOut} from '../../../../../../shared/animations/fade-in.animation';
 import {isNewChange} from '../../../../../../shared/utils/data.utils';
@@ -23,25 +22,25 @@ import {AppService} from '../../../../../services/app/app.service';
   styleUrls: ['./friends.scss'],
   template: `
   <section class="now-playlist ux-maker">
-    <div *ngIf="isPlaylistEmpty" [class.empty-list-closed]="sidebarToggle$ | async" class="empty-list text-center" [@flyOut]>
+    <div *ngIf="isFriendsEmpty" [class.empty-list-closed]="sidebarToggle$ | async" class="empty-list text-center" [@flyOut]>
       <icon name="play-circle-o" class="c-cfb ux-maker"></icon>
       <article>
-        <h3 class="c-cfb">Playlist Is Empty</h3>
+        <h3 class="c-cfb">Friends are Empty</h3>
         <p class="c-cfb">Queue Media From Results</p>
       </article>
     </div>
     <ul class="nav nav-list ux-maker nicer-ux" cdkDropList
-      (cdkDropListDropped)="onTrackDrop($event)"
+      (cdkDropListDropped)="onFriendDrop($event)"
       [cdkDropListLockAxis]="'y'">
-      <li class="now-playlist-track" #playlistTrack cdkDrag
-        *ngFor="let video of playlist.videos | search:playlist.filter; let index = index"
-        [class.active]="isActiveMedia(video.id, playlistTrack)"
+      <li class="now-playlist-track" #friendsTrack cdkDrag
+        *ngFor="let friend of friends.friends | search:friends.filter; let index = index"
+        [class.active]="isActiveFriend(friend.uid, friendsTrack)"
         [@flyOut]>
         <friends-track
-          [video]="video" [index]="index"
+          [friend]="friend"
           (remove)="removeVideo($event)"
-          (select)="selectVideo(video)"
-          (selectTrack)="selectTrackInVideo($event)"
+          (select)="selectFriend(friends)"
+          (selectTrack)="selectFriendInList($event)"
         ></friends-track>
       </li>
     </ul>
@@ -50,7 +49,7 @@ import {AppService} from '../../../../../services/app/app.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
-  @Input() playlist: any;
+  @Input() friends: any;
 
   @Output() select = new EventEmitter<any>();
   @Output()
@@ -72,12 +71,12 @@ export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.playlist: ', this.playlist);
+    console.log('this.friends: ', this.friends);
   }
 
   ngAfterViewChecked() {
     if (this.hasActiveChanged && this.activeTrackElement) {
-      this.zone.runOutsideAngular(() => this.scrollToActiveTrack());
+      this.zone.runOutsideAngular(() => this.scrollToActiveFriend());
     }
   }
 
@@ -87,42 +86,42 @@ export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
-  scrollToActiveTrack() {
+  scrollToActiveFriend() {
     if (this.activeTrackElement) {
       this.activeTrackElement.scrollIntoView();
     }
   }
 
-  selectVideo(media: any) {
-    this.select.emit(media);
+  selectFriend(friend: any) {
+    this.select.emit(friend);
   }
 
-  removeVideo(media: any) {
-    this.remove.emit(media);
+  removeVideo(friend: any) {
+    this.remove.emit(friend);
   }
 
-  isActiveMedia(mediaId: string, trackElement: HTMLUListElement) {
-    const isActive = this.playlist.selectedId === mediaId;
+  isActiveFriend(friendId: string, friendElement: HTMLUListElement) {
+    const isActive = this.friends.selectedId === friendId;
     if (isActive) {
-      this.activeTrackElement = trackElement;
+      this.activeTrackElement = friendElement;
     }
     return isActive;
   }
 
-  selectTrackInVideo(trackEvent: { time; media }) {
-    this.selectTrack.emit(trackEvent);
+  selectFriendInList(friendEvent: { time; media }) {
+    this.selectTrack.emit(friendEvent);
   }
 
-  onTrackDrop({
+  onFriendDrop({
     currentIndex,
     previousIndex
   }: CdkDragDrop<any>) {
-    const videos = [...this.playlist.videos];
+    const videos = [...this.friends];
     moveItemInArray(videos, previousIndex, currentIndex);
     this.sort.emit(videos);
   }
 
-  get isPlaylistEmpty() {
-    return this.playlist.videos.length === 0;
+  get isFriendsEmpty() {
+    return this.friends.length === 0;
   }
 }

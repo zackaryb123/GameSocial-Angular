@@ -39,7 +39,7 @@ import {AppService} from '../../../../../services/app/app.service';
 <!--        *ngIf="!isFilterEmpty()"-->
 <!--        (click)="resetSearchFilter()"></icon>-->
       <input type="search" name="playlist-search"
-        [value]="playlist.filter"
+        [value]="friends.filter"
         #searchFilter
         (input)="handleFilterChange(searchFilter.value)">
     </div>
@@ -48,9 +48,9 @@ import {AppService} from '../../../../../services/app/app.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FriendsFilterComponent implements OnInit {
-  @Input() playlist: any;
+  @Input() friends: any;
 
-  sidebarToggle$ = this.appService.sidebarToggle$
+  sidebarToggle$ = this.appService.sidebarToggle$;
   // @Output() save = new EventEmitter();
   @Output() clear = new EventEmitter();
   @Output() filter = new EventEmitter();
@@ -63,6 +63,7 @@ export class FriendsFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.friends);
     this.sidebarToggle$.subscribe(data => {
       console.log(data);
     });
@@ -77,8 +78,8 @@ export class FriendsFilterComponent implements OnInit {
   }
 
   isFilterEmpty() {
-    if (this.playlist) {
-      return this.playlist.filter === '';
+    if (this.friends) {
+      return this.friends.filter === '';
     }
   }
 
@@ -87,16 +88,16 @@ export class FriendsFilterComponent implements OnInit {
   }
 
   isPlaylistEmpty() {
-    return this.playlistLength === 0;
+    return this.friendsLength === 0;
   }
 
   onNowPlayingClick() {
     this.headerClick.next();
   }
 
-  get playlistLength() {
-    if (this.playlist) {
-      return this.playlist.videos.length;
+  get friendsLength() {
+    if (this.friends) {
+      return this.friends.friends[this.friends.selectedFriendsId].length;
     }
   }
 }

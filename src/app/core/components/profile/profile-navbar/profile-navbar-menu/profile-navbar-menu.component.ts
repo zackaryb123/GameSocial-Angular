@@ -12,6 +12,7 @@ import {ICON_PREFIX_BRAND} from '../../../../../shared/directives/icon';
 import {AppService} from "../../../../services/app/app.service";
 import {AuthService} from "../../../../services/auth";
 import {Router} from "@angular/router";
+import {PresenceService} from "../../../../services/presence/presence.service";
 
 enum Key {
   Backspace = 8,
@@ -86,6 +87,7 @@ export class ProfileNavbarMenuComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private presenceService: PresenceService
   ) { }
 
   ngOnInit() { }
@@ -118,12 +120,14 @@ export class ProfileNavbarMenuComponent implements OnInit {
   }
 
   handleSignOut() {
-    this.authService.doLogout()
-      .then((res) => {
-        console.log('res: ', res);
-        return this.router.navigate(['/']);
-      }, (error) => {
-        console.log('Logout error', error);
-      });
+    return this.presenceService.signOut();
+  //   this.authService.doLogout()
+  //     .then((res) => {
+  //       console.log('res: ', res);
+  //       return this.router.navigate(['/']);
+  //     }, (error) => {
+  //       console.log('Logout error', error);
+  //     });
   }
 }
+

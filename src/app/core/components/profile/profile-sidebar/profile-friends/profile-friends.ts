@@ -4,8 +4,8 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {PlaylistService} from '../../../../services/playlist/playlist.service';
 import {FriendsComponent} from './friends/friends.component';
+import {FriendsService} from '../../../../services/friends/friends.service';
 
 @Component({
   selector: 'profile-friends-list',
@@ -13,15 +13,15 @@ import {FriendsComponent} from './friends/friends.component';
   template: `
   <div class="sidebar-pane">
     <friends-filter
-      [playlist]="selectedPlaylist$ | async"
+      [friends]="friends$ | async"
       (clear)="clearPlaylist()"
       (filter)="updateFilter($event)"
       (reset)="resetFilter()"
       (headerClick)="onHeaderClick()"
     ></friends-filter>
     <friends
-      *ngIf="selectedPlaylist$ | async"
-      [playlist]="selectedPlaylist$ | async"
+      *ngIf="friends$ | async"
+      [friends]="friends$ | async"
       (select)="selectVideo($event)"
       (selectTrack)="selectTrackInVideo($event)"
       (remove)="removeVideo($event)"
@@ -32,12 +32,11 @@ import {FriendsComponent} from './friends/friends.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileFriendsList implements OnInit {
-  selectedPlaylist$ = this.playlistService.selectedPlaylist$;
+  friends$ = this.friendsService.friends$;
   @ViewChild(FriendsComponent, { static: true }) playlistComponent: FriendsComponent;
 
   constructor(
-    private playlistService: PlaylistService,
-    // public nowPlaylistService: NowPlaylistService
+    private friendsService: FriendsService
   ) {
   }
 
@@ -55,7 +54,7 @@ export class ProfileFriendsList implements OnInit {
   }
 
   updateFilter(searchFilter: string) {
-    this.playlistService.updateFilter(searchFilter);
+    this.friendsService.updateFilter(searchFilter);
   }
 
   resetFilter() {
@@ -71,7 +70,7 @@ export class ProfileFriendsList implements OnInit {
   }
 
   onHeaderClick() {
-    this.playlistComponent.scrollToActiveTrack();
+    this.playlistComponent.scrollToActiveFriend();
   }
 
   selectTrackInVideo(trackEvent: {

@@ -3,13 +3,14 @@ import { Store } from '@ngrx/store';
 import * as playlistStore from '../../store/playlist';
 import {GameSocialState} from '../../store/reducers';
 import {getPlaylist, getSelectedPlaylistVideos, getSelectedVideo, getSelectedPlaylistId} from '../../store/playlist';
+import {take} from 'rxjs/operators';
 
 @Injectable()
 export class PlaylistService {
   playlists$ = this.store.select(getPlaylist);
   selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
   selectedPlaylist$ = this.store.select(getSelectedPlaylistVideos);
-  selectedVideo$;
+  selectedVideo$ = this.store.select(getSelectedVideo);
 
   constructor(
     private store: Store<GameSocialState>,
@@ -54,7 +55,9 @@ export class PlaylistService {
   }
 
   getCurrent() {
-    return this.selectedVideo$;
+    return this.selectedVideo$.pipe(take(1)).subscribe(data => {
+      return data;
+    });
   }
 
   updateIndexByMedia(mediaId: string) {

@@ -13,6 +13,26 @@
     $remove-font-size: 2rem;
     $playlist-font-size: 2rem;
 
+    .is-online {
+      color: #00ff00;
+      background-color: #00ff00;
+      border-radius: 1rem;
+    }
+    .is-away {
+      color: yellow;
+      background-color: yellow;
+      border-radius: 1rem;
+    }
+    .is-offline {
+      color: red;
+      background-color: red;
+      border-radius: 1rem;
+    }
+
+    .status-sidebar-closed {
+      transform: translate(-2rem, -2rem);
+    }
+
     .now-playlist-track__trigger {
       text-shadow: none;
       padding: 1.5rem;
@@ -110,12 +130,12 @@
       z-index: $track-button;
       font-size: $remove-font-size;
       //transform: translatex(-1rem);
-      icon {
-        //color: red;
-        color: #00ff00;
-        background-color: #00ff00;
-        border-radius: 1rem;
-      }
+
+      //icon {
+      //  color: #00ff00;
+      //  background-color: #00ff00;
+      //  border-radius: 1rem;
+      //}
     }
 
     .badge-info {
