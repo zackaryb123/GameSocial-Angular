@@ -20,12 +20,12 @@ import { Component, OnInit } from '@angular/core';
             (search)="search($event)"
           ></player-search>
         </div>
-        <section class="is-flex-row is-content-aligned-h">
-          <search-navigator
-            [searchType]="searchType$"
-            [queryParams]="queryParams$"
-          ></search-navigator>
-        </section>
+<!--        <section class="is-flex-row is-content-aligned-h">-->
+<!--          <search-navigator-->
+<!--            [searchType]="searchType$"-->
+<!--            [queryParams]="queryParams$"-->
+<!--          ></search-navigator>-->
+<!--        </section>-->
       </app-navbar>
       <router-outlet name="home"></router-outlet>
     </article>

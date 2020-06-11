@@ -13,13 +13,14 @@ export const rootRouterConfig: Routes = [
   { path: '',               component: AccessPage, resolve: [AuthResolver], runGuardsAndResolvers: 'always' },
   { path: 'home',           component: HomePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
-      { path: 'videos',         component: AppVideosComponent,      outlet: 'home'},
-      { path: 'uploads',        component: ProfileUploadsComponent, outlet: 'home' },
+      { path: 'videos',         component: AppVideosComponent,        outlet: 'home'},
+      { path: 'uploads',        component: ProfileUploadsComponent,   outlet: 'home' },
     ]},
   { path: 'profile',        component: ProfilePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
-      { path: 'chat',           component: ProfileChatComponent,    outlet: 'profile' },
-      { path: 'friends',        component: ProfileFriendsComponent, outlet: 'profile' },
+      { path: 'chat',           component: ProfileChatComponent,      outlet: 'profile' },
+      // { path: 'messages',       component: ProfileMessagingComponent, outlet: 'profile'},
+      { path: 'friends',        component: ProfileFriendsComponent,   outlet: 'profile' },
     ]
   },
 ];

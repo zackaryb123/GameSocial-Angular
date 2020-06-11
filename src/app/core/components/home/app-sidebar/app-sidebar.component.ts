@@ -14,6 +14,20 @@ import {AppService} from '../../../services/app/app.service';
       <nav class="navbar navbar-transparent">
         <app-brand></app-brand>
         <app-navigator
+          page="home"
+          iconLink="videos"
+          iconLabel="Clips"
+          iconName="film"
+          [closed]="sidebarToggle$ | async">
+        </app-navigator>
+        <app-navigator
+          page="home"
+          iconLink="uploads"
+          iconLabel="Uploads"
+          iconName="upload"
+          [closed]="sidebarToggle$ | async">
+        </app-navigator>
+        <app-navigator
           iconLink="playlist"
           iconLabel="Playlist"
           iconName="film"
