@@ -18,7 +18,8 @@ import {TrackInfoComponent} from './app-player/track-info/track-info.component';
 import {PlaylistComponent} from './app-sidebar/app-playlist/playlist/playlist.component';
 import {PlaylistTrackComponent} from './app-sidebar/app-playlist/playlist/playlist-track.component';
 import {PlaylistFilterComponent} from './app-sidebar/app-playlist/playlist-filter/playlist-filter.component';
-import {AppPlaylist} from "./app-sidebar/app-playlist/app-playlist";
+import {AppPlaylist} from './app-sidebar/app-playlist/app-playlist';
+import {AppNavigatorComponent} from './app-sidebar/app-navigator/app-navigator.component';
 
 
 export const HOME_COMPONENTS = [
@@ -42,5 +43,6 @@ export const HOME_COMPONENTS = [
   AppPlaylist,
   PlaylistComponent,
   PlaylistTrackComponent,
-  PlaylistFilterComponent
+  PlaylistFilterComponent,
+  AppNavigatorComponent
 ];

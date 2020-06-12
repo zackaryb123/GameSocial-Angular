@@ -10,6 +10,7 @@ import {ProfileFriendsList} from './profile-sidebar/profile-friends/profile-frie
 import {FriendsComponent} from './profile-sidebar/profile-friends/friends/friends.component';
 import {FriendsTrackComponent} from './profile-sidebar/profile-friends/friends/friends-track.component';
 import {FriendsFilterComponent} from './profile-sidebar/profile-friends/friends-filter/friends-filter.component';
+import {ProfileNavigatorComponent} from './profile-sidebar/profile-navigator/profile-navigator.component';
 
 export const PROFILE_COMPONENTS = [
   // PROFILE
@@ -21,6 +22,7 @@ export const PROFILE_COMPONENTS = [
   ProfileChatComponent,
   ProfileFriendsComponent,
   ProfileUploadsComponent,
+  ProfileNavigatorComponent,
   ProfileFriendsList,
   FriendsComponent,
   FriendsTrackComponent,

@@ -20,13 +20,13 @@ import {AppService} from '../../../services/app/app.service';
 <!--        iconName="envelope"-->
 <!--        [closed]="sidebarToggle$ | async">-->
 <!--      </app-navigator>-->
-      <app-navigator
+      <profile-navigator
         page="profile"
         iconLink="friends"
         iconLabel="Friends"
         iconName="users"
         [closed]="sidebarToggle$ | async">
-      </app-navigator>
+      </profile-navigator>
     </nav>
     <profile-friends-list></profile-friends-list>
   </div>

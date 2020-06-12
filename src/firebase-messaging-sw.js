@@ -1,17 +1,15 @@
-import * as firebase from 'firebase/app';
-
-// importScripts('https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js');
-// importScripts('https://www.gstatic.com/firebasejs/7.6.0/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.6.0/firebase-messaging.js');
 
 firebase.initializeApp({
-  apiKey: "from firebase config",
-authDomain: "from firebase config",
-databaseURL: "from firebase config",
-projectId: "from firebase config",
-storageBucket: "from firebase config",
-messagingSenderId: "from firebase config",
-appId: "from firebase config",
-measurementId: "from firebase config"
+  apiKey: 'AIzaSyALcEJyPvQDEb1bZZVGKbveu5woOpxw4hs',
+  authDomain: 'gamesocial-zb.firebaseapp.com',
+  databaseURL: 'https://gamesocial-zb.firebaseio.com',
+  projectId: 'gamesocial-zb',
+  storageBucket: 'gamesocial-zb.appspot.com',
+  messagingSenderId: '659801044712',
+  appId: '1:659801044712:web:e30d41edbeeb46e8aabb5d',
+  measurementId: "from firebase config"
 });
 
 const messaging = firebase.messaging();

@@ -23,6 +23,7 @@ import {AppEffectsModules} from './core/effects';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {CdkTableModule} from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {AngularFireMessagingModule} from "@angular/fire/messaging";
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AngularFireModule.initializeApp(env.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireMessagingModule,
     BrowserAnimationsModule,
     ScrollingModule,
     InfiniteScrollModule,

@@ -5,8 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {IconInterface} from '../../../core/interfaces/common.interface';
-import {AuthService} from '../../../core/services/auth';
+import {AuthService} from "../../../../services/auth";
 
 @Component({
   selector: 'app-navigator',
@@ -14,8 +13,8 @@ import {AuthService} from '../../../core/services/auth';
   template: `
   <div *ngIf="!dropDown" class="list-group" [class.closed]="closed">
       <button class="list-group-item ux-maker"
-        [routerLink]="[{ outlets: { profile : iconLink } }]">
-        <icon [name]="iconLink"></icon>
+        [routerLink]="[{ outlets: { home : iconLink } }]">
+        <icon [name]="iconName"></icon>
         <span class="text">{{ iconLabel }}</span>
       </button>
   </div>
