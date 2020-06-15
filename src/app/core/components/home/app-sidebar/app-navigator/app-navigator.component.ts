@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {AuthService} from "../../../../services/auth";
+import {AuthService} from '../../../../services/auth';
 
 @Component({
   selector: 'app-navigator',

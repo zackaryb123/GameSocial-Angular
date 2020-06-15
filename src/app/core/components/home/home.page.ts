@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
     private appService: AppService,
     private authService: AuthService,
     private router: Router,
-    public afAuth: AngularFireAuth,
   ) {
   }
 

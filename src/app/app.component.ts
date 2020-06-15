@@ -3,6 +3,7 @@ import {GameSocialState} from './core/store/reducers';
 import {select, Store} from '@ngrx/store';
 import {PresenceService} from './core/services/presence/presence.service';
 import {MessagingService} from './core/services/messaging/messaging.service';
+import {AuthService} from './core/services/auth';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,13 @@ export class AppComponent implements OnInit {
   message;
 
   constructor(
+    public afAuth: AuthService,
     public presence: PresenceService,
     private store: Store<GameSocialState>,
     private msgService: MessagingService
   ) {
-    this.msgService.requestPermission()
-    this.msgService.receiveMessage()
+    this.msgService.requestPermission();
+    this.msgService.receiveMessage();
     this.message = this.msgService.currentMessage;
   }
 

@@ -83,6 +83,11 @@
       top: 6rem;
       right: 0;
       margin-right: 12px;
+      .btn-group {
+        .text-info {
+          margin-right: 2rem;
+        }
+      }
     }
 
     .track-info {

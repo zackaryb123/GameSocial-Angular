@@ -5,6 +5,7 @@ import {PlaylistService} from './playlist/playlist.service';
 import {PlayerService} from './player/player.service';
 import {FriendsService} from './friends/friends.service';
 import {MessagingService} from './messaging/messaging.service';
+import {ChatService} from './chat/chat.service';
 
 export const SERVICES = [
   AuthGuard,
@@ -16,5 +17,6 @@ export const SERVICES = [
   PlaylistService,
   FriendsService,
   PlayerService,
-  MessagingService
+  MessagingService,
+  ChatService
 ];

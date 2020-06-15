@@ -2,13 +2,39 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+import {Observable, of} from 'rxjs';
+import {first, switchMap} from 'rxjs/operators';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
+  user$: Observable<any>;
+
   constructor(
-   public afAuth: AngularFireAuth
-  ) { }
+   private afAuth: AngularFireAuth,
+   private afStore: AngularFirestore,
+   private router: Router
+  ) {
+    this.user$ = this.afAuth.user.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afStore.doc<any>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
+
+  getUser() {
+    return this.user$.pipe(first()).toPromise();
+  }
+
+  getAuth() {
+    return this.afAuth.user.pipe(first()).toPromise();
+  }
 
   doFacebookLogin() {
     return new Promise<any>((resolve, reject) => {

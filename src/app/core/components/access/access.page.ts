@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 
@@ -40,7 +39,6 @@ export class AccessPage implements OnInit {
 
   constructor(
     private router: Router,
-    public afAuth: AngularFireAuth,
   ) {
   }
 

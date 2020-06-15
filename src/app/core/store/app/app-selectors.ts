@@ -19,3 +19,9 @@ export const getShowModal = createSelector(
   (appStore: IAppStore) => appStore.showModal
 );
 
+export const getChatId = createSelector(
+  getAppStore,
+  (appStore: IAppStore) => appStore.chatId
+);
+
+

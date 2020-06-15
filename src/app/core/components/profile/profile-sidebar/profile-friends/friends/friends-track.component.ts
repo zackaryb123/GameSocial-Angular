@@ -9,7 +9,10 @@ import {
 } from '@angular/core';
 import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
 import {PresenceService} from '../../../../../services/presence/presence.service';
-import {AppService} from "../../../../../services/app/app.service";
+import {AppService} from '../../../../../services/app/app.service';
+import {AuthService} from '../../../../../services/auth';
+import {ChatService} from '../../../../../services/chat/chat.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'friends-track',
@@ -38,11 +41,19 @@ import {AppService} from "../../../../../services/app/app.service";
           title="Album Track - click to select cued tracks">
           <icon name="list-ul"></icon>
         </button>
-        <button class="btn btn-transparent text-info playlist-track"
-          (click)="toggleInfo()"
-          title="More information for this media">
-          <icon name="info-circle"></icon>
-        </button>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button class="btn btn-transparent text-info playlist-track"
+                  [routerLink]="[{outlets: { profile: 'chat' }}]"
+                  (click)="chat()"
+                  title="More information for this media">
+            <icon name="comments"></icon>
+          </button>
+          <button class="btn btn-transparent text-info playlist-track"
+            (click)="toggleInfo()"
+            title="More information for this media">
+            <icon name="info-circle"></icon>
+          </button>
+        </div>
       </section>
       <div class="btn btn-transparent text-danger ux-maker remove-track" title="Remove From Playlist"
         (click)="remove.emit(friend)">
@@ -94,7 +105,10 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
 
   constructor(
     private presence: PresenceService,
-    private appService: AppService
+    private appService: AppService,
+    private authService: AuthService,
+    private chatService: ChatService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -149,5 +163,9 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
   toggleInfo() {
     this.displayInfo = !this.displayInfo;
     return this.displayInfo;
+  }
+
+  chat() {
+    return this.chatService.start(this.friend.uid);
   }
 }

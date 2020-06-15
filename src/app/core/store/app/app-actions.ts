@@ -7,12 +7,14 @@ export class AppActionTypes {
   static SHOW_MODAL = '[APP] SHOW_MODAL';
   static CLOSE_MODAL = '[APP] CLOSE_MODAL';
   static UPDATE_SEARCH_QUERY = '[APP] UPDATE_SEARCH_QUERY';
+  static SET_CHAT_ID = '[APP] SET_CHAT_ID';
 }
 
 export interface IAppAction {
   type: any;
   payload?: any;
   media?: any;
+  id?: any;
 }
 
 export class ToggleSidebar implements Action {
@@ -32,4 +34,9 @@ export class CloseModal {
 export class UpdateSearchQuery implements Action {
   public type = AppActionTypes.UPDATE_SEARCH_QUERY;
   constructor(public payload: string) {}
+}
+
+export class SetChatId implements Action {
+  public type = AppActionTypes.SET_CHAT_ID;
+  constructor(public id: string) {}
 }

@@ -2,6 +2,7 @@ import {migrateReducerState} from '../store.utils';
 import {AppActionTypes, IAppAction} from './app-actions';
 
 export interface IAppStore {
+  chatId: string;
   sidebarToggle: boolean;
   searchQuery: string;
   showModal: {
@@ -11,6 +12,7 @@ export interface IAppStore {
   };
 }
 const newInitialState: IAppStore = {
+  chatId: '',
   sidebarToggle: true,
   searchQuery: '',
   showModal: {
@@ -31,6 +33,8 @@ export function appStore(
   action: IAppAction
 ): IAppStore {
   switch (action.type) {
+    case AppActionTypes.SET_CHAT_ID:
+      return { ...state, chatId: action.id }
     case AppActionTypes.UPDATE_SEARCH_QUERY:
       return { ...state, searchQuery: action.payload };
 

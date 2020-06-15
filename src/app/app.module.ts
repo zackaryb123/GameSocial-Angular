@@ -6,7 +6,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { env } from '../environments/environment';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -23,7 +23,8 @@ import {AppEffectsModules} from './core/effects';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {CdkTableModule} from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import {AngularFireMessagingModule} from "@angular/fire/messaging";
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {AngularFireMessagingModule} from "@angular/fire/messaging";
   imports: [
     AppStoreModule,
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     AppEffectsModules,
     NgbModule,
@@ -48,6 +50,7 @@ import {AngularFireMessagingModule} from "@angular/fire/messaging";
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireMessagingModule,
+    AngularFireDatabaseModule,
     BrowserAnimationsModule,
     ScrollingModule,
     InfiniteScrollModule,
