@@ -8,8 +8,9 @@ export interface IChat {
 }
 
 export interface IMessage {
-  message: string;
-  timeStamp: number;
+  uid?: string;
+  message?: string;
+  timeStamp?: number;
 }
 
 export class ChatModel implements Serializable, Deserializable, IChat  {
