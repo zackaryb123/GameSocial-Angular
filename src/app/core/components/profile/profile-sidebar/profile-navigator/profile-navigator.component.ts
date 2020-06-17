@@ -5,7 +5,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {AuthService} from '../../../../services/auth';
 
 @Component({
   selector: 'profile-navigator',
@@ -50,8 +49,6 @@ export class ProfileNavigatorComponent implements OnInit {
   // public searchType$ = this.store.select(PlayerSearch.getSearchType);
 
   constructor(
-    // private store: Store<EchoesState>,
-    private authService: AuthService,
     private router: Router,
   ) {
   }

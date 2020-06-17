@@ -32,6 +32,8 @@ export function friendsStore(
   action: IFriendsAction
 ): IFriendsStore {
   switch (action.type) {
+    case FriendsActionTypes.WATCH:
+      return { ...state, friends: action.friends };
     case FriendsActionTypes.SELECT:
       return { ...state, selectedFriendId: action.friend.uid };
     case FriendsActionTypes.ADD:

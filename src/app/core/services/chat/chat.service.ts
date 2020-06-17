@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { firestore } from 'firebase/app';
-import { map, switchMap } from 'rxjs/operators';
-import {AuthService} from '../auth';
+import {first, map, switchMap} from 'rxjs/operators';
 import {IMessage, MessageModel} from '../../models/chat.model';
 import {AppService} from '../app/app.service';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 
 @Injectable({
@@ -14,7 +14,7 @@ import {AppService} from '../app/app.service';
 export class ChatService {
   constructor(
     private afStore: AngularFirestore,
-    private authService: AuthService,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private appService: AppService
   ) {}
@@ -23,17 +23,17 @@ export class ChatService {
     return this.afStore
       .collection<any>('chats')
       .doc(chatId)
-      .snapshotChanges()
+      .valueChanges()
       .pipe(
         map((doc: any) => {
-          return { id: doc.payload.id, ...doc.payload.data() };
+          return doc;
+          // return { id: doc.payload.id, ...doc.payload.data() };
         })
       );
   }
 
   async start(friendId) {
-    // const { uid } = await this.authService.getUser();
-    const {uid} = await this.authService.getAuth();
+    const {uid} = await this.afAuth.user.pipe(first()).toPromise();
     const chatId = this.createChatId(uid, friendId);
     this.appService.setChatId(chatId);
 
@@ -56,12 +56,10 @@ export class ChatService {
         }
       }
     );
-
-    // this.router.navigate([{outlets: {profile: 'chat'}}]);
   }
 
   async sendMessage(chatId, message) {
-    const {uid} = await this.authService.getAuth();
+    const {uid} = await this.afAuth.user.pipe(first()).toPromise();
     const data: IMessage = {
       uid,
       message,

@@ -33,7 +33,7 @@ import {AppService} from '../../../../../services/app/app.service';
       (cdkDropListDropped)="onFriendDrop($event)"
       [cdkDropListLockAxis]="'y'">
       <li class="now-playlist-track" #friendsTrack cdkDrag
-        *ngFor="let friend of friends.friends | search:friends.filter; let index = index"
+        *ngFor="let friend of friends; let index = index"
         [class.active]="isActiveFriend(friend.uid, friendsTrack)"
         [@flyOut]>
         <friends-track
@@ -50,6 +50,7 @@ import {AppService} from '../../../../../services/app/app.service';
 })
 export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() friends: any;
+  @Input() filter: any;
 
   @Output() select = new EventEmitter<any>();
   @Output()
@@ -71,7 +72,6 @@ export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.friends: ', this.friends);
   }
 
   ngAfterViewChecked() {
@@ -122,6 +122,6 @@ export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   get isFriendsEmpty() {
-    return this.friends.length === 0;
+    return this.friends === null || this.friends.length === 0;
   }
 }

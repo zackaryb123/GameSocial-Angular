@@ -39,7 +39,7 @@ import {AppService} from '../../../../../services/app/app.service';
 <!--        *ngIf="!isFilterEmpty()"-->
 <!--        (click)="resetSearchFilter()"></icon>-->
       <input type="search" name="playlist-search"
-        [value]="friends.filter"
+        [value]="filter"
         #searchFilter
         (input)="handleFilterChange(searchFilter.value)">
     </div>
@@ -49,11 +49,12 @@ import {AppService} from '../../../../../services/app/app.service';
 })
 export class FriendsFilterComponent implements OnInit {
   @Input() friends: any;
+  @Input() filter: any;
 
   sidebarToggle$ = this.appService.sidebarToggle$;
   // @Output() save = new EventEmitter();
   @Output() clear = new EventEmitter();
-  @Output() filter = new EventEmitter();
+  @Output() updateFilter = new EventEmitter();
   @Output() reset = new EventEmitter();
   @Output() headerClick = new EventEmitter();
 
@@ -63,10 +64,6 @@ export class FriendsFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.friends);
-    this.sidebarToggle$.subscribe(data => {
-      console.log(data);
-    });
   }
 
   handleFilterChange(searchFilter: string) {

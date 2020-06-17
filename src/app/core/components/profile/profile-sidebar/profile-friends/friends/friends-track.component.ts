@@ -10,7 +10,6 @@ import {
 import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
 import {PresenceService} from '../../../../../services/presence/presence.service';
 import {AppService} from '../../../../../services/app/app.service';
-import {AuthService} from '../../../../../services/auth';
 import {ChatService} from '../../../../../services/chat/chat.service';
 import {Router} from '@angular/router';
 
@@ -31,7 +30,7 @@ import {Router} from '@angular/router';
         </span>
       </section>
 
-      <section class="video-title" (click)="markSelected(friend)" [title]="friend.fname + ' ' + friend.lname">Zack Blaylock</section>
+      <section class="video-title" (click)="markSelected(friend)" [title]="friend.fname + ' ' + friend.lname">{{friend.fname}} {{friend.lname}}</section>
     </div>
     <aside class="playlist-track__content">
       <section class="track-actions">
@@ -76,7 +75,7 @@ import {Router} from '@angular/router';
       </button>
     </article>
     <article [@flyOut] *ngIf="displayInfo" class="track-info">
-      {{ friend.bio }}
+<!--      {{ friend.bio }}-->
     </article>
   </div>
   `,
@@ -104,9 +103,8 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
   private parsedTracks = false;
 
   constructor(
-    private presence: PresenceService,
+    public presence: PresenceService,
     private appService: AppService,
-    private authService: AuthService,
     private chatService: ChatService,
     private router: Router,
   ) {}

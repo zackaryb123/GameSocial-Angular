@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class FriendsActionTypes {
+  static WATCH = '[FRIENDS] WATCH';
   static ADD = '[FRIENDS] ADD';
   static SELECT = '[FRIENDS] SELECT';
   static REMOVE = '[FRIENDS] REMOVE';
@@ -16,6 +17,12 @@ export interface IFriendsAction {
   friendId?: any;
   filter?: any;
 }
+
+export class WatchFriends implements Action {
+  public type = FriendsActionTypes.WATCH;
+  constructor(public freinds: any) {}
+}
+
 export class AddFriend implements Action {
   public type = FriendsActionTypes.ADD;
   constructor(

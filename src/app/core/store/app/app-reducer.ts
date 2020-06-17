@@ -10,6 +10,7 @@ export interface IAppStore {
     media: any;
     status: 'loading' | 'none'
   };
+  filter: string;
 }
 const newInitialState: IAppStore = {
   chatId: '',
@@ -19,7 +20,8 @@ const newInitialState: IAppStore = {
     addToPlaylist: false,
     media: undefined,
     status: 'none'
-  }
+  },
+  filter: ''
 };
 
 const initialState: IAppStore = migrateReducerState(
@@ -34,7 +36,9 @@ export function appStore(
 ): IAppStore {
   switch (action.type) {
     case AppActionTypes.SET_CHAT_ID:
-      return { ...state, chatId: action.id }
+      return { ...state, chatId: action.id };
+    case AppActionTypes.UPDATE_FILTER:
+      return { ...state, filter: action.filter };
     case AppActionTypes.UPDATE_SEARCH_QUERY:
       return { ...state, searchQuery: action.payload };
 

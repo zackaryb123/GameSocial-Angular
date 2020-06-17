@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import {Observable, of} from 'rxjs';
 import {first, switchMap} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
@@ -10,30 +9,25 @@ import {Router} from '@angular/router';
 @Injectable()
 export class AuthService {
 
-  user$: Observable<any>;
-
   constructor(
    private afAuth: AngularFireAuth,
    private afStore: AngularFirestore,
    private router: Router
   ) {
-    this.user$ = this.afAuth.user.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afStore.doc<any>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
-
-  getUser() {
-    return this.user$.pipe(first()).toPromise();
   }
 
   getAuth() {
     return this.afAuth.user.pipe(first()).toPromise();
+  }
+
+  async getAuthUser() {
+    const {uid} = await this.getAuth();
+    return this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise();
+  }
+
+  async getAuthFriends() {
+    const {uid} = await this.getAuth();
+    return this.afStore.collection('user').doc(uid).collection('friends').get().pipe();
   }
 
   doFacebookLogin() {
@@ -92,7 +86,9 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(value.email, value.password)
       // firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-      .then(res => {
+      .then(async res => {
+        const user = await this.afStore.collection('users').doc(res.user.uid).get();
+        console.log('user: ', user);
         resolve(res);
       }, err => reject(err));
     });

@@ -50,8 +50,6 @@ export class AppNavigatorComponent implements OnInit {
   // public searchType$ = this.store.select(PlayerSearch.getSearchType);
 
   constructor(
-    // private store: Store<EchoesState>,
-    private authService: AuthService,
     private router: Router,
   ) {
   }

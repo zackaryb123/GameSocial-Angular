@@ -8,10 +8,8 @@ import {
   HostListener
 } from '@angular/core';
 import {expandFadeInAnimation} from '../../../../../shared/animations/fade-in.animation';
-import {ICON_PREFIX_BRAND} from '../../../../../shared/directives/icon';
-import {AuthService} from '../../../../services/auth';
 import {Router} from '@angular/router';
-import {PresenceService} from "../../../../services/presence/presence.service";
+import {PresenceService} from '../../../../services/presence/presence.service';
 
 enum Key {
   Backspace = 8,
@@ -82,7 +80,6 @@ export class AppNavbarMenuComponent implements OnInit {
   }
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private presenceService: PresenceService
   ) { }

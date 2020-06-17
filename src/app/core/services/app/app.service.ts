@@ -2,7 +2,7 @@ import {Store} from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import * as AppStore from '../../store/app';
 import {GameSocialState} from '../../store/reducers';
-import {getChatId, getSearchQuery, getShowModal, getSidebarToggle} from '../../store/app';
+import {getChatId, getFilter, getSearchQuery, getShowModal, getSidebarToggle} from '../../store/app';
 
 @Injectable()
 export class AppService {
@@ -10,6 +10,7 @@ export class AppService {
   searchQuery$ = this.store.select(getSearchQuery);
   showModal$ = this.store.select(getShowModal);
   chatId$ = this.store.select(getChatId);
+  filter$ = this.store.select(getFilter);
 
   constructor(private store: Store<GameSocialState>) {}
 

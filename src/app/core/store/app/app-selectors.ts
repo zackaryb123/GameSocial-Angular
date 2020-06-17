@@ -24,4 +24,9 @@ export const getChatId = createSelector(
   (appStore: IAppStore) => appStore.chatId
 );
 
+export const getFilter = createSelector(
+  getAppStore,
+  (appStore: IAppStore) => appStore.filter
+);
+
 

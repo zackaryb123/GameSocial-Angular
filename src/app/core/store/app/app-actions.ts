@@ -8,6 +8,7 @@ export class AppActionTypes {
   static CLOSE_MODAL = '[APP] CLOSE_MODAL';
   static UPDATE_SEARCH_QUERY = '[APP] UPDATE_SEARCH_QUERY';
   static SET_CHAT_ID = '[APP] SET_CHAT_ID';
+  static UPDATE_FILTER = '[APP] UPDATE_FILTER';
 }
 
 export interface IAppAction {
@@ -15,6 +16,7 @@ export interface IAppAction {
   payload?: any;
   media?: any;
   id?: any;
+  filter?: any;
 }
 
 export class ToggleSidebar implements Action {
@@ -39,4 +41,9 @@ export class UpdateSearchQuery implements Action {
 export class SetChatId implements Action {
   public type = AppActionTypes.SET_CHAT_ID;
   constructor(public id: string) {}
+}
+
+export class UpdateFilter implements Action {
+  public type = AppActionTypes.UPDATE_FILTER;
+  constructor(public filter: string) {}
 }
