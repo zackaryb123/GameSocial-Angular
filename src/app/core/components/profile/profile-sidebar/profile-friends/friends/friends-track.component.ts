@@ -11,7 +11,8 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
 import {PresenceService} from '../../../../../services/presence/presence.service';
 import {AppService} from '../../../../../services/app/app.service';
 import {ChatService} from '../../../../../services/chat/chat.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../../../../services/auth';
 
 @Component({
   selector: 'friends-track',
@@ -29,7 +30,6 @@ import {Router} from '@angular/router';
           pr0Xt0Xtype18
         </span>
       </section>
-
       <section class="video-title" (click)="markSelected(friend)" [title]="friend.fname + ' ' + friend.lname">{{friend.fname}} {{friend.lname}}</section>
     </div>
     <aside class="playlist-track__content">
@@ -41,9 +41,9 @@ import {Router} from '@angular/router';
           <icon name="list-ul"></icon>
         </button>
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button class="btn btn-transparent text-info playlist-track"
-                  [routerLink]="[{outlets: { profile: 'chat' }}]"
-                  (click)="chat()"
+<!--          [routerLink]="[{outlets: { chat: chatId }}]"-->
+          <button *ngIf="chatId" class="btn btn-transparent text-info playlist-track"
+                  (click)="chat(chatId)"
                   title="More information for this media">
             <icon name="comments"></icon>
           </button>
@@ -85,6 +85,7 @@ import {Router} from '@angular/router';
 export class FriendsTrackComponent implements OnInit, AfterContentInit {
   @Input() friend;
 
+  chatId: string;
   sidebarToggle$ = this.appService.sidebarToggle$;
 
   @Output() remove = new EventEmitter<any>();
@@ -103,14 +104,18 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
   private parsedTracks = false;
 
   constructor(
+    private authService: AuthService,
     public presence: PresenceService,
     private appService: AppService,
     private chatService: ChatService,
     private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.presence$ = this.presence.getPresence(this.friend.uid);
+    const {uid} = await this.authService.getAuth();
+    this.chatId = this.chatService.createChatId(uid, this.friend.uid);
   }
 
   ngAfterContentInit() {
@@ -163,7 +168,8 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
     return this.displayInfo;
   }
 
-  chat() {
-    return this.chatService.start(this.friend.uid);
+  chat(chatId: string) {
+    this.chatService.start(this.friend.uid, chatId);
+    return this.router.navigate([{outlets: { chat: chatId }}], {relativeTo: this.route});
   }
 }

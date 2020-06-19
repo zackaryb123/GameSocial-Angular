@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ChatService} from '../../../services/chat/chat.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -8,7 +8,9 @@ import {first} from 'rxjs/operators';
 @Component({
   selector: 'profile-chat',
   templateUrl: './profile-chat.component.html',
-  styleUrls: ['./profile-chat.component.scss']
+  styleUrls: ['./profile-chat.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class ProfileChatComponent implements OnInit, OnChanges {
   chat$: Observable<any>;
@@ -23,18 +25,18 @@ export class ProfileChatComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    // const chatId = this.route.snapshot.paramMap.get('id');
-    this.chatId$.pipe(first()).subscribe(id => {
-      this.chatId = id;
-      this.chat$ = this.chatService.get(id);
+    this.route.params.subscribe(routeParams => {
+      if (routeParams) {
+        this.chatId = routeParams.uid;
+        this.chat$ = this.chatService.get(routeParams.uid);
+      }
     });
+    // const chatId = this.route.snapshot.paramMap.get('uid');
+    // this.chat$ = this.chatService.get(chatId);
     // this.chat$ = this.chatService.joinUsers(source);
   }
 
   ngOnChanges({chat$}: SimpleChanges): void {
-    if (chat$) {
-      console.log(chat$);
-    }
   }
 
   submit() {

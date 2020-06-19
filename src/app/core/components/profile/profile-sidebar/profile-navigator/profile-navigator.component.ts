@@ -12,7 +12,7 @@ import {
   template: `
   <div *ngIf="!dropDown" class="list-group" [class.closed]="closed">
       <button class="list-group-item ux-maker"
-        [routerLink]="[{ outlets: { profile : iconLink } }]">
+        [routerLink]="[{ outlets: { user : iconLink } }]">
         <icon [name]="iconName"></icon>
         <span class="text">{{ iconLabel }}</span>
       </button>

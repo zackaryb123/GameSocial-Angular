@@ -18,9 +18,9 @@ export const rootRouterConfig: Routes = [
     ]},
   { path: 'profile',        component: ProfilePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
-      { path: 'chat',       component: ProfileChatComponent,      outlet: 'profile' },
+      { path: ':uid',           component: ProfileChatComponent,      outlet: 'chat' },
       // { path: 'messages',       component: ProfileMessagingComponent, outlet: 'profile'},
-      { path: 'friends',        component: ProfileFriendsComponent,   outlet: 'profile' },
+      { path: '',               component: ProfileFriendsComponent,   outlet: 'user' },
     ]
   },
 ];

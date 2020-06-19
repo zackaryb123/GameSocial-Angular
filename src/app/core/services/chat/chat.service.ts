@@ -32,9 +32,11 @@ export class ChatService {
       );
   }
 
-  async start(friendId) {
+  async start(friendId, chatId) {
+    console.log('friendId: ', friendId);
+    console.log('chatId: ', chatId);
     const {uid} = await this.afAuth.user.pipe(first()).toPromise();
-    const chatId = this.createChatId(uid, friendId);
+    // const chatId = this.createChatId(uid, friendId);
     this.appService.setChatId(chatId);
 
     const data = {

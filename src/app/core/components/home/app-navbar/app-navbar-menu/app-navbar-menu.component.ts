@@ -39,7 +39,7 @@ enum Key {
       >
       <div class="list-group">
         <a class="list-group-item navbar-action-link"
-        [routerLink]="['/profile']">
+        [routerLink]="['/profile',{ chat: '' }]">
           <icon name="user"></icon> Profile
         </a>
         <button class="list-group-item"
