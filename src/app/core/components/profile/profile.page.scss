@@ -26,6 +26,28 @@ article {
     transition: margin 0.3s ease-out;
     margin-left: 0;
   }
+
+  article {
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  article::-webkit-scrollbar {
+    width: .5rem;
+  }
+
+  article::-webkit-scrollbar-track {
+    //box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    //border-radius: 10px;
+    background-color: #263238;
+  }
+
+  article::-webkit-scrollbar-thumb {
+    background-color: cornflowerblue;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+  }
 }
 
 @media (min-width: 768px) {

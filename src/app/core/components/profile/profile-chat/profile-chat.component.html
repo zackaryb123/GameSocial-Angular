@@ -1,33 +1,84 @@
 <ng-container *ngIf="chat$ | async as chat">
 
-  <div class="top">
-    <p>
-      https://firestore-megachat.firebaseapp.com/chats/{{ chat.id }}
-    </p>
+  <div class="column col-12 pl-md-3 pr-md-3 px-lg-auto px-0">
+  <div class="chat-message">
+    <ul class="list-unstyled chat-1 scrollbar-light-blue">
+      <li class="d-flex justify-content-end mb-4">
+        <div class="chat-body white p-3 z-depth-1">
+          <div class="header">
+            <strong class="primary-font">Lara Croft</strong>
+            <small class="pull-right text-muted"><i class="far fa-clock"></i> 13 mins ago</small>
+          </div>
+          <hr class="m-1 w-100">
+          <p class="mb-0 chat-text">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+            laudantiumgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg.
+          </p>
+        </div>
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
+      </li>
+      <li *ngFor="let msg of chat.messages; trackBy: trackByCreated" class="d-flex justify-content-start mb-4">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
+        <div class="chat-body white p-3 ml-2 z-depth-1">
+          <div class="header">
+            <strong class="chat-name primary-font">fname lname</strong>
+            <small class="pull-right text-muted"><i class="far fa-clock"></i>{{msg.timeStamp | dateAgo}}</small>
+          </div>
+          <hr class="m-1 w-100">
+          <p class="mb-0">
+            {{msg.message}}
+          </p>
+        </div>
+      </li>
+      <li class="d-flex justify-content-end mb-4">
+        <div class="chat-body white p-3 z-depth-1">
+          <div class="header">
+            <strong class="primary-font">Lara Croft</strong>
+            <small class="pull-right text-muted"><i class="far fa-clock"></i> 13 mins ago</small>
+          </div>
+          <hr class="m-1 w-100">
+          <p class="mb-0">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+            laudantium.
+          </p>
+        </div>
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
+      </li>
+    </ul>
+<!--    <div class="white">-->
+<!--      <div class="form-group basic-textarea">-->
+<!--        <textarea [(ngModel)]="newMsg" (keydown.enter)="submit()" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..."></textarea>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <button (click)="submit()" type="button" class="btn btn-outline-pink btn-rounded btn-sm waves-effect waves-dark float-right">Send</button>-->
+
+  </div>
   </div>
 
-
-  <div class="chat">
-
-
-    <div class="msg" *ngFor="let msg of chat.messages; trackBy: trackByCreated">
-
-      <div class="user">
-        <img style="max-width: 5rem;"
-          srcset="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png 1x, https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png 1.778x">
-        <div style="color: ghostwhite;"><span>Zack Blay</span></div>
+    <div class="form">
+      <div class="form__group field">
+        <input [(ngModel)]="newMsg" (keydown.enter)="submit()" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+        <label for="name" class="form__label"><icon class="send-icon" name="send"></icon></label>
       </div>
-
-      <p style="color: ghostwhite;">{{ msg.message }}</p>
-
+      <button [disabled]="!newMsg" (click)="submit()" class="btn btn-outline-pink btn-rounded btn-sm waves-effect chat-button" type="button">
+        <span class="text">Send</span>
+<!--        <icon name="send"></icon>-->
+      </button>
     </div>
 
-  </div>
-
-  <div class="form">
-    <input [(ngModel)]="newMsg" (keydown.enter)="submit()">
-
-    <button (click)="submit()">Send</button>
-  </div>
+<!--  <div class="chat">-->
+<!--    <div class="msg" *ngFor="let msg of chat.messages; trackBy: trackByCreated">-->
+<!--      <div class="user">-->
+<!--        <img style="max-width: 5rem;"-->
+<!--          srcset="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png 1x, https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png 1.778x">-->
+<!--        <div style="color: ghostwhite;"><span>Zack Blay</span></div>-->
+<!--      </div>-->
+<!--      <p style="color: ghostwhite;">{{ msg.message }}</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="form">-->
+<!--    <input [(ngModel)]="newMsg" (keydown.enter)="submit()">-->
+<!--    <button (click)="submit()">Send</button>-->
+<!--  </div>-->
 
 </ng-container>

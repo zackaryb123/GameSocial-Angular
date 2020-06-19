@@ -43,6 +43,10 @@ export class ProfileChatComponent implements OnInit, OnChanges {
   }
 
   trackByCreated(i, msg) {
-    return msg.createdAt;
+    return msg.timeStamp;
+  }
+
+  trackByUid(i, user) {
+    return user.uid;
   }
 }

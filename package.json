@@ -31,7 +31,7 @@
     "core-js": "^2.6.11",
     "firebase": "^7.14.2",
     "firebase-admin": "^8.12.1",
-    "firebase-functions": "^3.6.2",
+    "firebase-functions": "^3.7.0",
     "lodash": "^4.17.15",
     "memo-decorator": "^2.0.1",
     "ngrx-store-localstorage": "^9.0.0",
