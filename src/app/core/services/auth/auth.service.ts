@@ -5,15 +5,44 @@ import * as firebase from 'firebase/app';
 import {first, switchMap} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {User} from 'firebase';
 
 @Injectable()
 export class AuthService {
+
+  authUser: Observable<User>;
 
   constructor(
    private afAuth: AngularFireAuth,
    private afStore: AngularFirestore,
    private router: Router
   ) {
+    this.watchAuthUser();
+  }
+
+  watchAuthUser() {
+    this.authUser = this.afAuth.user.pipe(
+      switchMap( (auth) => {
+        if (auth) {
+          return this.afStore.collection('users').doc(auth.uid).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
+
+  onAuthStateChanged() {
+    return new Promise<any>((resolve, reject) => {
+      return this.afAuth.onAuthStateChanged((user) => {
+        if (user) {
+          resolve(user);
+        } else {
+          reject('No user logged in');
+        }
+      });
+    });
   }
 
   getAuth() {
@@ -22,12 +51,9 @@ export class AuthService {
 
   async getAuthUser() {
     const {uid} = await this.getAuth();
-    return this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise();
-  }
-
-  async getAuthFriends() {
-    const {uid} = await this.getAuth();
-    return this.afStore.collection('user').doc(uid).collection('friends').get().pipe();
+    return await this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise().then(data =>{
+      return data.data();
+    });
   }
 
   doFacebookLogin() {

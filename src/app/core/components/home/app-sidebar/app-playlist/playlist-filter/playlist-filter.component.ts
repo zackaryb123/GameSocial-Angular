@@ -7,6 +7,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {AppService} from '../../../../../services/app/app.service';
+import {distinctUntilChanged, takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 // import * as NowPlaylist from '@store/playlist';
 
 @Component({
@@ -49,7 +51,7 @@ import {AppService} from '../../../../../services/app/app.service';
 })
 export class PlaylistFilterComponent implements OnInit {
   @Input() playlist: any;
-
+  private unsubscribe$: Subject<boolean> = new Subject<boolean>();
   sidebarToggle$ = this.appService.sidebarToggle$
   // @Output() save = new EventEmitter();
   @Output() clear = new EventEmitter();
@@ -63,9 +65,11 @@ export class PlaylistFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sidebarToggle$.subscribe(data => {
-      console.log(data);
-    });
+    // this.sidebarToggle$
+    //   .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+    //   .subscribe(data => {
+    //   console.log(data);
+    // });
   }
 
   handleFilterChange(searchFilter: string) {

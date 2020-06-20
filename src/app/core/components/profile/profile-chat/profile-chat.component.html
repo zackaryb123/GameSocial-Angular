@@ -1,48 +1,24 @@
-<ng-container *ngIf="chat$ | async as chat">
+<ng-container *ngIf="altUser && authUser && chat$ | async as chat">
 
   <div class="column col-12 pl-md-3 pr-md-3 px-lg-auto px-0">
   <div class="chat-message">
     <ul class="list-unstyled chat-1 scrollbar-light-blue">
-      <li class="d-flex justify-content-end mb-4">
-        <div class="chat-body white p-3 z-depth-1">
-          <div class="header">
-            <strong class="primary-font">Lara Croft</strong>
-            <small class="pull-right text-muted"><i class="far fa-clock"></i> 13 mins ago</small>
-          </div>
-          <hr class="m-1 w-100">
-          <p class="mb-0 chat-text">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-            laudantiumgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg.
-          </p>
-        </div>
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
-      </li>
-      <li *ngFor="let msg of chat.messages; trackBy: trackByCreated" class="d-flex justify-content-start mb-4">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
+      <li *ngFor="let msg of chat.messages; trackBy: trackByCreated"
+          [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
+          class="d-flex mb-4">
+        <img *ngIf="isAuthUser(msg.uid)" [src]="authUser.avatar" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
         <div class="chat-body white p-3 ml-2 z-depth-1">
           <div class="header">
-            <strong class="chat-name primary-font">fname lname</strong>
+            <strong *ngIf="isAuthUser(msg.uid)" class="chat-name primary-font">{{authUser.fname}} {{authUser.lname}}</strong>
+            <strong *ngIf="!isAuthUser(msg.uid)" class="chat-name primary-font">{{altUser.fname}} {{altUser.lname}}</strong>
             <small class="pull-right text-muted"><i class="far fa-clock"></i>{{msg.timeStamp | dateAgo}}</small>
           </div>
           <hr class="m-1 w-100">
-          <p class="mb-0">
+          <p class="chat-text mb-0">
             {{msg.message}}
           </p>
         </div>
-      </li>
-      <li class="d-flex justify-content-end mb-4">
-        <div class="chat-body white p-3 z-depth-1">
-          <div class="header">
-            <strong class="primary-font">Lara Croft</strong>
-            <small class="pull-right text-muted"><i class="far fa-clock"></i> 13 mins ago</small>
-          </div>
-          <hr class="m-1 w-100">
-          <p class="mb-0">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-            laudantium.
-          </p>
-        </div>
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
+        <img *ngIf="!isAuthUser(msg.uid)" [src]="altUser.avatar" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
       </li>
     </ul>
 <!--    <div class="white">-->

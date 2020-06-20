@@ -13,6 +13,13 @@ body {
   overflow-y: scroll;
 }
 
+button {
+  //&:focus {
+  //  outline: 0 !important;
+  //  box-shadow: none !important;
+  //}
+}
+
 //html::-webkit-scrollbar {
 //  width: .5rem;
 //}

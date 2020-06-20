@@ -22,7 +22,12 @@ button {
       box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
       .img-rounded {
         padding: .5rem;
-        border-radius: 20px;
+        //border-radius: 20px;
+        //or
+        max-height: 15rem;
+        max-width: 15rem;
+        border-radius: 1rem;
+        margin: auto;
       }
       .card-body {
         //background: rgba(10, 10, 10, 0.2);
