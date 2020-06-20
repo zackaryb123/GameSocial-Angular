@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {AppService} from '../../../services/app/app.service';
+import {AppService} from '../../../../services/app/app.service';
 import {Store} from '@ngrx/store';
-import {GameSocialState} from '../../../store/reducers';
+import {GameSocialState} from '../../../../store/reducers';
 
 
 @Component({

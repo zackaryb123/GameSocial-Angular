@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {GameSocialState} from '../../../../store/reducers';
-import {AppService} from '../../../../services/app/app.service';
+import {GameSocialState} from '../../../store/reducers';
+import {AppService} from '../../../services/app/app.service';
 
 // actions
 // import * as fromPlayerSearch from '@core/store/player-profile';

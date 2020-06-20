@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {AppService} from '../../../services/app/app.service';
-import {AuthService} from '../../../services/auth';
+import {AppService} from '../../../../services/app/app.service';
+import {AuthService} from '../../../../services/auth';
 
 
 @Component({
