@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {AppService} from '../../../services/app/app.service';
-import {Store} from '@ngrx/store';
-import {GameSocialState} from '../../../store/reducers';
+import {AuthService} from '../../../services/auth';
 
 
 @Component({
@@ -12,9 +11,10 @@ import {GameSocialState} from '../../../store/reducers';
 })
 export class ProfileBrandComponent implements OnInit {
   sidebarToggle$ = this.appService.sidebarToggle$;
+  authUser$ = this.authService.authUser$;
 
   constructor(
-    private store: Store<GameSocialState>,
+    private authService: AuthService,
     private appService: AppService,
   ) { }
 

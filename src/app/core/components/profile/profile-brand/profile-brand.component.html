@@ -11,10 +11,10 @@
 
 </div>
 
-<div class="card">
-  <img class="card-img-top img-rounded" alt="avatar" src="../../../../../assets/Koala.jpg"/>
+<div class="card" *ngIf="authUser$ | async as authUser">
+  <img class="card-img-top img-rounded" alt="avatar" [src]="authUser.avatar"/>
   <div [class.hidden]="sidebarToggle$ | async" class="card-body">
-    <h5 class="card-title">Fname Lname</h5>
-    <p class="card-text">Some example text</p>
+    <h5 class="card-title">{{authUser.fname}} {{authUser.lname}}</h5>
+    <p class="card-text">{{authUser.bio}}</p>
   </div>
 </div>

@@ -6,12 +6,11 @@ import {first, switchMap} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {User} from 'firebase';
 
 @Injectable()
 export class AuthService {
 
-  authUser: Observable<User>;
+  authUser$: Observable<any>;
 
   constructor(
    private afAuth: AngularFireAuth,
@@ -22,7 +21,7 @@ export class AuthService {
   }
 
   watchAuthUser() {
-    this.authUser = this.afAuth.user.pipe(
+    this.authUser$ = this.afAuth.user.pipe(
       switchMap( (auth) => {
         if (auth) {
           return this.afStore.collection('users').doc(auth.uid).valueChanges();
