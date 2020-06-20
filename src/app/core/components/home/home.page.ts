@@ -13,6 +13,12 @@ export class HomePage implements OnInit {
   sidebarToggle$ = this.appService.sidebarToggle$;
   user: FirebaseUserModel = new FirebaseUserModel();
 
+  query$ = '';
+  searchType$ = 'video';
+  currentPlaylist$ = false;
+  queryParams$ = {duration: false, hd: false };
+  presets$ = '';
+
   constructor(
     private appService: AppService,
     private authService: AuthService,
@@ -21,6 +27,25 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  search(query: string) {
+    if (!query.hasOwnProperty('isTrusted')) {
+      // this.store.dispatch(this.playerSearchActions.searchNewQuery(query));
+    }
+  }
+
+  resetPageToken(query: string) {
+    // this.store.dispatch(this.playerSearchActions.resetPageToken());
+    // this.store.dispatch(new fromPlayerSearch.UpdateQueryAction(query));
+  }
+
+  searchMore() {
+    // this.store.dispatch(this.playerSearchActions.searchMoreForQuery());
+  }
+
+  updateParams(queryParams: any) {
+    // this.store.dispatch(new UpdateQueryFilter(queryParams));
   }
 
 }

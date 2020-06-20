@@ -34,6 +34,7 @@
     }
 
     .now-playlist-track__trigger {
+      border: 1px solid ghostwhite;
       text-shadow: none;
       padding: 1.5rem;
       border-radius: 7px;
@@ -53,7 +54,7 @@
 
       .active & {
         color: var(--text-color);
-        border-right: 6px solid var(--track-active-border-color);
+        //border-right: 6px solid var(--track-active-border-color);
         //background: var(--track-bg-active-color);
         //background-color: #202a2f;
         background: rgba(10, 10, 10, 0.2);

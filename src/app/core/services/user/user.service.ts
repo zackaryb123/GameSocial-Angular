@@ -14,8 +14,14 @@ export class UserService {
   }
 
   async getUser(uid: string) {
-    return await this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise().then(data => {
-      return data.data();
+    return await this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise()
+      .then( data => {
+        return data.data();
     });
   }
+
+  // async getUser(uid: string) {
+  //    const {data} = await this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise();
+  //    console.log('{data}: ', data);
+  // }
 }

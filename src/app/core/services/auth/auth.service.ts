@@ -50,7 +50,7 @@ export class AuthService {
 
   async getAuthUser() {
     const {uid} = await this.getAuth();
-    return await this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise().then(data =>{
+    return await this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise().then(data => {
       return data.data();
     });
   }

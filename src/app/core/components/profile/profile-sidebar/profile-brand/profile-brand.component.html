@@ -12,9 +12,9 @@
 </div>
 
 <div class="card" *ngIf="authUser$ | async as authUser">
-  <img class="card-img-top img-rounded" alt="avatar" [src]="authUser.avatar"/>
-  <div [class.hidden]="sidebarToggle$ | async" class="card-body">
-    <h5 class="card-title">{{authUser.fname}} {{authUser.lname}}</h5>
-    <p class="card-text">{{authUser.bio}}</p>
-  </div>
+  <img (click)="profileRoute()" class="card-img-top img-rounded" alt="avatar" [src]="authUser.avatar"/>
+<!--  <div [class.hidden]="sidebarToggle$ | async" class="card-body">-->
+<!--    <h5 class="card-title">{{authUser.fname}} {{authUser.lname}}</h5>-->
+<!--    <p class="card-text">{{authUser.bio}}</p>-->
+<!--  </div>-->
 </div>

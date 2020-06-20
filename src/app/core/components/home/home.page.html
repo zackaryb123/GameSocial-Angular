@@ -3,7 +3,32 @@
 <app-sidebar [class.closed]="sidebarToggle$ | async"></app-sidebar>
 
 <div class="container-main">
-  <app-search [class.closed]="sidebarToggle$ | async"></app-search>
+<!--  <app-search [class.closed]="sidebarToggle$ | async"></app-search>-->
+  <article
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollDisabled]="currentPlaylist$"
+    (scrolled)="searchMore()"
+    [immediateCheck]="true">
+    <app-navbar>
+      <div class="navbar-header">
+        <player-search
+          [query]="query$"
+          [searchParams]="queryParams$"
+          (queryChange)="resetPageToken($event)"
+          (paramsChange)="updateParams($event)"
+          (search)="search($event)"
+        ></player-search>
+      </div>
+      <!--        <section class="is-flex-row is-content-aligned-h">-->
+      <!--          <search-navigator-->
+      <!--            [searchType]="searchType$"-->
+      <!--            [queryParams]="queryParams$"-->
+      <!--          ></search-navigator>-->
+      <!--        </section>-->
+    </app-navbar>
+    <router-outlet name="home"></router-outlet>
+  </article>
 <!--  <app-player [class.closed]="sidebarToggle$ | async" class="navbar navbar-default navbar-fixed-bottom"></app-player>-->
 </div>
 

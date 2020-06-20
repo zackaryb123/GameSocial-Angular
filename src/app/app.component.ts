@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.message = this.msgService.currentMessage;
   }
 
-  async ngOnInit() {
+  ngOnInit() {
   }
 
 }

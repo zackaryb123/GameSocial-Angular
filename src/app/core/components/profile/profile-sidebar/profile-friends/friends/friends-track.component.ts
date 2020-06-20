@@ -13,35 +13,35 @@ import {AppService} from '../../../../../services/app/app.service';
 import {ChatService} from '../../../../../services/chat/chat.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../../../services/auth';
+import {UserService} from '../../../../../services/user';
 
 @Component({
   selector: 'friends-track',
   styleUrls: ['./friends-track.scss'],
   template: `
-  <div class="now-playlist-track__trigger">
-    <div class="track-contents">
+  <div *ngIf="user$ | async as user" class="now-playlist-track__trigger">
+    <div  class="track-contents">
       <section class="video-thumb playlist-track__thumb"
-        (click)="markSelected(friend)">
+        (click)="markSelected(user)">
 <!--        <span class="track-number">{{ index + 1 }}</span>-->
-        <img draggable="false" class="video-thumb__image"
-        srcset="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png 1x, https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png 1.778x"
-        xtitle="Drag to sort">
+        <img  draggable="false" class="video-thumb__image"
+             [src]="user.avatar"
+             xtitle="Drag to sort">
         <span class="badge badge-info">
-          pr0Xt0Xtype18
+          {{user.tag}}
         </span>
       </section>
-      <section class="video-title" (click)="markSelected(friend)" [title]="friend.fname + ' ' + friend.lname">{{friend.fname}} {{friend.lname}}</section>
+      <section class="video-title" (click)="markSelected(user)" [title]="user.fname + ' ' + user.lname">{{user.fname}} {{user.lname}}</section>
     </div>
     <aside class="playlist-track__content">
       <section class="track-actions">
         <button class="btn btn-transparent text-primary playlist-track"
-          *ngIf="isPlaylistMedia(friend.uid)"
-          (click)="handleToggleTracks($event, friend)"
+          *ngIf="isPlaylistMedia(user.uid)"
+          (click)="handleToggleTracks($event, user)"
           title="Album Track - click to select cued tracks">
           <icon name="list-ul"></icon>
         </button>
         <div class="btn-group" role="group" aria-label="Basic example">
-<!--          [routerLink]="[{outlets: { chat: chatId }}]"-->
           <button *ngIf="chatId" class="btn btn-transparent text-info playlist-track"
                   (click)="chat(chatId)"
                   title="More information for this media">
@@ -55,7 +55,7 @@ import {AuthService} from '../../../../../services/auth';
         </div>
       </section>
       <div class="btn btn-transparent text-danger ux-maker remove-track" title="Remove From Playlist"
-        (click)="remove.emit(friend)">
+        (click)="remove.emit(user)">
         <icon *ngIf="presence$ | async as presence"
           [ngClass]="{
           'is-online':  presence.status  === 'online',
@@ -70,21 +70,22 @@ import {AuthService} from '../../../../../services/auth';
       <aside class="album-tracks-heading">Tracks</aside>
       <button type="button" class="list-group-item btn-transparent"
         *ngFor="let track of tracks"
-        (click)="handleSelectTrack($event, track, friend)">
+        (click)="handleSelectTrack($event, track, user)">
         {{ track }}
       </button>
     </article>
     <article [@flyOut] *ngIf="displayInfo" class="track-info">
-<!--      {{ friend.bio }}-->
+      {{ user.bio }}
     </article>
   </div>
   `,
   animations: [flyOut, flyInOut],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FriendsTrackComponent implements OnInit, AfterContentInit {
   @Input() friend;
 
+  user$: any;
   chatId: string;
   sidebarToggle$ = this.appService.sidebarToggle$;
 
@@ -108,14 +109,25 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
     public presence: PresenceService,
     private appService: AppService,
     private chatService: ChatService,
+    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  async ngOnInit() {
-    this.presence$ = this.presence.getPresence(this.friend.uid);
-    const {uid} = await this.authService.getAuth();
-    this.chatId = this.chatService.createChatId(uid, this.friend.uid);
+  // async ngOnInit() {
+  //   this.user$ =  await this.userService.getUser(this.friend.uid);
+  //   this.presence$ = this.presence.getPresence(this.friend.uid);
+  //   const {uid} = await this.authService.getAuth();
+  //   this.chatId = this.chatService.createChatId(uid, this.friend.uid);
+  //   console.log('this.user: ', this.user$);
+  // }
+
+   ngOnInit() {
+     this.user$ =  this.userService.getUser(this.friend.uid);
+     this.presence$ = this.presence.getPresence(this.friend.uid);
+     this.authService.getAuth().then(auth => {
+      this.chatId = this.chatService.createChatId(auth.uid, this.friend.uid);
+    });
   }
 
   ngAfterContentInit() {
@@ -170,6 +182,6 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
 
   chat(chatId: string) {
     this.chatService.start(this.friend.uid, chatId);
-    return this.router.navigate([{outlets: { chat: chatId }}], {relativeTo: this.route});
+    return this.router.navigateByUrl(`/profile/(chat:${chatId})`);
   }
 }

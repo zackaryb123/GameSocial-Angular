@@ -38,8 +38,12 @@ export class ProfileChatComponent implements OnInit, OnChanges {
         if (routeParams) {
         this.chatId = routeParams.uid;
         this.chat$ = this.chatService.get(routeParams.uid);
-        this.chat$.pipe(first()).toPromise().then(async chat => {
-          this.altUser = await this.getChatUsersInfo(chat.uids);
+        this.chat$.pipe(first()).toPromise().then( chat => {
+          console.log('chat: ', chat);
+          // this.altUser = await
+          this.getChatUsersInfo(chat.uids).then(user => {
+            this.altUser = user;
+          });
         });
       }
     });

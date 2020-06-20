@@ -10,6 +10,7 @@ import {
 import {expandFadeInAnimation} from '../../../../../shared/animations/fade-in.animation';
 import {Router} from '@angular/router';
 import {PresenceService} from '../../../../services/presence/presence.service';
+import {AuthService} from "../../../../services/auth";
 
 enum Key {
   Backspace = 8,
@@ -38,8 +39,8 @@ enum Key {
       (@expandFadeIn.done)="endAnimation($event)"
       >
       <div class="list-group">
-        <a class="list-group-item navbar-action-link"
-        [routerLink]="['/profile',{ chat: '' }]">
+        <a *ngIf="authUser" class="list-group-item navbar-action-link"
+        [routerLink]="['/profile', {outlets: {user: authUser.uid}}]">
           <icon name="user"></icon> Profile
         </a>
         <button class="list-group-item"
@@ -53,6 +54,7 @@ enum Key {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavbarMenuComponent implements OnInit {
+  authUser: any;
   end = false;
   hide = true;
   get menuState() {
@@ -80,11 +82,17 @@ export class AppNavbarMenuComponent implements OnInit {
   }
 
   constructor(
+    private authService: AuthService,
     private router: Router,
     private presenceService: PresenceService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.authUser = await
+    this.authService.getAuth().then(auth => {
+      this.authUser = auth;
+    });
+  }
 
   hideMenu() {
     this.hide = true;

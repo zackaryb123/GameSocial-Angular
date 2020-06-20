@@ -10,9 +10,8 @@ import {ImageBlurComponent} from './app-player/image-blur/image-blur.component';
 import {PlayerResizerComponent} from './app-player/player-resizer/player-resizer.component';
 import {MediaInfoComponent} from './app-player/media-info/media-info.component';
 import {AppPlayerComponent} from './app-player/app-player.component';
-import {SearchNavigatorComponent} from './app-search/search-navigator/search-navigator.component';
-import {AppSearchComponent} from './app-search/app-search.component';
-import {PlayerSearchComponent} from './app-search/player-search/player-search.component';
+import {SearchNavigatorComponent} from '../../../shared/components/search-navigator/search-navigator.component';
+import {PlayerSearchComponent} from '../../../shared/components/player-search/player-search.component';
 import {PlayerControlsComponent} from './app-player/player-controls/player-controls.component';
 import {TrackInfoComponent} from './app-player/track-info/track-info.component';
 import {PlaylistComponent} from './app-sidebar/app-playlist/playlist/playlist.component';
@@ -29,7 +28,6 @@ export const HOME_COMPONENTS = [
   AppNavbarMenuComponent,
   AppNavbarUserComponent,
   PlayerSearchComponent,
-  AppSearchComponent,
   SearchNavigatorComponent,
   AppSidebarComponent,
   AppVideosComponent,

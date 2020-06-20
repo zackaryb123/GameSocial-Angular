@@ -99,7 +99,7 @@ export class PlaylistFilterComponent implements OnInit {
   }
 
   get playlistLength() {
-    if (this.playlist) {
+    if (this.playlist && this.playlist.videos) {
       return this.playlist.videos.length;
     }
   }
