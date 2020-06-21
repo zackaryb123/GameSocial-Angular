@@ -209,13 +209,18 @@ img {
   border-radius: 0.25rem !important;
 }
 .card {
+  border-radius: 1rem !important;
+  background: rgba(10, 10, 10, 0.2);
+  box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+  color: ghostwhite;
+
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
+  //background-color: #fff;
+  //background-clip: border-box;
   border: 1px solid #f2f4f9;
-  border-radius: 0.25rem;
+  //border-radius: 0.25rem;
 }
