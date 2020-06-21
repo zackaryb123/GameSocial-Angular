@@ -15,7 +15,11 @@
   }
 
   .chat-body {
-    background-color: white;
+    background: rgba(10, 10, 10, 0.2);
+    box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+    color: ghostwhite;
+    border: 1px solid ghostwhite;
+    //background-color: white;
     border-radius: 1rem;
   }
 

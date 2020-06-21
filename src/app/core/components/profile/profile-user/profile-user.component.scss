@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.progress-bar {
+  background-color: cornflowerblue;
+}
+
 .profile-page .profile-header {
   color: ghostwhite;
   border-radius: 1rem;
@@ -221,6 +225,6 @@ img {
   word-wrap: break-word;
   //background-color: #fff;
   //background-clip: border-box;
-  border: 1px solid #f2f4f9;
+  border: 1px solid ghostwhite;
   //border-radius: 0.25rem;
 }
