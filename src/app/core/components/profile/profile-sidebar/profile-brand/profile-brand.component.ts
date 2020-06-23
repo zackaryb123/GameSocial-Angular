@@ -34,7 +34,6 @@ export class ProfileBrandComponent implements OnInit {
   }
 
   profileRoute() {
-    console.log('profileRoute()', this.authUid);
     return this.router.navigateByUrl(`/profile/(user:${this.authUid})`);
   }
 }

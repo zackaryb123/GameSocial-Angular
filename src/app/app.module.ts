@@ -25,7 +25,6 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
-import { ProfileUserComponent } from './core/components/profile/profile-user/profile-user.component';
 
 
 @NgModule({
@@ -35,7 +34,6 @@ import { ProfileUserComponent } from './core/components/profile/profile-user/pro
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,
     ...CORE_COMPONENTS,
-    ProfileUserComponent,
   ],
   imports: [
     AppStoreModule,

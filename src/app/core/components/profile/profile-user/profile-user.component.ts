@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../../services/auth';
+import {UserService} from '../../../services/user';
+import {distinctUntilChanged, first, takeUntil} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'profile-user',
@@ -6,10 +11,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
+  user: any;
+  userFriends: any;
+  activeTab = 'tab1';
+  unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+  ) {
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.route.params
+      .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+      .subscribe( routeParams => {
+        if (routeParams) {
+          this.user = this.userService.getUser(routeParams.uid);
+          this.userFriends = this.userService.getUserFriends(routeParams.uid);
+        }
+      });
+  }
+
+  selectTab(tab) {
+    this.activeTab = tab;
   }
 
 }

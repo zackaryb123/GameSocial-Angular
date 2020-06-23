@@ -25,6 +25,7 @@ import {UserService} from '../../../../../services/user';
         (click)="markSelected(user)">
 <!--        <span class="track-number">{{ index + 1 }}</span>-->
         <img  draggable="false" class="video-thumb__image"
+              (click)="goProfile(user.uid)"
              [src]="user.avatar"
              xtitle="Drag to sort">
         <span class="badge badge-info">
@@ -183,5 +184,9 @@ export class FriendsTrackComponent implements OnInit, AfterContentInit {
   chat(chatId: string) {
     this.chatService.start(this.friend.uid, chatId);
     return this.router.navigateByUrl(`/profile/(chat:${chatId})`);
+  }
+
+  goProfile(uid: string) {
+    return this.router.navigateByUrl(`/profile/(user:${uid})`);
   }
 }
