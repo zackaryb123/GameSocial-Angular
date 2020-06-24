@@ -7,11 +7,9 @@ import {
 import {FriendsComponent} from './friends/friends.component';
 import {AppService} from '../../../../services/app/app.service';
 import {FriendsService} from '../../../../services/friends/friends.service';
-import {Observable, of} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {first, switchMap} from 'rxjs/operators';
-import {SubscriptionService} from '../../../../services';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'profile-friends-list',
@@ -40,7 +38,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileFriendsList implements OnInit {
-  friends$ = this.friendsService.friends$; // Observable<any>;
+  friends$: Observable<any>; // Observable<any>;
   filter$ = this.appService.filter$;
   @ViewChild(FriendsComponent, { static: true }) playlistComponent: FriendsComponent;
 
@@ -49,10 +47,12 @@ export class ProfileFriendsList implements OnInit {
     private afAuth: AngularFireAuth,
     private appService: AppService,
     private friendsService: FriendsService,
-  ) {}
+  ) {
+    this.friends$ = this.friendsService.friends$;
+  }
 
   ngOnInit() {
-    this.friends$ = this.friendsService.friends$;
+    // this.friends$ = this.friendsService.friends$;
   }
 
   selectVideo(media: any) {

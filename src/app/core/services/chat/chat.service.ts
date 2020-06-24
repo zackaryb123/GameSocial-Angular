@@ -6,6 +6,7 @@ import {first, map, switchMap} from 'rxjs/operators';
 import {IMessage, MessageModel} from '../../models/chat.model';
 import {AppService} from '../app/app.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import * as firebase from '../presence/presence.service';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class ChatService {
     private appService: AppService
   ) {}
 
-  get(chatId) {
+  watchChat(chatId) {
     return this.afStore
       .collection<any>('chats')
       .doc(chatId)
@@ -32,11 +33,13 @@ export class ChatService {
       );
   }
 
+  getChat(chatId) {
+    return this.afStore.collection<any>('chats')
+      .doc(chatId).get().toPromise();
+  }
+
   async start(friendId, chatId) {
-    console.log('friendId: ', friendId);
-    console.log('chatId: ', chatId);
     const {uid} = await this.afAuth.user.pipe(first()).toPromise();
-    // const chatId = this.createChatId(uid, friendId);
     this.appService.setChatId(chatId);
 
     const data = {
@@ -51,6 +54,9 @@ export class ChatService {
 
     const chatRef = this.afStore.collection('chats').doc(chatId);
 
+    this.setUserChatTracker(uid, friendId, chatId);
+
+    // Set chat session in database
     await chatRef.get().toPromise().then(
       chat => {
         if (!chat.exists) {
@@ -60,7 +66,8 @@ export class ChatService {
     );
   }
 
-  async sendMessage(chatId, message) {
+  async sendMessage(friendId, chatId, message) {
+    console.log('sendMessage friendId: ', friendId);
     const {uid} = await this.afAuth.user.pipe(first()).toPromise();
     const data: IMessage = {
       uid,
@@ -69,39 +76,14 @@ export class ChatService {
     };
     if (chatId) {
       const ref = this.afStore.collection('chats').doc(chatId);
+
+      this.updateUserChatTracker(uid, friendId, chatId);
+
       return ref.update({
         messages: firestore.FieldValue.arrayUnion(data)
       });
     }
   }
-
-  // joinUsers(chat$: Observable<any>) {
-  //   let chat;
-  //   const joinKeys = {};
-  //
-  //   return chat$.pipe(
-  //     switchMap(c => {
-  //       // Unique User IDs
-  //       chat = c;
-  //       const uids = Array.from(new Set(c.messages.map(v => v.uid)));
-  //
-  //       // Firestore User Doc Reads
-  //       const userDocs = uids.map(u =>
-  //         this.afs.doc(`users/${u}`).valueChanges()
-  //       );
-  //
-  //       return userDocs.length ? combineLatest(userDocs) : of([]);
-  //     }),
-  //     map(arr => {
-  //       arr.forEach(v => (joinKeys[(<any>v).uid] = v));
-  //       chat.messages = chat.messages.map(v => {
-  //         return { ...v, user: joinKeys[v.uid] };
-  //       });
-  //
-  //       return chat;
-  //     })
-  //   );
-  // }
 
   createChatId(uid1, uid2) {
     const firstUid = uid1 > uid2 ? uid1 : uid2;
@@ -112,6 +94,71 @@ export class ChatService {
       .reduce((a, b) => a.concat(b));
 
     return result.join('');
+  }
+
+  setUserChatTracker(authUid, friendUid, chatId) {
+    const authUserRef = this.afStore.collection('users').doc(authUid).collection('chats').doc(chatId);
+    const friendUserRef = this.afStore.collection('users').doc(friendUid).collection('chats').doc(chatId);
+    const date = Date.now();
+
+    // To Track chat auth user notifications
+    authUserRef.get().toPromise().then(
+      chat => {
+        if (!chat.exists) {
+          // Set timestamp for tracking
+          return authUserRef.set({
+            id: chatId,
+            lastChecked: date,
+            lastUpdated: date
+          });
+        } else {
+          // Only update auth user timestamp (new chats read)
+          return authUserRef.update({
+            lastChecked: date
+          });
+        }
+      }
+    );
+
+    // To Track friend chat notifications
+    friendUserRef.get().toPromise().then(
+      chat => {
+        if (!chat.exists) {
+          // Set timestamp for tracking
+          return friendUserRef.set({
+            id: chatId,
+            lastChecked: date,
+            lastUpdated: date
+          });
+        }
+      }
+    );
+  }
+
+  updateUserChatTracker(authUid, friendUid, chatId) {
+    const authUserRef = this.afStore.collection('users').doc(authUid).collection('chats').doc(chatId);
+    const friendUserRef = this.afStore.collection('users').doc(friendUid).collection('chats').doc(chatId);
+    // To Track friend chat notifications
+    const date = Date.now();
+    friendUserRef.get().toPromise().then(
+      chat => {
+        if (chat.exists) {
+          // Set timestamp for tracking
+          return friendUserRef.update({
+            lastUpdated: date
+          });
+        }
+      }
+    );
+    authUserRef.get().toPromise().then(
+      chat => {
+        if (chat.exists) {
+          return authUserRef.update({
+            lastChecked: date
+          });
+        }
+      }
+    );
   }
 
 }

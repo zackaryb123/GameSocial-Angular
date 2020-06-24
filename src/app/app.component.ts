@@ -4,6 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {PresenceService} from './core/services/presence/presence.service';
 import {MessagingService} from './core/services/messaging/messaging.service';
 import {FriendsService} from './core/services/friends/friends.service';
+import {ChatNotificationService} from './core/services/notification/chat-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,9 @@ export class AppComponent implements OnInit {
   constructor(
     public presence: PresenceService,
     public friendsService: FriendsService,
-    private store: Store<GameSocialState>,
-    private msgService: MessagingService,
+    public chatNotificationService: ChatNotificationService,
+    public store: Store<GameSocialState>,
+    public msgService: MessagingService,
   ) {
     this.msgService.requestPermission();
     this.msgService.receiveMessage();

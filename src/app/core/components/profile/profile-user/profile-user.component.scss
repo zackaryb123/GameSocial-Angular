@@ -121,6 +121,11 @@
   //background: #fff;
   border-radius: 1rem;
   //border-radius: 0 0 .25rem .25rem;
+
+  .header-link-item {
+    cursor: pointer;
+    position: relative;
+  }
 }
 
 .profile-page .profile-header .header-links ul {

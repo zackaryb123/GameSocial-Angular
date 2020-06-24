@@ -25,6 +25,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { NotificationComponent } from './core/components/profile/notification/notification.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,
     ...CORE_COMPONENTS,
+    NotificationComponent,
   ],
   imports: [
     AppStoreModule,

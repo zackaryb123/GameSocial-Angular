@@ -36,6 +36,7 @@
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
+                <notification></notification>
                 <a class="header-link-icon pt-1px d-none d-md-block">Notifications</a>
               </li>
               <li (click)="selectTab('tab3')" [class.active]="activeTab === 'tab3'" *ngIf="userFriends | async as friends" class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">

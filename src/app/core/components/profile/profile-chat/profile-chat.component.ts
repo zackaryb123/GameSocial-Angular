@@ -37,14 +37,14 @@ export class ProfileChatComponent implements OnInit, OnChanges {
       .subscribe(routeParams => {
         if (routeParams) {
         this.chatId = routeParams.uid;
-        this.chat$ = this.chatService.get(routeParams.uid);
-        this.chat$.pipe(first()).toPromise().then( chat => {
-          console.log('chat: ', chat);
-          // this.altUser = await
-          this.getChatUsersInfo(chat.uids).then(user => {
-            this.altUser = user;
-          });
-        });
+        this.chat$ = this.chatService.watchChat(routeParams.uid);
+        this.chatService.getChat(routeParams.uid).then(
+            chat => {
+              this.getChatUsersInfo(chat.data().uids).then(user => {
+                this.altUser = user;
+              });
+            }
+          );
       }
     });
   }
@@ -53,7 +53,7 @@ export class ProfileChatComponent implements OnInit, OnChanges {
   }
 
   submit() {
-    this.chatService.sendMessage(this.chatId, this.newMsg);
+    this.chatService.sendMessage(this.altUser.uid, this.chatId, this.newMsg);
     this.newMsg = '';
   }
 

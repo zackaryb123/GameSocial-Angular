@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import {GameSocialState} from '../../store/reducers';
 import {first, switchMap, take} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -13,7 +11,6 @@ export class FriendsService {
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
-    private store: Store<GameSocialState>,
   ) {
     this.watchFriends();
   }

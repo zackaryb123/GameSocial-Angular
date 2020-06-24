@@ -8,6 +8,7 @@ import {MessagingService} from './messaging/messaging.service';
 import {ChatService} from './chat/chat.service';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {ChatNotificationService} from './notification/chat-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,6 @@ export const SERVICES = [
   FriendsService,
   PlayerService,
   MessagingService,
-  ChatService
+  ChatService,
+  ChatNotificationService
 ];

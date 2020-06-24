@@ -8,7 +8,6 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
 
   constructor(private angularFireMessaging: AngularFireMessaging) {
-
     this.angularFireMessaging.onMessage((msgings) => console.log(msgings));
   }
 
