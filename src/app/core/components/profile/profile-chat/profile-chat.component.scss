@@ -1,5 +1,33 @@
 :host {
 
+  .rightArrow {
+    position: relative;
+  }
+
+  .leftArrow {
+    position: relative;
+  }
+
+  .rightArrow:before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    right: -20px;
+    width: 0;
+    border: 10px solid transparent;
+    border-left: 10px solid ghostwhite;
+  }
+
+  .leftArrow:before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: -20px;
+    width: 0;
+    border: 10px solid transparent;
+    border-right: 10px solid ghostwhite;
+  }
+
   .avatar {
     width: 5rem;
     height: 5rem;

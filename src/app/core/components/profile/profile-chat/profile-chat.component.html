@@ -7,7 +7,7 @@
           [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
           class="d-flex mb-4">
         <img *ngIf="isAuthUser(msg.uid)" [src]="authUser.avatar" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
-        <div class="chat-body white p-3 ml-2 z-depth-1">
+        <div [class.rightArrow]="!isAuthUser(msg.uid)" [class.leftArrow]="isAuthUser(msg.uid)" class="chat-body leftArrow white p-3 ml-2 z-depth-1">
           <div class="header">
             <strong *ngIf="isAuthUser(msg.uid)" class="chat-name primary-font">{{authUser.fname}} {{authUser.lname}}</strong>
             <strong *ngIf="!isAuthUser(msg.uid)" class="chat-name primary-font">{{altUser.fname}} {{altUser.lname}}</strong>
