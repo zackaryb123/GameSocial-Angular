@@ -1,19 +1,20 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ChatNotificationService} from '../../../services/notification/chat-notification.service';
 import {Observable, Subject} from 'rxjs';
 import {distinctUntilChanged, first, map, takeUntil} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
-  selector: 'notification',
+  selector: 'app-notification',
   styleUrls: ['./notification.component.scss'],
   template: `
     <div *ngIf="chatNotifications$ | async as chat" class="notification-icon">
       <!--                  <span class="glyphicon glyphicon-envelope"></span>-->
-      <span *ngIf="(chatNotificationNum | async) !== 0" class="notification-badge badge">{{chatNotificationNum | async}}</span>
+      <span [style]="positionStyle" *ngIf="(chatNotificationNum | async) !== 0" class="notification-badge badge">{{chatNotificationNum | async}}</span>
     </div>`
 })
 export class NotificationComponent implements OnInit {
+  @Input() positionStyle;
   chatNotifications$: Observable<any>;
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
   chatNotificationNum: any;

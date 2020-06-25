@@ -27,6 +27,7 @@ enum Key {
   selector: 'app-navbar-menu',
   animations: [expandFadeInAnimation],
   template: `
+    <app-notification [positionStyle]="notificationStyle"></app-notification>
     <button class="btn btn-navbar btn-transparent ux-maker btn-toggle"
       (click)="toggleMenu()">
       <icon name="ellipsis-v"></icon>
@@ -60,7 +61,10 @@ export class AppNavbarMenuComponent implements OnInit {
   get menuState() {
     return this.hide ? 'hide' : 'show';
   }
-
+  notificationStyle = {
+    top: '-7px',
+    left: '-10px'
+  };
   @Input() signedIn = false;
   @Input()
   appVersion = {

@@ -8,7 +8,7 @@ import {
   HostListener
 } from '@angular/core';
 import {expandFadeInAnimation} from '../../../../../shared/animations/fade-in.animation';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PresenceService} from '../../../../services/presence/presence.service';
 
 enum Key {
@@ -26,6 +26,7 @@ enum Key {
   selector: 'profile-navbar-menu',
   animations: [expandFadeInAnimation],
   template: `
+    <app-notification [positionStyle]="notificationStyle"></app-notification>
     <button class="btn btn-navbar btn-transparent ux-maker btn-toggle"
       (click)="toggleMenu()">
       <icon name="ellipsis-v"></icon>
@@ -42,7 +43,6 @@ enum Key {
         [routerLink]="['/home']">
           <icon name="user"></icon> Home
         </a>
-
         <button class="list-group-item"
           (click)="handleSignOut()">
           <icon name="sign-out"></icon> Sign Out
@@ -60,7 +60,10 @@ export class ProfileNavbarMenuComponent implements OnInit {
   get menuState() {
     return this.hide ? 'hide' : 'show';
   }
-
+  notificationStyle = {
+    top: '-7px',
+    left: '-10px'
+  };
   @Input() signedIn = false;
   @Input()
   appVersion = {
@@ -82,9 +85,10 @@ export class ProfileNavbarMenuComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private presenceService: PresenceService
-  ) { }
+  ) {}
 
   ngOnInit() { }
 
