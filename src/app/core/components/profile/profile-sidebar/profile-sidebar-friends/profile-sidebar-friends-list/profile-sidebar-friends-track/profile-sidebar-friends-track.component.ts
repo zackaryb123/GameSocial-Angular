@@ -19,7 +19,7 @@ import {UserService} from '../../../../../../services/user';
   selector: 'profile-sidebar-friends-track',
   styleUrls: ['./profile-sidebar-friends-track.scss'],
   template: `
-  <div *ngIf="user$ | async as user" class="now-playlist-track__trigger">
+  <div *ngIf="user$ | async as user" [ngClass]="{'hide-box': (sidebarToggle$ | async)}" class="now-playlist-track__trigger">
     <div  class="track-contents">
       <section class="video-thumb playlist-track__thumb"
         (click)="markSelected(user)">
@@ -32,10 +32,13 @@ import {UserService} from '../../../../../../services/user';
           {{user.tag}}
         </span>
       </section>
-      <section class="video-title" (click)="markSelected(user)" [title]="user.fname + ' ' + user.lname">{{user.fname}} {{user.lname}}</section>
+      <section
+        *ngIf="!(sidebarToggle$ | async)" class="video-title"
+        (click)="markSelected(user)"
+        [title]="user.fname + ' ' + user.lname">{{user.fname}} {{user.lname}}</section>
     </div>
     <aside class="playlist-track__content">
-      <section class="track-actions">
+      <section *ngIf="!(sidebarToggle$ | async)" class="track-actions">
         <button class="btn btn-transparent text-primary playlist-track"
           *ngIf="isPlaylistMedia(user.uid)"
           (click)="handleToggleTracks($event, user)"

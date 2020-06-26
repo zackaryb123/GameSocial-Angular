@@ -25,6 +25,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { UserFriendsTrackComponent } from './core/components/profile/profile-user/user-friends/user-friends-track/user-friends-track.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,
     ...CORE_COMPONENTS,
+    UserFriendsTrackComponent,
   ],
   imports: [
     AppStoreModule,

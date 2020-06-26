@@ -8,12 +8,13 @@ import {
   Output
 } from '@angular/core';
 import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
+import {AppService} from "../../../../../services/app/app.service";
 
 @Component({
   selector: 'playlist-track',
   styleUrls: ['./playlist-track.scss'],
   template: `
-  <div class="now-playlist-track__trigger">
+  <div class="now-playlist-track__trigger" [ngClass]="{'hide-box': (sidebarToggle$ | async)}" >
     <div class="track-contents">
       <section class="video-thumb playlist-track__thumb"
         (click)="markSelected(video)">
@@ -66,7 +67,7 @@ import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.anim
 export class PlaylistTrackComponent implements AfterContentInit {
   @Input() video: any;
   @Input() index: number;
-
+  sidebarToggle$ = this.appService.sidebarToggle$;
   @Output() remove = new EventEmitter<any>();
   @Output() select = new EventEmitter<any>();
   @Output()
@@ -82,7 +83,7 @@ export class PlaylistTrackComponent implements AfterContentInit {
   private parsedTracks = false;
 
   constructor(
-    // public mediaParser: MediaParserService
+    private appService: AppService,
     ) {}
 
   ngAfterContentInit() {
