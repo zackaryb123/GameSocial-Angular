@@ -12,6 +12,7 @@ profile-navbar {
   display: block;
 
 nav.navbar {
+  padding: 0;
   margin-left: 0;
   background-image: none;
   background-color: rgba(243,243,243,0.8);
@@ -98,7 +99,8 @@ nav.navbar.navbar-fixed-top {
   margin-left: $drawer-width;
 }
 .navbar-container {
-  padding: 0.5rem 0;
+  //padding: 0.5rem 0;
+  padding: 4px 0;
 }
 .navbar-actions {
   position: relative;

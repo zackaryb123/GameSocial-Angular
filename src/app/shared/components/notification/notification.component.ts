@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ChatNotificationService} from '../../../services/notification/chat-notification.service';
+import {ChatNotificationService} from '../../../core/services/notification/chat-notification.service';
 import {Observable, Subject} from 'rxjs';
 import {distinctUntilChanged, first, map, takeUntil} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
