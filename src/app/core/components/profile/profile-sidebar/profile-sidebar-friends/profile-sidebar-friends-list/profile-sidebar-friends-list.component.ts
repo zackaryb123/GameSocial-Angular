@@ -12,14 +12,14 @@ import {
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {flyOut} from '../../../../../../shared/animations/fade-in.animation';
-import {isNewChange} from '../../../../../../shared/utils/data.utils';
 import {AppService} from '../../../../../services/app/app.service';
+import {isNewChange} from '../../../../../../shared/utils/data.utils';
 
 @Component({
-  selector: 'friends',
+  selector: 'profile-sidebar-friends-list',
   animations: [flyOut],
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./friends.scss'],
+  styleUrls: ['./profile-sidebar-friends-list.scss'],
   template: `
   <section class="now-playlist ux-maker">
     <div *ngIf="isFriendsEmpty" [class.empty-list-closed]="sidebarToggle$ | async" class="empty-list text-center" [@flyOut]>
@@ -36,19 +36,19 @@ import {AppService} from '../../../../../services/app/app.service';
         *ngFor="let friend of friends; let index = index"
         [class.active]="isActiveFriend(friend.uid, friendsTrack)"
         [@flyOut]>
-        <friends-track
+        <profile-sidebar-friends-track
           [friend]="friend"
           (remove)="removeVideo($event)"
           (select)="selectFriend(friends)"
           (selectTrack)="selectFriendInList($event)"
-        ></friends-track>
+        ></profile-sidebar-friends-track>
       </li>
     </ul>
   </section>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FriendsComponent implements OnInit, OnChanges, AfterViewChecked {
+export class ProfileSidebarFriendsListComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() friends: any;
   @Input() filter: any;
 

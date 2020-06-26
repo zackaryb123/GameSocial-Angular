@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'profile-navigator',
-  styleUrls: ['./profile-navigator.scss'],
+  selector: 'profile-sidebar-navigator',
+  styleUrls: ['./profile-sidebar-navigator.scss'],
   template: `
   <div *ngIf="!dropDown" class="list-group" [class.closed]="closed">
       <button class="list-group-item ux-maker"
@@ -36,7 +36,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileNavigatorComponent implements OnInit {
+export class ProfileSidebarNavigatorComponent implements OnInit {
   @Input() page = 'home';
   @Input() dropDown = false;
   @Input() closed = false;

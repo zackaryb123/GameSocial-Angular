@@ -7,17 +7,17 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
-import {PresenceService} from '../../../../../services/presence/presence.service';
-import {AppService} from '../../../../../services/app/app.service';
-import {ChatService} from '../../../../../services/chat/chat.service';
+import {flyInOut, flyOut} from '../../../../../../../shared/animations/fade-in.animation';
+import {PresenceService} from '../../../../../../services/presence/presence.service';
+import {AppService} from '../../../../../../services/app/app.service';
+import {ChatService} from '../../../../../../services/chat/chat.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../../../../services/auth';
-import {UserService} from '../../../../../services/user';
+import {AuthService} from '../../../../../../services/auth';
+import {UserService} from '../../../../../../services/user';
 
 @Component({
-  selector: 'friends-track',
-  styleUrls: ['./friends-track.scss'],
+  selector: 'profile-sidebar-friends-track',
+  styleUrls: ['./profile-sidebar-friends-track.scss'],
   template: `
   <div *ngIf="user$ | async as user" class="now-playlist-track__trigger">
     <div  class="track-contents">
@@ -83,7 +83,7 @@ import {UserService} from '../../../../../services/user';
   animations: [flyOut, flyInOut],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FriendsTrackComponent implements OnInit, AfterContentInit {
+export class ProfileSidebarFriendsTrackComponent implements OnInit, AfterContentInit {
   @Input() friend;
 
   user$: any;

@@ -4,27 +4,27 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {FriendsComponent} from './friends/friends.component';
 import {AppService} from '../../../../services/app/app.service';
 import {FriendsService} from '../../../../services/friends/friends.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
+import {ProfileSidebarFriendsListComponent} from './profile-sidebar-friends-list/profile-sidebar-friends-list.component';
 
 @Component({
-  selector: 'profile-friends-list',
-  styleUrls: ['./profile-friends.scss'],
+  selector: 'profile-sidebar-friends',
+  styleUrls: ['./profile-sidebar-friends.scss'],
   template: `
   <div class="sidebar-pane">
-    <friends-filter
+    <profile-sidebar-friends-filter
       [friends]="friends$ | async"
       [filter]="filter$ | async"
       (clear)="clearPlaylist()"
       (updateFilter)="updateFilter($event)"
       (reset)="resetFilter()"
       (headerClick)="onHeaderClick()"
-    ></friends-filter>
-    <friends
+    ></profile-sidebar-friends-filter>
+    <profile-sidebar-friends-list
       *ngIf="friends$ | async"
       [friends]="friends$ | async"
       [filter]="filter$ | async"
@@ -32,15 +32,15 @@ import {Observable} from "rxjs";
       (selectTrack)="selectTrackInVideo($event)"
       (remove)="removeVideo($event)"
       (sort)="sortPlaylist($event)"
-    ></friends>
+    ></profile-sidebar-friends-list>
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileFriendsList implements OnInit {
+export class ProfileSidebarFriends implements OnInit {
   friends$: Observable<any>; // Observable<any>;
   filter$ = this.appService.filter$;
-  @ViewChild(FriendsComponent, { static: true }) playlistComponent: FriendsComponent;
+  @ViewChild(ProfileSidebarFriendsListComponent, { static: true }) playlistComponent: ProfileSidebarFriendsListComponent;
 
   constructor(
     private afStore: AngularFirestore,

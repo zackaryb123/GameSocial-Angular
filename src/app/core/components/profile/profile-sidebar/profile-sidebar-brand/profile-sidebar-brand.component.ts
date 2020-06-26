@@ -6,12 +6,12 @@ import {first} from 'rxjs/operators';
 
 
 @Component({
-  selector: 'profile-brand',
-  styleUrls: ['./profile-brand.scss'],
-  templateUrl: './profile-brand.component.html',
+  selector: 'profile-sidebar-brand',
+  styleUrls: ['./profile-sidebar-brand.scss'],
+  templateUrl: './profile-sidebar-brand.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileBrandComponent implements OnInit {
+export class ProfileSidebarBrandComponent implements OnInit {
   sidebarToggle$ = this.appService.sidebarToggle$;
   authUser$ = this.authService.authUser$;
   authUid: string;

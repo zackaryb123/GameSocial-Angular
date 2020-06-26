@@ -12,7 +12,7 @@ import {AppService} from '../../../services/app/app.service';
     [class.closed]="sidebarToggle$ | async">
     <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
     <nav class="navbar navbar-transparent">
-      <profile-brand></profile-brand>
+      <profile-sidebar-brand></profile-sidebar-brand>
 <!--      <app-navigator-->
 <!--        page="profile"-->
 <!--        iconLink="chat"-->
@@ -28,7 +28,7 @@ import {AppService} from '../../../services/app/app.service';
 <!--        [closed]="sidebarToggle$ | async">-->
 <!--      </profile-navigator>-->
     </nav>
-    <profile-friends-list></profile-friends-list>
+    <profile-sidebar-friends></profile-sidebar-friends>
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

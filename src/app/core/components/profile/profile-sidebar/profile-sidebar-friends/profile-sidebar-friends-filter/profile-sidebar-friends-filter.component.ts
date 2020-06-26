@@ -10,8 +10,8 @@ import {AppService} from '../../../../../services/app/app.service';
 // import * as NowPlaylist from '@store/playlist';
 
 @Component({
-  selector: 'friends-filter',
-  styleUrls: ['./friends-filter.scss'],
+  selector: 'profile-sidebar-friends-filter',
+  styleUrls: ['./profile-sidebar-friends-filter.scss'],
   template: `
   <section [class.center]="sidebarToggle$ | async" class="nav-header user-playlists-filter">
   <span class="playlist-header" (click)="onNowPlayingClick()">
@@ -47,7 +47,7 @@ import {AppService} from '../../../../../services/app/app.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FriendsFilterComponent implements OnInit {
+export class ProfileSidebarFriendsFilterComponent implements OnInit {
   @Input() friends: any;
   @Input() filter: any;
 

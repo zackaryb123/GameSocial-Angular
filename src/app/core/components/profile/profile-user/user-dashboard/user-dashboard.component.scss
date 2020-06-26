@@ -1,52 +1,39 @@
-@media (max-width: 768px) {
-  .user-container {
-    margin-top: 0;
-  }
+
+.left-wrapper .social-links a {
+  width: 30px;
+  height: 30px;
 }
 
-@media (min-width: 768px) {
-  .user-container {
-    margin-top: 10rem;
-  }
+.right-wrapper .latest-photos > .row {
+  margin-right: 0;
+  margin-left: 0;
 }
 
-.container {
-  width: 100%;
+.right-wrapper .latest-photos > .row > div {
+  padding-left: 3px;
+  padding-right: 3px;
 }
+
+.right-wrapper .latest-photos > .row > div figure {
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  margin-bottom: 6px;
+}
+
+.right-wrapper .latest-photos > .row > div figure:hover {
+  -webkit-transform: scale(1.06);
+  transform: scale(1.06);
+}
+
+.right-wrapper .latest-photos > .row > div figure img {
+  border-radius: .25rem;
+}
+
+// Other
 
 .progress-bar {
   background-color: cornflowerblue;
 }
-
-//.profile-page .profile-body .left-wrapper .social-links a {
-//  width: 30px;
-//  height: 30px;
-//}
-//
-//.profile-page .profile-body .right-wrapper .latest-photos > .row {
-//  margin-right: 0;
-//  margin-left: 0;
-//}
-//
-//.profile-page .profile-body .right-wrapper .latest-photos > .row > div {
-//  padding-left: 3px;
-//  padding-right: 3px;
-//}
-//
-//.profile-page .profile-body .right-wrapper .latest-photos > .row > div figure {
-//  -webkit-transition: all .3s ease-in-out;
-//  transition: all .3s ease-in-out;
-//  margin-bottom: 6px;
-//}
-//
-//.profile-page .profile-body .right-wrapper .latest-photos > .row > div figure:hover {
-//  -webkit-transform: scale(1.06);
-//  transform: scale(1.06);
-//}
-//
-//.profile-page .profile-body .right-wrapper .latest-photos > .row > div figure img {
-//  border-radius: .25rem;
-//}
 
 .img-xs {
   width: 37px;

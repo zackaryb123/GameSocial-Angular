@@ -1,8 +1,8 @@
-<div class="container">
-
+<div *ngIf="userFriends | async as userFriends" class="container">
   <div class="friend-list">
     <div class="row">
-      <div class="col-md-4 col-sm-6">
+
+      <div *ngFor="let user of userFriends" class="col-md-4 col-sm-6">
         <div class="friend-card">
           <img src="https://via.placeholder.com/400x100/6495ED" alt="profile-cover" class="img-responsive cover">
           <div class="card-info">
@@ -85,6 +85,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
