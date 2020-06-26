@@ -5,21 +5,39 @@
 //  border-color: transparent;
 //}
 
-button {
-  border: 1px solid #263238;
-  icon {
-    color: #263238;
-  }
-}
+//button {
+//  border: 1px solid #263238;
+//  icon {
+//    color: #263238;
+//  }
+//}
 
 //@media (min-width: 320px) {
   :host {
+    display: flex;
     .btn-toggle {
+      background: transparent;
+      //border: 1px solid #263238;
+      border: none;
       padding: 1rem;
       font-size: 2rem;
       color: var(--navbar-text-color);
-      background-color: rgba(243,243,243,0.8);
-
+      //background-color: rgba(243,243,243,0.8);
+      icon {
+        color: #263238;
+      }
+      &:hover icon {
+        color: cornflowerblue;
+      }
+      &:focus icon {
+        color: cornflowerblue;
+      }
+      &:hover {
+        background-color: #263238;
+      }
+      &:focus {
+        background-color: #263238;
+      }
 
       .update-indicator {
         position: absolute;

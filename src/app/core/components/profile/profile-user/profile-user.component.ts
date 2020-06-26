@@ -16,10 +16,6 @@ export class ProfileUserComponent implements OnInit {
   userFriends: any;
   activeTab = 'tab1';
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
-  notificationStyle = {
-    top: '-10px',
-    left: '17px'
-  };
 
   constructor(
     private authService: AuthService,
@@ -40,16 +36,8 @@ export class ProfileUserComponent implements OnInit {
     this.auth = this.authService.getAuth().then(auth => auth);
   }
 
-  isAuthUser() {
-    console.log('isAuthUser1: ', this.auth );
-    console.log('isAuthUser2: ', this.user );
-    console.log('isAuthUser3: ',  this.user.uid === this.auth.uid);
-
-    return this.auth && this.user && this.user.uid === this.auth.uid;
-  }
-
-  selectTab(tab) {
-    this.activeTab = tab;
+  selectTab(event) {
+    this.activeTab = event;
   }
 
 }

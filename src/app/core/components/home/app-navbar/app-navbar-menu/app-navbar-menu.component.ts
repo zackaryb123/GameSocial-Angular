@@ -62,8 +62,8 @@ export class AppNavbarMenuComponent implements OnInit {
     return this.hide ? 'hide' : 'show';
   }
   notificationStyle = {
-    top: '-7px',
-    left: '-10px'
+    top: '-2px',
+    left: '22px'
   };
   @Input() signedIn = false;
   @Input()
