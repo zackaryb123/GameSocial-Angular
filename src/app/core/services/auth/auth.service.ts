@@ -55,6 +55,16 @@ export class AuthService {
     });
   }
 
+  createUser(user) {
+    return this.afStore.collection('users').doc(user.uid).set({
+      avatar: '',
+      bio: '',
+      name: user.name,
+      tag: '',
+      uid: user.uid
+    });
+  }
+
   doFacebookLogin() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
