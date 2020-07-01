@@ -25,8 +25,9 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
-import { UserFriendsTrackComponent } from './core/components/profile/profile-user/user-friends/user-friends-track/user-friends-track.component';
+import {MsalModule} from '@azure/msal-angular';
 
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import { UserFriendsTrackComponent } from './core/components/profile/profile-use
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,
     ...CORE_COMPONENTS,
-    UserFriendsTrackComponent,
   ],
   imports: [
     AppStoreModule,
@@ -59,10 +59,36 @@ import { UserFriendsTrackComponent } from './core/components/profile/profile-use
     NgxTypeaheadModule,
     StoreRouterConnectingModule.forRoot({}),
     CdkTableModule,
-    DragDropModule
+    DragDropModule,
     // ServiceWorkerModule.register('/ngsw-worker.js', {
     //   enabled: env.production
     // })
+    MsalModule.forRoot({
+        auth: {
+          clientId: '273227eb-4db5-4ad6-a567-c4d54fac3708',
+          authority: '7cf310c1-bc89-4a58-9c3b-fd416a0d4daf',
+          redirectUri: 'https://gamesocial-zb.firebaseapp.com/__/auth/handler',
+        },
+        cache: {
+          cacheLocation: 'localStorage',
+          storeAuthStateInCookie: isIE, // set to true for IE 11
+        },
+      },
+      {
+        popUp: !isIE,
+        consentScopes: [
+          'user.read',
+          'openid',
+          'profile',
+          'Xboxlive.signin',
+          'Xboxlive.offline_access'
+        ],
+        unprotectedResources: [],
+        // protectedResourceMap: [
+        //   ['Enter_the_Graph_Endpoint_Herev1.0/me', ['user.read']]
+        // ],
+        extraQueryParameters: {}
+      })
   ],
   exports: [RouterModule],
   providers: [

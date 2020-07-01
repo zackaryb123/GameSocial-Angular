@@ -6,6 +6,9 @@ import {first, switchMap} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import OAuthCredential = firebase.auth.OAuthCredential;
+// import {MsalService} from '@azure/msal-angular';
 
 @Injectable()
 export class AuthService {
@@ -14,8 +17,10 @@ export class AuthService {
 
   constructor(
    private afAuth: AngularFireAuth,
+   // private msalService: MsalService,
    private afStore: AngularFirestore,
-   private router: Router
+   private router: Router,
+   private http: HttpClient
   ) {
     this.watchAuthUser();
   }
@@ -55,13 +60,53 @@ export class AuthService {
     });
   }
 
-  createUser(user) {
-    return this.afStore.collection('users').doc(user.uid).set({
-      avatar: '',
+  createUser(data) {
+     this.afStore.collection('users').doc(data.user.uid).set({
+      avatar: 'https://firebasestorage.googleapis.com/v0/b/gamesocial-zb.appspot.com/o/avatar.jpg?alt=media&token=a63d8d23-041c-4021-bb68-742bd0a95160',
       bio: '',
-      name: user.name,
+      name: data.additionalUserInfo.profile.displayName,
       tag: '',
-      uid: user.uid
+      uid: data.user.uid,
+      providerId: data.additionalUserInfo.profile.id,
+      provider: data.additionalUserInfo.providerId
+    });
+  }
+
+  doMicrosoftLogin() {
+    return new Promise<any>((resolve, reject) => {
+      // TODO: Choose Msal
+      // this.msalService.loginPopup()
+      //     .then(res => {
+      //       // this.createUser(res);
+      //       console.log('Microsoft Res: ', res);
+      //       resolve(res);
+      //     }, err => {
+      //       console.log('Microsoft Err: ', err);
+      //       reject(err);
+      //     }
+      // );
+
+      // TODO: Choose Firebase
+      const provider = new firebase.auth.OAuthProvider('microsoft.com');
+      // provider.setCustomParameters({
+      //   tenant: '7cf310c1-bc89-4a58-9c3b-fd416a0d4daf'
+      // });
+      // provider.addScope('user.authenticate');
+      provider.addScope('login.live.com');
+      // provider.addScope('service::user.auth.xboxlive.com::MBI_SSL');
+      // provider.addScope('xboxlive.com');
+      // provider.addScope('273227eb-4db5-4ad6-a567-c4d54fac3708/Xboxlive.signin');
+      // provider.addScope('api://273227eb-4db5-4ad6-a567-c4d54fac3708/Xboxlive.offline_access');
+      // provider.addScope('Xbox.Services');
+      this.afAuth.signInWithPopup(provider)
+        .then(res => {
+          // this.createUser(res);
+          console.log('Microsoft Res: ', res);
+          resolve(res);
+        }, err => {
+          console.log('Microsoft Err: ', err);
+          reject(err);
+        });
     });
   }
 
@@ -70,6 +115,7 @@ export class AuthService {
       const provider = new firebase.auth.FacebookAuthProvider();
       this.afAuth.signInWithPopup(provider)
       .then(res => {
+        console.log('Facebook Res: ', res);
         resolve(res);
       }, err => {
         console.log(err);

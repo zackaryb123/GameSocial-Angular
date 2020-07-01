@@ -100,12 +100,12 @@
 //}
 
 .list-group-item.theme-selector {
-  /deep/ .btn.active {
+  .btn.active {
     background-color: var(--brand-primary);
     color: var(--brand-inverse-text);
     border: 1px solide var(--brand-primary);
   }
-  /deep/ .btn {
+  .btn {
     background-color: transparent;
     color: var(--brand-primary);
 

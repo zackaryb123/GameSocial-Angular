@@ -35,6 +35,13 @@ export class LoginComponent {
     });
   }
 
+  tryMicrosoftLogin() {
+    this.authService.doMicrosoftLogin()
+      .then(res => {
+        this.router.navigate(['/home']);
+      });
+  }
+
   tryFacebookLogin() {
     this.authService.doFacebookLogin()
     .then(res => {
