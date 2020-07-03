@@ -47,7 +47,7 @@ type HashParameters = LogUserResponse;
 // ].join(' ');
 
 // ----- Functions ----- //
-exports.microsoftAuthenticate = functions.https.onCall(
+exports.authenticate = functions.https.onCall(
   async (
     email: Credentials['email'],
     password: Credentials['password'],

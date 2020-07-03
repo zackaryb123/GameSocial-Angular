@@ -4,7 +4,7 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-export const archiveChat = functions.firestore
+exports.chat = functions.firestore
   .document('chats/{chatId}')
   .onUpdate(change => {
     const data = change.after.data();
