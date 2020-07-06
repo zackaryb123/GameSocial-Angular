@@ -1,5 +1,4 @@
-import {stringify} from "querystring";
-
+import {stringify} from 'querystring';
 const functions = require('firebase-functions');
 import axios from 'axios';
 import {
@@ -15,6 +14,7 @@ import {
   TokensExchangeProperties
 } from './models/microsoft.models';
 import {parse} from 'ts-node/dist';
+import {CallableContext} from 'firebase-functions/lib/providers/https';
 
 const uris = {
   userAuthenticate: 'https://user.auth.xboxlive.com/user/authenticate',
@@ -47,21 +47,21 @@ type HashParameters = LogUserResponse;
 // ].join(' ');
 
 // ----- Functions ----- //
-exports.authenticate = functions.https.onCall(
-  async (
-    email: Credentials['email'],
-    password: Credentials['password'],
-    options: AuthenticateOptions = {}
-    ) => {
-    const preAuthResponse = await preAuth();
-    const logUserResponse = await logUser(preAuthResponse, { email, password });
-    const exchangeRpsTicketForUserTokenResponse = await exchangeRpsTicketForUserToken(
-      logUserResponse.access_token
-    );
+exports.authenticate = functions.https.onCall(async (data: any, constex: CallableContext) => {
+  console.log('authenticate dataa: ', data);
+  const email: Credentials['email'] = data.email;
+  const password: Credentials['password'] = data.password;
+  const options: AuthenticateOptions = {};
 
-    return exchangeUserTokenForXSTSIdentity(
-      exchangeRpsTicketForUserTokenResponse.Token,
-      {XSTSRelyingParty: options.XSTSRelyingParty, raw: false}
+  const preAuthResponse = await preAuth();
+  const logUserResponse = await logUser(preAuthResponse, { email, password });
+  const exchangeRpsTicketForUserTokenResponse = await exchangeRpsTicketForUserToken(
+    logUserResponse.access_token
+  );
+
+  return exchangeUserTokenForXSTSIdentity(
+    exchangeRpsTicketForUserTokenResponse.Token,
+    {XSTSRelyingParty: options.XSTSRelyingParty, raw: false}
     ) as Promise<AuthenticateResponse>;
 });
 

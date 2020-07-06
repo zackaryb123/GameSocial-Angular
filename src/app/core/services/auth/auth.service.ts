@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import OAuthCredential = firebase.auth.OAuthCredential;
+import {GetUGCQueryString, XBLAuthorization} from '../../interfaces/xbox.interfaces';
+import {XboxService} from '../3rd-party/microsoft/xbox.service';
 // import {MsalService} from '@azure/msal-angular';
 
 @Injectable()
@@ -20,7 +22,8 @@ export class AuthService {
    // private msalService: MsalService,
    private afStore: AngularFirestore,
    private router: Router,
-   private http: HttpClient
+   private http: HttpClient,
+   private xboxService: XboxService
   ) {
     this.watchAuthUser();
   }
@@ -74,34 +77,11 @@ export class AuthService {
 
   doMicrosoftLogin() {
     return new Promise<any>((resolve, reject) => {
-      // TODO: Choose Msal
-      // this.msalService.loginPopup()
-      //     .then(res => {
-      //       // this.createUser(res);
-      //       console.log('Microsoft Res: ', res);
-      //       resolve(res);
-      //     }, err => {
-      //       console.log('Microsoft Err: ', err);
-      //       reject(err);
-      //     }
-      // );
-
-      // TODO: Choose Firebase
       const provider = new firebase.auth.OAuthProvider('microsoft.com');
-      // provider.setCustomParameters({
-      //   tenant: '7cf310c1-bc89-4a58-9c3b-fd416a0d4daf'
-      // });
-      // provider.addScope('user.authenticate');
-      provider.addScope('login.live.com');
-      // provider.addScope('service::user.auth.xboxlive.com::MBI_SSL');
-      // provider.addScope('xboxlive.com');
-      // provider.addScope('273227eb-4db5-4ad6-a567-c4d54fac3708/Xboxlive.signin');
-      // provider.addScope('api://273227eb-4db5-4ad6-a567-c4d54fac3708/Xboxlive.offline_access');
-      // provider.addScope('Xbox.Services');
       this.afAuth.signInWithPopup(provider)
         .then(res => {
-          // this.createUser(res);
           console.log('Microsoft Res: ', res);
+          this.createUser(res);
           resolve(res);
         }, err => {
           console.log('Microsoft Err: ', err);

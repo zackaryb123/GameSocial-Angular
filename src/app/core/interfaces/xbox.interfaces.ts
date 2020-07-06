@@ -1,4 +1,5 @@
 export interface XBLAuthorization {
+  gamertagOrXUID: string | number;
   userHash: string;
   XSTSToken: string;
 }
