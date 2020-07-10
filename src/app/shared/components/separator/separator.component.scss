@@ -1,0 +1,44 @@
+.separator-divider {
+  display: flex;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  white-space: nowrap;
+  text-align: center;
+  border-top: 0;
+
+  clear: both;
+  width: 100%;
+  min-width: 100%;
+
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  padding-top: 1rem;
+  box-sizing: border-box;
+}
+
+.separator-divider-inner-text {
+  margin-left: 1rem;
+  display: inline-block;
+  padding: 0 1em 0 0;
+}
+
+.diamond {
+  height: 18px;
+  display: inline-block;
+  margin-right: 4px;
+  margin-top: -4px;
+  vertical-align: middle;
+  width: 18px;
+}
+
+.separator-text {
+  display: inline-block;
+  margin: 0 0 0 4px;
+  vertical-align: top;
+}
+
+.separator-line {
+  padding: 0 5%;
+}

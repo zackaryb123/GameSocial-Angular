@@ -65,11 +65,17 @@
       border: none;
 
       .media-card {
+        border: 1px solid ghostwhite;
+        border-radius: 3px;
         color: gray;
         text-shadow: none;
         display: block;
         position: relative;
         text-decoration: none;
+        div {
+          border-bottom: 1px solid ghostwhite;
+          border-radius: 3px;
+        }
         &:hover {
           div {
             .item-actions.main-actions {
@@ -167,7 +173,7 @@
       .thumbnail {
         //border-radius: 0;
         clear: both;
-        height: 25rem;
+        //height: 25rem;
         border: none;
         padding: 0;
         box-shadow: none;
@@ -179,7 +185,7 @@
 
         .thumb-image {
           border-radius: 3px;
-          height: 100%;
+          //height: 100%;
           transition: transform 0.3s ease-out;
           max-width: 100%;
           border: 0;
@@ -232,7 +238,12 @@
       }
 
       .item-actions {
-        border: 1px solid ghostwhite;
+        //border-bottom-right-radius: 3px;
+        //border-bottom-left-radius: 3px;
+        //border-bottom: 1px solid ghostwhite;
+        //border-right: 1px solid ghostwhite;
+        //border-left: 1px solid ghostwhite;
+        //border: 1px solid ghostwhite;
         padding: 1rem;
         margin: 0;
         box-shadow: none;
@@ -284,7 +295,7 @@
         transform: translate(-50%, -50%);
       }
       .thumbnail {
-        height: 17rem;
+        //height: 17rem;
       }
     }
   }

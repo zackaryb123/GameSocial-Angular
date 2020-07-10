@@ -7,10 +7,6 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import OAuthCredential = firebase.auth.OAuthCredential;
-import {GetUGCQueryString, XBLAuthorization} from '../../interfaces/xbox.interfaces';
-import {XboxService} from '../3rd-party/microsoft/xbox.service';
-// import {MsalService} from '@azure/msal-angular';
 
 @Injectable()
 export class AuthService {
@@ -19,11 +15,9 @@ export class AuthService {
 
   constructor(
    private afAuth: AngularFireAuth,
-   // private msalService: MsalService,
    private afStore: AngularFirestore,
    private router: Router,
    private http: HttpClient,
-   private xboxService: XboxService
   ) {
     this.watchAuthUser();
   }
@@ -60,18 +54,6 @@ export class AuthService {
     const {uid} = await this.getAuth();
     return this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise().then(data => {
       return data.data();
-    });
-  }
-
-  createUser(data) {
-     this.afStore.collection('users').doc(data.user.uid).set({
-      avatar: 'https://firebasestorage.googleapis.com/v0/b/gamesocial-zb.appspot.com/o/avatar.jpg?alt=media&token=a63d8d23-041c-4021-bb68-742bd0a95160',
-      bio: '',
-      name: data.additionalUserInfo.profile.displayName,
-      tag: '',
-      uid: data.user.uid,
-      providerId: data.additionalUserInfo.profile.id,
-      provider: data.additionalUserInfo.providerId
     });
   }
 
@@ -138,6 +120,7 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {
+        this.createUser(res, value);
         resolve(res);
       }, err => reject(err));
     });
@@ -163,6 +146,35 @@ export class AuthService {
           console.log('doLogout: fail: ', error);
           reject(error);
         });
+    });
+  }
+
+  createUser(data, value?) {
+    console.log('createUser(data): ', data);
+    const newUserRef = this.afStore.collection('users').doc(data.user.uid);
+    newUserRef.get().toPromise().then(user => {
+      if (!user.exists) {
+        if (data.additionalUserInfo.providerId === 'microsoft.com') {
+          return this.afStore.collection('users').doc(data.user.uid).set({
+            avatar: 'https://firebasestorage.googleapis.com/v0/b/gamesocial-zb.appspot.com/o/avatar.jpg?alt=media&token=a63d8d23-041c-4021-bb68-742bd0a95160',
+            bio: '',
+            name: data.additionalUserInfo.profile.displayName,
+            tag: '',
+            uid: data.user.uid,
+            providerId: data.additionalUserInfo.profile.id,
+            provider: data.additionalUserInfo.providerId
+          });
+        } else {
+          return this.afStore.collection('users').doc(data.user.uid).set({
+            avatar: 'https://firebasestorage.googleapis.com/v0/b/gamesocial-zb.appspot.com/o/avatar.jpg?alt=media&token=a63d8d23-041c-4021-bb68-742bd0a95160',
+            bio: '',
+            name: value.name,
+            tag: value.username,
+            uid: data.user.uid,
+            provider: data.additionalUserInfo.providerId
+          });
+        }
+      }
     });
   }
 }

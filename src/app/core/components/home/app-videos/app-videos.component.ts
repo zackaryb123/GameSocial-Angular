@@ -15,14 +15,17 @@ import {AppService} from '../../../services/app/app.service';
   styleUrls: ['./app-videos.scss'],
   template: `
 <!--    <loader [message]="'Loading Awesome Media Results'" [loading]="loading$"></loader>-->
-    <video-list
+    <separator
+    [title]="'Xbox'">
+    </separator>
+    <video-list2
       [list]="videos$"
       [queued]="playlistIds$"
       (play)="playSelectedVideo($event)"
       (queue)="queueSelectedVideo($event)"
       (unqueue)="removeVideoFromPlaylist($event)"
       (add)="addMediaToPlaylist($event)"
-    ></video-list>
+    ></video-list2>
   `
 })
 export class AppVideosComponent implements OnInit {

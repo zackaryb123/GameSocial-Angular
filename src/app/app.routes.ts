@@ -12,7 +12,7 @@ export const rootRouterConfig: Routes = [
   { path: '',               component: AccessPage, resolve: [AuthResolver], runGuardsAndResolvers: 'always' },
   { path: 'home',           component: HomePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
-      { path: 'videos',         component: AppVideosComponent,        outlet: 'home'},
+      { path: 'clips',         component: AppVideosComponent,        outlet: 'xbox'},
     ]},
   { path: 'profile',        component: ProfilePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [

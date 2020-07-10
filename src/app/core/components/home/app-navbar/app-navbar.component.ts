@@ -8,17 +8,24 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-// import { Authorization } from '@core/services';
-// import { EchoesState } from '@core/store';
-// import { AppApi } from '@dispatcher/app.dispatcher';
-
 @Component({
   selector: 'app-navbar',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app-navbar.scss'],
   template: `
-    <nav class="row navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-container">
+        <ul class="nav abs-pos">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="[{ outlets: { xbox : 'clips' } }]">Xbox</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Playstation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Nintendo</a>
+          </li>
+        </ul>
         <div class="navbar__content">
         <h3 *ngIf="header" class="navbar__header navbar-text">
             <button *ngIf="mainIcon" class="navbar-btn__main btn-transparent"
@@ -30,10 +37,6 @@ import {
           <ng-content></ng-content>
         </div>
         <section class="navbar-text navbar-actions">
-<!--          <app-navbar-user-->
-<!--            [userImageUrl]="(user$)"-->
-<!--            (signIn)="signInUser()"-->
-<!--            ></app-navbar-user>-->
           <app-navbar-menu
             [appVersion]="appVersion$"
             [theme]="themes$"

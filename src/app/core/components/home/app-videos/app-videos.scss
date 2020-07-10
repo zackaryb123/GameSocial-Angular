@@ -1,39 +1,39 @@
 @import '../../../../../assets/home/core/global';
 
 :host {
-  margin-top: 7rem;
-	display: block;
+  margin-top: 10rem;
+  display: block;
   margin-bottom: 6rem;
 
-	.nav-toolbar {
-		margin: 0.9rem .5rem;
-		display: inline-block;
-	}
+  .nav-toolbar {
+    margin: 0.9rem .5rem;
+    display: inline-block;
+  }
 }
 
 //@media (min-width: 320px) {
-	:host {
-		position: relative;
+:host {
+  position: relative;
 
-		.nav-toolbar {
-			.btn {
-				padding: 1rem 2.7rem;
-			}
-		}
-	}
+  .nav-toolbar {
+    .btn {
+      padding: 1rem 2.7rem;
+    }
+  }
+}
 //}
 
 @media (min-width: 768px) {
-	:host {
-		padding-left: 0;
+  :host {
+    padding-left: 0;
 
-		.nav-toolbar {
-			.btn {
-				padding: 0.7rem 1.5rem;
-			}
-		}
-		.videos-list {
-			padding-left: 1.6rem;
-		}
-	}
+    .nav-toolbar {
+      .btn {
+        padding: 0.7rem 1.5rem;
+      }
+    }
+    .videos-list {
+      padding-left: 1.6rem;
+    }
+  }
 }

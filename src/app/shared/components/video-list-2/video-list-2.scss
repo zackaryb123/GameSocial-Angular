@@ -7,17 +7,18 @@
 //@media (min-width: 320px) {
   :host {
     ul {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
+      padding: 0;
+      //display: flex;
+      //flex-direction: row;
+      //flex-wrap: wrap;
+      //justify-content: center;
     }
     .video-list-item {
-      width: 100%;
-      max-width: 100%;
+      //width: 100%;
+      //max-width: 100%;
 
       &:hover {
-        box-shadow: none;
+        //box-shadow: none;
       }
     }
   }
@@ -26,7 +27,7 @@
   :host {
     .video-list-item {
       //width: 22rem;
-      width: 36rem;
+      //width: 36rem;
     }
   }
 }

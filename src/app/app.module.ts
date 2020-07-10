@@ -26,6 +26,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {MsalModule} from '@azure/msal-angular';
+import { SeparatorComponent } from './shared/components/separator/separator.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -36,6 +38,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,
     ...CORE_COMPONENTS,
+    SeparatorComponent,
   ],
   imports: [
     AppStoreModule,
@@ -60,6 +63,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     StoreRouterConnectingModule.forRoot({}),
     CdkTableModule,
     DragDropModule,
+    FlexLayoutModule,
     // ServiceWorkerModule.register('/ngsw-worker.js', {
     //   enabled: env.production
     // })

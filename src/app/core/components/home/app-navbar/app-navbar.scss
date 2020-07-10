@@ -1,5 +1,15 @@
 @import '../../../../../assets/home/core/global';
 
+.game-options {
+
+}
+
+.abs-pos {
+  position: absolute;
+  top: 6rem;
+  left: 3px;
+}
+
 app-navbar {
   $zindex: 1020;
   $navbar-container-padding: 0.5rem 5rem;
@@ -19,13 +29,45 @@ app-navbar {
   }
 
   .navbar-container {
-    padding: 0.5rem 2rem .5rem 5rem;
+    //padding: 0.5rem 2rem .5rem 5rem;
+    padding: 0.5rem 2rem .5rem 0rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     //padding: $navbar-container-padding;
     backdrop-filter: blur(.5rem);
     width: 100%;
+
+    .nav {
+      border-bottom-right-radius: .5rem;
+      background: rgba(10, 10, 10, 0.2);
+      box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+      &.abs-pos {
+        position: absolute;
+        top: 6rem;
+        left: 3px;
+      }
+
+      .nav-item {
+        .nav-link {
+          border-bottom-right-radius: 3px;
+          color: ghostwhite;
+          background-color: rgba(100, 149, 237, 0.8);
+          //color: cornflowerblue;
+          //background-color: transparent;
+          &:active{
+            //background: rgba(10, 10, 10, 0.2);
+            //box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+          }
+          &:hover {
+            color: cornflowerblue;
+            cursor: pointer;
+            background: rgba(10, 10, 10, 0.2);
+            box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+          }
+        }
+      }
+    }
 
     .navbar__content {
       flex: 1;

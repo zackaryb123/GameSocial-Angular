@@ -1,0 +1,81 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import {fadeInAnimation} from '../../animations';
+
+function createIdMap(list: any[]) {
+  return list.reduce((acc, cur) => {
+    acc[cur.id] = true;
+    return acc;
+  }, {});
+}
+
+@Component({
+  selector: 'video-list2',
+  styleUrls: ['./video-list-2.scss'],
+  animations: [fadeInAnimation],
+  template: `
+<!--    class="video-list-container list-unstyled clearfix"-->
+  <div fxLayout="row wrap" fxLayoutGap="grid">
+<!--    class="video-list-item"-->
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="33%" fxFlex.lg="25%" [@fadeIn] *ngFor="let media of list">
+      <video-media
+        [media]="media"
+        [queued]="media | isInQueue:queued"
+        (play)="playSelectedVideo(media)"
+        (queue)="queueSelectedVideo(media)"
+        (unqueue)="unqueueSelectedVideo(media)"
+        (add)="addVideo(media)">
+      </video-media>
+    </div>
+  </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VideoList2Component implements OnChanges {
+  @Input() list: any[] = [];
+  @Input() queued: string[] = [];
+  @Output() play = new EventEmitter();
+  @Output() queue = new EventEmitter();
+  @Output() add = new EventEmitter();
+  @Output() unqueue = new EventEmitter();
+
+  queuedMediaIdMap = {};
+
+  constructor() {}
+
+  ngOnChanges({ queued }: SimpleChanges) {
+    // if (queued && queued.currentValue) {
+    //   console.log('YoutubeListComponent.createIdMap()');
+    //   this.queuedMediaIdMap = createIdMap(queued.currentValue);
+    // }
+  }
+
+  playSelectedVideo(media) {
+    this.play.emit(media);
+  }
+
+  queueSelectedVideo(media) {
+    this.queue.emit(media);
+  }
+
+  addVideo(media) {
+    this.add.emit(media);
+  }
+
+  unqueueSelectedVideo(media) {
+    this.unqueue.emit(media);
+  }
+
+  getMediaStatus(media: any) {
+    return {
+      queued: this.queuedMediaIdMap[media.id]
+    };
+  }
+}
