@@ -28,15 +28,15 @@ export class VideoeMediaComponent {
   constructor() { }
 
   playVideo(media: any) {
-    this.play.emit(media);
+    // this.play.emit(media);
   }
 
   queueVideo(media: any) {
-    this.queue.emit(media);
+    // this.queue.emit(media);
   }
 
   addVideoToPlaylist(media: any) {
-    this.add.emit(media);
+    // this.add.emit(media);
   }
 
   toggle(showDesc: boolean) {
@@ -44,6 +44,6 @@ export class VideoeMediaComponent {
   }
 
   removeVideoFromQueue(media: any) {
-    this.unqueue.emit(media);
+    // this.unqueue.emit(media);
   }
 }

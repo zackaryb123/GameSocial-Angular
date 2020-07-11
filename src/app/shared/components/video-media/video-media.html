@@ -15,18 +15,20 @@
       <div
         rel="tooltip"
         class="media-thumb is-rounded-top"
-        [title]="media.snippet.title"
+        [title]="media.titleName"
         (click)="playVideo(media)">
 
         <div class="thumbnail">
           <img
             name
             class="thumb-image thumb-shadow"
-            [src]="media | videoToThumb">
+            [src]="media.thumbnails[0].uri"
+          >
           <img
             name
             class="thumb-image is-rounded"
-            [src]="media | videoToThumb">
+            [src]="media.thumbnails[0].uri"
+          >
         </div>
 
         <button class="btn btn-transparent text-primary btn-lg ux-maker play-media">
@@ -40,7 +42,7 @@
             href="#/video/"
             rel="tooltip"
             class="media-thumb ellipsis">
-            {{ media.snippet.title }}
+            {{ media.titleName }}
           </span>
         </h4>
         <!-- <section class="stats is-absolute-bottom is-flex-row">
@@ -66,7 +68,7 @@
             <icon name="reply" title="Queue this video to now playlist"></icon>
           </button>
           <button
-            *ngIf="queued"
+            *ngIf="!queued"
             class="btn btn-transparent text-danger no-padding"
             (click)="removeVideoFromQueue(media)">
             <icon name="trash" title="Queue this video to now playlist"></icon>
@@ -86,7 +88,7 @@
           </button> -->
           <!-- <span class="is-strechable"></span> -->
           <span class="text-info item-duration">
-						<icon name="clock-o"></icon> {{ media.contentDetails?.duration | toFriendlyDuration }}
+						<icon name="clock-o"></icon> {{ media.durationInSeconds }}
 					</span>
           <button class="btn btn-transparent no-padding">
             <icon

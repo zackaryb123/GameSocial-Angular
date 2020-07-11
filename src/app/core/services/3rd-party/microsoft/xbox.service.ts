@@ -20,19 +20,15 @@ export class XboxService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT',
+      // 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT'
     });
-    // h.set('Accept', 'application/json');
-    // h.set('Content-Type', 'application/json');
-    // h.set('Access-Control-Allow-Origin', '*');
     return this.http.post(`${BASE_URI}/${uris.gameclips}`, JsonData, {headers}).toPromise().then((data: GameClipNode[]) => {
-      console.log(data);
       return data;
     }, (err) => {
-      console.log('ONREJECT ERROR: ', err);
+      console.log('ON REJECT ERROR: ', err);
       return err;
     }).catch(err => {
-      console.log('ERROR: ', err);
+      console.log('CATCH ERROR: ', err);
       return err;
     });
   }

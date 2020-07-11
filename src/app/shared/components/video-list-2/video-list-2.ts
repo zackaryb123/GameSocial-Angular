@@ -27,12 +27,13 @@ function createIdMap(list: any[]) {
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="33%" fxFlex.lg="25%" [@fadeIn] *ngFor="let media of list">
       <video-media
         [media]="media"
-        [queued]="media | isInQueue:queued"
-        (play)="playSelectedVideo(media)"
-        (queue)="queueSelectedVideo(media)"
-        (unqueue)="unqueueSelectedVideo(media)"
-        (add)="addVideo(media)">
+        [queued]="false">
       </video-media>
+<!--      [queued]="media | isInQueue:queued"-->
+<!--      (play)="playSelectedVideo(media)"-->
+<!--      (queue)="queueSelectedVideo(media)"-->
+<!--      (unqueue)="unqueueSelectedVideo(media)"-->
+<!--      (add)="addVideo(media)"-->
     </div>
   </div>
   `,

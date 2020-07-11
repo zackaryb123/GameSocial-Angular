@@ -8,7 +8,7 @@ import {
   Output
 } from '@angular/core';
 import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
-import {AppService} from "../../../../../services/app/app.service";
+import {AppService} from '../../../../../services/app/app.service';
 
 @Component({
   selector: 'playlist-track',
@@ -20,7 +20,7 @@ import {AppService} from "../../../../../services/app/app.service";
         (click)="markSelected(video)">
         <span class="track-number">{{ index + 1 }}</span>
         <img draggable="false" class="video-thumb__image"
-        src="{{ video | videoToThumb }}"
+        src="https://gameclipscontent-t2009.xboxlive.com/xuid-2533274858701166-public/1648e433-a514-41a5-9541-13efc7f0ff6c_Thumbnail.PNG"
         xtitle="Drag to sort">
         <span class="badge badge-info">
           {{ video.contentDetails.duration | toFriendlyDuration }}
