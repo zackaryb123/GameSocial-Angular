@@ -6,6 +6,12 @@ import {
   Output
 } from '@angular/core';
 import {ICON_PREFIX_BRAND} from '../../directives/icon';
+import {AuthService} from "../../../core/services/auth";
+import {AppService} from "../../../core/services/app/app.service";
+import {getSelectedPlaylistId} from "../../../core/store/playlist";
+import {Store} from "@ngrx/store";
+import {GameSocialState} from "../../../core/store/reducers";
+import {PlaylistService} from "../../../core/services/playlist/playlist.service";
 
 @Component({
   selector: 'video-media',
@@ -21,11 +27,19 @@ export class VideoeMediaComponent {
   @Output() add = new EventEmitter<any>();
   @Output() unqueue = new EventEmitter<any>();
 
+  auth: any;
+  selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
   showDesc = false;
   isPlaying = false;
   ICON_PREFIX_BRAND = ICON_PREFIX_BRAND;
 
-  constructor() { }
+  constructor(
+    private playlistService: PlaylistService,
+    private authService: AuthService,
+    private store: Store<GameSocialState>,
+  ) {
+    this.auth = this.authService.getAuth();
+  }
 
   playVideo(media: any) {
     // this.play.emit(media);
@@ -36,6 +50,7 @@ export class VideoeMediaComponent {
   }
 
   addVideoToPlaylist(media: any) {
+
     // this.add.emit(media);
   }
 

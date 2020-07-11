@@ -46,12 +46,16 @@ export class AuthService {
     });
   }
 
-  getAuth() {
+  getAuthPromise() {
     return this.afAuth.user.pipe(first()).toPromise();
   }
 
+  getAuth() {
+    return this.afAuth.user.pipe(first()).toPromise().then(auth => auth);
+  }
+
   async getAuthUser() {
-    const {uid} = await this.getAuth();
+    const {uid} = await this.getAuthPromise();
     return this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise().then(data => {
       return data.data();
     });

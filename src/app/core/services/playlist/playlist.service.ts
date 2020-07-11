@@ -4,6 +4,8 @@ import * as playlistStore from '../../store/playlist';
 import {GameSocialState} from '../../store/reducers';
 import {getPlaylist, getSelectedPlaylistVideos, getSelectedVideo, getSelectedPlaylistId} from '../../store/playlist';
 import {take} from 'rxjs/operators';
+import {AngularFirestore} from "@angular/fire/firestore";
+import {AuthService} from "../auth";
 
 @Injectable()
 export class PlaylistService {
@@ -13,8 +15,17 @@ export class PlaylistService {
   selectedVideo$ = this.store.select(getSelectedVideo);
 
   constructor(
+    private authService: AuthService,
+    private afStore: AngularFirestore,
     private store: Store<GameSocialState>,
   ) {}
+
+  async addToPlaylist(media, selectedPlaylistId) {
+    const auth = await this.authService.getAuth();
+    this.afStore.collection('user').doc(auth.uid).collection('playlist').doc(selectedPlaylistId).collection('clips').doc(media.clipId).set({
+      clipId: media.clipsId
+    });
+  }
 
   // queueVideo(mediaId: string) {
     // return this.microsoftService.api

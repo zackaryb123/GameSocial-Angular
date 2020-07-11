@@ -129,7 +129,7 @@ export class ProfileSidebarFriendsTrackComponent implements OnInit, AfterContent
    ngOnInit() {
      this.user$ =  this.userService.getUser(this.friend.uid);
      this.presence$ = this.presence.getPresence(this.friend.uid);
-     this.authService.getAuth().then(auth => {
+     this.authService.getAuthPromise().then(auth => {
       this.chatId = this.chatService.createChatId(auth.uid, this.friend.uid);
     });
   }

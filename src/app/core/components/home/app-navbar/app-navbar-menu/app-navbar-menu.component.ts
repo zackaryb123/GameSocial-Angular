@@ -10,7 +10,7 @@ import {
 import {expandFadeInAnimation} from '../../../../../shared/animations/fade-in.animation';
 import {Router} from '@angular/router';
 import {PresenceService} from '../../../../services/presence/presence.service';
-import {AuthService} from "../../../../services/auth";
+import {AuthService} from '../../../../services/auth';
 
 enum Key {
   Backspace = 8,
@@ -93,7 +93,7 @@ export class AppNavbarMenuComponent implements OnInit {
 
   ngOnInit() {
     // this.authUser = await
-    this.authService.getAuth().then(auth => {
+    this.authService.getAuthPromise().then(auth => {
       this.authUser = auth;
     });
   }

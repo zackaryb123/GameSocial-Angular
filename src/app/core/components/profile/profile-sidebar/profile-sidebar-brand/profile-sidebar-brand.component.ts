@@ -24,7 +24,7 @@ export class ProfileSidebarBrandComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.getAuth().then(auth => {
+    this.authService.getAuthPromise().then(auth => {
       this.authUid = auth.uid;
     });
   }

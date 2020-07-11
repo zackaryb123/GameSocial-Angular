@@ -1,6 +1,9 @@
 $icon-font-path: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/fonts/" !default;
 // Include Bootstrap styles
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+@import '../assets/home/echoes-variables';
+@import "../assets/home/bootstrap-custom";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
 .bg-page {
   //background: cornflowerblue;
