@@ -12,6 +12,7 @@ import {Subject} from 'rxjs';
 })
 export class ProfileUserComponent implements OnInit {
   user: any;
+  userUID: any;
   auth: any;
   userFriends: any;
   activeTab = 'tab1';
@@ -29,6 +30,7 @@ export class ProfileUserComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe( routeParams => {
         if (routeParams) {
+          this.userUID = routeParams.uid;
           this.user = this.userService.getUser(routeParams.uid);
           this.userFriends = this.userService.getUserFriends(routeParams.uid);
         }

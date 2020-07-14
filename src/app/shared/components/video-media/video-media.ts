@@ -6,12 +6,12 @@ import {
   Output
 } from '@angular/core';
 import {ICON_PREFIX_BRAND} from '../../directives/icon';
-import {AuthService} from "../../../core/services/auth";
-import {AppService} from "../../../core/services/app/app.service";
-import {getSelectedPlaylistId} from "../../../core/store/playlist";
-import {Store} from "@ngrx/store";
-import {GameSocialState} from "../../../core/store/reducers";
-import {PlaylistService} from "../../../core/services/playlist/playlist.service";
+import {AuthService} from '../../../core/services/auth';
+import {AppService} from '../../../core/services/app/app.service';
+import {getSelectedPlaylistId} from '../../../core/store/playlist';
+import {Store} from '@ngrx/store';
+import {GameSocialState} from '../../../core/store/reducers';
+import {PlaylistService} from '../../../core/services/playlist/playlist.service';
 
 @Component({
   selector: 'video-media',

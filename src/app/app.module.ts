@@ -28,6 +28,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {MsalModule} from '@azure/msal-angular';
 import { SeparatorComponent } from './shared/components/separator/separator.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { UserVideosComponent } from './core/components/profile/profile-user/user-videos/user-videos.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -39,6 +40,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ...SHARED_COMPONENTS,
     ...CORE_COMPONENTS,
     SeparatorComponent,
+    UserVideosComponent,
   ],
   imports: [
     AppStoreModule,

@@ -38,7 +38,7 @@ import {ProfileSidebarFriendsListComponent} from './profile-sidebar-friends-list
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileSidebarFriends implements OnInit {
-  friends$: Observable<any>; // Observable<any>;
+  friends$: Observable<any>;
   filter$ = this.appService.filter$;
   @ViewChild(ProfileSidebarFriendsListComponent, { static: true }) playlistComponent: ProfileSidebarFriendsListComponent;
 

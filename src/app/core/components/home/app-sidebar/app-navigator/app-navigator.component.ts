@@ -26,7 +26,7 @@ import {AuthService} from '../../../../services/auth';
             data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
       <icon [name]="iconName"></icon>
-      <span class="text">{{ iconLabel }}</span>
+      <span class="text ml-3">{{ iconLabel }}</span>
     </button>
     <div [style.display]="toggleDropdown ? 'block' : 'none'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="#">Playlist One</a>

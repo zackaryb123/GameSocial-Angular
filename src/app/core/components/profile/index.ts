@@ -14,6 +14,7 @@ import {ProfileSidebarFriendsListComponent} from './profile-sidebar/profile-side
 import {ProfileSidebarFriendsTrackComponent} from './profile-sidebar/profile-sidebar-friends/profile-sidebar-friends-list/profile-sidebar-friends-track/profile-sidebar-friends-track.component';
 import {ProfileSidebarFriendsFilterComponent} from './profile-sidebar/profile-sidebar-friends/profile-sidebar-friends-filter/profile-sidebar-friends-filter.component';
 import {UserFriendsTrackComponent} from './profile-user/user-friends/user-friends-track/user-friends-track.component';
+import {UserVideosComponent} from './profile-user/user-videos/user-videos.component';
 
 export const PROFILE_COMPONENTS = [
   // PROFILE
@@ -32,5 +33,6 @@ export const PROFILE_COMPONENTS = [
   UserFriendsComponent,
   UserHeaderComponent,
   UserDashboardComponent,
-  UserFriendsTrackComponent
+  UserFriendsTrackComponent,
+  UserVideosComponent
 ];
