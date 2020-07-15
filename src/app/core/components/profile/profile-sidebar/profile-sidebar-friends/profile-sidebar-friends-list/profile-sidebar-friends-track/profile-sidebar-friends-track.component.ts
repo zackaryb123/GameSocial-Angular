@@ -38,7 +38,7 @@ import {UserService} from '../../../../../../services/user';
         [title]="user.fname + ' ' + user.lname">{{user.fname}} {{user.lname}}</section>
     </div>
     <aside class="playlist-track__content">
-      <section *ngIf="!(sidebarToggle$ | async)" class="track-actions">
+      <section class="track-actions">
         <button class="btn btn-transparent text-primary playlist-track"
           *ngIf="isPlaylistMedia(user.uid)"
           (click)="handleToggleTracks($event, user)"

@@ -19,7 +19,7 @@ import {PlaylistService} from '../../../core/services/playlist/playlist.service'
   templateUrl: './video-media.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoeMediaComponent implements OnInit{
+export class VideoeMediaComponent implements OnInit {
   @Input() media: any;
   @Input() queued = false;
   @Output() play = new EventEmitter<any>();

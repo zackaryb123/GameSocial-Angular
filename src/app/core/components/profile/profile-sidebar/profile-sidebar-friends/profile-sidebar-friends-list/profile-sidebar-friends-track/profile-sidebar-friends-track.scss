@@ -29,49 +29,47 @@
       border-radius: 1rem;
     }
 
-    .status-sidebar-closed {
-      transform: translate(-3rem, -2rem);
+    //.status-sidebar-closed {
+    //  transform: translate(-3rem, -2rem);
+    //}
+
+    @media (max-width: 768px) {
+      .now-playlist-track__trigger {
+        background: none;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        border: none;
+        padding: 0;
+      }
     }
 
-    .hide-box {
-      background: none !important;
-      box-shadow: none !important;
-      border: none !important;
-      padding: 0 !important;
+    @media (min-width: 768px) {
+      .now-playlist-track__trigger {
+        background: rgba(10, 10, 10, 0.2);
+        box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+        -moz-box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+        -webkit-box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+        border: 1px solid ghostwhite;
+        //padding: 1.5rem;
+      }
     }
 
     .now-playlist-track__trigger {
-      border: 1px solid ghostwhite;
       text-shadow: none;
-      padding: 1.5rem;
       border-radius: 7px;
       position: relative;
+      border: 1px solid ghostwhite;
+      padding: 1.5rem;
+      color: var(--text-color);
       background: rgba(10, 10, 10, 0.2);
       box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
-      //background-color: var(--sidebar-bg-secondary);
-      //box-shadow: inset 0 0 10px #000000;
-      -moz-box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
-      -webkit-box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
+      margin: 0;
 
       .track-contents {
         display: flex;
         flex-direction: row;
         height: 65px;
-      }
-
-      .active & {
-        color: var(--text-color);
-        //border-right: 6px solid var(--track-active-border-color);
-        //background: var(--track-bg-active-color);
-        //background-color: #202a2f;
-        background: rgba(10, 10, 10, 0.2);
-        box-shadow: inset 0px 0px 6px rgba(10, 10, 10, 0.5);
-        margin: 0;
-        //border-radius: 0;
-        text-shadow: none;
-        padding: 1.5rem;
-        border-radius: 7px;
-        position: relative;
       }
     }
 
@@ -188,6 +186,10 @@
 @media (min-width: 768px) {
   :host {
     .remove-track {
+      .closed & {
+        right: 30px;
+        top: 0;
+      }
       //transform: translatex(5rem);
     }
     &:hover {

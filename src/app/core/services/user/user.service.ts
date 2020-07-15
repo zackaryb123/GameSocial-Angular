@@ -6,8 +6,8 @@ import {first, switchMap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BASE_URI, URIS} from '../../constants/server';
-import {GameClipNode} from "../../interfaces/xbox.interfaces";
-import {iterator} from "rxjs/internal-compatibility";
+import {GameClipNode} from '../../interfaces/xbox.interfaces';
+import {GameClipModule} from '../../models/xbox';
 
 @Injectable()
 export class UserService {
@@ -44,13 +44,13 @@ export class UserService {
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
+          Accept: 'application/json',
         });
         return await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise()
-          .then((res: GameClipNode[]) => {
-            const thumbnails = res.map(item => item.thumbnails);
-            console.log('thumbnails: ', thumbnails);
-            console.log('res', res);
-            return res;
+          .then((res: any) => {
+            const n = new GameClipModule().deserialize(res).toJSON();
+            console.log('res', n);
+            return n;
         }, err => {
           console.log(err);
         }).catch(err => {
@@ -72,6 +72,7 @@ export class UserService {
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
+          Accept: 'application/json'
         });
         const clips: any = await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise();
         console.log('clips: ', clips);

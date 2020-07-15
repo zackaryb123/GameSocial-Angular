@@ -11,6 +11,8 @@ export class GameClipsService {
   ) { }
 
   addGameClip(media, uid) {
+    media.thumbnailUri = media.thumbnails[0].uri.substring(6);
+    media.gameClipUri = media.gameClipUris[0].uri.substring(6);
     this.afStore.collection('clips').add({
       media
     }).then(data => {

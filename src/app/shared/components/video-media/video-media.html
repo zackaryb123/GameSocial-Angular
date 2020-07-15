@@ -9,8 +9,8 @@
 
       <div rel="tooltip" class="media-thumb is-rounded-top" [title]="media.titleName" (click)="playVideo(media)">
         <div class="thumbnail">
-          <img class="thumb-image thumb-shadow" *ngIf="media.thumbnails" [src]="media.thumbnails[0]?.uri">
-          <img class="thumb-image is-rounded" *ngIf="media.thumbnails" [src]="media.thumbnails[0]?.uri">
+          <img class="thumb-image thumb-shadow" [src]="media.thumbnails[0]?.uri">
+          <img class="thumb-image is-rounded" [src]="media.thumbnails[0]?.uri">
         </div>
 
         <button class="btn btn-transparent text-primary btn-lg ux-maker play-media">

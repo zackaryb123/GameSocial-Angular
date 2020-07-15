@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { GameClipsService } from './game-clips-service.service';
+import {GameClipsService} from './game-clips.service';
 
 describe('GameClipsServiceService', () => {
   let service: GameClipsService;
