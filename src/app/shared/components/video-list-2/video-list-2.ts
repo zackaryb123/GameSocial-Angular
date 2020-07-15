@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   Output,
   SimpleChanges
 } from '@angular/core';
@@ -39,8 +39,8 @@ function createIdMap(list: any[]) {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoList2Component implements OnChanges {
-  @Input() list: any[] = [];
+export class VideoList2Component implements OnChanges, OnInit {
+  @Input() list: any[];
   @Input() queued: string[] = [];
   @Output() play = new EventEmitter();
   @Output() queue = new EventEmitter();
@@ -49,7 +49,12 @@ export class VideoList2Component implements OnChanges {
 
   queuedMediaIdMap = {};
 
-  constructor() {}
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    console.log('this.list: ', this.list);
+  }
 
   ngOnChanges({ queued }: SimpleChanges) {
     // if (queued && queued.currentValue) {

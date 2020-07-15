@@ -4,15 +4,19 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {first, switchMap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
-import * as firebase from "firebase";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BASE_URI, URIS} from '../../constants/server';
+import {GameClipNode} from "../../interfaces/xbox.interfaces";
+import {iterator} from "rxjs/internal-compatibility";
 
 @Injectable()
 export class UserService {
   userGameClips$: Observable<any>;
 
   constructor(
-   public afStore: AngularFirestore,
-   public afAuth: AngularFireAuth
+   private afStore: AngularFirestore,
+   private afAuth: AngularFireAuth,
+   private http: HttpClient
   ) {
     this.watchUserGameClips();
   }
@@ -31,21 +35,52 @@ export class UserService {
       });
   }
 
-  getUserClips(uid: string) {
-    return this.afStore.collection('users').doc(uid).collection('clips').get().pipe(first()).toPromise()
+  async getUserClips(uid: string) {
+    return await this.afStore.collection('users').doc(uid).collection('clips').get().toPromise()
       .then(snap => {
         return snap.docs.map(doc => doc.data());
-      }).then(data => {
+      }).then(async data => {
         const arrUids = data.map(item => item.clipId);
-        console.log('arrUids: ', arrUids);
-        return data;
-        // const getUserClips = firebase.functions().httpsCallable('addMessage');
-        // getUserClips(arrUids).then((result) => {
-        //   // Read result of the Cloud Function.
-        //   console.log('result: ', result.data);
-        // }).catch(err => {
-        //   console.log(err);
-        // });
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        });
+        return await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise()
+          .then((res: GameClipNode[]) => {
+            const thumbnails = res.map(item => item.thumbnails);
+            console.log('thumbnails: ', thumbnails);
+            console.log('res', res);
+            return res;
+        }, err => {
+          console.log(err);
+        }).catch(err => {
+          console.log(err);
+        });
+      }, err => {
+        console.log(err);
+      }).catch(err => {
+        console.log(err);
+      });
+  }
+
+  async getUserClips2(uid: string) {
+    return await this.afStore.collection('users').doc(uid).collection('clips').get().toPromise()
+      .then(snap => {
+        return snap.docs.map(doc => doc.data());
+      }).then(async data => {
+        const arrUids = data.map(item => item.clipId);
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        });
+        const clips: any = await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise();
+        console.log('clips: ', clips);
+        console.log(clips.map(i => i.thumbnails.data()));
+        return clips;
+      }, err => {
+        console.log(err);
+      }).catch(err => {
+        console.log(err);
       });
   }
 

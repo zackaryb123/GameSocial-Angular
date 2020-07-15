@@ -36,7 +36,6 @@ export class UserDashboardComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(data => {
       this.userGameClips = data;
-      console.log('DATA: ', data);
     });
   }
 
@@ -45,7 +44,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   async openXboxModal(content) {
-    const res = await this.xboxService.getGameClips('pr0Xt0Xtype18');
+    const res = await this.xboxService.getXboxGameClips('pr0Xt0Xtype18');
     this.videos$ = res.gameClips;
     this.continuationToken$ = res.continuationToken;
     this.modalTitle = 'My Xbox Clips';

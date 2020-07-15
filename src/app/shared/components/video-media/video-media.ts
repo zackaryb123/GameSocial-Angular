@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
+  Input, OnInit,
   Output
 } from '@angular/core';
 import {ICON_PREFIX_BRAND} from '../../directives/icon';
@@ -19,7 +19,7 @@ import {PlaylistService} from '../../../core/services/playlist/playlist.service'
   templateUrl: './video-media.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoeMediaComponent {
+export class VideoeMediaComponent implements OnInit{
   @Input() media: any;
   @Input() queued = false;
   @Output() play = new EventEmitter<any>();
@@ -32,6 +32,10 @@ export class VideoeMediaComponent {
   showDesc = false;
   isPlaying = false;
   ICON_PREFIX_BRAND = ICON_PREFIX_BRAND;
+
+  ngOnInit(): void {
+    console.log('this.media: ', this.media);
+  }
 
   constructor(
     private playlistService: PlaylistService,

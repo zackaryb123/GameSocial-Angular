@@ -38,10 +38,6 @@ export class AppVideosComponent implements OnInit {
 
   async ngOnInit() {
     // this.videos$ = TEST_VIDEOS;
-    const res = await this.xboxService.getGameClips('pr0Xt0Xtype18');
-    this.videos$ = res.gameClips;
-    this.continuationToken$ = res.continuationToken;
-    console.log('this.videos$: ', this.videos$);
     // console.log('thumbnails: ', this.videos$[0].thumbnails);
     // const thumbnails = this.videos$[0].thumbnails.map(item => item.uri);
     // console.log(thumbnails.toString())

@@ -21,7 +21,6 @@ export class UserFriendsTrackComponent implements OnInit {
       // .then(user => {
       //   this.userInfo = user;
       // });
-    console.log(this.userInfo);
   }
 
 }

@@ -1,13 +1,7 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {GameClipNode} from '../../../interfaces/xbox.interfaces';
-import axios, {AxiosRequestConfig} from 'axios';
-
-const BASE_URI = 'http://localhost:3000';
-
-const uris = {
-  gameclips: 'xboxlive/clips',
-};
+import {BASE_URI, URIS} from '../../../constants/server';
 
 @Injectable()
 export class XboxService {
@@ -15,14 +9,13 @@ export class XboxService {
     private http: HttpClient
   ) {}
 
-  getGameClips(gamertag: string) {
+  getXboxGameClips(gamertag: string) {
     const JsonData = JSON.stringify({gamertagOrXUID: gamertag});
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT'
+      'Access-Control-Allow-Origin': '*'
     });
-    return this.http.post(`${BASE_URI}/${uris.gameclips}`, JsonData, {headers}).toPromise().then((data: GameClipNode[]) => {
+    return this.http.post(`${BASE_URI}/${URIS.XBOX_GAME_CLIPS}`, JsonData, {headers}).toPromise().then((data: GameClipNode[]) => {
       return data;
     }, (err) => {
       console.log('ON REJECT ERROR: ', err);
