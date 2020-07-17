@@ -37,51 +37,31 @@ export class UserService {
 
   async getUserClips(uid: string) {
     return await this.afStore.collection('users').doc(uid).collection('clips').get().toPromise()
-      .then(snap => {
+      .then(async snap => {
         return snap.docs.map(doc => doc.data());
-      }).then(async data => {
-        const arrUids = data.map(item => item.clipId);
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          Accept: 'application/json',
-        });
-        return await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise()
-          .then((res: any) => {
-            const n = new GameClipModule().deserialize(res).toJSON();
-            console.log('res', n);
-            return n;
-        }, err => {
-          console.log(err);
-        }).catch(err => {
-          console.log(err);
-        });
-      }, err => {
-        console.log(err);
-      }).catch(err => {
-        console.log(err);
       });
   }
 
   async getUserClips2(uid: string) {
     return await this.afStore.collection('users').doc(uid).collection('clips').get().toPromise()
-      .then(snap => {
-        return snap.docs.map(doc => doc.data());
-      }).then(async data => {
+      .then(async snap => {
+        // return snap.docs.map(doc => doc.data());
+        const data = snap.docs.map(doc => doc.data());
         const arrUids = data.map(item => item.clipId);
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          Accept: 'application/json'
+          'Access-Control-Allow-Origin': '*'
         });
-        const clips: any = await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise();
-        console.log('clips: ', clips);
-        console.log(clips.map(i => i.thumbnails.data()));
-        return clips;
-      }, err => {
-        console.log(err);
-      }).catch(err => {
-        console.log(err);
+        return await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise()
+          .then((res: any) => {
+            // const docs = res.map(i => new GameClipModule().deserialize(i));
+            console.log('res', res.map(item => item.data()));
+            return res;
+          }, err => {
+            console.log(err);
+          }).catch(err => {
+            console.log(err);
+          });
       });
   }
 

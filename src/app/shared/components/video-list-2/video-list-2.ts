@@ -37,7 +37,7 @@ function createIdMap(list: any[]) {
     </div>
   </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoList2Component implements OnChanges, OnInit {
   @Input() list: any[];

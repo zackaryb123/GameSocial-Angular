@@ -1,4 +1,4 @@
-<section class="video-item card ux-maker" [class.show-description]="showDesc">
+<section class="video-item card ux-maker" [class.show-description]="showDesc" *ngIf="media as media">
   <section class="media-card">
     <div class="front face is-rounded-bottom">
       <div class="indicators clearfix">
@@ -8,7 +8,7 @@
       </div>
 
       <div rel="tooltip" class="media-thumb is-rounded-top" [title]="media.titleName" (click)="playVideo(media)">
-        <div class="thumbnail">
+        <div class="thumbnail" *ngIf="media.thumbnails">
           <img class="thumb-image thumb-shadow" [src]="media.thumbnails[0]?.uri">
           <img class="thumb-image is-rounded" [src]="media.thumbnails[0]?.uri">
         </div>

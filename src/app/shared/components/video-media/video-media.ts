@@ -17,7 +17,7 @@ import {PlaylistService} from '../../../core/services/playlist/playlist.service'
   selector: 'video-media',
   styleUrls: ['./video-media.scss'],
   templateUrl: './video-media.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoeMediaComponent implements OnInit {
   @Input() media: any;

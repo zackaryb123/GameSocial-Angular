@@ -29,6 +29,7 @@ import {MsalModule} from '@azure/msal-angular';
 import { SeparatorComponent } from './shared/components/separator/separator.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { UserVideosComponent } from './core/components/profile/profile-user/user-videos/user-videos.component';
+import { ClipPageComponent } from './core/components/clip/clip-page/clip-page.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -41,6 +42,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ...CORE_COMPONENTS,
     SeparatorComponent,
     UserVideosComponent,
+    ClipPageComponent,
   ],
   imports: [
     AppStoreModule,

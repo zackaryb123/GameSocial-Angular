@@ -17,8 +17,8 @@ export class GameClipsService {
       media
     }).then(data => {
       this.afStore.collection('users').doc(uid).collection('clips').doc(data.id).set({
-        clipId: data.id,
-        providerClipId: media.gameClipId
+        ...media,
+        id: data.id
       });
     });
   }

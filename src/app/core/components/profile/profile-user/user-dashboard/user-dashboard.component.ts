@@ -57,7 +57,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   isAdded(gameClipId) {
-    const exist: any[] = this.userGameClips.filter(item => item.providerClipId === gameClipId);
+    const exist: any[] = this.userGameClips.filter(item => item.gameClipId === gameClipId);
     return !(exist.length > 0);
   }
 
