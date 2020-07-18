@@ -24,6 +24,7 @@ function createIdMap(list: any[]) {
   <ul class="video-list-container list-unstyled clearfix">
     <li class="video-list-item" [@fadeIn] *ngFor="let media of list">
       <video-media
+        [type]="'thumbnail'"
         [media]="media"
         [queued]="media | isInQueue:queued"
         (play)="playSelectedVideo(media)"

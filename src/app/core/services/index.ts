@@ -10,6 +10,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {ChatNotificationService} from './notification/chat-notification.service';
 import {XboxService} from './3rd-party/microsoft/xbox.service';
+import {GameClipsService} from './game-clips/game-clips.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,6 @@ export const SERVICES = [
   MessagingService,
   ChatService,
   ChatNotificationService,
-  XboxService
+  XboxService,
+  GameClipsService
 ];

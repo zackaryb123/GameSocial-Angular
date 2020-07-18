@@ -7,17 +7,20 @@ import {AppVideosComponent} from './core/components/home/app-videos/app-videos.c
 import {AccessPage} from './core/components/access/access.page';
 import {ProfileChatComponent} from './core/components/profile/profile-chat/profile-chat.component';
 import {ProfileUserComponent} from './core/components/profile/profile-user/profile-user.component';
+import {ClipPageComponent} from './core/components/clip/clip-page.component';
 
 export const rootRouterConfig: Routes = [
   { path: '',               component: AccessPage, resolve: [AuthResolver], runGuardsAndResolvers: 'always' },
   { path: 'home',           component: HomePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
-      { path: 'clips',         component: AppVideosComponent,        outlet: 'xbox'},
+      { path: 'clips',         component: AppVideosComponent,         outlet: 'xbox'},
+      { path: ':uid',           component: ClipPageComponent,         outlet: 'clip' }
     ]},
   { path: 'profile',        component: ProfilePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
       { path: ':uid',           component: ProfileChatComponent,      outlet: 'chat' },
-      { path: ':uid',           component: ProfileUserComponent,      outlet: 'user' }
+      { path: ':uid',           component: ProfileUserComponent,      outlet: 'user' },
+      { path: ':uid',           component: ClipPageComponent,         outlet: 'clip' }
     ]
   },
 ];

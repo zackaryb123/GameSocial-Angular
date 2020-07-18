@@ -26,6 +26,7 @@ function createIdMap(list: any[]) {
 <!--    class="video-list-item"-->
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="33%" fxFlex.lg="25%" [@fadeIn] *ngFor="let media of list">
       <video-media
+        [type]="'thumbnail'"
         [media]="media"
         [queued]="false">
       </video-media>

@@ -25,5 +25,22 @@ export class XboxService {
       return err;
     });
   }
+  getXboxGameClip(gamertag: string, sid: string, gameId: string) {
+    console.log(gamertag, sid, gameId);
+    const JsonData = JSON.stringify({gamertagOrXUID: gamertag, scid: sid, gameClipId: gameId});
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    return this.http.post(`${BASE_URI}/${URIS.XBOX_GAME_CLIP}`, JsonData, {headers}).toPromise().then((data: GameClipNode) => {
+      return data;
+    }, (err) => {
+      console.log('ON REJECT ERROR: ', err);
+      return err;
+    }).catch(err => {
+      console.log('CATCH ERROR: ', err);
+      return err;
+    });
+  }
 
 }

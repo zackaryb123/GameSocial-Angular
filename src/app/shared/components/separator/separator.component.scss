@@ -14,7 +14,7 @@
   font-variant: tabular-nums;
   line-height: 1.5715;
   list-style: none;
-  padding-top: 1rem;
+  padding-top: .5rem;
   box-sizing: border-box;
 }
 
@@ -41,4 +41,9 @@
 
 .separator-line {
   padding: 0 5%;
+}
+
+.hr-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

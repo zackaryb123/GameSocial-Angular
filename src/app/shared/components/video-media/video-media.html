@@ -1,5 +1,5 @@
-<section class="video-item card ux-maker" [class.show-description]="showDesc" *ngIf="media as media">
-  <section class="media-card">
+<section class="video-item card ux-maker" [class.show-description]="showDesc" *ngIf="media">
+  <section class="media-card" (click)="goClip(media)">
     <div class="front face is-rounded-bottom">
       <div class="indicators clearfix">
         <span class="pull-left item-is-playing">
@@ -8,9 +8,15 @@
       </div>
 
       <div rel="tooltip" class="media-thumb is-rounded-top" [title]="media.titleName" (click)="playVideo(media)">
-        <div class="thumbnail" *ngIf="media.thumbnails">
+        <div class="thumbnail" *ngIf="type === 'thumbnail' && media.thumbnails">
           <img class="thumb-image thumb-shadow" [src]="media.thumbnails[0]?.uri">
           <img class="thumb-image is-rounded" [src]="media.thumbnails[0]?.uri">
+        </div>
+
+        <div class="thumbnail" *ngIf="type === 'clip' && media.thumbnails">
+          <video controls [poster]="media.thumbnails[0]?.uri">
+            <source *ngIf="media.gameClipUris" [src]="media.gameClipUris[0]?.uri" type="video/mp4"/>
+          </video>
         </div>
 
         <button class="btn btn-transparent text-primary btn-lg ux-maker play-media">
