@@ -6,8 +6,6 @@ import {first, switchMap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BASE_URI, URIS} from '../../constants/server';
-import {GameClipNode} from '../../interfaces/xbox.interfaces';
-import {GameClipModule} from '../../models/xbox';
 
 @Injectable()
 export class UserService {
@@ -47,7 +45,7 @@ export class UserService {
       .then(async snap => {
         // return snap.docs.map(doc => doc.data());
         const data = snap.docs.map(doc => doc.data());
-        const arrUids = data.map(item => item.clipId);
+        const arrUids = data.map(item => item.id);
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
@@ -55,7 +53,6 @@ export class UserService {
         return await this.http.post(`${BASE_URI}/${URIS.USER_GAME_CLIPS}`, JSON.stringify(arrUids), {headers}).toPromise()
           .then((res: any) => {
             // const docs = res.map(i => new GameClipModule().deserialize(i));
-            console.log('res', res.map(item => item.data()));
             return res;
           }, err => {
             console.log(err);

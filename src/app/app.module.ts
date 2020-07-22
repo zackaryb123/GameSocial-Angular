@@ -27,6 +27,7 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {MsalModule} from '@azure/msal-angular';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {LayoutModule} from '@angular/cdk/layout';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -62,6 +63,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CdkTableModule,
     DragDropModule,
     FlexLayoutModule,
+    LayoutModule,
     // ServiceWorkerModule.register('/ngsw-worker.js', {
     //   enabled: env.production
     // })

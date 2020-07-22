@@ -14,7 +14,7 @@
         </div>
 
         <div class="thumbnail" *ngIf="type === 'clip' && media.thumbnails">
-          <video controls [poster]="media.thumbnails[0]?.uri">
+          <video class="thumb-video" controls [poster]="media.thumbnails[0]?.uri">
             <source *ngIf="media.gameClipUris" [src]="media.gameClipUris[0]?.uri" type="video/mp4"/>
           </video>
         </div>

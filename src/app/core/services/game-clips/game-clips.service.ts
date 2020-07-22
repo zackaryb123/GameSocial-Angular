@@ -18,13 +18,17 @@ export class GameClipsService {
   }
 
   addGameClip(media, uid) {
-    media.thumbnailUri = media.thumbnails[0].uri.substring(6);
-    media.gameClipUri = media.gameClipUris[0].uri.substring(6);
     this.afStore.collection('clips').add({
-      media
+      ...media,
+      uid
     }).then(data => {
+      this.afStore.collection('clips').doc(data.id).update({
+        id: data.id
+      });
       this.afStore.collection('users').doc(uid).collection('clips').doc(data.id).set({
-        ...media,
+        xuid: media.xuid,
+        scid: media.scid,
+        gameClipId: media.gameClipId,
         id: data.id,
         uid
       });

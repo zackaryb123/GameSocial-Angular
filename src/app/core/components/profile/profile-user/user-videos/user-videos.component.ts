@@ -30,7 +30,7 @@ export class UserVideosComponent implements OnInit {
   ngOnInit() {
     // this.videos$ = this.userService.getUserClips2(this.userUID);
 
-    this.userService.getUserClips(this.userUID)
+    this.userService.getUserClips2(this.userUID)
       .then((data) => {
         console.log('this.videos$: ', data);
         this.videos$ = data;
