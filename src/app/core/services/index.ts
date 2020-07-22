@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 import {ChatNotificationService} from './notification/chat-notification.service';
 import {XboxService} from './3rd-party/microsoft/xbox.service';
 import {GameClipsService} from './game-clips/game-clips.service';
+import {CommentsService} from './comments/comments.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,6 @@ export const SERVICES = [
   ChatService,
   ChatNotificationService,
   XboxService,
-  GameClipsService
+  GameClipsService,
+  CommentsService
 ];

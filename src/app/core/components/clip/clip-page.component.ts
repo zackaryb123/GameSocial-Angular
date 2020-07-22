@@ -6,6 +6,7 @@ import {GameClipsService} from '../../services/game-clips/game-clips.service';
 import {UserService} from '../../services/user';
 import {XboxService} from '../../services/3rd-party/microsoft/xbox.service';
 import {AuthService} from '../../services/auth';
+import {CommentsService} from '../../services/comments/comments.service';
 
 @Component({
   selector: 'clip-page',
@@ -20,6 +21,7 @@ export class ClipPageComponent implements OnInit {
   user: any;
   authUser: any;
   newMsg: any;
+  comments$: any;
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
   isLg: any = false;
 
@@ -29,6 +31,7 @@ export class ClipPageComponent implements OnInit {
     private userService: UserService,
     private xboxService: XboxService,
     private authService: AuthService,
+    private commentsService: CommentsService
   ) {
   }
 
@@ -43,17 +46,19 @@ export class ClipPageComponent implements OnInit {
         if (routeParams) {
           this.clipId = routeParams.uid;
           this.gameClipsService.getGameClip(this.clipId).then(data => {
-            console.log('DATA: ', data);
             this.userId = data.uid;
             this.userService.getUser(this.userId).then(user => {
               this.user = user;
-              console.log('this.user: ', this.user);
             });
             this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
               this.clip = xboxclip.gameClip;
             });
           });
         }
+      });
+    this.commentsService.watchClipComments(this.clipId).pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+      .subscribe(comments => {
+        this.comments$ = comments;
       });
   }
 
@@ -66,10 +71,11 @@ export class ClipPageComponent implements OnInit {
   }
 
   isAuthUser(msgUid: any) {
-    return msgUid === this.authUser.uid;
+    return this.authUser && msgUid === this.authUser.uid;
   }
 
   submit() {
+    this.commentsService.addClipComment(this.newMsg, this.clipId, this.authUser.uid);
     this.newMsg = '';
   }
 

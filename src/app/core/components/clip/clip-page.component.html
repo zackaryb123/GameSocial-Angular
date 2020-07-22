@@ -29,22 +29,14 @@
           <div class="column col-12 pl-md-3 pr-md-3 px-lg-auto px-0">
             <div class="chat-message">
               <ul class="list-unstyled chat-1 scrollbar-light-blue">
-                <li *ngFor="let msg of comments; trackBy: trackByCreated"
+                <li *ngFor="let msg of comments$; trackBy: trackByCreated"
                     [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
                     class="d-flex mb-4">
-                  <img *ngIf="isAuthUser(msg.uid)" [src]="authUser.avatar" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
-                  <div [class.rightArrow]="!isAuthUser(msg.uid)" [class.leftArrow]="isAuthUser(msg.uid)" class="chat-body leftArrow white p-3 ml-2 z-depth-1">
-                    <div class="header">
-                      <strong *ngIf="isAuthUser(msg.uid)" class="chat-name primary-font">{{authUser.fname}} {{authUser.lname}}</strong>
-                      <strong *ngIf="!isAuthUser(msg.uid)" class="chat-name primary-font">{{altUser.fname}} {{altUser.lname}}</strong>
-                      <small class="pull-right text-muted"><i class="far fa-clock"></i>{{msg.timeStamp | dateAgo}}</small>
-                    </div>
-                    <hr class="m-1 w-100">
-                    <p class="chat-text mb-0">
-                      {{msg.comment}}
-                    </p>
-                  </div>
-                  <img *ngIf="!isAuthUser(msg.uid)" [src]="altUser.avatar" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
+                  <message
+                  [authUser]="isAuthUser(msg.uid) ? authUser : null"
+                  [altUID]="!isAuthUser(msg.uid) ? msg.uid : null"
+                  [msg]="msg">
+                  </message>
                 </li>
               </ul>
             </div>
