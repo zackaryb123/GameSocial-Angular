@@ -6,7 +6,7 @@
         </separator>
       </div>
 
-      <div class="clip-column1 col-md-8 col-sm-12">
+      <div class="clip-column1 col-sm-12 col-md-8">
         <video-media
           *ngIf="clip as media"
           [type]="'clip'"
@@ -15,10 +15,24 @@
         </video-media>
       </div>
 
-      <div class="clip-column2 col-md-4 col-sm-12">
+      <div class="clip-column2 col-sm-12 col-md-4">
         <separator
           [title]="'Explore'">
         </separator>
+        <div>
+
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-4 p-0" *ngFor="let media of exploreClips">
+              <video-media
+                [type]="'thumbnail'"
+                [media]="media"
+                [queued]="false">
+              </video-media>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="clip-column3 col-md-8 col-sm-12">
         <separator

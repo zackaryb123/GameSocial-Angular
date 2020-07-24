@@ -21,6 +21,7 @@ export class ClipPageComponent implements OnInit {
   user: any;
   authUser: any;
   newMsg: any;
+  exploreClips: any;
   comments$: any;
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
   isLg: any = false;
@@ -36,6 +37,7 @@ export class ClipPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Get Auth User
     this.authService.getAuthUser().then(auth => {
       this.authUser = auth;
     });
@@ -47,23 +49,32 @@ export class ClipPageComponent implements OnInit {
           this.clipId = routeParams.uid;
           this.gameClipsService.getGameClip(this.clipId).then(data => {
             this.userId = data.uid;
+            // Get Game Clip
+            this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
+              this.clip = xboxclip.gameClip;
+            });
+            // Get User
             this.userService.getUser(this.userId).then(user => {
               this.user = user;
             });
-            this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
-              this.clip = xboxclip.gameClip;
+            // Get User Explore Clips
+            this.userService.getExploreClips(this.userId).then(expClips => {
+              this.exploreClips = expClips;
             });
           });
         }
       });
+    // Observe Comments
     this.commentsService.watchClipComments(this.clipId).pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(comments => {
         this.comments$ = comments;
       });
   }
 
-  getExploreClips() {
-
+  getNewExploreClips() {
+    this.userService.getExploreClips(this.userId).then(expClips => {
+      this.exploreClips = expClips;
+    });
   }
 
   trackByCreated(i, msg) {

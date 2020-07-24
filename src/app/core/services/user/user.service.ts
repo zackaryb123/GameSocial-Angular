@@ -6,6 +6,7 @@ import {first, switchMap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BASE_URI, URIS} from '../../constants/server';
+import {GameClipsService} from "../game-clips/game-clips.service";
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,8 @@ export class UserService {
   constructor(
    private afStore: AngularFirestore,
    private afAuth: AngularFireAuth,
-   private http: HttpClient
+   private http: HttpClient,
+   private gameClipsService: GameClipsService
   ) {
     this.watchUserGameClips();
   }
@@ -72,6 +74,27 @@ export class UserService {
         }
       })
     );
+  }
+
+  getExploreClips(uid: string) {
+    const expClipSize = 2;
+    return this.afStore.collection('users').doc(uid).collection('clips').get().toPromise().then(async userClips => {
+      const clips = userClips.docs.map(item => item.data());
+      const userClipsArr = [];
+      for (let i = 0; i < expClipSize; i++) {
+        if (!userClipsArr.includes(clips[i])) {
+          userClipsArr.push(clips[Math.floor(Math.random() * clips.length)]);
+        }
+      }
+      const clipsArr = [];
+      for (let i = 0; i < userClipsArr.length; i++) {
+        await this.gameClipsService.getGameClip(userClipsArr[i].id).then(clip => {
+          clipsArr.push(clip);
+        });
+      }
+      console.log('clipsArr: ', clipsArr);
+      return clipsArr;
+    });
   }
 
   // async getUser(uid: string) {
