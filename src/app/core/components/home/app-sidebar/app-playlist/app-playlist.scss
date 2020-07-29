@@ -1,6 +1,6 @@
 // FLEX LAYOUT START
 playlist::-webkit-scrollbar {
-  width: .5em;
+  width: .25em;
 }
 
 playlist::-webkit-scrollbar-track {
@@ -24,7 +24,7 @@ playlist::-webkit-scrollbar-thumb {
   flex-basis: 0rem;
   display: flex;
   flex-direction: column;
-  
+
   .sidebar-pane {
     flex: 1 1 0;
     display: flex;

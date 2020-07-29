@@ -6,6 +6,50 @@
     max-width: 124rem;
   }
 
+  .chat-message {
+    max-height: 45rem;
+    overflow-y: scroll;
+    direction: rtl;
+  }
+
+  .chat-message::-webkit-scrollbar {
+    width: .5rem;
+  }
+
+  .chat-message::-webkit-scrollbar-track {
+    //box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    //border-radius: 10px;
+    background-color: #263238;
+  }
+
+  .chat-message::-webkit-scrollbar-thumb {
+    background-color: cornflowerblue;
+    //background-color: transparent;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .comments-lg {
+      display: none !important;
+    }
+
+    .explore-lg {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .comments-sm {
+      display: none !important;
+    }
+
+    .explore-sm {
+      display: none !important;
+    }
+  }
+
   @media (min-width: 768px) {
     .clip-container {
       .row {
@@ -14,10 +58,19 @@
           height: fit-content;
         }
         .clip-column2 {
-          padding-left: 0;
+          // first view
+          //padding-left: 0;
+
+          // seconf view
+          padding-right: 0;
+
         }
         .clip-column3 {
-          padding-right: 0;
+          // first view
+          //padding-right: 0;
+
+          // second view
+          padding-left: 0;
         }
       }
     }
@@ -41,20 +94,24 @@
     content: "";
     position: absolute;
     bottom: 10px;
-    right: -20px;
+    //right: -20px;
+    left: -20px;
     width: 0;
     border: 10px solid transparent;
-    border-left: 10px solid ghostwhite;
+    //border-left: 10px solid ghostwhite;
+    border-right: 10px solid ghostwhite;
   }
 
   .leftArrow:before {
     content: "";
     position: absolute;
     bottom: 10px;
-    left: -20px;
+    //left: -20px;
+    right: -20px;
     width: 0;
     border: 10px solid transparent;
-    border-right: 10px solid ghostwhite;
+    //border-right: 10px solid ghostwhite;
+    border-left: 10px solid ghostwhite;
   }
 
   .avatar {
@@ -86,7 +143,8 @@
   }
 
   .chat-name {
-    margin-right: 1rem;
+    //margin-right: 1rem;
+    margin-left: 1rem;
   }
 
   .chat-button {

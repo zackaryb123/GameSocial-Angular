@@ -77,7 +77,7 @@ export class UserService {
   }
 
   getExploreClips(uid: string) {
-    const expClipSize = 2;
+    const expClipSize = 3;
     return this.afStore.collection('users').doc(uid).collection('clips').get().toPromise().then(async userClips => {
       const clips = userClips.docs.map(item => item.data());
       const userClipsArr = [];

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {distinctUntilChanged, first, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
@@ -14,7 +14,7 @@ import {CommentsService} from '../../services/comments/comments.service';
   styleUrls: ['./clip-page.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClipPageComponent implements OnInit {
+export class ClipPageComponent implements OnInit, OnChanges {
   clipId: any;
   clip: any = {};
   userId: any;
@@ -46,6 +46,7 @@ export class ClipPageComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(routeParams => {
         if (routeParams) {
+          console.log('ROUTE PARAMS: ', routeParams);
           this.clipId = routeParams.uid;
           this.gameClipsService.getGameClip(this.clipId).then(data => {
             this.userId = data.uid;
@@ -69,6 +70,10 @@ export class ClipPageComponent implements OnInit {
       .subscribe(comments => {
         this.comments$ = comments;
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('CHANGES: ', changes);
   }
 
   getNewExploreClips() {

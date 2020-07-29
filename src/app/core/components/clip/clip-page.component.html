@@ -13,9 +13,50 @@
           [media]="media"
           [queued]="false">
         </video-media>
+
+        <!--   Display Comments LG    -->
+        <div class="comments-lg">
+          <separator
+            [title]="'Comments'">
+          </separator>
+
+          <ng-container class="comments">
+            <div class="column col-12 pl-md-3 pr-md-3 px-lg-auto px-0">
+              <div class="chat-message">
+                <ul class="list-unstyled chat-1 scrollbar-light-blue">
+                  <li *ngFor="let msg of comments$; trackBy: trackByCreated"
+                      [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
+                      class="d-flex mb-4">
+                    <message
+                      [flipped]="true"
+                      [authUser]="isAuthUser(msg.uid) ? authUser : null"
+                      [altUID]="!isAuthUser(msg.uid) ? msg.uid : null"
+                      [msg]="msg">
+                    </message>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form">
+                <div class="form__group field">
+                  <input [(ngModel)]="newMsg" (keydown.enter)="submit()" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                  <label for="name" class="form__label"><icon class="send-icon" name="send"></icon></label>
+                </div>
+                <button [disabled]="!newMsg" (click)="submit()" class="btn btn-outline-pink btn-rounded btn-sm waves-effect chat-button" type="button">
+                  <span class="text">Send</span>
+                  <!--        <icon name="send"></icon>-->
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <!--   Display Comments LG    -->
       </div>
 
-      <div class="clip-column2 col-sm-12 col-md-4">
+      <!--  Display Explore SM    -->
+      <div class="explore-sm clip-column2 col-sm-12 col-md-4">
         <separator
           [title]="'Explore'">
         </separator>
@@ -34,41 +75,71 @@
           </div>
         </div>
       </div>
-      <div class="clip-column3 col-md-8 col-sm-12">
-        <separator
-          [title]="'Comments'">
-        </separator>
+      <!--  Display Explore SM    -->
 
-        <ng-container class="comments">
-          <div class="column col-12 pl-md-3 pr-md-3 px-lg-auto px-0">
-            <div class="chat-message">
-              <ul class="list-unstyled chat-1 scrollbar-light-blue">
-                <li *ngFor="let msg of comments$; trackBy: trackByCreated"
-                    [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
-                    class="d-flex mb-4">
-                  <message
-                  [authUser]="isAuthUser(msg.uid) ? authUser : null"
-                  [altUID]="!isAuthUser(msg.uid) ? msg.uid : null"
-                  [msg]="msg">
-                  </message>
-                </li>
-              </ul>
+      <!--      <div class="clip-column3 col-md-8 col-sm-12">-->
+      <div class="clip-column3 col-sm-12 col-md-4">
+        <!--   Display Explore LG     -->
+        <div class="explore-lg">
+          <separator
+            [title]="'Explore'">
+          </separator>
+        <div>
+
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-4 p-0" *ngFor="let media of exploreClips">
+              <video-media
+                [type]="'thumbnail'"
+                [media]="media"
+                [queued]="false">
+              </video-media>
             </div>
           </div>
+        </div>
+        </div>
+        <!--   Display LG     -->
 
-          <div class="col-12">
-            <div class="form">
-              <div class="form__group field">
-                <input [(ngModel)]="newMsg" (keydown.enter)="submit()" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                <label for="name" class="form__label"><icon class="send-icon" name="send"></icon></label>
+        <!--    Display Comments SM    -->
+        <div class="comments-sm">
+          <separator
+                     [title]="'Comments'">
+          </separator>
+
+          <ng-container class="comments">
+            <div class="column col-12 pl-md-3 pr-md-3 px-lg-auto px-0">
+              <div class="chat-message">
+                <ul class="list-unstyled chat-1 scrollbar-light-blue">
+                  <li *ngFor="let msg of comments$; trackBy: trackByCreated"
+                      [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
+                      class="d-flex mb-4">
+                    <message
+                      [authUser]="isAuthUser(msg.uid) ? authUser : null"
+                      [altUID]="!isAuthUser(msg.uid) ? msg.uid : null"
+                      [msg]="msg">
+                    </message>
+                  </li>
+                </ul>
               </div>
-              <button [disabled]="!newMsg" (click)="submit()" class="btn btn-outline-pink btn-rounded btn-sm waves-effect chat-button" type="button">
-                <span class="text">Send</span>
-                <!--        <icon name="send"></icon>-->
-              </button>
             </div>
-          </div>
-        </ng-container>
+
+            <div class="col-12">
+              <div class="form">
+                <div class="form__group field">
+                  <input [(ngModel)]="newMsg" (keydown.enter)="submit()" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                  <label for="name" class="form__label"><icon class="send-icon" name="send"></icon></label>
+                </div>
+                <button [disabled]="!newMsg" (click)="submit()" class="btn btn-outline-pink btn-rounded btn-sm waves-effect chat-button" type="button">
+                  <span class="text">Send</span>
+                  <!--        <icon name="send"></icon>-->
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <!--    Display SM    -->
+
       </div>
     </div>
 </div>

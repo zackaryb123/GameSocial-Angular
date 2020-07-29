@@ -42,6 +42,7 @@ export class VideoeMediaComponent implements OnInit, OnChanges {
 
   ngOnChanges({media}: SimpleChanges): void {
     if (media && isNewChange(media)) {
+      this.media = media.currentValue;
       console.log('New Media', media);
     }
   }
