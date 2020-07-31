@@ -30,7 +30,7 @@ import {PlayerService} from '../../../services/player/player.service';
         [fullScreen]="player.isShowPlayer"
       ></player-resizer>
 
-      <iframe id="7sp6dyg" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="367" height="270" src="https://www.youtube.com/embed/?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A4200&amp;widgetid=1"></iframe>
+      <iframe id="7sp6dyg" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="GameClip video player" width="367" height="270" src=""></iframe>
 <!--      <iframe id="7sp6dyg" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="1122" height="1017" src="https://www.youtube.com/embed/?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A4200&amp;widgetid=1"></iframe>-->
 
     </div>

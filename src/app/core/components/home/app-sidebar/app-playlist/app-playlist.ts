@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, Input,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -32,8 +32,9 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppPlaylist implements OnInit {
-  selectedPlaylist$ = this.playlistService.selectedPlaylist$;
   @ViewChild(PlaylistComponent, { static: true }) playlistComponent: PlaylistComponent;
+  @Input() playlist: any;
+  selectedPlaylist$ = this.playlistService.selectedPlaylist$;
 
   constructor(
     private playlistService: PlaylistService,
@@ -42,7 +43,6 @@ export class AppPlaylist implements OnInit {
   }
 
   ngOnInit() {
-    // this.playlist$ = this.nowPlaylistService.playlist$;
   }
 
   selectVideo(media: any) {

@@ -374,23 +374,11 @@
                     <source [src]="media.gameClipUris[0].uri" type="video/mp4"/>
                   </video>
                 </div>
-                <section class="item-actions main-actions is-rounded">
-                  <h4 class="title">
-                    <span href="#/video/" rel="tooltip" class="media-thumb ellipsis">
-                      {{ media.titleName }}
-                    </span>
-                  </h4>
-                  <section class="media-actions is-flex-row is-flex-valign">
-                    <button *ngIf="isAdded(media.gameClipId)"
-                      class="btn text-primary btn-transparent no-padding"
-                      (click)="addVideoToPlaylist(media)">
-                      <icon name="plus" title="Add This video to a playlist"></icon>
-                    </button>
-                    <span class="text-info item-duration">
-                      <icon name="clock-o"></icon> {{ media.durationInSeconds }}
-                    </span>
-                  </section>
-                </section>
+                <button *ngIf="isAdded(media.gameClipId)"
+                        class="btn add-clip-btn text-primary btn-transparent no-padding"
+                        (click)="addVideoToPlaylist(media)">
+                  <icon name="plus" title="Add This video to a playlist"></icon>
+                </button>
               </div>
             </div>
           </section>

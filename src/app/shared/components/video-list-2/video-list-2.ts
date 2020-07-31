@@ -25,11 +25,16 @@ function createIdMap(list: any[]) {
   <div fxLayout="row wrap" fxLayoutGap="grid">
 <!--    class="video-list-item"-->
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="33%" fxFlex.lg="25%" [@fadeIn] *ngFor="let media of list">
-      <video-media
+      <video-media-options
+        enableDetails="true"
+        enableStatistics="true"
+        enableOptions="true"
+        [isAuthUser]="isAuthUser(media.uid)"
+        [adminActionEnabled]="page === 'profile'"
         [type]="'thumbnail'"
         [media]="media"
         [queued]="false">
-      </video-media>
+      </video-media-options>
 <!--      [queued]="media | isInQueue:queued"-->
 <!--      (play)="playSelectedVideo(media)"-->
 <!--      (queue)="queueSelectedVideo(media)"-->
@@ -41,6 +46,8 @@ function createIdMap(list: any[]) {
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoList2Component implements OnChanges, OnInit {
+  @Input() page: any;
+  @Input() authUser: any;
   @Input() list: any[];
   @Input() queued: string[] = [];
   @Output() play = new EventEmitter();
@@ -54,7 +61,6 @@ export class VideoList2Component implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    console.log('this.list: ', this.list);
   }
 
   ngOnChanges({ queued }: SimpleChanges) {
@@ -62,6 +68,10 @@ export class VideoList2Component implements OnChanges, OnInit {
     //   console.log('YoutubeListComponent.createIdMap()');
     //   this.queuedMediaIdMap = createIdMap(queued.currentValue);
     // }
+  }
+
+  isAuthUser(msgUid: any) {
+    return this.authUser && msgUid === this.authUser.uid;
   }
 
   playSelectedVideo(media) {

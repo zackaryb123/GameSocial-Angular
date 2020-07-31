@@ -37,7 +37,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ...SHARED_PIPES,
     ...SHARED_DIRECTIVES,
     ...SHARED_COMPONENTS,
-    ...CORE_COMPONENTS,
+    ...CORE_COMPONENTS
   ],
   imports: [
     AppStoreModule,

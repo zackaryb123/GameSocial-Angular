@@ -4,7 +4,7 @@
       <div class="col-12 grid-margin">
 
         <user-header
-          *ngIf="auth | async as auth"
+          *ngIf="auth as auth"
           [userFriends]="userFriends"
           [auth]="auth"
           [user]="user"
@@ -47,7 +47,7 @@
 
     </div>
     <div [hidden]="!(activeTab === 'tab4')" class="row profile-body">
-      <user-videos [userUID]="userUID"></user-videos>
+      <user-videos [authUser]="auth" [userUID]="userUID"></user-videos>
     </div>
   </div>
 </div>

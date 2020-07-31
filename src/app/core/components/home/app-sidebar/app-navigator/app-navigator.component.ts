@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, EventEmitter,
   Input,
-  OnInit,
+  OnInit, Output,
 } from '@angular/core';
 import {AuthService} from '../../../../services/auth';
 
@@ -29,15 +29,16 @@ import {AuthService} from '../../../../services/auth';
       <span class="text ml-3">{{ iconLabel }}</span>
     </button>
     <div [style.display]="toggleDropdown ? 'block' : 'none'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Playlist One</a>
-      <a class="dropdown-item" href="#">Playlist Two</a>
-      <a class="dropdown-item" href="#">Playlist Three</a>
+      <a *ngFor="let playlist of dropDownList" (click)="getNewList(playlist.id)" class="dropdown-item" style="cursor: pointer">
+        <span>{{playlist.name}}</span>
+      </a>
     </div>
   </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavigatorComponent implements OnInit {
+  @Input() dropDownList: any;
   @Input() page = 'home';
   @Input() dropDown = false;
   @Input() closed = false;
@@ -46,7 +47,10 @@ export class AppNavigatorComponent implements OnInit {
   @Input() iconLabel: string;
   @Input() iconLink: string;
   @Input() outlet: string;
+
   toggleDropdown = false;
+
+  @Output() selectNewPlaylist = new EventEmitter<string>();
   // public searchType$ = this.store.select(PlayerSearch.getSearchType);
 
   constructor(
@@ -55,6 +59,10 @@ export class AppNavigatorComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getNewList(id) {
+    this.selectNewPlaylist.emit(id);
   }
 
   toddleDropdown() {

@@ -3,29 +3,78 @@ import { Store } from '@ngrx/store';
 import * as playlistStore from '../../store/playlist';
 import {GameSocialState} from '../../store/reducers';
 import {getPlaylist, getSelectedPlaylistVideos, getSelectedVideo, getSelectedPlaylistId} from '../../store/playlist';
-import {take} from 'rxjs/operators';
-import {AngularFirestore} from "@angular/fire/firestore";
-import {AuthService} from "../auth";
+import {switchMap, take} from 'rxjs/operators';
+import { firestore } from 'firebase/app';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {AuthService} from '../auth';
+import {Observable, of} from 'rxjs';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable()
 export class PlaylistService {
-  playlists$ = this.store.select(getPlaylist);
+  playlists$: Observable<any>; // = this.store.select(getPlaylist);
   selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
   selectedPlaylist$ = this.store.select(getSelectedPlaylistVideos);
   selectedVideo$ = this.store.select(getSelectedVideo);
+
+
 
   constructor(
     private authService: AuthService,
     private afStore: AngularFirestore,
     private store: Store<GameSocialState>,
-  ) {}
+    private afAuth: AngularFireAuth
+  ) {
+    this.watchPlaylist();
+  }
 
-  async addToPlaylist(media, selectedPlaylistId) {
-    const auth = await this.authService.getAuth();
-    this.afStore.collection('user').doc(auth.uid).collection('playlist').doc(selectedPlaylistId).collection('clips').doc(media.clipId).set({
-      clipId: media.clipsId
+  watchPlaylist() {
+    this.playlists$ = this.afAuth.user.pipe(
+      switchMap( (auth) => {
+        if (auth) {
+          return this.afStore.doc<any>(`users/${auth.uid}`).collection('playlist').valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
+
+  watchPlaylistById(playlistId) {
+    this.selectedPlaylistId$.pipe(
+      switchMap((value: any, index: number): Observable<any> => {
+        return this.playlists$ = this.afAuth.user.pipe(
+          switchMap( (auth) => {
+            if (auth) {
+              return this.afStore.doc<any>(`users/${auth.uid}/playlist/${playlistId}`).valueChanges();
+            } else {
+              return of(null);
+            }
+          })
+        );
+      })
+    );
+  }
+
+  getPlaylistByIdPromise(authUid, playlistId) {
+    return this.afStore.doc(`users/${authUid}/playlist/${playlistId}`).get().toPromise();
+  }
+
+  addPlaylist(authUid, name) {
+    return this.afStore.collection(`users/${authUid}/playlist`).add({
+      clips: [],
+      name
     });
   }
+
+  addToPlaylist(authUid, clipId, playlistId) {
+    return this.afStore.collection('user').doc(authUid).collection('playlist').doc(playlistId)
+      .update({
+        clips: firestore.FieldValue.arrayUnion(clipId)
+    });
+  }
+
+  /* --- STORE --- */
 
   // queueVideo(mediaId: string) {
     // return this.microsoftService.api

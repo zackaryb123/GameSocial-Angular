@@ -1,0 +1,78 @@
+<section class="video-item card ux-maker" [class.show-description]="showDesc" *ngIf="media">
+  <section class="media-card" (click)="goClip(media)">
+    <div class="front face is-rounded-bottom">
+      <div class="indicators clearfix">
+        <span class="pull-left item-is-playing">
+					<icon name="play"></icon>Now Playing
+				</span>
+      </div>
+
+      <div rel="tooltip" class="media-thumb is-rounded-top" [title]="media.titleName" (click)="playVideo(media)">
+        <div class="thumbnail" *ngIf="type === 'thumbnail' && media.thumbnails">
+          <img class="thumb-image thumb-shadow" [src]="media.thumbnails[0]?.uri">
+          <img class="thumb-image is-rounded" [src]="media.thumbnails[0]?.uri">
+        </div>
+
+        <div class="thumbnail" *ngIf="type === 'clip' && media.thumbnails">
+          <video playsinline class="thumb-video" controls [poster]="media.thumbnails[0]?.uri">
+            <source *ngIf="media.gameClipUris" [src]="media.gameClipUris[0]?.uri" type="video/mp4"/>
+          </video>
+        </div>
+
+        <button class="btn btn-transparent text-primary btn-lg ux-maker play-media">
+          <icon name="video-play 3x"></icon>
+        </button>
+      </div>
+
+<!--      <section class="item-actions main-actions is-rounded">-->
+<!--        <h4 class="title">-->
+<!--					<span rel="tooltip" class="media-thumb ellipsis">{{ media.titleName }}-->
+<!--          </span>-->
+<!--        </h4>-->
+<!--        <section class="media-actions is-flex-row is-flex-valign">-->
+<!--          <button-->
+<!--            *ngIf="!queued"-->
+<!--            class="btn btn-transparent text-info first-action"-->
+<!--            (click)="queueVideo(media)">-->
+<!--            <icon name="reply" title="Queue this video to now playlist"></icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            *ngIf="!queued"-->
+<!--            class="btn btn-transparent text-danger no-padding"-->
+<!--            (click)="removeVideoFromQueue(media)">-->
+<!--            <icon name="trash" title="Queue this video to now playlist"></icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="btn text-primary btn-transparent no-padding"-->
+<!--            (click)="addVideoToPlaylist(media)">-->
+<!--            <icon name="plus" title="Add This video to a playlist"></icon>-->
+<!--          </button>-->
+<!--          <span class="text-info item-duration">-->
+<!--						<icon name="clock-o"></icon> {{ media.durationInSeconds }}-->
+<!--					</span>-->
+<!--          <button class="btn btn-transparent no-padding">-->
+<!--            <icon-->
+<!--              name="info-circle"-->
+<!--              title="more info about this video"-->
+<!--              class="text-info text-md is-media-valign"-->
+<!--              (click)="toggle(showDesc)"-->
+<!--            ></icon>-->
+<!--          </button>-->
+<!--        </section>-->
+<!--      </section>-->
+    </div>
+
+<!--    <section-->
+<!--      *ngIf="showDesc"-->
+<!--      class="close-desc is-absolute-bottom is-absolute-right">-->
+<!--      <button-->
+<!--        (click)="toggle(showDesc)"-->
+<!--        class="btn-transparent btn-xs text-md text-success"-->
+<!--        title="flip back...">-->
+<!--        <icon name="times-circle"></icon>-->
+<!--      </button>-->
+<!--    </section>-->
+
+  </section>
+
+</section>

@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AppService} from '../../../services/app/app.service';
 import {GameClipNode} from '../../../interfaces/xbox.interfaces';
 import {XboxService} from '../../../services/3rd-party/microsoft/xbox.service';
-import {TEST_VIDEOS} from '../../../constants/test-data';
-import {extractThumbnailSrcSet} from '../../../../shared/utils/media.utils';
 
 @Component({
   selector: 'app-videos',
@@ -14,6 +12,8 @@ import {extractThumbnailSrcSet} from '../../../../shared/utils/media.utils';
     [title]="'Xbox'">
     </separator>
     <video-list2
+      [authUser]="authUser"
+      [page]=""
       [list]="videos$"
       [queued]="playlistIds$"
       (play)="playSelectedVideo($event)"
@@ -24,6 +24,7 @@ import {extractThumbnailSrcSet} from '../../../../shared/utils/media.utils';
   `
 })
 export class AppVideosComponent implements OnInit {
+  @Input() authUser: any;
   // videos$: any;
   videos$: GameClipNode[];
   continuationToken$: any;

@@ -2,6 +2,8 @@ import {ChangeDetectionStrategy, Component, Injectable, OnInit} from '@angular/c
 import {Store} from '@ngrx/store';
 import {GameSocialState} from '../../../store/reducers';
 import {AppService} from '../../../services/app/app.service';
+import {PlaylistService} from "../../../services/playlist/playlist.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -25,12 +27,15 @@ import {AppService} from '../../../services/app/app.service';
           iconLabel="Playlist"
           iconName="film"
           dropDown="true"
+          [dropDownList]="playlist$ | async"
           [closed]="sidebarToggle$ | async"
-          [searchType]="searchType$">
+          [searchType]="searchType$"
+          (selectNewPlaylist)="getNewPlaylist($event)"
+        >
         </app-navigator>
       </nav>
 
-      <app-playlist></app-playlist>
+      <app-playlist [playlist]="playlist$ | async"></app-playlist>
 
       <!--    <nav class="navbar navbar-transparent">-->
       <!--      <app-navigator-->
@@ -45,12 +50,19 @@ import {AppService} from '../../../services/app/app.service';
 })
 
 export class AppSidebarComponent implements OnInit {
+  playlist$: Observable<any>;
   sidebarToggle$ = this.appService.sidebarToggle$;
   searchType$ = '';
 
   constructor(
     private appService: AppService,
+    private playlistService: PlaylistService
   ) {
+    this.playlist$ = this.playlistService.playlists$;
+  }
+
+  getNewPlaylist(id) {
+    console.log('getNewPlaylist: ', id);
   }
 
   toggleSidebar() {

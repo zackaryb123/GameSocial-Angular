@@ -17,7 +17,9 @@ const MODAL_ANIMATION_TIMEOUT = 50;
       </div>
       <section class="is-flex-row content">
         <div class="media-to-add is-flex-column is-sticky">
-          <video-media [media]="video.media"></video-media>
+          <video-media-options
+            [media]="video.media">
+          </video-media-options>
         </div>
         <div class="playlists is-strechable" *ngIf="playlists$ | async as playlists">
           <input [value]="playlistsFilter" placeholder="filter playlists..." class="form-control" #searchFilter (input)

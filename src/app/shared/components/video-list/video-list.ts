@@ -23,7 +23,10 @@ function createIdMap(list: any[]) {
   template: `
   <ul class="video-list-container list-unstyled clearfix">
     <li class="video-list-item" [@fadeIn] *ngFor="let media of list">
-      <video-media
+      <video-media-options
+        enableDetails="true"
+        enableStatistics="true"
+        enableOptions="true"
         [type]="'thumbnail'"
         [media]="media"
         [queued]="media | isInQueue:queued"
@@ -31,7 +34,7 @@ function createIdMap(list: any[]) {
         (queue)="queueSelectedVideo(media)"
         (unqueue)="unqueueSelectedVideo(media)"
         (add)="addVideo(media)">
-      </video-media>
+      </video-media-options>
     </li>
   </ul>
   `,

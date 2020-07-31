@@ -11,13 +11,17 @@ import {GameClipNode} from '../../../../interfaces/xbox.interfaces';
     <separator
       [title]="'My Game Clips'">
     </separator>
-    <video-list2 *ngIf="videos$"
+    <video-list2
+      *ngIf="videos$"
+      [authUser]="authUser"
+      [page]="'profile'"
       [list]="videos$">
     </video-list2>
   `
 })
 export class UserVideosComponent implements OnInit {
   @Input() userUID: any;
+  @Input() authUser: any;
   videos$: any;
 
   constructor(
@@ -29,10 +33,9 @@ export class UserVideosComponent implements OnInit {
 
   ngOnInit() {
     // this.videos$ = this.userService.getUserClips2(this.userUID);
-
     this.userService.getUserClips2(this.userUID)
       .then((data) => {
-        console.log('this.videos$: ', data);
+        // console.log('this.videos$: ', data);
         this.videos$ = data;
     });
   }

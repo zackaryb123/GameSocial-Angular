@@ -35,7 +35,9 @@ export class ProfileUserComponent implements OnInit {
           this.userFriends = this.userService.getUserFriends(routeParams.uid);
         }
       });
-    this.auth = this.authService.getAuthPromise().then(auth => auth);
+    this.authService.getAuthPromise().then(auth => {
+      this.auth = auth;
+    });
   }
 
   selectTab(event) {

@@ -7,12 +7,15 @@
       </div>
 
       <div class="clip-column1 col-sm-12 col-md-8">
-        <video-media
+        <video-media-options
+          enableDetails="true"
+          enableOptions="true"
+          enableStatistics="true"
           *ngIf="clip as media"
           [type]="'clip'"
           [media]="media"
           [queued]="false">
-        </video-media>
+        </video-media-options>
 
         <!--   Display Comments LG    -->
         <div class="comments-lg">
@@ -66,11 +69,11 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-4 p-0" *ngFor="let media of exploreClips">
-              <video-media
+              <video-media-options
                 [type]="'thumbnail'"
                 [media]="media"
                 [queued]="false">
-              </video-media>
+              </video-media-options>
             </div>
           </div>
         </div>
@@ -90,11 +93,11 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-4 p-0" *ngFor="let media of exploreClips">
-              <video-media
+              <video-media-options
                 [type]="'thumbnail'"
                 [media]="media"
                 [queued]="false">
-              </video-media>
+              </video-media-options>
             </div>
           </div>
         </div>

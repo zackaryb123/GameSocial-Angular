@@ -16,12 +16,17 @@ import {Router} from '@angular/router';
 import {isNewChange} from '../../utils/data.utils';
 
 @Component({
-  selector: 'video-media',
-  styleUrls: ['./video-media.scss'],
-  templateUrl: './video-media.html',
+  selector: 'video-media-options',
+  styleUrls: ['./video-media-options.scss'],
+  templateUrl: './video-media-options.html',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoeMediaComponent implements OnInit, OnChanges {
+export class VideoMediaOptionsComponent implements OnInit, OnChanges {
+  @Input() enableDetails: boolean;
+  @Input() enableOptions: boolean;
+  @Input() enableStatistics: boolean;
+  @Input() isAuthUser: boolean;
+  @Input() adminActionEnabled: boolean;
   @Input() type: any;
   @Input() media: any;
   @Input() queued = false;
@@ -37,13 +42,11 @@ export class VideoeMediaComponent implements OnInit, OnChanges {
   ICON_PREFIX_BRAND = ICON_PREFIX_BRAND;
 
   ngOnInit(): void {
-    console.log('this.media: ', this.media);
   }
 
   ngOnChanges({media}: SimpleChanges): void {
     if (media && isNewChange(media)) {
-      this.media = media.currentValue;
-      console.log('New Media', media);
+      // this.media = media.currentValue;
     }
   }
 
@@ -61,6 +64,8 @@ export class VideoeMediaComponent implements OnInit, OnChanges {
       return this.router.navigateByUrl(`/home/(clip:${media.id})`);
     }
   }
+
+  addVideo(media: any) { }
 
   playVideo(media: any) {
     // this.play.emit(media);
