@@ -48,7 +48,6 @@ import {distinctUntilChanged, takeUntil} from "rxjs/operators";
       <!--    </nav>-->
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AppSidebarComponent implements OnInit {

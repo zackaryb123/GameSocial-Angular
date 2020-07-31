@@ -46,7 +46,6 @@ import {AppService} from '../../../../../services/app/app.service';
     </ul>
   </section>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() playlist: any;

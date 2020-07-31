@@ -23,7 +23,7 @@ import {AppService} from '../../../../../services/app/app.service';
              [src]="video.thumbnails[0].uri"
         xtitle="Drag to sort">
         <span class="badge badge-info">
-          {{ video.durationInSeconds | toFriendlyDuration }}
+          {{ video.durationInSeconds }}
         </span>
       </section>
 
@@ -62,7 +62,6 @@ import {AppService} from '../../../../../services/app/app.service';
   </div>
   `,
   animations: [flyOut, flyInOut],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistTrackComponent implements AfterContentInit {
   @Input() video: any;

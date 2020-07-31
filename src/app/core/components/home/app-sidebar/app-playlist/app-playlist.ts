@@ -32,12 +32,11 @@ import {isNewChange} from '../../../../../shared/utils/data.utils';
     ></playlist>
   </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppPlaylist implements OnInit, OnChanges {
   @ViewChild(PlaylistComponent, { static: true }) playlistComponent: PlaylistComponent;
   @Input() selectedPlaylist: any;
-  playlist: any;
+  playlist: any = [];
 
   // selectedPlaylist$ = this.playlistService.selectedPlaylist$;
 
