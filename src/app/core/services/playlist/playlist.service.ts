@@ -28,6 +28,8 @@ export class PlaylistService {
     this.watchPlaylist();
   }
 
+  /* --- FIREBASE --- */
+
   watchPlaylist() {
     this.playlists$ = this.afAuth.user.pipe(
       switchMap( (auth) => {
@@ -41,7 +43,7 @@ export class PlaylistService {
   }
 
   watchPlaylistById(playlistId) {
-    this.selectedPlaylistId$.pipe(
+    return this.selectedPlaylistId$.pipe(
       switchMap((value: any, index: number): Observable<any> => {
         return this.playlists$ = this.afAuth.user.pipe(
           switchMap( (auth) => {
@@ -120,7 +122,7 @@ export class PlaylistService {
     });
   }
 
-  updateIndexByMedia(mediaId: string) {
+  updatePlaylistIndex(mediaId: string) {
     this.store.dispatch(new playlistStore.UpdatePlaylistIndex(mediaId));
   }
 

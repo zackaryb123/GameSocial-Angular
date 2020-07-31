@@ -20,14 +20,14 @@ import {AppService} from '../../../../../services/app/app.service';
         (click)="markSelected(video)">
         <span class="track-number">{{ index + 1 }}</span>
         <img draggable="false" class="video-thumb__image"
-        src="https://gameclipscontent-t2009.xboxlive.com/xuid-2533274858701166-public/1648e433-a514-41a5-9541-13efc7f0ff6c_Thumbnail.PNG"
+             [src]="video.thumbnails[0].uri"
         xtitle="Drag to sort">
         <span class="badge badge-info">
-          {{ video.contentDetails.duration | toFriendlyDuration }}
+          {{ video.durationInSeconds | toFriendlyDuration }}
         </span>
       </section>
 
-      <section class="video-title" (click)="markSelected(video)" [title]="video.snippet.title">{{ video.snippet.title }}</section>
+      <section class="video-title" (click)="markSelected(video)" [title]="video.titleName">{{ video.titleName }}</section>
       </div>
     <aside class="playlist-track__content">
       <section class="track-actions">
@@ -57,7 +57,7 @@ import {AppService} from '../../../../../services/app/app.service';
       </button>
     </article>
     <article [@flyOut] *ngIf="displayInfo" class="track-info">
-      {{ video.snippet.description }}
+      {{ video.userCaption}}
     </article>
   </div>
   `,

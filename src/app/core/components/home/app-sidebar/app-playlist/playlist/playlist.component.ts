@@ -10,7 +10,6 @@ import {
   NgZone,
   SimpleChanges, OnInit
 } from '@angular/core';
-// import * as NowPlaylist from '@store/playlist';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {flyOut} from '../../../../../../shared/animations/fade-in.animation';
 import {isNewChange} from '../../../../../../shared/utils/data.utils';
@@ -34,9 +33,9 @@ import {AppService} from '../../../../../services/app/app.service';
       (cdkDropListDropped)="onTrackDrop($event)"
       [cdkDropListLockAxis]="'y'">
       <li class="now-playlist-track" #playlistTrack cdkDrag
-        *ngFor="let video of playlist.videos | search:playlist.filter; let index = index"
+        *ngFor="let video of playlist; let index = index"
         [class.active]="isActiveMedia(video.id, playlistTrack)"
-        [@flyOut]>
+        [@flyOut]> <!--| search:''-->
         <playlist-track
           [video]="video" [index]="index"
           (remove)="removeVideo($event)"
@@ -47,7 +46,7 @@ import {AppService} from '../../../../../services/app/app.service';
     </ul>
   </section>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() playlist: any;
@@ -69,7 +68,8 @@ export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   constructor(
     public zone: NgZone,
     private appService: AppService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     console.log('this.playlist: ', this.playlist);
@@ -102,7 +102,7 @@ export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   isActiveMedia(mediaId: string, trackElement: HTMLUListElement) {
-    const isActive = this.playlist.selectedId === mediaId;
+    const isActive = this.playlist[0].id === mediaId;
     if (isActive) {
       this.activeTrackElement = trackElement;
     }
@@ -117,12 +117,13 @@ export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
     currentIndex,
     previousIndex
   }: CdkDragDrop<any>) {
-    const videos = [...this.playlist.videos];
+    const videos = [...this.playlist];
     moveItemInArray(videos, previousIndex, currentIndex);
     this.sort.emit(videos);
   }
 
   get isPlaylistEmpty() {
-    return this.playlist.videos.length === 0;
+    console.log('this.playlist: ', this.playlist);
+    return this.playlist.length === 0;
   }
 }

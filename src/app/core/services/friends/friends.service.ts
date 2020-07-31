@@ -30,6 +30,14 @@ export class FriendsService {
   getFriends() {
     return this.friends$.pipe(first()).toPromise();
   }
+
+  getUserFriends(uid: string) {
+    return this.afStore.collection('users').doc(uid).collection('friends').get().pipe(first()).toPromise()
+      .then(snap => {
+        return snap.docs.map(doc => doc.data());
+      });
+  }
+
   // removeFriend(friend: any) {
   //   this.store.dispatch(new friendsStore.RemoveFriend(friend));
   // }

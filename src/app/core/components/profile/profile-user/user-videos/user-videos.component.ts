@@ -3,6 +3,7 @@ import {UserService} from '../../../../services/user';
 import {AuthService} from '../../../../services/auth';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GameClipNode} from '../../../../interfaces/xbox.interfaces';
+import {GameClipsService} from "../../../../services/game-clips/game-clips.service";
 
 @Component({
   selector: 'user-videos',
@@ -26,14 +27,13 @@ export class UserVideosComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
+    private gameClipService: GameClipsService,
     private http: HttpClient
   ) {
   }
 
   ngOnInit() {
-    // this.videos$ = this.userService.getUserClips2(this.userUID);
-    this.userService.getUserClips2(this.userUID)
+    this.gameClipService.getUserClipsServer(this.userUID)
       .then((data) => {
         // console.log('this.videos$: ', data);
         this.videos$ = data;

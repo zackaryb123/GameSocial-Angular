@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
-  Component, Input,
-  OnInit,
+  Component, Input, OnChanges,
+  OnInit, SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {PlaylistComponent} from './playlist/playlist.component';
 import {PlaylistService} from '../../../../services/playlist/playlist.service';
+import {GameClipsService} from '../../../../services/game-clips/game-clips.service';
+import {isNewChange} from '../../../../../shared/utils/data.utils';
 
 @Component({
   selector: 'app-playlist',
@@ -13,15 +15,16 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
   template: `
   <div class="sidebar-pane">
     <playlist-filter
-      [playlist]="selectedPlaylist$ | async"
+      *ngIf="playlist"
+      [playlist]="playlist"
       (clear)="clearPlaylist()"
       (filter)="updateFilter($event)"
       (reset)="resetFilter()"
       (headerClick)="onHeaderClick()"
     ></playlist-filter>
     <playlist
-      *ngIf="selectedPlaylist$ | async"
-      [playlist]="selectedPlaylist$ | async"
+      *ngIf="playlist"
+      [playlist]="playlist"
       (select)="selectVideo($event)"
       (selectTrack)="selectTrackInVideo($event)"
       (remove)="removeVideo($event)"
@@ -31,19 +34,32 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppPlaylist implements OnInit {
+export class AppPlaylist implements OnInit, OnChanges {
   @ViewChild(PlaylistComponent, { static: true }) playlistComponent: PlaylistComponent;
-  @Input() playlist: any;
-  selectedPlaylist$ = this.playlistService.selectedPlaylist$;
+  @Input() selectedPlaylist: any;
+  playlist: any;
+
+  // selectedPlaylist$ = this.playlistService.selectedPlaylist$;
 
   constructor(
     private playlistService: PlaylistService,
+    private gameClipsService: GameClipsService,
     // public nowPlaylistService: NowPlaylistService
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
   }
+
+  ngOnChanges({selectedPlaylist}: SimpleChanges): void {
+    if (selectedPlaylist && isNewChange(selectedPlaylist)) {
+      this.gameClipsService.getListClipsServer(selectedPlaylist.currentValue.clips).then(data => {
+        console.log(data);
+        this.playlist = data;
+      });
+    }
+  }
+
 
   selectVideo(media: any) {
     // this.store.dispatch(new AppPlayer.PlayVideo(media));

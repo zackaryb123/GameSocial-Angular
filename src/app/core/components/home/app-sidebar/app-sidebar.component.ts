@@ -3,7 +3,8 @@ import {Store} from '@ngrx/store';
 import {GameSocialState} from '../../../store/reducers';
 import {AppService} from '../../../services/app/app.service';
 import {PlaylistService} from "../../../services/playlist/playlist.service";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
+import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 
 
 @Component({
@@ -30,12 +31,13 @@ import {Observable} from "rxjs";
           [dropDownList]="playlist$ | async"
           [closed]="sidebarToggle$ | async"
           [searchType]="searchType$"
-          (selectNewPlaylist)="getNewPlaylist($event)"
-        >
+          (selectNewPlaylist)="getNewPlaylist($event)">
         </app-navigator>
       </nav>
 
-      <app-playlist [playlist]="playlist$ | async"></app-playlist>
+      <app-playlist
+        [selectedPlaylist]="selectedPlaylist$ | async">
+      </app-playlist>
 
       <!--    <nav class="navbar navbar-transparent">-->
       <!--      <app-navigator-->
@@ -51,6 +53,8 @@ import {Observable} from "rxjs";
 
 export class AppSidebarComponent implements OnInit {
   playlist$: Observable<any>;
+  selectedPlaylist$: Observable<any>;
+  unsubscribe$: Subject<boolean> = new Subject<boolean>();
   sidebarToggle$ = this.appService.sidebarToggle$;
   searchType$ = '';
 
@@ -62,6 +66,8 @@ export class AppSidebarComponent implements OnInit {
   }
 
   getNewPlaylist(id) {
+    this.playlistService.updatePlaylistIndex(id);
+    this.selectedPlaylist$ = this.playlistService.watchPlaylistById(id).pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
     console.log('getNewPlaylist: ', id);
   }
 

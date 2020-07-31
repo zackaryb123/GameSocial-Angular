@@ -6,6 +6,7 @@ import {
   OnInit, Output,
 } from '@angular/core';
 import {AuthService} from '../../../../services/auth';
+import {PlaylistService} from "../../../../services/playlist/playlist.service";
 
 @Component({
   selector: 'app-navigator',
@@ -55,6 +56,7 @@ export class AppNavigatorComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private playlistService: PlaylistService
   ) {
   }
 

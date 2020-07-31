@@ -4,6 +4,7 @@ import {UserService} from '../../../services/user';
 import {distinctUntilChanged, first, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
+import {FriendsService} from "../../../services/friends/friends.service";
 
 @Component({
   selector: 'profile-user',
@@ -20,6 +21,7 @@ export class ProfileUserComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private friendsService: FriendsService,
     private userService: UserService,
     private route: ActivatedRoute,
   ) {
@@ -32,7 +34,7 @@ export class ProfileUserComponent implements OnInit {
         if (routeParams) {
           this.userUID = routeParams.uid;
           this.user = this.userService.getUser(routeParams.uid);
-          this.userFriends = this.userService.getUserFriends(routeParams.uid);
+          this.userFriends = this.friendsService.getUserFriends(routeParams.uid);
         }
       });
     this.authService.getAuthPromise().then(auth => {

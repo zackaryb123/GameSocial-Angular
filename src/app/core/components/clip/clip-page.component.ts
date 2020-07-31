@@ -59,7 +59,7 @@ export class ClipPageComponent implements OnInit, OnChanges {
               this.user = user;
             });
             // Get User Explore Clips
-            this.userService.getExploreClips(this.userId).then(expClips => {
+            this.gameClipsService.getExploreClips(this.userId).then(expClips => {
               this.exploreClips = expClips;
             });
           });
@@ -77,7 +77,7 @@ export class ClipPageComponent implements OnInit, OnChanges {
   }
 
   getNewExploreClips() {
-    this.userService.getExploreClips(this.userId).then(expClips => {
+    this.gameClipsService.getExploreClips(this.userId).then(expClips => {
       this.exploreClips = expClips;
     });
   }

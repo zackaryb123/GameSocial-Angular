@@ -7,9 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {AppService} from '../../../../../services/app/app.service';
-import {distinctUntilChanged, takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-// import * as NowPlaylist from '@store/playlist';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'playlist-filter',
@@ -36,12 +34,12 @@ import {Subject} from "rxjs";
 <!--      <icon name="cloud-upload-alt"></icon>-->
 <!--    </button>-->
     <div class="playlist-filter">
-      <icon name="search" *ngIf="isFilterEmpty()"></icon>
+      <icon name="search"></icon>
 <!--      <icon name="times" class="text-danger"-->
 <!--        *ngIf="!isFilterEmpty()"-->
 <!--        (click)="resetSearchFilter()"></icon>-->
       <input type="search" name="playlist-search"
-        [value]="playlist.filter"
+        [value]=""
         #searchFilter
         (input)="handleFilterChange(searchFilter.value)">
     </div>
@@ -65,6 +63,7 @@ export class PlaylistFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     // this.sidebarToggle$
     //   .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
     //   .subscribe(data => {
@@ -81,9 +80,9 @@ export class PlaylistFilterComponent implements OnInit {
   }
 
   isFilterEmpty() {
-    if (this.playlist) {
-      return this.playlist.filter === '';
-    }
+    // if (this.playlist) {
+    //   return this.playlist.filter === '';
+    // }
   }
 
   clearPlaylist() {
@@ -99,8 +98,8 @@ export class PlaylistFilterComponent implements OnInit {
   }
 
   get playlistLength() {
-    if (this.playlist && this.playlist.videos) {
-      return this.playlist.videos.length;
+    if (this.playlist) {
+      return this.playlist.length;
     }
   }
 }

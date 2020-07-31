@@ -31,7 +31,6 @@
                       [style.justifyContent]="isAuthUser(msg.uid) ? 'start' : 'flex-end'"
                       class="d-flex mb-4">
                     <message
-                      [flipped]="true"
                       [authUser]="isAuthUser(msg.uid) ? authUser : null"
                       [altUID]="!isAuthUser(msg.uid) ? msg.uid : null"
                       [msg]="msg">

@@ -30,9 +30,8 @@ export class UserDashboardComponent implements OnInit {
     private modalService: NgbModal,
     private gameClipsService: GameClipsService,
     private authService: AuthService,
-    private userService: UserService
   ) {
-    this.userService.userGameClips$
+    this.gameClipsService.userGameClips$
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(data => {
       this.userGameClips = data;
