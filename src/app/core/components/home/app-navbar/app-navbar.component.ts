@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation
 } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -17,13 +18,13 @@ import {
       <div class="navbar-container">
         <ul class="nav abs-pos">
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="[{ outlets: { xbox : 'clips' } }]">Xbox</a>
+            <a class="nav-link active" (click)="go('xbox')">Xbox</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Playstation</a>
+            <a class="nav-link" (click)="go('playstation')">Playstation</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Nintendo</a>
+            <a class="nav-link" (click)="go('nintendo')">Nintendo</a>
           </li>
         </ul>
         <div class="navbar__content">
@@ -71,9 +72,15 @@ export class AppNavbarComponent implements OnInit {
   @Output() signOut = new EventEmitter();
   @Output() headerMainIconClick = new EventEmitter();
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit() {}
+
+  go(link) {
+    return this.router.navigateByUrl(`/home/(explore:${link})`);
+  }
 
   signInUser() {
     // this.appApi.signinUser();

@@ -53,7 +53,6 @@ export class AppPlaylist implements OnInit, OnChanges {
   ngOnChanges({selectedPlaylist}: SimpleChanges): void {
     if (selectedPlaylist && isNewChange(selectedPlaylist)) {
       this.gameClipsService.getListClipsServer(selectedPlaylist.currentValue.clips).then(data => {
-        console.log(data);
         this.playlist = data;
       });
     }

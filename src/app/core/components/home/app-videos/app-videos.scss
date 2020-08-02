@@ -1,9 +1,17 @@
 @import '../../../../../assets/home/core/global';
 
 :host {
-  margin-top: 10rem;
+  margin-top: 7rem;
   display: block;
   margin-bottom: 6rem;
+
+  .coming-soon {
+    background-image: url(http://www.seekgif.com/uploads/coming-soon-background-0.jpeg);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+  }
 
   .nav-toolbar {
     margin: 0.9rem .5rem;

@@ -5,8 +5,7 @@ import {
   Input,
   OnInit, Output,
 } from '@angular/core';
-import {AuthService} from '../../../../services/auth';
-import {PlaylistService} from "../../../../services/playlist/playlist.service";
+import {PlaylistService} from '../../../../services/playlist/playlist.service';
 
 @Component({
   selector: 'app-navigator',
@@ -14,7 +13,7 @@ import {PlaylistService} from "../../../../services/playlist/playlist.service";
   template: `
   <div *ngIf="!dropDown" class="list-group" [class.closed]="closed">
       <button class="list-group-item ux-maker"
-        [routerLink]="[{ outlets: { home : iconLink } }]">
+              (click)="go()">
         <icon [name]="iconName"></icon>
         <span class="text">{{ iconLabel }}</span>
       </button>
@@ -22,17 +21,25 @@ import {PlaylistService} from "../../../../services/playlist/playlist.service";
 
   <div *ngIf="dropDown" class="dropdown list-group" [class.closed]="closed">
     <button (click)="toddleDropdown()"
-            class="list-group-item ux-maker dropdown"
+            class="btn list-group-item ux-maker dropdown"
             type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
       <icon [name]="iconName"></icon>
       <span class="text ml-3">{{ iconLabel }}</span>
     </button>
-    <div [style.display]="toggleDropdown ? 'block' : 'none'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a *ngFor="let playlist of dropDownList" (click)="getNewList(playlist.id)" class="dropdown-item" style="cursor: pointer">
         <span>{{playlist.name}}</span>
       </a>
+      <div class="input-group mb-3 dropdown-item">
+        <input type="text" class="form-control" placeholder="Add Playlist" aria-label="Add Playlist" aria-describedby="basic-addon2"
+          [(ngModel)]="newListItem"
+          (keydown.enter)="addListItem()">
+        <div class="input-group-append">
+          <button (click)="addListItem()" class="btn btn-outline-secondary" type="button">Add</button>
+        </div>
+      </div>
     </div>
   </div>
   `,
@@ -49,6 +56,8 @@ export class AppNavigatorComponent implements OnInit {
   @Input() iconLink: string;
   @Input() outlet: string;
 
+  authUser: any;
+  newListItem: any;
   toggleDropdown = false;
 
   @Output() selectNewPlaylist = new EventEmitter<string>();
@@ -63,11 +72,22 @@ export class AppNavigatorComponent implements OnInit {
   ngOnInit() {
   }
 
+  go() {
+    return this.router.navigateByUrl(`/home/(${this.iconLink}:clips)`);
+  }
+
   getNewList(id) {
     this.selectNewPlaylist.emit(id);
   }
 
   toddleDropdown() {
     this.toggleDropdown = !this.toggleDropdown;
+  }
+
+  addListItem() {
+    switch (this.page) {
+      case 'home':
+        return this.playlistService.addPlaylist(this.authUser.uid, this.newListItem);
+    }
   }
 }

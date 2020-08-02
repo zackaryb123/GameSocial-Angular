@@ -71,7 +71,6 @@ export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   ngOnInit(): void {
-    console.log('this.playlist: ', this.playlist);
   }
 
   ngAfterViewChecked() {
@@ -122,7 +121,6 @@ export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   get isPlaylistEmpty() {
-    console.log('this.playlist: ', this.playlist);
     return this.playlist.length === 0;
   }
 }

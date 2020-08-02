@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AppService} from '../../../services/app/app.service';
 import {GameClipNode} from '../../../interfaces/xbox.interfaces';
 import {XboxService} from '../../../services/3rd-party/microsoft/xbox.service';
+import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-videos',
@@ -9,7 +12,7 @@ import {XboxService} from '../../../services/3rd-party/microsoft/xbox.service';
   template: `
 <!--    <loader [message]="'Loading Awesome Media Results'" [loading]="loading$"></loader>-->
     <separator
-    [title]="'Xbox'">
+    [title]="station">
     </separator>
     <video-list2
       [authUser]="authUser"
@@ -26,7 +29,9 @@ import {XboxService} from '../../../services/3rd-party/microsoft/xbox.service';
 export class AppVideosComponent implements OnInit {
   @Input() authUser: any;
   // videos$: any;
+  station: any;
   videos$: GameClipNode[];
+  unsubscribe$: Subject<boolean> = new Subject<boolean>();
   continuationToken$: any;
   // this.store.select(fromPlayerSearch.getPlayerSearchResults);
   playlistIds$ = ''; // this.store.select(NowPlaylist.getPlaylistMediaIds);
@@ -34,10 +39,19 @@ export class AppVideosComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private xboxService: XboxService
+    private xboxService: XboxService,
+    private route: ActivatedRoute
   ) { }
 
   async ngOnInit() {
+    this.route.params
+      .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+      .subscribe(routeParams => {
+        if (routeParams) {
+          console.log('ROUTE PARAMS: ', routeParams);
+          this.station = routeParams.station;
+        }
+      });
     // this.videos$ = TEST_VIDEOS;
     // console.log('thumbnails: ', this.videos$[0].thumbnails);
     // const thumbnails = this.videos$[0].thumbnails.map(item => item.uri);

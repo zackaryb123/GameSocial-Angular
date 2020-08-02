@@ -14,6 +14,7 @@ export const rootRouterConfig: Routes = [
   { path: 'home',           component: HomePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',
     children: [
       { path: 'clips',         component: AppVideosComponent,         outlet: 'xbox'},
+      { path: ':station',         component: AppVideosComponent,         outlet: 'explore'},
       { path: ':uid',           component: ClipPageComponent,         outlet: 'clip' }
     ]},
   { path: 'profile',        component: ProfilePage, canActivate: [AuthGuard], runGuardsAndResolvers: 'always',

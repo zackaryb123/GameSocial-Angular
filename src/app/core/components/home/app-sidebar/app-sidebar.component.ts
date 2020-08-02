@@ -1,10 +1,8 @@
 import {ChangeDetectionStrategy, Component, Injectable, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {GameSocialState} from '../../../store/reducers';
 import {AppService} from '../../../services/app/app.service';
-import {PlaylistService} from "../../../services/playlist/playlist.service";
-import {Observable, Subject} from "rxjs";
-import {distinctUntilChanged, takeUntil} from "rxjs/operators";
+import {PlaylistService} from '../../../services/playlist/playlist.service';
+import {Observable, Subject} from 'rxjs';
+import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -22,7 +20,6 @@ import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 <!--          iconLabel="Clips"-->
 <!--          iconName="film"-->
 <!--          [closed]="sidebarToggle$ | async">-->
-<!--        </app-navigator>-->
         <app-navigator
           iconLink="playlist"
           iconLabel="Playlist"
@@ -67,7 +64,6 @@ export class AppSidebarComponent implements OnInit {
   getNewPlaylist(id) {
     this.playlistService.updatePlaylistIndex(id);
     this.selectedPlaylist$ = this.playlistService.watchPlaylistById(id).pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
-    console.log('getNewPlaylist: ', id);
   }
 
   toggleSidebar() {
