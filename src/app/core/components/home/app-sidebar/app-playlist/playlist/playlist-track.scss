@@ -114,12 +114,12 @@
 
     .remove-track {
       position: absolute;
-      top: 1rem;
-      right: 0rem;
+      top: 3rem;
+      right: 5px;
       // display: block;
       z-index: $track-button;
       font-size: $remove-font-size;
-      transform: translatex(0rem);
+      //transform: translatex(0rem);
       icon {
         color: red;
       }
@@ -162,12 +162,12 @@
 @media (min-width: 768px) {
   :host {
     .remove-track {
-      display: none;
-      //transform: translatex(5rem);
+      //display: none;
+      transform: translatex(5rem);
     }
     &:hover {
       .remove-track {
-        //transform: translatex(0rem);
+        transform: translatex(0rem);
       }
     }
 

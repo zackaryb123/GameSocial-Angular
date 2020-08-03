@@ -34,6 +34,7 @@ import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
       </nav>
 
       <app-playlist
+        [authId]="auth.uid"
         [selectedPlaylist]="selectedPlaylist$ | async">
       </app-playlist>
 

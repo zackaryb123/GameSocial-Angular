@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import {flyInOut, flyOut} from '../../../../../../shared/animations/fade-in.animation';
 import {AppService} from '../../../../../services/app/app.service';
+import {PlaylistService} from '../../../../../services/playlist/playlist.service';
 
 @Component({
   selector: 'playlist-track',
@@ -44,7 +45,7 @@ import {AppService} from '../../../../../services/app/app.service';
         </button>
       </section>
       <button class="btn btn-transparent text-danger ux-maker remove-track" title="Remove From Playlist"
-        (click)="remove.emit(video)">
+        (click)="removeFromPlaylist(video.id)">
         <icon name="trash"></icon>
       </button>
     </aside>
@@ -63,9 +64,11 @@ import {AppService} from '../../../../../services/app/app.service';
   `,
   animations: [flyOut, flyInOut],
 })
-export class PlaylistTrackComponent implements AfterContentInit {
+export class PlaylistTrackComponent implements OnInit, AfterContentInit {
   @Input() video: any;
   @Input() index: number;
+  @Input() authId: any;
+  @Input() selectedPlaylist: any;
   sidebarToggle$ = this.appService.sidebarToggle$;
   @Output() remove = new EventEmitter<any>();
   @Output() select = new EventEmitter<any>();
@@ -74,7 +77,6 @@ export class PlaylistTrackComponent implements AfterContentInit {
     time: string;
     media: any;
   }>();
-
   displayTracks = false;
   displayInfo = false;
   tracks: string[] = [];
@@ -83,7 +85,12 @@ export class PlaylistTrackComponent implements AfterContentInit {
 
   constructor(
     private appService: AppService,
+    private playlistService: PlaylistService
     ) {}
+
+  ngOnInit(): void {
+    console.log('Selected playlist id: ', this.selectedPlaylist.id);
+  }
 
   ngAfterContentInit() {
     this.extractTracks(this.video);
@@ -97,6 +104,12 @@ export class PlaylistTrackComponent implements AfterContentInit {
       //   this.tracks = tracks;
       //   this.hasTracks = true;
       // }
+    }
+  }
+
+  removeFromPlaylist(mediaId) {
+    if (confirm('Are you sure you want to delete?')) {
+      return this.playlistService.removeFromPlaylist(this.authId, mediaId, this.selectedPlaylist.id);
     }
   }
 

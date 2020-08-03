@@ -24,6 +24,8 @@ import {isNewChange} from '../../../../../shared/utils/data.utils';
     ></playlist-filter>
     <playlist
       *ngIf="playlist"
+      [authId]="authId"
+      [selectedPlaylist]="selectedPlaylist"
       [playlist]="playlist"
       (select)="selectVideo($event)"
       (selectTrack)="selectTrackInVideo($event)"
@@ -35,6 +37,7 @@ import {isNewChange} from '../../../../../shared/utils/data.utils';
 })
 export class AppPlaylist implements OnInit, OnChanges {
   @ViewChild(PlaylistComponent, { static: true }) playlistComponent: PlaylistComponent;
+  @Input() authId: any;
   @Input() selectedPlaylist: any;
   playlist: any = [];
 

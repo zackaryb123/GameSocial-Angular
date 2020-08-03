@@ -37,6 +37,8 @@ import {AppService} from '../../../../../services/app/app.service';
         [class.active]="isActiveMedia(video.id, playlistTrack)"
         [@flyOut]> <!--| search:''-->
         <playlist-track
+          [authId]="authId"
+          [selectedPlaylist]="selectedPlaylist"
           [video]="video" [index]="index"
           (remove)="removeVideo($event)"
           (select)="selectVideo(video)"
@@ -48,8 +50,9 @@ import {AppService} from '../../../../../services/app/app.service';
   `,
 })
 export class PlaylistComponent implements OnInit, OnChanges, AfterViewChecked {
+  @Input() authId: any;
   @Input() playlist: any;
-
+  @Input() selectedPlaylist: any;
   @Output() select = new EventEmitter<any>();
   @Output()
   selectTrack = new EventEmitter<{

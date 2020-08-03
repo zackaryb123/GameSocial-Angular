@@ -1,6 +1,6 @@
 <app-player class="navbar-default navbar-fixed-bottom"></app-player>
 
-<app-sidebar [auth]="auth" [class.closed]="sidebarToggle$ | async"></app-sidebar>
+<app-sidebar *ngIf="auth" [auth]="auth" [class.closed]="sidebarToggle$ | async"></app-sidebar>
 
 <div class="container-main">
 <!--  <app-search [class.closed]="sidebarToggle$ | async"></app-search>-->

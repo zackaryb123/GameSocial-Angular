@@ -94,6 +94,12 @@ export class PlaylistService {
     });
   }
 
+  removeFromPlaylist(authId, mediaId, playlistId) {
+    return this.afStore.doc(`users/${authId}/playlist/${playlistId}`).update({
+      clips: firestore.FieldValue.arrayRemove(mediaId)
+    });
+  }
+
   /* --- STORE --- */
 
   // queueVideo(mediaId: string) {
