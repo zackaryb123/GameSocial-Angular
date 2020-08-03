@@ -46,13 +46,13 @@ export class ClipPageComponent implements OnInit, OnChanges {
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(routeParams => {
         if (routeParams) {
-          console.log('ROUTE PARAMS: ', routeParams);
           this.clipId = routeParams.uid;
           this.gameClipsService.getGameClip(this.clipId).then(data => {
             this.userId = data.uid;
             // Get Game Clip
             this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
-              this.clip = xboxclip.gameClip;
+              this.clip = data;
+              this.clip.gameClipUris = xboxclip.gameClip.gameClipUris;
             });
             // Get User
             this.userService.getUser(this.userId).then(user => {
@@ -73,7 +73,6 @@ export class ClipPageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('CHANGES: ', changes);
   }
 
   getNewExploreClips() {

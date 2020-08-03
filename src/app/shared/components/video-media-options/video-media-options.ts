@@ -22,6 +22,7 @@ import {isNewChange} from '../../utils/data.utils';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoMediaOptionsComponent implements OnInit, OnChanges {
+  @Input() authId: any;
   @Input() enableDetails: boolean;
   @Input() enableOptions: boolean;
   @Input() enableStatistics: boolean;
@@ -35,7 +36,7 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
   @Output() add = new EventEmitter<any>();
   @Output() unqueue = new EventEmitter<any>();
 
-  auth: any;
+  playlists: any;
   selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
   showDesc = false;
   isPlaying = false;
@@ -56,13 +57,19 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
     private store: Store<GameSocialState>,
     private router: Router
   ) {
-    this.auth = this.authService.getAuth();
   }
 
   goClip(media) {
     if (this.type !== 'clip') {
       return this.router.navigateByUrl(`/home/(clip:${media.id})`);
     }
+  }
+
+  getPlaylist() {
+    this.playlistService.getPlaylistPromise(this.authId).then(data => {
+      console.log('playlists : ', data);
+      this.playlists = data;
+    });
   }
 
   addVideo(media: any) { }
@@ -75,9 +82,8 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
     // this.queue.emit(media);
   }
 
-  addVideoToPlaylist(media: any) {
-
-    // this.add.emit(media);
+  addVideoToPlaylist(playlistId, mediaId) {
+    return this.playlistService.addToPlaylist(this.authId, mediaId, playlistId);
   }
 
   toggle(showDesc: boolean) {

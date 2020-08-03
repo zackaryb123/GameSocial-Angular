@@ -65,13 +65,25 @@
 <!--            (click)="addVideoToPlaylist(media)">-->
 <!--            <icon name="plus" title="Add This video to a playlist"></icon>-->
 <!--          </button>-->
-          <button
-            class="btn btn-link add-to-playlist"
-            title="Add this video to a playlist"
-            (click)="addVideo(media)">
-            <icon name="plus"></icon>
-            Add
-          </button>
+          <div class="dropdown">
+            <button
+              (click)="getPlaylist()"
+              class="btn dropdown btn-link"
+              type="button"
+              id="dropdownPlaylistButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              title="Add this video to a playlist">
+              <icon name="plus"></icon>
+              Add
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownPlaylistButton">
+              <a *ngFor="let playlist of playlists" (click)="addVideoToPlaylist(playlist.id, media.id)" class="dropdown-item" style="cursor: pointer">
+                <span>{{playlist.name}}</span>
+              </a>
+            </div>
+          </div>
           <!-- <span class="is-strechable"></span> -->
           <span class="text-info item-duration">
 						<icon name="clock-o"></icon> {{ media.durationInSeconds }}

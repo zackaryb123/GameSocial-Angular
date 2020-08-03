@@ -22,8 +22,10 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
   <div *ngIf="dropDown" class="dropdown list-group" [class.closed]="closed">
     <button (click)="toddleDropdown()"
             class="btn list-group-item ux-maker dropdown"
-            type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
             aria-expanded="false">
       <icon [name]="iconName"></icon>
       <span class="text ml-3">{{ iconLabel }}</span>
@@ -46,6 +48,7 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavigatorComponent implements OnInit {
+  @Input() auth: any;
   @Input() dropDownList: any;
   @Input() page = 'home';
   @Input() dropDown = false;
@@ -55,9 +58,7 @@ export class AppNavigatorComponent implements OnInit {
   @Input() iconLabel: string;
   @Input() iconLink: string;
   @Input() outlet: string;
-
-  authUser: any;
-  newListItem: any;
+  newListItem: string;
   toggleDropdown = false;
 
   @Output() selectNewPlaylist = new EventEmitter<string>();
@@ -87,7 +88,8 @@ export class AppNavigatorComponent implements OnInit {
   addListItem() {
     switch (this.page) {
       case 'home':
-        return this.playlistService.addPlaylist(this.authUser.uid, this.newListItem);
+        return this.playlistService.addPlaylist(this.auth.uid, this.newListItem);
     }
+    this.newListItem = '';
   }
 }

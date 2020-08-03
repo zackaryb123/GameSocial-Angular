@@ -26,7 +26,6 @@ export class VideoMediaBasicComponent implements OnInit {
   @Output() add = new EventEmitter<any>();
   @Output() unqueue = new EventEmitter<any>();
 
-  auth: any;
   selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
   showDesc = false;
   isPlaying = false;
@@ -49,7 +48,6 @@ export class VideoMediaBasicComponent implements OnInit {
     private store: Store<GameSocialState>,
     private router: Router
   ) {
-    this.auth = this.authService.getAuth();
   }
 
   goClip(media) {
@@ -66,9 +64,8 @@ export class VideoMediaBasicComponent implements OnInit {
     // this.queue.emit(media);
   }
 
-  addVideoToPlaylist(media: any) {
-
-    // this.add.emit(media);
+  addVideoToPlaylist(playlistId, mediaId) {
+    // return this.playlistService.addToPlaylist(this.authId, mediaId, playlistId);
   }
 
   toggle(showDesc: boolean) {

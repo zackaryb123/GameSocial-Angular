@@ -1,6 +1,6 @@
 <app-player class="navbar-default navbar-fixed-bottom"></app-player>
 
-<app-sidebar [class.closed]="sidebarToggle$ | async"></app-sidebar>
+<app-sidebar [auth]="auth" [class.closed]="sidebarToggle$ | async"></app-sidebar>
 
 <div class="container-main">
 <!--  <app-search [class.closed]="sidebarToggle$ | async"></app-search>-->

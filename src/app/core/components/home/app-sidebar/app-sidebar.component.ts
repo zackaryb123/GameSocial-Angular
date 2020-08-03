@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Injectable, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Injectable, Input, OnInit} from '@angular/core';
 import {AppService} from '../../../services/app/app.service';
 import {PlaylistService} from '../../../services/playlist/playlist.service';
 import {Observable, Subject} from 'rxjs';
@@ -25,6 +25,7 @@ import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
           iconLabel="Playlist"
           iconName="film"
           dropDown="true"
+          [auth]="auth"
           [dropDownList]="playlist$ | async"
           [closed]="sidebarToggle$ | async"
           [searchType]="searchType$"
@@ -48,6 +49,7 @@ import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
 })
 
 export class AppSidebarComponent implements OnInit {
+  @Input() auth;
   playlist$: Observable<any>;
   selectedPlaylist$: Observable<any>;
   unsubscribe$: Subject<boolean> = new Subject<boolean>();

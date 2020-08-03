@@ -8,12 +8,13 @@
 
       <div class="clip-column1 col-sm-12 col-md-8">
         <video-media-options
+          *ngIf="clip && authUser"
           enableDetails="true"
           enableOptions="true"
           enableStatistics="true"
-          *ngIf="clip as media"
+          [authId]="authUser.uid"
           [type]="'clip'"
-          [media]="media"
+          [media]="clip"
           [queued]="false">
         </video-media-options>
 

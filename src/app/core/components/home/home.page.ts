@@ -12,7 +12,7 @@ import {AppService} from '../../services/app/app.service';
 export class HomePage implements OnInit {
   sidebarToggle$ = this.appService.sidebarToggle$;
   user: FirebaseUserModel = new FirebaseUserModel();
-
+  auth: any;
   query$ = '';
   searchType$ = 'video';
   currentPlaylist$ = false;
@@ -27,6 +27,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.getAuth().then(data => {{
+      this.auth = data;
+    }});
   }
 
   search(query: string) {

@@ -58,21 +58,39 @@ export class PlaylistService {
     );
   }
 
+  getPlaylistPromise(authUid) {
+    return this.afStore.collection(`users/${authUid}/playlist`).get().toPromise().then(data => {
+      return data.docs.map(item => item.data());
+    });
+  }
+
   getPlaylistByIdPromise(authUid, playlistId) {
     return this.afStore.doc(`users/${authUid}/playlist/${playlistId}`).get().toPromise();
   }
 
   addPlaylist(authUid, name) {
-    return this.afStore.collection(`users/${authUid}/playlist`).add({
+    const addPlaylistRef = this.afStore.collection(`users/${authUid}/playlist`);
+    return addPlaylistRef.add({
       clips: [],
       name
+    }).then(data => {
+      console.log(data);
+      return addPlaylistRef.doc(data.id).update({
+        id: data.id
+      });
     });
   }
 
   addToPlaylist(authUid, clipId, playlistId) {
-    return this.afStore.collection('user').doc(authUid).collection('playlist').doc(playlistId)
-      .update({
-        clips: firestore.FieldValue.arrayUnion(clipId)
+    const playlistRef = this.afStore.collection('users').doc(authUid).collection('playlist').doc(playlistId);
+    playlistRef.get().toPromise().then(snap => {
+      const clips: any[] = snap.data().clips;
+      console.log(clips);
+      if (!clips.includes(clipId)) {
+        return playlistRef.update({
+            clips: firestore.FieldValue.arrayUnion(clipId)
+          });
+      }
     });
   }
 
