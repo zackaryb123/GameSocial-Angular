@@ -1,0 +1,27 @@
+//@import '../../../../assets/home/echoes-variables';
+
+:host{
+  $bg-description: rgba(255, 255, 255, 0.9);
+  .item-action {
+    color: var(--link-primary-color);
+    &.item-likes {
+      margin-right: 0.5rem;
+    }
+    icon {
+      color: cornflowerblue;
+    }
+  }
+  .item-views {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 767px) {
+  :host {
+    .video-item {
+      .item-views {
+        display: block;
+      }
+    }
+  }
+}

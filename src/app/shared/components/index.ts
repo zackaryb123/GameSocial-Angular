@@ -6,16 +6,18 @@ import {SeparatorComponent} from './separator/separator.component';
 import {VideoList2Component} from './video-list-2/video-list-2';
 import {MessageComponent} from './message/message.component';
 import {VideoMediaOptionsComponent} from './video-media-options/video-media-options';
-import {VideoMediaBasicComponent} from './video-media-basic/video-media-basic.component';
+import {ViewsComponent} from './views/views.component';
+import {LikesComponent} from './likes/likes.component';
 
 export const SHARED_COMPONENTS = [
   VideoListComponent,
   VideoList2Component,
-  VideoMediaBasicComponent,
   VideoMediaOptionsComponent,
   ButtonGroupComponent,
   FixedPluginComponent,
   NotificationComponent,
   SeparatorComponent,
-  MessageComponent
+  MessageComponent,
+  ViewsComponent,
+  LikesComponent
 ];

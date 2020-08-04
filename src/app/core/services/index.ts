@@ -12,6 +12,7 @@ import {ChatNotificationService} from './notification/chat-notification.service'
 import {XboxService} from './3rd-party/microsoft/xbox.service';
 import {GameClipsService} from './game-clips/game-clips.service';
 import {CommentsService} from './comments/comments.service';
+import {StatisticsService} from './statistics/statistics-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,7 @@ export const SERVICES = [
   ChatNotificationService,
   XboxService,
   GameClipsService,
-  CommentsService
+  CommentsService,
+  StatisticsService
+
 ];

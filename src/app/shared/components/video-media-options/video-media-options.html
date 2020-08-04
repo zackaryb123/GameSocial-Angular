@@ -38,12 +38,17 @@
 						<icon name="thumbs-up"></icon> {{ media.likeCount | number:'2.0'}}
 					</span>
 
-          <span
-            class="item-views item-action"
-            rel="tooltip"
-            title="Views">
-						<icon name="eye"></icon> {{ 0 | number:'2.0'}}
-					</span>
+<!--          <span-->
+<!--            class="item-views item-action"-->
+<!--            rel="tooltip"-->
+<!--            title="Views">-->
+<!--						<icon name="eye"></icon> {{ 0 | number:'2.0'}}-->
+<!--					</span>-->
+          <views
+            [clipId]="media.id"
+            [views]="media.views"
+            [enableCount]="allowViewCount">
+          </views>
         </section>
 
         <section *ngIf="enableOptions" class="media-actions is-flex-row is-flex-valign">
@@ -80,7 +85,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownPlaylistButton">
               <a *ngFor="let playlist of playlists" (click)="addVideoToPlaylist(playlist.id, media.id)" class="dropdown-item" style="cursor: pointer">
-                <span>{{playlist.name}}</span>
+                <span class="dropdown-item">{{playlist.name}}</span>
               </a>
             </div>
           </div>

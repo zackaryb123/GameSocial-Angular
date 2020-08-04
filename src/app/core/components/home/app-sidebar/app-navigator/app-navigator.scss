@@ -6,30 +6,42 @@ icon {
 :host {
 	.list-group {
 		margin: 0;
-	}
-	.list-group-item {
-		$active-color: rgba(10,10,10, .5);
 
-		color: $clouds;
-		border: none;
-		background: transparent;
+    .list-group-item {
+      $active-color: rgba(10,10,10, .5);
 
-		&:hover {
-			background: rgba(10,10,10,.2);
-			box-shadow: inset 0px 0px 6px $active-color;
-		}
+      color: $clouds;
+      border: none;
+      background: transparent;
 
-		.closed & {
-			text-align: center;
-		}
+      &:hover {
+        background: rgba(10,10,10,.2);
+        box-shadow: inset 0px 0px 6px $active-color;
+      }
 
-		icon {
-			color: var(--brand-primary);
-			.closed & {
-				//margin: 0;
-			}
-		}
-	}
+      .closed & {
+        text-align: center;
+      }
+
+      newListItem
+
+      icon {
+        color: var(--brand-primary);
+        .closed & {
+          //margin: 0;
+        }
+      }
+    }
+
+    .dropdown-menu{
+      .dropdown-item {
+        .dropdown-item-text {
+          font-size: 18px;
+        }
+      }
+
+    }
+  }
 }
 
 @media (min-width: 768px) {

@@ -92,6 +92,17 @@
       .media-actions {
         justify-content: space-between;
 
+        .dropdown {
+          .dropdown-menu {
+            .dropdown-item {
+              .dropdown-item {
+                font-size: 18px;
+              }
+            }
+          }
+
+        }
+
         .first-action {
           padding-left: 0;
         }

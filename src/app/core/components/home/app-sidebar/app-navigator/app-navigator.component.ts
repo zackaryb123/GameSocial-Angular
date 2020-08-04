@@ -32,7 +32,7 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a *ngFor="let playlist of dropDownList" (click)="getNewList(playlist.id)" class="dropdown-item" style="cursor: pointer">
-        <span>{{playlist.name}}</span>
+        <span class="dropdown-item-text">{{playlist.name}}</span>
       </a>
       <div class="input-group mb-3 dropdown-item">
         <input type="text" class="form-control" placeholder="Add Playlist" aria-label="Add Playlist" aria-describedby="basic-addon2"
@@ -71,6 +71,7 @@ export class AppNavigatorComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.dropDownList);
   }
 
   go() {

@@ -26,6 +26,8 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
   @Input() enableDetails: boolean;
   @Input() enableOptions: boolean;
   @Input() enableStatistics: boolean;
+  @Input() allowViewCount: boolean;
+  @Input() allowLikeAction: boolean;
   @Input() isAuthUser: boolean;
   @Input() adminActionEnabled: boolean;
   @Input() type: any;
