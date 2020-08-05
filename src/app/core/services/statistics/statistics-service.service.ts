@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {firestore} from 'firebase/app';
-import {HttpClient} from "@angular/common/http";
-import {URIS} from "../../constants/server";
+import {HttpClient} from '@angular/common/http';
+import {URIS} from '../../constants/server';
 
 
 @Injectable({
@@ -35,10 +35,17 @@ export class StatisticsService {
 
   incrementViews(clipId, ipAddress) {
     const clipRef = this.afStore.doc(`clips/${clipId}`);
-    return clipRef.collection('ips').doc(ipAddress).get().toPromise().then(snap => {
+    return clipRef.collection('ips').doc(ipAddress).get().toPromise().then(async snap => {
       if (!snap.exists) {
-        return clipRef.update({
-          views: firestore.FieldValue.increment(1)
+        await clipRef.collection('ips').doc(ipAddress).set({ ip: ipAddress });
+        await clipRef.update({ views: firestore.FieldValue.increment(1) }).then(s => {});
+        return clipRef.get().toPromise().then(s => {
+          console.log('s.data().views : ', s.data().views);
+          return s.data().views;
+        });
+      } else {
+        return clipRef.get().toPromise().then(s => {
+          return s.data().views;
         });
       }
     });

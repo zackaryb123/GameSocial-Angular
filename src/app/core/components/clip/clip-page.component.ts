@@ -47,19 +47,20 @@ export class ClipPageComponent implements OnInit, OnChanges {
       .subscribe(routeParams => {
         if (routeParams) {
           this.clipId = routeParams.uid;
-          this.gameClipsService.getGameClip(this.clipId).then(data => {
+          this.gameClipsService.getGameClip(this.clipId).then(async data => {
             this.userId = data.uid;
             // Get Game Clip
-            this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
+            await this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
               this.clip = data;
               this.clip.gameClipUris = xboxclip.gameClip.gameClipUris;
+              console.log('this.clip : ', this.clip);
             });
             // Get User
-            this.userService.getUser(this.userId).then(user => {
+            await this.userService.getUser(this.userId).then(user => {
               this.user = user;
             });
             // Get User Explore Clips
-            this.gameClipsService.getExploreClips(this.userId).then(expClips => {
+            await this.gameClipsService.getExploreClips(this.userId).then(expClips => {
               this.exploreClips = expClips;
             });
           });

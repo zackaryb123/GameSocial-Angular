@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {StatisticsService} from '../../../core/services/statistics/statistics-service.service';
-// var ip = require('ip');
-
+import {isNewChange} from '../../utils/data.utils';
 
 @Component({
   selector: 'views',
@@ -17,7 +16,7 @@ import {StatisticsService} from '../../../core/services/statistics/statistics-se
     </span>
   `
 })
-export class ViewsComponent implements OnInit {
+export class ViewsComponent implements OnInit, OnChanges {
   @Input() views: any;
   @Input() clipId: any;
   @Input() enableCount: boolean;
@@ -27,20 +26,22 @@ export class ViewsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.statService.getIPAddress().toPromise().then(ip => {
-      this.ipAddress = ip;
+    this.statService.getIPAddress().toPromise().then((ipData: any) => {
+      this.ipAddress = ipData.ip;
+      if (this.enableCount && this.clipId) {
+        this.statService.incrementViews(this.clipId, this.ipAddress).then(views => {
+          this.views = views;
+        });
+      }
     });
-    // const clientIp = ip.address();
-    console.log('clientIp: ', this.ipAddress);
-    if (this.enableCount) {
-      this.statService.incrementViews(this.clipId, this.ipAddress).then(views => {
-        console.log('views: ', views);
+  }
+
+  ngOnChanges({clipId}: SimpleChanges): void {
+    if (clipId && isNewChange(clipId)) {
+      this.statService.incrementViews(clipId.currentValue, this.ipAddress).then(views => {
         this.views = views;
       });
     }
-    // this.statService.getViewsPromise(views => {
-    //   this.views = views;
-    // });
   }
 
 }

@@ -45,6 +45,9 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
   ICON_PREFIX_BRAND = ICON_PREFIX_BRAND;
 
   ngOnInit(): void {
+    if (this.allowViewCount) {
+      console.log('this.media:', this.media);
+    }
   }
 
   ngOnChanges({media}: SimpleChanges): void {
