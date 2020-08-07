@@ -1,0 +1,17 @@
+:host {
+  //$bg-description: rgba(255, 255, 255, 0.9);
+
+  .first-action {
+    padding-left: 0;
+  }
+
+  .item-action {
+    color: gray;
+    &.item-likes {
+      margin-right: 0.5rem;
+    }
+    icon {
+      color: cornflowerblue;
+    }
+  }
+}

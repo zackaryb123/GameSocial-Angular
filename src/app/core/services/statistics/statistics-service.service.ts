@@ -21,26 +21,25 @@ export class StatisticsService {
     return this.http.get(URIS.IP_ADDRESS);
   }
 
-  getViewsPromise(clipId) {
+  getViewCountPromise(clipId) {
     this.afStore.doc(`clips/${clipId}`).get().toPromise().then(snap => {
       return snap.data().views;
     });
   }
 
-  getIpsPromise(clipId) {
-    this.afStore.collection(`clips/${clipId}/ips`).get().toPromise().then(snap => {
-      return snap.docs.map(ip => ip.data());
+  getViewsCollectionPromise(clipId) {
+    this.afStore.collection(`clips/${clipId}/views`).get().toPromise().then(snap => {
+      return snap.docs.map(view => view.data());
     });
   }
 
   incrementViews(clipId, ipAddress) {
     const clipRef = this.afStore.doc(`clips/${clipId}`);
-    return clipRef.collection('ips').doc(ipAddress).get().toPromise().then(async snap => {
+    return clipRef.collection('views').doc(ipAddress).get().toPromise().then(async snap => {
       if (!snap.exists) {
-        await clipRef.collection('ips').doc(ipAddress).set({ ip: ipAddress });
-        await clipRef.update({ views: firestore.FieldValue.increment(1) }).then(s => {});
+        await clipRef.collection('views').doc(ipAddress).set({ ip: ipAddress });
+        await clipRef.update({ views: firestore.FieldValue.increment(1) });
         return clipRef.get().toPromise().then(s => {
-          console.log('s.data().views : ', s.data().views);
           return s.data().views;
         });
       } else {
@@ -52,5 +51,38 @@ export class StatisticsService {
   }
 
   /* ----- LIKES ----- */
+
+  getLikesCountPromise(clipId) {
+    this.afStore.doc(`clips/${clipId}`).get().toPromise().then(snap => {
+      return snap.data().likeCount;
+    });
+  }
+
+  getLikesCollectionPromise(clipId) {
+    this.afStore.collection(`clips/${clipId}/likes`).get().toPromise().then(snap => {
+      return snap.docs.map(like =>  like.data());
+    });
+  }
+
+  isClipLiked(clipId, authId) {
+    const clipRef = this.afStore.doc(`clips/${clipId}`);
+    return clipRef.collection('likes').doc(authId).get().toPromise().then(snap => {
+      return snap.exists;
+    });
+  }
+
+  incrementLikes(clipId, authId) {
+    const clipRef = this.afStore.doc(`clips/${clipId}`);
+    return clipRef.collection('likes').doc(authId).set({ uid: authId }).then(async () => {
+      return await clipRef.update({ likeCount: firestore.FieldValue.increment(1) });
+    });
+  }
+
+  decrementLikes(clipId, authId) {
+    const clipRef = this.afStore.doc(`clips/${clipId}`);
+    return clipRef.collection('likes').doc(authId).delete().then(async () => {
+      return await clipRef.update({ likeCount: firestore.FieldValue.increment(-1) });
+    });
+  }
 
 }

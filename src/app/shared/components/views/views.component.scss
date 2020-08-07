@@ -1,18 +1,20 @@
-//@import '../../../../assets/home/echoes-variables';
-
 :host{
-  $bg-description: rgba(255, 255, 255, 0.9);
-  .item-action {
-    color: var(--link-primary-color);
-    &.item-likes {
-      margin-right: 0.5rem;
+  button {
+    opacity: 1;
+    .item-action {
+      &.item-likes {
+        margin-right: 0.5rem;
+      }
+
+      icon {
+        color: cornflowerblue;
+      }
     }
-    icon {
-      color: cornflowerblue;
+
+    .item-views {
+      display: inline-block;
+      color: gray;
     }
-  }
-  .item-views {
-    display: inline-block;
   }
 }
 

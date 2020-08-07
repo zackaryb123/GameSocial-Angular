@@ -31,23 +31,22 @@
         </h4>
 
         <section *ngIf="enableStatistics" class="stats is-absolute-bottom is-flex-row ">
-          <span
-            class="item-likes item-action mr-3"
-            rel="tooltip"
-            title="Likes">
-						<icon name="thumbs-up"></icon> {{ media.likeCount | number:'2.0'}}
-					</span>
-
 <!--          <span-->
-<!--            class="item-views item-action"-->
+<!--            class="item-likes item-action mr-3"-->
 <!--            rel="tooltip"-->
-<!--            title="Views">-->
-<!--						<icon name="eye"></icon> {{ 0 | number:'2.0'}}-->
+<!--            title="Likes">-->
+<!--						<icon name="thumbs-up"></icon> {{ media.likeCount | number:'2.0'}}-->
 <!--					</span>-->
+          <likes
+            [authId]="authId"
+            [clipId]="media.id"
+            [allowLikeAction]="allowLikeAction"
+            [likeCount]="media.likeCount">
+          </likes>
           <views
             [clipId]="media.id"
             [views]="media.views"
-            [enableCount]="allowViewCount">
+            [allowViewCount]="allowViewCount">
           </views>
         </section>
 
