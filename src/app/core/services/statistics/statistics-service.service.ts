@@ -33,11 +33,11 @@ export class StatisticsService {
     });
   }
 
-  incrementViews(clipId, ipAddress) {
+  incrementViews(clipId, authId) {
     const clipRef = this.afStore.doc(`clips/${clipId}`);
-    return clipRef.collection('views').doc(ipAddress).get().toPromise().then(async snap => {
+    return clipRef.collection('views').doc(authId).get().toPromise().then(async snap => {
       if (!snap.exists) {
-        await clipRef.collection('views').doc(ipAddress).set({ ip: ipAddress });
+        await clipRef.collection('views').doc(authId).set({ ip: authId });
         await clipRef.update({ views: firestore.FieldValue.increment(1) });
         return clipRef.get().toPromise().then(s => {
           return s.data().views;

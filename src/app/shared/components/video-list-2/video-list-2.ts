@@ -34,7 +34,8 @@ function createIdMap(list: any[]) {
         [adminActionEnabled]="page === 'profile'"
         [type]="'thumbnail'"
         [media]="media"
-        [queued]="false">
+        [queued]="false"
+        (removed)="refreshClips($event)">
       </video-media-options>
 <!--      [queued]="media | isInQueue:queued"-->
 <!--      (play)="playSelectedVideo(media)"-->
@@ -55,6 +56,7 @@ export class VideoList2Component implements OnChanges, OnInit {
   @Output() queue = new EventEmitter();
   @Output() add = new EventEmitter();
   @Output() unqueue = new EventEmitter();
+  @Output() refresh = new EventEmitter();
 
   queuedMediaIdMap = {};
 
@@ -62,6 +64,7 @@ export class VideoList2Component implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.list);
   }
 
   ngOnChanges({ queued }: SimpleChanges) {
@@ -73,6 +76,10 @@ export class VideoList2Component implements OnChanges, OnInit {
 
   isAuthUser(msgUid: any) {
     return this.authUser && msgUid === this.authUser.uid;
+  }
+
+  refreshClips(event) {
+    this.refresh.emit(event);
   }
 
   playSelectedVideo(media) {

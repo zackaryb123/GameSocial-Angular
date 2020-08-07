@@ -17,10 +17,12 @@ import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None,
 })
 export class UserDashboardComponent implements OnInit {
+  @Input() authId;
   @Input() user;
   videos$: GameClipNode[];
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
-  userGameClips: any[];
+  // userGameClips$: Observable<any>;
+  userGameClips: any;
   continuationToken$: any;
   modalTitle: any;
   closeResult: string;
@@ -31,15 +33,14 @@ export class UserDashboardComponent implements OnInit {
     private gameClipsService: GameClipsService,
     private authService: AuthService,
   ) {
-    this.gameClipsService.userGameClips$
-      .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
-      .subscribe(data => {
-      this.userGameClips = data;
-    });
+    // this.userGameClips$ = this.gameClipsService.userGameClips$;
   }
 
   ngOnInit() {
-
+    this.gameClipsService.getUserGameClipsPromise(this.authId).then(clips => {
+      console.log('ngOnInit: ', clips);
+      this.userGameClips = clips;
+    });
   }
 
   async openXboxModal(content) {

@@ -19,23 +19,24 @@ import {isNewChange} from '../../utils/data.utils';
   `
 })
 export class ViewsComponent implements OnInit, OnChanges {
+  @Input() authId: any;
   @Input() views: any;
   @Input() clipId: any;
   @Input() allowViewCount: boolean;
-  ipAddress: any;
+  // ipAddress: any;
   constructor(
     private statService: StatisticsService
   ) { }
 
   ngOnInit(): void {
-    this.statService.getIPAddress().toPromise().then((ipData: any) => {
-      this.ipAddress = ipData.ip;
-    });
+    // this.statService.getIPAddress().toPromise().then((ipData: any) => {
+    //   this.ipAddress = ipData.ip;
+    // });
   }
 
   ngOnChanges({clipId}: SimpleChanges): void {
     if (clipId && isNewChange(clipId) && this.allowViewCount) {
-      this.statService.incrementViews(clipId.currentValue, this.ipAddress).then(views => {
+      this.statService.incrementViews(clipId.currentValue, this.authId).then(views => {
         this.views = views;
       });
     }

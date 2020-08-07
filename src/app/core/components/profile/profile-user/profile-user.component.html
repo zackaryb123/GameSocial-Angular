@@ -16,6 +16,7 @@
     <div [hidden]="!(activeTab === 'tab1')" class="profile-body">
 
       <user-dashboard
+        [authId]="auth.uid"
         [user]="user">
       </user-dashboard>
 

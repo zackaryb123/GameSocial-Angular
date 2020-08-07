@@ -31,12 +31,6 @@
         </h4>
 
         <section *ngIf="enableStatistics" class="stats is-absolute-bottom is-flex-row ">
-<!--          <span-->
-<!--            class="item-likes item-action mr-3"-->
-<!--            rel="tooltip"-->
-<!--            title="Likes">-->
-<!--						<icon name="thumbs-up"></icon> {{ media.likeCount | number:'2.0'}}-->
-<!--					</span>-->
           <likes
             [authId]="authId"
             [clipId]="media.id"
@@ -44,6 +38,7 @@
             [likeCount]="media.likeCount">
           </likes>
           <views
+            [authId]="authId"
             [clipId]="media.id"
             [views]="media.views"
             [allowViewCount]="allowViewCount">
@@ -60,15 +55,10 @@
           <button
             *ngIf="isAuthUser && adminActionEnabled"
             class="btn btn-transparent text-danger no-padding"
-            (click)="removeVideoFromQueue(media)">
-            <icon name="trash" title="Queue this video to now playlist"></icon>
+            (click)="removeVideo(authId, media.id)">
+            <icon name="trash" title="Remove video"></icon>
             Remove
           </button>
-<!--          <button-->
-<!--            class="btn text-primary btn-transparent no-padding"-->
-<!--            (click)="addVideoToPlaylist(media)">-->
-<!--            <icon name="plus" title="Add This video to a playlist"></icon>-->
-<!--          </button>-->
           <div class="dropdown">
             <button
               (click)="getPlaylist()"

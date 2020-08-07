@@ -1,12 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from '../../../../services/user';
 import {AuthService} from '../../../../services/auth';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {GameClipNode} from '../../../../interfaces/xbox.interfaces';
-import {GameClipsService} from "../../../../services/game-clips/game-clips.service";
+import {GameClipsService} from '../../../../services/game-clips/game-clips.service';
 
 @Component({
-  selector: 'user-videos',
+  selector: ' user-videos',
   styleUrls: ['./user-videos.component.scss'],
   template: `
     <separator
@@ -16,7 +14,8 @@ import {GameClipsService} from "../../../../services/game-clips/game-clips.servi
       *ngIf="videos$"
       [authUser]="authUser"
       [page]="'profile'"
-      [list]="videos$">
+      [list]="videos$"
+      (refresh)="refreshClips($event)">
     </video-list2>
   `
 })
@@ -35,9 +34,17 @@ export class UserVideosComponent implements OnInit {
   ngOnInit() {
     this.gameClipService.getUserClipsServer(this.userUID)
       .then((data) => {
-        // console.log('this.videos$: ', data);
         this.videos$ = data;
     });
+  }
+
+  refreshClips(event: boolean) {
+    if (event) {
+      this.gameClipService.getUserClipsServer(this.userUID)
+        .then((data) => {
+          this.videos$ = data;
+        });
+    }
   }
 
 }

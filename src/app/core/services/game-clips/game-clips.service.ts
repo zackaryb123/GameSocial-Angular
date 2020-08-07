@@ -36,6 +36,12 @@ export class GameClipsService {
     );
   }
 
+  getUserGameClipsPromise(authId) {
+    return this.afStore.collection(`users/${authId}/clips`).get().toPromise().then(snap => {
+      return snap.docs.map(clip => clip.data());
+    });
+  }
+
   async getGameClip(uid) {
     return await this.afStore.collection('clips').doc(uid).get().pipe(first()).toPromise().then(snap => {
       return snap.data();
@@ -58,6 +64,11 @@ export class GameClipsService {
         uid
       });
     });
+  }
+
+  removeGameClip(authId, clipId) {
+    this.afStore.doc(`users/${authId}/clips/${clipId}`).delete();
+    this.afStore.doc(`clips/${clipId}`).delete();
   }
 
   async getUserClipsServer(uid: string) {

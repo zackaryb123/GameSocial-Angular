@@ -17,12 +17,12 @@ import {AppService} from '../../../../../services/app/app.service';
 
 @Component({
   selector: 'playlist',
-  animations: [flyOut],
+  // animations: [flyOut],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./playlist.scss'],
   template: `
   <section class="now-playlist ux-maker">
-    <div *ngIf="isPlaylistEmpty" [class.empty-list-closed]="sidebarToggle$ | async" class="empty-list text-center" [@flyOut]>
+    <div *ngIf="isPlaylistEmpty" [class.empty-list-closed]="sidebarToggle$ | async" class="empty-list text-center"> <!--[@flyOut]-->
       <icon name="play-circle-o" class="c-cfb ux-maker"></icon>
       <article>
         <h3 class="c-cfb">Playlist Is Empty</h3>
@@ -34,8 +34,7 @@ import {AppService} from '../../../../../services/app/app.service';
       [cdkDropListLockAxis]="'y'">
       <li class="now-playlist-track" #playlistTrack cdkDrag
         *ngFor="let video of playlist; let index = index"
-        [class.active]="isActiveMedia(video.id, playlistTrack)"
-        [@flyOut]> <!--| search:''-->
+        [class.active]="isActiveMedia(video.id, playlistTrack)"><!--[@flyOut]--> <!--| search:''-->
         <playlist-track
           [authId]="authId"
           [selectedPlaylist]="selectedPlaylist"

@@ -14,6 +14,7 @@ import {GameSocialState} from '../../../core/store/reducers';
 import {PlaylistService} from '../../../core/services/playlist/playlist.service';
 import {Router} from '@angular/router';
 import {isNewChange} from '../../utils/data.utils';
+import {GameClipsService} from '../../../core/services/game-clips/game-clips.service';
 
 @Component({
   selector: 'video-media-options',
@@ -37,6 +38,7 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
   @Output() queue = new EventEmitter<any>();
   @Output() add = new EventEmitter<any>();
   @Output() unqueue = new EventEmitter<any>();
+  @Output() removed = new EventEmitter<any>();
 
   playlists: any;
   selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
@@ -58,6 +60,7 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
 
   constructor(
     private playlistService: PlaylistService,
+    private clipService: GameClipsService,
     private authService: AuthService,
     private store: Store<GameSocialState>,
     private router: Router
@@ -77,6 +80,13 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
     });
   }
 
+  removeVideo(authId: any, clipId: any) {
+    if (confirm('Are you sure you want to delete?')) {
+      this.clipService.removeGameClip(authId, clipId);
+      this.removed.emit(true);
+    }
+  }
+
   addVideo(media: any) { }
 
   playVideo(media: any) {
@@ -93,9 +103,5 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
 
   toggle(showDesc: boolean) {
     this.showDesc = !showDesc;
-  }
-
-  removeVideoFromQueue(media: any) {
-    // this.unqueue.emit(media);
   }
 }
