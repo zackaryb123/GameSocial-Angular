@@ -28,6 +28,7 @@ export class UserDashboardComponent implements OnInit {
   closeResult: string;
 
   constructor(
+    private userService: UserService,
     private xboxService: XboxService,
     private modalService: NgbModal,
     private gameClipsService: GameClipsService,
@@ -36,15 +37,18 @@ export class UserDashboardComponent implements OnInit {
     // this.userGameClips$ = this.gameClipsService.userGameClips$;
   }
 
-  ngOnInit() {
-    this.gameClipsService.getUserGameClipsPromise(this.authId).then(clips => {
-      console.log('ngOnInit: ', clips);
+  async ngOnInit() {
+    await this.userService.getUser(this.authId).then(user => {
+      console.log('USER: ', user);
+      this.user = user;
+    });
+    await this.gameClipsService.getUserGameClipsPromise(this.authId).then(clips => {
       this.userGameClips = clips;
     });
   }
 
-  async openXboxModal(content) {
-    const res = await this.xboxService.getXboxGameClips('pr0Xt0Xtype18');
+  async openXboxModal(content, user) {
+    const res = await this.xboxService.getXboxGameClips(user.gamertag);
     this.videos$ = res.gameClips;
     this.continuationToken$ = res.continuationToken;
     this.modalTitle = 'My Xbox Clips';
@@ -57,6 +61,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   isAdded(gameClipId) {
+    console.log(this.userGameClips);
     const exist: any[] = this.userGameClips.filter(item => item.gameClipId === gameClipId);
     return !(exist.length > 0);
   }

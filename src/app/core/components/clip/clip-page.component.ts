@@ -36,9 +36,10 @@ export class ClipPageComponent implements OnInit, OnChanges {
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // Get Auth User
-    this.authService.getAuthUser().then(auth => {
+    await this.authService.getAuthUser().then(auth => {
+      console.log('AuthUser: ', auth);
       this.authUser = auth;
     });
 
@@ -69,6 +70,7 @@ export class ClipPageComponent implements OnInit, OnChanges {
     // Observe Comments
     this.commentsService.watchClipComments(this.clipId).pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(comments => {
+        console.log(comments);
         this.comments$ = comments;
       });
   }
@@ -87,7 +89,7 @@ export class ClipPageComponent implements OnInit, OnChanges {
   }
 
   isAuthUser(msgUid: any) {
-    return this.authUser && msgUid === this.authUser.uid;
+      return this.authUser && msgUid === this.authUser.uid;
   }
 
   submit() {

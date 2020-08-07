@@ -54,6 +54,7 @@
     }
 
     .track-number {
+      border: 1px solid ghostwhite;
       border-radius: 10px;
       position: absolute;
       left: 1.5rem;
@@ -106,6 +107,7 @@
       width: 6.4rem;
 
       .video-thumb__image {
+        border: 1px solid ghostwhite;
         border-radius: 10px;
         cursor: pointer;
         height: 100%;

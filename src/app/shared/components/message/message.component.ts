@@ -41,7 +41,7 @@ export class MessageComponent implements OnInit {
   }
 
   isAuthUser(msgUid: any) {
-    return msgUid === this.authUser.uid;
+    return this.authUser && msgUid === this.authUser.uid;
   }
 
 }

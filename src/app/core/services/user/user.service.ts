@@ -12,8 +12,7 @@ export class UserService {
   }
 
   getUser(uid: string) {
-    return this.afStore.collection('users').doc(uid).get().pipe(first()).toPromise()
-      .then(snap => {
+    return this.afStore.doc(`users/${uid}`).get().toPromise().then(snap => {
         return snap.data();
     });
   }

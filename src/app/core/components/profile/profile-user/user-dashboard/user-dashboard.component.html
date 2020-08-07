@@ -50,8 +50,8 @@
           <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:</label>
           <p class="text-muted">www.nobleui.com</p>
         </div>
-        <div class="mt-3 d-flex social-links">
-          <a class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github" (click)="openXboxModal(content)">
+        <div class="mt-3 d-flex social-links" *ngIf="user">
+          <a class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github" (click)="openXboxModal(content, user)">
             <img height="16" width="16" style="-webkit-user-select: none;margin: auto;cursor: zoom-in;" src="../../../../../../assets/1024px-Xbox_one_logo.svg.png">
           </a>
 <!--          <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github">-->
