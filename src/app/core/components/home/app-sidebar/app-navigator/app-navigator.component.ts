@@ -1,11 +1,16 @@
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {
   ChangeDetectionStrategy,
-  Component, EventEmitter,
+  Component,
+  EventEmitter,
   Input,
-  OnInit, Output,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 import {PlaylistService} from '../../../../services/playlist/playlist.service';
+import {isNewChange} from '../../../../../shared/utils/data.utils';
 
 @Component({
   selector: 'app-navigator',
@@ -30,26 +35,25 @@ import {PlaylistService} from '../../../../services/playlist/playlist.service';
       <icon [name]="iconName"></icon>
       <span class="text ml-3">{{ iconLabel }}</span>
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a *ngFor="let playlist of dropDownList" (click)="getNewList(playlist.id)" class="dropdown-item" style="cursor: pointer">
+    <div *ngIf="dropDownList" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a *ngFor="let playlist of dropDownList" [id]="playlist.id" (click)="getNewList(playlist.id)" class="dropdown-item" style="cursor: pointer">
         <span class="dropdown-item-text">{{playlist.name}}</span>
       </a>
       <div class="input-group mb-3 dropdown-item">
         <input type="text" class="form-control" placeholder="Add Playlist" aria-label="Add Playlist" aria-describedby="basic-addon2"
           [(ngModel)]="newListItem"
-          (keydown.enter)="addListItem()">
+          (keydown.enter)="addListItem(newListItem)">
         <div class="input-group-append">
-          <button (click)="addListItem()" class="btn btn-outline-secondary" type="button">Add</button>
+          <button [disabled]="!newListItem || newListItem === ''" (click)="addListItem(newListItem)" class="btn btn-outline-secondary" type="button">Add</button>
         </div>
       </div>
     </div>
   </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppNavigatorComponent implements OnInit {
+export class AppNavigatorComponent implements OnInit, OnChanges {
   @Input() auth: any;
-  @Input() dropDownList: any;
+  @Input() dropDownList: Array<any>;
   @Input() page = 'home';
   @Input() dropDown = false;
   @Input() closed = false;
@@ -58,7 +62,7 @@ export class AppNavigatorComponent implements OnInit {
   @Input() iconLabel: string;
   @Input() iconLink: string;
   @Input() outlet: string;
-  newListItem: string;
+  newListItem = '';
   toggleDropdown = false;
 
   @Output() selectNewPlaylist = new EventEmitter<string>();
@@ -71,7 +75,12 @@ export class AppNavigatorComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.dropDownList);
+  }
+
+  ngOnChanges({dropDownList}: SimpleChanges): void {
+    if (dropDownList && isNewChange(dropDownList)) {
+      // console.log(dropDownList);
+    }
   }
 
   go() {
@@ -86,11 +95,13 @@ export class AppNavigatorComponent implements OnInit {
     this.toggleDropdown = !this.toggleDropdown;
   }
 
-  addListItem() {
-    switch (this.page) {
-      case 'home':
-        return this.playlistService.addPlaylist(this.auth.uid, this.newListItem);
+  addListItem(value) {
+    if (value) {
+      this.newListItem = '';
+      switch (this.page) {
+        case 'home':
+          return this.playlistService.addPlaylist(this.auth.uid, value);
+      }
     }
-    this.newListItem = '';
   }
 }

@@ -15,6 +15,7 @@ import {PlaylistService} from '../../../core/services/playlist/playlist.service'
 import {Router} from '@angular/router';
 import {isNewChange} from '../../utils/data.utils';
 import {GameClipsService} from '../../../core/services/game-clips/game-clips.service';
+import {UserService} from '../../../core/services/user';
 
 @Component({
   selector: 'video-media-options',
@@ -29,6 +30,7 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
   @Input() enableStatistics: boolean;
   @Input() allowViewCount: boolean;
   @Input() allowLikeAction: boolean;
+  @Input() allowUserInfo: boolean;
   @Input() isAuthUser: boolean;
   @Input() adminActionEnabled: boolean;
   @Input() type: any;
@@ -40,37 +42,43 @@ export class VideoMediaOptionsComponent implements OnInit, OnChanges {
   @Output() unqueue = new EventEmitter<any>();
   @Output() removed = new EventEmitter<any>();
 
+  user: any;
   playlists: any;
   selectedPlaylistId$ = this.store.select(getSelectedPlaylistId);
   showDesc = false;
   isPlaying = false;
   ICON_PREFIX_BRAND = ICON_PREFIX_BRAND;
 
-  ngOnInit(): void {
-    if (this.allowViewCount) {
-      console.log('this.media:', this.media);
-    }
-  }
-
-  ngOnChanges({media}: SimpleChanges): void {
-    if (media && isNewChange(media)) {
-      // this.media = media.currentValue;
-    }
-  }
-
   constructor(
     private playlistService: PlaylistService,
     private clipService: GameClipsService,
     private authService: AuthService,
+    private userService: UserService,
     private store: Store<GameSocialState>,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+  }
+
+  ngOnChanges({media}: SimpleChanges): void {
+    if (media && isNewChange(media)) {
+      if (this.allowUserInfo) {
+        this.userService.getUser(this.media.uid).then(data => {
+          this.user = data;
+        });
+      }
+    }
   }
 
   goClip(media) {
     if (this.type !== 'clip') {
       return this.router.navigateByUrl(`/home/(clip:${media.id})`);
     }
+  }
+
+  goUser(userId) {
+    return this.router.navigateByUrl(`/profile/(user:${userId})`);
   }
 
   getPlaylist() {

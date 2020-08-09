@@ -15,6 +15,7 @@ import {CommentsService} from '../../services/comments/comments.service';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClipPageComponent implements OnInit, OnChanges {
+  loading = true;
   clipId: any;
   clip: any = {};
   userId: any;
@@ -39,7 +40,6 @@ export class ClipPageComponent implements OnInit, OnChanges {
   async ngOnInit() {
     // Get Auth User
     await this.authService.getAuthUser().then(auth => {
-      console.log('AuthUser: ', auth);
       this.authUser = auth;
     });
 
@@ -47,6 +47,7 @@ export class ClipPageComponent implements OnInit, OnChanges {
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe(routeParams => {
         if (routeParams) {
+          this.loading = true;
           this.clipId = routeParams.uid;
           this.gameClipsService.getGameClip(this.clipId).then(async data => {
             this.userId = data.uid;
@@ -54,7 +55,6 @@ export class ClipPageComponent implements OnInit, OnChanges {
             await this.xboxService.getXboxGameClip(data.xuid, data.scid, data.gameClipId).then(xboxclip => {
               this.clip = data;
               this.clip.gameClipUris = xboxclip.gameClip.gameClipUris;
-              console.log('this.clip : ', this.clip);
             });
             // Get User
             await this.userService.getUser(this.userId).then(user => {
@@ -64,6 +64,7 @@ export class ClipPageComponent implements OnInit, OnChanges {
             await this.gameClipsService.getExploreClips(this.userId).then(expClips => {
               this.exploreClips = expClips;
             });
+            this.loading = false;
           });
         }
       });

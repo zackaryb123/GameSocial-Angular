@@ -55,6 +55,12 @@
         background: var(--filter-darker-bg);
         padding-left: 5px;
 
+        icon {
+          position: absolute;
+          right: 12px;
+          top: 12px;
+        }
+
         input {
           background-color: #202a2f;
           //background: transparent;

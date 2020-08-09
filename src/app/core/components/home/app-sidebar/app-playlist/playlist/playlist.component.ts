@@ -26,7 +26,7 @@ import {AppService} from '../../../../../services/app/app.service';
       <icon name="play-circle-o" class="c-cfb ux-maker"></icon>
       <article>
         <h3 class="c-cfb">Playlist Is Empty</h3>
-        <p class="c-cfb">Queue Media From Results</p>
+        <p class="c-cfb">Add or Select Playlist From Results</p>
       </article>
     </div>
     <ul class="nav nav-list ux-maker nicer-ux" cdkDropList

@@ -10,20 +10,22 @@ import {Subject} from 'rxjs';
   selector: 'app-videos',
   styleUrls: ['./app-videos.scss'],
   template: `
-<!--    <loader [message]="'Loading Awesome Media Results'" [loading]="loading$"></loader>-->
+    <loading [loading]="loading"></loading>
     <separator
     [title]="station">
     </separator>
-    <video-list2
-      [authUser]="authUser"
-      [page]=""
-      [list]="videos$"
-      [queued]="playlistIds$"
-      (play)="playSelectedVideo($event)"
-      (queue)="queueSelectedVideo($event)"
-      (unqueue)="removeVideoFromPlaylist($event)"
-      (add)="addMediaToPlaylist($event)"
-    ></video-list2>
+    <div *ngIf="!loading">
+      <video-list2
+        [authUser]="authUser"
+        [page]=""
+        [list]="videos$"
+        [queued]="playlistIds$"
+        (play)="playSelectedVideo($event)"
+        (queue)="queueSelectedVideo($event)"
+        (unqueue)="removeVideoFromPlaylist($event)"
+        (add)="addMediaToPlaylist($event)"
+      ></video-list2>
+    </div>
   `
 })
 export class AppVideosComponent implements OnInit {
@@ -35,7 +37,7 @@ export class AppVideosComponent implements OnInit {
   continuationToken$: any;
   // this.store.select(fromPlayerSearch.getPlayerSearchResults);
   playlistIds$ = ''; // this.store.select(NowPlaylist.getPlaylistMediaIds);
-  loading$ = false; // this.store.select(fromPlayerSearch.getIsSearching);
+  loading = true;
 
   constructor(
     private appService: AppService,
@@ -50,6 +52,7 @@ export class AppVideosComponent implements OnInit {
         if (routeParams) {
           console.log('ROUTE PARAMS: ', routeParams);
           this.station = routeParams.station;
+          this.loading = false;
         }
       });
     // this.videos$ = TEST_VIDEOS;

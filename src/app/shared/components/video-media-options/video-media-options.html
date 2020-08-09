@@ -1,4 +1,4 @@
-<section class="video-item card ux-maker" [class.show-description]="showDesc" *ngIf="media">
+<section *ngIf="media" class="video-item card ux-maker" [class.show-description]="showDesc">
   <section class="media-card">
     <div class="front face is-rounded-bottom">
       <div class="indicators clearfix">
@@ -6,7 +6,6 @@
 					<icon name="play"></icon>Now Playing
 				</span>
       </div>
-
       <div rel="tooltip" class="media-thumb is-rounded-top" [title]="media.titleName" (click)="goClip(media)">
         <div class="thumbnail" *ngIf="type === 'thumbnail' && media.thumbnails">
           <img class="thumb-image thumb-shadow" [src]="media.thumbnails[0]?.uri">
@@ -25,12 +24,17 @@
       </div>
 
       <section *ngIf="enableDetails" class="item-actions main-actions is-rounded">
-        <h4 class="title">
-					<span rel="tooltip" class="media-thumb ellipsis">{{ media.titleName }}
-          </span>
-        </h4>
+        <div class="header-info is-flex-row mb-3">
+          <div *ngIf="user" class="user-info">
+            <img (click)="goUser(user.uid)" [src]="user.avatar" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
+          </div>
+          <h4 class="title">
+            <span rel="tooltip" class="media-thumb ellipsis">{{ media.titleName }}</span>
+            <span>{{media.userCaption}}</span>
+          </h4>
+        </div>
 
-        <section *ngIf="enableStatistics" class="stats is-absolute-bottom is-flex-row ">
+        <section *ngIf="enableStatistics" class="stats is-absolute-bottom is-flex-row">
           <likes
             [authId]="authId"
             [clipId]="media.id"
@@ -82,28 +86,28 @@
           <span class="text-info item-duration">
 						<icon name="clock-o"></icon> {{ media.durationInSeconds }}
 					</span>
-          <button class="btn btn-transparent no-padding">
-            <icon
-              name="info-circle"
-              title="more info about this video"
-              class="text-info text-md is-media-valign"
-              (click)="toggle(showDesc)"
-              ></icon>
-          </button>
+<!--          <button class="btn btn-transparent no-padding">-->
+<!--            <icon-->
+<!--              name="info-circle"-->
+<!--              title="more info about this video"-->
+<!--              class="text-info text-md is-media-valign"-->
+<!--              (click)="toggle(showDesc)"-->
+<!--              ></icon>-->
+<!--          </button>-->
         </section>
       </section>
     </div>
 
-    <section
-      *ngIf="showDesc"
-      class="close-desc is-absolute-bottom is-absolute-right">
-      <button
-        (click)="toggle(showDesc)"
-        class="btn-transparent btn-xs text-md text-success"
-        title="flip back...">
-        <icon name="times-circle"></icon>
-      </button>
-    </section>
+<!--    <section-->
+<!--      *ngIf="showDesc"-->
+<!--      class="close-desc is-absolute-bottom is-absolute-right">-->
+<!--      <button-->
+<!--        (click)="toggle(showDesc)"-->
+<!--        class="btn-transparent btn-xs text-md text-success"-->
+<!--        title="flip back...">-->
+<!--        <icon name="times-circle"></icon>-->
+<!--      </button>-->
+<!--    </section>-->
 
   </section>
 

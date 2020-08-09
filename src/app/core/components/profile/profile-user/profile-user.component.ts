@@ -4,7 +4,7 @@ import {UserService} from '../../../services/user';
 import {distinctUntilChanged, first, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
-import {FriendsService} from "../../../services/friends/friends.service";
+import {FriendsService} from '../../../services/friends/friends.service';
 
 @Component({
   selector: 'profile-user',
@@ -12,6 +12,7 @@ import {FriendsService} from "../../../services/friends/friends.service";
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
+  loading = true;
   user: any;
   userUID: any;
   auth: any;
@@ -28,6 +29,9 @@ export class ProfileUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.getAuthPromise().then(auth => {
+      this.auth = auth;
+    });
     this.route.params
       .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
       .subscribe( routeParams => {
@@ -35,11 +39,9 @@ export class ProfileUserComponent implements OnInit {
           this.userUID = routeParams.uid;
           this.user = this.userService.getUser(routeParams.uid);
           this.userFriends = this.friendsService.getUserFriends(routeParams.uid);
+          this.loading = false;
         }
       });
-    this.authService.getAuthPromise().then(auth => {
-      this.auth = auth;
-    });
   }
 
   selectTab(event) {

@@ -29,6 +29,7 @@ function createIdMap(list: any[]) {
         enableDetails="true"
         enableStatistics="true"
         enableOptions="true"
+        allowUserInfo="true"
         [authId]="authUser.uid"
         [isAuthUser]="isAuthUser(media.uid)"
         [adminActionEnabled]="page === 'profile'"

@@ -28,14 +28,14 @@ import {UserService} from '../../../../../../services/user';
               (click)="goProfile(user.uid)"
              [src]="user.avatar"
              xtitle="Drag to sort">
-        <span class="badge badge-info">
-          {{user.tag}}
+        <span *ngIf="!(sidebarToggle$ | async)" class="badge badge-info">
+          {{user.gamertag}}
         </span>
       </section>
       <section
         *ngIf="!(sidebarToggle$ | async)" class="video-title"
         (click)="markSelected(user)"
-        [title]="user.fname + ' ' + user.lname">{{user.fname}} {{user.lname}}</section>
+        [title]="user.name">{{user.name}}</section>
     </div>
     <aside class="playlist-track__content">
       <section class="track-actions">

@@ -31,6 +31,7 @@
 // playlist also using it
 //@media (min-width: 320px) {
   :host {
+    height: 100%;
     --media-primary-color: var(--brand-primary);
     --media-dark-transparent: var(--brand-dark-bg-color-transparent);
     --text-color: var(--brand-primary-text-color);
@@ -40,6 +41,7 @@
     $bg-description: rgba(255, 255, 255, 0.9);
     $icon-color: $gray-light;
     .video-item {
+      height: 100%;
       &.show-description {
         .item-actions {
           visibility: none;
@@ -53,6 +55,17 @@
         white-space: normal;
       }
     }
+
+    .avatar {
+      cursor: pointer;
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .header-info {
+      border-bottom: none !important;
+    }
+
 
     .video-item {
       width: 100%;
@@ -75,8 +88,7 @@
         display: block;
         position: relative;
         text-decoration: none;
-        div {
-          border-bottom: 1px solid ghostwhite;
+        .media-thumb {
           border-radius: 3px;
         }
         &:hover {
@@ -96,7 +108,7 @@
           .dropdown-menu {
             .dropdown-item {
               .dropdown-item {
-                font-size: 18px;
+                //font-size: 18px;
               }
             }
           }
@@ -109,6 +121,7 @@
       }
 
       .front {
+        border-bottom: 1px solid ghostwhite;
         padding: 0px;
         // box-shadow: 0 6px 15px -7px var(--media-dark-transparent);
         position: relative;
@@ -198,6 +211,7 @@
         border-radius: 3px;
 
         .thumb-video {
+          border-bottom: 1px solid ghostwhite;
           width: 100%;
         }
 

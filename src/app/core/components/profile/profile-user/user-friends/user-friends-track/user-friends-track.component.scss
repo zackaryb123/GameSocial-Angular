@@ -1,3 +1,22 @@
+.is-online {
+  //border: 1px solid ghostwhite;
+  color: #00ff00;
+  //background-color: #00ff00;
+  //border-radius: 1rem;
+}
+.is-away {
+  //border: 1px solid ghostwhite;
+  color: yellow;
+  //background-color: yellow;
+  //border-radius: 1rem;
+}
+.is-offline {
+  //border: 1px solid ghostwhite;
+  color: red;
+  //background-color: red;
+  //border-radius: 1rem;
+}
+
 .friend-card{
   border-radius: 4px;
   overflow: hidden;
@@ -22,11 +41,13 @@
 }
 
 .friend-card .card-info img.profile-photo-lg{
+  cursor: pointer;
   margin-top: -60px;
   border: 7px solid #fff;
 }
 
 img.profile-photo-lg {
+  cursor: pointer;
   height: 80px;
   width: 80px;
   border-radius: 50%;

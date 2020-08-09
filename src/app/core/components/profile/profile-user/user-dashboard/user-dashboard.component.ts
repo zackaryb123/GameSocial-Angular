@@ -21,7 +21,7 @@ export class UserDashboardComponent implements OnInit {
   @Input() user;
   videos$: GameClipNode[];
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
-  // userGameClips$: Observable<any>;
+  userGameClips$: Observable<any>;
   userGameClips: any;
   continuationToken$: any;
   modalTitle: any;
@@ -34,17 +34,17 @@ export class UserDashboardComponent implements OnInit {
     private gameClipsService: GameClipsService,
     private authService: AuthService,
   ) {
-    // this.userGameClips$ = this.gameClipsService.userGameClips$;
   }
 
   async ngOnInit() {
     await this.userService.getUser(this.authId).then(user => {
-      console.log('USER: ', user);
       this.user = user;
     });
-    await this.gameClipsService.getUserGameClipsPromise(this.authId).then(clips => {
-      this.userGameClips = clips;
-    });
+    this.gameClipsService.userGameClips$
+      .pipe(takeUntil(this.unsubscribe$), distinctUntilChanged())
+      .subscribe(clips => {
+        this.userGameClips = clips;
+      });
   }
 
   async openXboxModal(content, user) {
@@ -61,7 +61,6 @@ export class UserDashboardComponent implements OnInit {
   }
 
   isAdded(gameClipId) {
-    console.log(this.userGameClips);
     const exist: any[] = this.userGameClips.filter(item => item.gameClipId === gameClipId);
     return !(exist.length > 0);
   }

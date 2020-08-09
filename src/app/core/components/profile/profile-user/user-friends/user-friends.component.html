@@ -4,7 +4,8 @@
 
       <div *ngFor="let user of userFriends" class="col-md-4 col-sm-6">
         <user-friends-track
-        [user]="user">
+          enablePresence="true"
+          [user]="user">
         </user-friends-track>
       </div>
 

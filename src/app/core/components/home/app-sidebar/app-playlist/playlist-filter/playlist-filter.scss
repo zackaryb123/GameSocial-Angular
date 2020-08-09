@@ -55,11 +55,17 @@
         background: var(--filter-darker-bg);
         padding-left: 5px;
 
+        icon {
+          position: absolute;
+          right: 12px;
+          top: 12px;
+        }
+
         input {
           background-color: #202a2f;
           //background: transparent;
           border: none;
-          padding: 0 3px;
+          padding: 0 2rem 0 3px;
           margin-bottom: 0;
           color: var(--brand-inverse-text);
           width: 100%;

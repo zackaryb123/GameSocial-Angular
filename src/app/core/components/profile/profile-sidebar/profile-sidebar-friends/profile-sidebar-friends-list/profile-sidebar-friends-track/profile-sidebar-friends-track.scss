@@ -14,16 +14,19 @@
     $playlist-font-size: 2rem;
 
     .is-online {
+      border: 1px solid ghostwhite;
       color: #00ff00;
       background-color: #00ff00;
       border-radius: 1rem;
     }
     .is-away {
+      border: 1px solid ghostwhite;
       color: yellow;
       background-color: yellow;
       border-radius: 1rem;
     }
     .is-offline {
+      border: 1px solid ghostwhite;
       color: red;
       background-color: red;
       border-radius: 1rem;
@@ -130,6 +133,7 @@
       width: 6.4rem;
 
       .video-thumb__image {
+        border: 1px solid ghostwhite;
         cursor: pointer;
         height: 100%;
         border-radius: 10px;

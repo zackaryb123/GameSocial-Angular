@@ -93,6 +93,7 @@
       margin: 0.7rem 0;
     }
     .now-playlist-track__trigger {
+      border: none;
       padding: 0;
       margin: 1rem 0;
     }
@@ -111,6 +112,8 @@
     .video-thumb {
       height: 5rem;
       width: 7rem;
+      .video-thumb__image {
+      }
     }
     .track-tracks {
       display: none;

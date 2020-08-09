@@ -31,7 +31,7 @@ export class PlaylistService {
   /* --- FIREBASE --- */
 
   watchPlaylist() {
-    this.playlists$ = this.afAuth.user.pipe(
+    return this.playlists$ = this.afAuth.user.pipe(
       switchMap( (auth) => {
         if (auth) {
           return this.afStore.doc<any>(`users/${auth.uid}`).collection('playlist').valueChanges();
@@ -45,7 +45,7 @@ export class PlaylistService {
   watchPlaylistById(playlistId) {
     return this.selectedPlaylistId$.pipe(
       switchMap((value: any, index: number): Observable<any> => {
-        return this.playlists$ = this.afAuth.user.pipe(
+        return this.afAuth.user.pipe(
           switchMap( (auth) => {
             if (auth) {
               return this.afStore.doc<any>(`users/${auth.uid}/playlist/${playlistId}`).valueChanges();
