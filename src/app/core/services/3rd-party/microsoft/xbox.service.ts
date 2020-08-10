@@ -9,8 +9,8 @@ export class XboxService {
     private http: HttpClient
   ) {}
 
-  getXboxGameClips(gamertag: string) {
-    const JsonData = JSON.stringify({gamertagOrXUID: gamertag});
+  getXboxGameClips(gamertag: string, continuationToken?: string) {
+    const JsonData = JSON.stringify({gamertagOrXUID: gamertag, continuationToken});
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
@@ -25,6 +25,7 @@ export class XboxService {
       return err;
     });
   }
+
   getXboxGameClip(gamertag: string, sid: string, gameId: string) {
     console.log(gamertag, sid, gameId);
     const JsonData = JSON.stringify({gamertagOrXUID: gamertag, scid: sid, gameClipId: gameId});
@@ -43,4 +44,21 @@ export class XboxService {
     });
   }
 
+  linkXboxAccount(values: any) {
+    const JsonData = JSON.stringify(values);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    return this.http.post(`${BASE_URI}/${URIS.XBOX_LINK_ACCOUNT}`, JsonData, {headers}).toPromise().then((data: any) => {
+      console.log(data);
+      return data;
+    }, (err) => {
+      console.log('ON REJECT ERROR: ', err);
+      return err;
+    }).catch(err => {
+      console.log('CATCH ERROR: ', err);
+      return err;
+    });
+  }
 }

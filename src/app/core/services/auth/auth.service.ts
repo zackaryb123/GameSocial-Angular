@@ -65,9 +65,12 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.OAuthProvider('microsoft.com');
       this.afAuth.signInWithPopup(provider)
-        .then(res => {
+        .then(async res => {
           console.log('Microsoft Res: ', res);
-          this.createUser(res);
+          const {exists} = await this.afStore.doc(`users/${res.user.uid}`).get().toPromise();
+          if (!exists) {
+            this.createUser(res);
+          }
           resolve(res);
         }, err => {
           console.log('Microsoft Err: ', err);
@@ -157,28 +160,38 @@ export class AuthService {
     console.log('createUser(data): ', data);
     const newUserRef = this.afStore.collection('users').doc(data.user.uid);
     newUserRef.get().toPromise().then(user => {
-      if (!user.exists) {
+      // if (!user.exists) {
         if (data.additionalUserInfo.providerId === 'microsoft.com') {
           return this.afStore.collection('users').doc(data.user.uid).set({
             avatar: 'https://firebasestorage.googleapis.com/v0/b/gamesocial-zb.appspot.com/o/avatar.jpg?alt=media&token=a63d8d23-041c-4021-bb68-742bd0a95160',
             bio: '',
             name: data.additionalUserInfo.profile.displayName,
-            tag: '',
+            gamertag: '',
             uid: data.user.uid,
             providerId: data.additionalUserInfo.profile.id,
-            provider: data.additionalUserInfo.providerId
+            provider: data.additionalUserInfo.providerId,
+            linkedAccounts: {
+              xbox: {},
+              psn: {},
+              nintendo: {}
+            }
           });
         } else {
           return this.afStore.collection('users').doc(data.user.uid).set({
             avatar: 'https://firebasestorage.googleapis.com/v0/b/gamesocial-zb.appspot.com/o/avatar.jpg?alt=media&token=a63d8d23-041c-4021-bb68-742bd0a95160',
             bio: '',
             name: value.name,
-            tag: value.username,
+            gamertag: value.username,
             uid: data.user.uid,
-            provider: data.additionalUserInfo.providerId
+            provider: data.additionalUserInfo.providerId,
+            linkedAccounts: {
+              xbox: {},
+              psn: {},
+              nintendo: {}
+            }
           });
         }
-      }
+      // }
     });
   }
 }
