@@ -35,6 +35,7 @@ export class UserDashboardComponent implements OnInit {
   successMessage: string;
   accountLinkType: string;
   modalLoading: boolean;
+  syncLoading: boolean;
 
   constructor(
     private userService: UserService,
@@ -144,6 +145,18 @@ export class UserDashboardComponent implements OnInit {
         default:
           return null;
       }
+    }
+  }
+
+  syncAccount(user) {
+    if (this.authId === user.uid) {
+      this.syncLoading = true;
+      this.xboxService.syncAccount(user).then(data => {
+        console.log(data);
+        this.syncLoading = false;
+      }).catch(err => {
+        this.syncLoading = false;
+      });
     }
   }
 

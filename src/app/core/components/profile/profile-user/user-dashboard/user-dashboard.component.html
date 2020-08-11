@@ -346,7 +346,7 @@
 </div>
 
 <!--Modal-->
-<ng-template #content let-modal>
+<ng-template class="modal-dialog" #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{modalTitle}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -396,9 +396,16 @@
         <button (click)="restartClips(user)" type="button" class="btn btn-secondary">Restart</button>
         <button (click)="getNextClips(user)" type="button" class="btn btn-secondary">Next</button>
       </div>
+
+      <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <button *ngIf="!syncLoading" (click)="syncAccount(user)" type="button" class="btn btn-secondary">Sync Account</button>
+        <div *ngIf="syncLoading" class="spinner-grow" role="status" style="color: cornflowerblue">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
       <div fxLayout="row wrap" fxLayoutGap="grid">
-        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="33%" fxFlex.lg="25%" [@fadeIn] *ngFor="let media of videos$">
-          <section class="video-item card ux-maker">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%" fxFlex.lg="33%" [@fadeIn] *ngFor="let media of videos$">
+          <section class="video-item card ux-maker m-1">
             <section class="media-card">
               <div class="front face is-rounded-bottom">
                 <div rel="tooltip" class="media-thumb is-rounded-top" [title]="media.titleName">

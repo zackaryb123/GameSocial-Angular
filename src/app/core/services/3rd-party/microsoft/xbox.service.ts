@@ -61,4 +61,22 @@ export class XboxService {
       return err;
     });
   }
+
+  syncAccount(user: any) {
+    const JsonData = JSON.stringify({uid: user.uid, gamertag: user.gamertag});
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    return this.http.post(`${BASE_URI}/${URIS.XBOX_SYNC_ACCOUNT}`, JsonData, {headers}).toPromise().then((data: any) => {
+      console.log(data);
+      return data;
+    }, (err) => {
+      console.log('ON REJECT ERROR: ', err);
+      return err;
+    }).catch(err => {
+      console.log('CATCH ERROR: ', err);
+      return err;
+    });
+  }
 }

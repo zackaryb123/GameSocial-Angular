@@ -7,6 +7,7 @@ import {isNewChange} from '../../utils/data.utils';
   styleUrls: ['./likes.component.scss'],
   template: `
     <button
+      *ngIf="!likeLoading"
       [disabled]="!allowLikeAction"
       [style]="!allowLikeAction ? { opacity: 1, cursor: 'default' } : null"
       (click)="toggleLike()"
@@ -18,6 +19,9 @@ import {isNewChange} from '../../utils/data.utils';
         {{ likeCount | number:'2.0'}}
       </span>
     </button>
+    <div *ngIf="likeLoading" class="spinner-grow" role="status" style="color: cornflowerblue">
+      <span class="sr-only">Loading...</span>
+    </div>
   `
 })
 export class LikesComponent implements OnInit, OnChanges {
@@ -25,6 +29,7 @@ export class LikesComponent implements OnInit, OnChanges {
   @Input() authId: any;
   @Input() likeCount: any;
   @Input() allowLikeAction: any;
+  likeLoading: boolean;
   liked: boolean;
   constructor(
     private statService: StatisticsService
@@ -42,6 +47,7 @@ export class LikesComponent implements OnInit, OnChanges {
   }
 
   async toggleLike() {
+    this.likeLoading = true;
     if (this.liked) {
       await this.statService.decrementLikes(this.clipId, this.authId).then(() => {
         this.liked = false;
@@ -53,6 +59,7 @@ export class LikesComponent implements OnInit, OnChanges {
         this.likeCount = this.likeCount + 1;
       });
     }
+    this.likeLoading = false;
   }
 
 
