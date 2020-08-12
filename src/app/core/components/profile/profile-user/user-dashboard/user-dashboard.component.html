@@ -353,7 +353,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" *ngIf="authId === user.uid">
     <loading
       [loading]="modalLoading">
     </loading>
@@ -398,6 +398,7 @@
       </div>
 
       <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <span class="float-left mr-3">Last Synced: {{this.syncTimestamp | date:'short'}}</span>
         <button *ngIf="!syncLoading" (click)="syncAccount(user)" type="button" class="btn btn-secondary">Sync Account</button>
         <div *ngIf="syncLoading" class="spinner-grow" role="status" style="color: cornflowerblue">
           <span class="sr-only">Loading...</span>
@@ -424,6 +425,10 @@
             </section>
           </section>
         </div>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button (click)="restartClips(user)" type="button" class="btn btn-secondary">Restart</button>
+        <button (click)="getNextClips(user)" type="button" class="btn btn-secondary">Next</button>
       </div>
     </div>
     <!-- Video List -->

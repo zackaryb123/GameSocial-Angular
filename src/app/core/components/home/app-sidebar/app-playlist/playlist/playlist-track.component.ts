@@ -31,7 +31,7 @@ import {PlaylistService} from '../../../../../services/playlist/playlist.service
       <section class="video-title" (click)="markSelected(video)" [title]="video.titleName">{{ video.titleName }}</section>
       </div>
     <aside class="playlist-track__content">
-      <section class="track-actions">
+      <section *ngIf="!(sidebarToggle$ | async)" class="track-actions">
         <button class="btn btn-transparent text-primary playlist-track"
           *ngIf="isPlaylistMedia(video)"
           (click)="handleToggleTracks($event, video)"

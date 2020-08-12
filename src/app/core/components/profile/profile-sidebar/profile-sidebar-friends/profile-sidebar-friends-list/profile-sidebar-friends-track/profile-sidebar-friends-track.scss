@@ -191,7 +191,8 @@
   :host {
     .remove-track {
       .closed & {
-        right: 30px;
+        //right: 30px;
+        right: -11px;
         top: 0;
       }
       //transform: translatex(5rem);

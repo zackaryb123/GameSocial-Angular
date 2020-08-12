@@ -146,4 +146,6 @@ img {
 
 .modal-dialog {
   width: 950px;
+  max-width: fit-content;
+  max-width: -webkit-fill-available;
 }

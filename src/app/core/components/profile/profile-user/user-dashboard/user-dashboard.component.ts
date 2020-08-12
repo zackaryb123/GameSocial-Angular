@@ -36,6 +36,7 @@ export class UserDashboardComponent implements OnInit {
   accountLinkType: string;
   modalLoading: boolean;
   syncLoading: boolean;
+  syncTimestamp: any;
 
   constructor(
     private userService: UserService,
@@ -67,6 +68,7 @@ export class UserDashboardComponent implements OnInit {
     this.modalService.open(content, { size: 'xl' });
     this.modalLoading = true;
     this.accountLinkType = type;
+    this.syncTimestamp = this.user.linkedAccounts[type.toLowerCase()]?.timestamp;
     // Resets
     this.errorMessage = null;
     this.successMessage = null;
@@ -153,6 +155,8 @@ export class UserDashboardComponent implements OnInit {
       this.syncLoading = true;
       this.xboxService.syncAccount(user).then(data => {
         console.log(data);
+        this.syncTimestamp = data.timestamp;
+        console.log(this.syncTimestamp);
         this.syncLoading = false;
       }).catch(err => {
         this.syncLoading = false;
